@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Edit comment</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Text</mat-label>
+      <textarea
+        matInput
+        formControlName="text"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="10"
+        cdkAutosizeMaxRows="15"
+      ></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="true"
+      [disabled]="!form.valid"
+    >
+      Submit
+    </button>
+  </mat-dialog-actions>
+</form>

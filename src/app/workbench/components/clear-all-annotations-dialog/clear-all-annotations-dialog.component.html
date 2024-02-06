@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Clear all annotations</h1>
+<mat-dialog-content>
+  <p>
+    Are you sure that you want to remove all annotations from this annotation
+    layer?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [mat-dialog-close]="true"
+    (click)="removeAllAnnotations()"
+  >
+    Clear all
+  </button>
+</mat-dialog-actions>

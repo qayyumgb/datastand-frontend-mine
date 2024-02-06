@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Annotation count</h1>
+
+<mat-dialog-content>
+  <div class="wrapper">
+    <div>Spans</div>
+    <div>{{ spansLength$ | async }}</div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

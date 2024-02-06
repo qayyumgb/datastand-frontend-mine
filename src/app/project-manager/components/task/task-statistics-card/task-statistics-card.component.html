@@ -1,0 +1,470 @@
+<loader-card *ngIf="isLoading()"></loader-card>
+<section *ngIf="isLoaded()">
+  <div class="card">
+    <div class="grid-5 center">
+      <metric
+        title="Texts"
+        symbol="text_snippet"
+        [isMatIcon]="true"
+        [value]="stats.num_texts"
+        subtitle="in total"
+      ></metric>
+      <metric
+        title="New"
+        symbol="start"
+        [isMatIcon]="true"
+        [value]="stats.status.num_new"
+        subtitle="texts"
+      ></metric>
+      <metric
+        title="In Progress"
+        symbol="schedule"
+        [isMatIcon]="true"
+        [value]="stats.status.num_in_progress"
+        subtitle="texts"
+      ></metric>
+      <metric
+        title="Pending"
+        symbol="warning_amber"
+        [isMatIcon]="true"
+        [value]="stats.status.num_pending"
+        subtitle="texts"
+      ></metric>
+      <metric
+        title="Completed"
+        symbol="check_circle"
+        [isMatIcon]="true"
+        [value]="stats.status.num_completed"
+        [total]="stats.num_texts"
+        subtitle="texts"
+      >
+      </metric>
+    </div>
+  </div>
+
+  <div class="card text-length-card">
+    <h2>Text Length</h2>
+    <div class="grid-5 center">
+      <metric
+        title="Average"
+        [value]="stats.text_length.mean"
+        symbol="x̄"
+        subtitle="chars"
+      ></metric>
+      <metric
+        title="Median"
+        [value]="stats.text_length.median"
+        symbol="x͂"
+        subtitle="chars"
+      ></metric>
+      <metric
+        title="Std."
+        [value]="stats.text_length.std"
+        symbol="σ"
+        subtitle="chars"
+      ></metric>
+      <metric
+        title="Min"
+        [value]="stats.text_length.min"
+        symbol="∧"
+        subtitle="chars"
+      ></metric>
+      <metric
+        title="Max"
+        [value]="stats.text_length.max"
+        symbol="∨"
+        subtitle="chars"
+      ></metric>
+    </div>
+    <br />
+    <div class="table-and-chart">
+      <div class="card longest-texts-card">
+        <h3>Longest texts</h3>
+        <div class="card card-inner-window">
+          <div class="w-100">
+            <div
+              *ngFor="let text of stats.text_length.longest_texts"
+              class="card-item"
+            >
+              <a [routerLink]="urls.getTaskTextUrl(text.task!, text.id!)">{{
+                text.name || text.raw_string
+              }}</a>
+              <div>{{ text.raw_string.length }}</div>
+              <div>
+                <button
+                  mat-stroked-button
+                  class="small"
+                  (click)="deleteTaskText(text.id!)"
+                >
+                  <mat-icon>delete</mat-icon> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card longest-texts-card">
+        <h3>
+          Shortest texts
+          <mat-icon
+            class="tip-icon"
+            matTooltip="You can use this to find out outliers."
+            >help_outline</mat-icon
+          >
+        </h3>
+        <div class="card card-inner-window">
+          <div class="w-100">
+            <div
+              *ngFor="let text of stats.text_length.shortest_texts"
+              class="card-item"
+            >
+              <div>
+                <a [routerLink]="urls.getTaskTextUrl(text.task!, text.id!)">{{
+                  text.name || text.raw_string
+                }}</a>
+              </div>
+              <div>{{ text.raw_string.length }}</div>
+              <div>
+                <button
+                  mat-stroked-button
+                  class="small"
+                  (click)="deleteTaskText(text.id!)"
+                >
+                  <mat-icon>delete</mat-icon> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="chart">
+          <ngx-charts-bar-vertical
+            [scheme]="colorScheme!"
+            [results]="stats.text_length.histogram"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisLabel]="'Length (chars)'"
+            [yAxisLabel]="'# Texts'"
+          >
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card text-length-card">
+    <h2>Annotation by Text</h2>
+    <div class="grid-5 center">
+      <metric
+        title="Average"
+        [value]="stats.spans_per_text.mean"
+        symbol="x̄"
+        subtitle="spans per text"
+      ></metric>
+      <metric
+        title="Median"
+        [value]="stats.spans_per_text.median"
+        symbol="x͂"
+        subtitle="spans per text"
+      ></metric>
+      <metric
+        title="Std."
+        [value]="stats.spans_per_text.std"
+        symbol="σ"
+        subtitle="spans per text"
+      ></metric>
+      <metric
+        title="Min"
+        [value]="stats.spans_per_text.min"
+        symbol="∧"
+        subtitle="spans"
+      ></metric>
+      <metric
+        title="Max"
+        [value]="stats.spans_per_text.max"
+        symbol="∨"
+        subtitle="spans"
+      ></metric>
+    </div>
+    <br />
+    <div class="table-and-chart">
+      <div class="card longest-texts-card">
+        <h3>Texts with most annotations</h3>
+        <div class="card card-inner-window">
+          <div class="w-100">
+            <div
+              *ngFor="let text of stats.spans_per_text.texts_with_most_spans"
+              class="card-item"
+            >
+              <a [routerLink]="urls.getTaskTextUrl(text.task!, text.id!)">{{
+                text.name || text.raw_string
+              }}</a>
+              <div>{{ text.num_spans }}</div>
+              <div>
+                <button mat-stroked-button class="small">
+                  <mat-icon>delete</mat-icon> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card longest-texts-card">
+        <h3>Texts with fewest annotations</h3>
+        <div class="card card-inner-window">
+          <div class="w-100">
+            <div
+              *ngFor="let text of stats.spans_per_text.texts_with_fewest_spans"
+              class="card-item"
+            >
+              <a [routerLink]="urls.getTaskTextUrl(text.task!, text.id!)">{{
+                text.name || text.raw_string
+              }}</a>
+              <div>{{ text.num_spans }}</div>
+              <div>
+                <button mat-stroked-button class="small">
+                  <mat-icon>delete</mat-icon> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="chart">
+          <ngx-charts-bar-vertical
+            [scheme]="colorScheme!"
+            [results]="stats.spans_per_text.histogram"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisLabel]="'# Spans'"
+            [yAxisLabel]="'# Texts'"
+          >
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card text-length-card">
+    <h2>Span Distribution</h2>
+    <div class="table-and-chart">
+      <div class="card longest-texts-card">
+        <h3>Most frequent spans</h3>
+        <div class="card card-inner-window">
+          <div class="w-100">
+            <div
+              *ngFor="
+                let spanAnnotation of stats.spans_per_text.most_frequent_spans
+              "
+              class="card-item"
+            >
+              <div>{{ spanAnnotation.span_value }}</div>
+              <div>{{ spanAnnotation.label_name }}</div>
+              <div>{{ spanAnnotation.num_spans }}</div>
+              <div>
+                <button mat-stroked-button class="small">
+                  <mat-icon>delete</mat-icon> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card longest-texts-card">
+        <h3>Least frequent spans</h3>
+        <div class="card card-inner-window">
+          <div class="w-100">
+            <div
+              *ngFor="
+                let spanAnnotation of stats.spans_per_text.least_frequent_spans
+              "
+              class="card-item"
+            >
+              <div>{{ spanAnnotation.span_value }}</div>
+              <div>{{ spanAnnotation.label_name }}</div>
+              <div>{{ spanAnnotation.num_spans }}</div>
+              <div>
+                <button mat-stroked-button class="small">
+                  <mat-icon>delete</mat-icon> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="chart">
+          <ngx-charts-bar-vertical
+            [scheme]="colorScheme!"
+            [results]="stats.spans_per_text.histogram"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisLabel]="'Content'"
+            [yAxisLabel]="'# Spans'"
+          >
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card text-length-card">
+    <h2>Label Distribution</h2>
+    <div class="grid-5 center">
+      <metric
+        title="Average"
+        [value]="stats.labels.mean"
+        symbol="x̄"
+        subtitle="spans per label"
+      ></metric>
+      <metric
+        title="Median"
+        [value]="stats.labels.median"
+        symbol="x͂"
+        subtitle="spans per label"
+      ></metric>
+      <metric
+        title="Std."
+        [value]="stats.labels.std"
+        symbol="σ"
+        subtitle="spans per label"
+      ></metric>
+      <metric
+        title="Min"
+        [value]="stats.labels.min"
+        symbol="∧"
+        subtitle="spans"
+      ></metric>
+      <metric
+        title="Max"
+        [value]="stats.labels.max"
+        symbol="∨"
+        subtitle="spans"
+      ></metric>
+    </div>
+    <br />
+    <div class="table-and-chart">
+      <div class="card label-frequency-card">
+        <h3>Label frequency</h3>
+        <div class="card card-inner-window">
+          <div class="w-100">
+            <!-- Intentionally reuse histogram data here -->
+            <div *ngFor="let label of stats.labels.histogram" class="card-item">
+              <div>{{ label.name }}</div>
+              <div>{{ label.value }}</div>
+              <div>
+                <button mat-stroked-button class="small">
+                  <mat-icon>delete</mat-icon> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="chart">
+          <ngx-charts-bar-vertical
+            [scheme]="colorScheme!"
+            [results]="stats.labels.histogram"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisLabel]="'Labels'"
+            [yAxisLabel]="'# Spans'"
+          >
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card text-length-card">
+    <h2>Time per Span</h2>
+    <div class="grid-6 center">
+      <metric
+        title="Average"
+        [value]="stats.time_per_span.mean"
+        symbol="x̄"
+        subtitle="seconds per span"
+      ></metric>
+      <metric
+        title="Median"
+        [value]="stats.time_per_span.median"
+        symbol="x͂"
+        subtitle="seconds per span"
+      ></metric>
+      <metric
+        title="Std."
+        [value]="stats.time_per_span.std"
+        symbol="σ"
+        subtitle="seconds per span"
+      ></metric>
+      <metric
+        title="Min"
+        [value]="stats.time_per_span.min"
+        symbol="∧"
+        subtitle="seconds per span"
+      ></metric>
+      <metric
+        title="Max"
+        [value]="stats.time_per_span.max"
+        symbol="∨"
+        subtitle="seconds per span"
+      ></metric>
+      <metric
+        title="Count"
+        [value]="stats.time_per_span.count"
+        symbol="m"
+        subtitle="spans"
+      ></metric>
+    </div>
+    <br />
+    <div class="table-and-chart">
+      <div class="card label-frequency-card">
+        <h3>Label frequency</h3>
+        <div class="card card-inner-window">
+          <div class="w-100">
+            <!-- Intentionally reuse histogram data here -->
+            <div
+              *ngFor="let label of stats.time_per_span.histogram"
+              class="card-item"
+            >
+              <div>{{ label.name }}</div>
+              <div>{{ label.value }}</div>
+              <div>
+                <button mat-stroked-button class="small">
+                  <mat-icon>delete</mat-icon> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="chart">
+          <ngx-charts-bar-vertical
+            [scheme]="colorScheme!"
+            [results]="stats.time_per_span.histogram"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisLabel]="'Time spent (in seconds)'"
+            [yAxisLabel]="'# Spans'"
+          >
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

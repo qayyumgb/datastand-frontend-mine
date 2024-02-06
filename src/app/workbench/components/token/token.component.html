@@ -1,0 +1,11 @@
+<ng-template *ngIf="token">
+  <div
+    class="token"
+    [attr.token-id]="token.id"
+    [attr.token-start]="token.start"
+    [attr.token-end]="token.end"
+    [matTooltip]="getToolTipText()"
+  >
+    {{ token.content }}
+  </div>
+</ng-template>

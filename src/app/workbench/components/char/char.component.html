@@ -1,0 +1,64 @@
+<!--
+   Case 1: Character without token boundary 
+
+   We intentionally call addTokenBoundary with chId+1 as the user actually clicks
+   on the previous character. This is because the token boundary is placed after
+   the character, not before it.
+-->
+<div
+  *ngIf="!isLast && !hasBoundary"
+  class="ch"
+  (click)="addTokenBoundary(tokenLayerId, chId + 1)"
+  [innerHTML]="renderCh(ch)"
+  [class.special-ch-space]="isSpecialCh(ch)"
+  [cdkContextMenuTriggerFor]="context_menu"
+></div>
+<!-- 
+   Case 2: Character with token boundary 
+
+   We intentionally call removeTokenBoundary with chId+1 as the user actually clicks
+   on the previous character. This is because the token boundary is placed after the
+   character, not before it.
+-->
+<div
+  *ngIf="!isLast && hasBoundary"
+  class="ch has-boundary"
+  (click)="removeTokenBoundary(tokenLayerId, chId + 1)"
+  [innerHTML]="renderCh(ch)"
+  [class.special-ch-space]="isSpecialCh(ch)"
+  [cdkContextMenuTriggerFor]="context_menu"
+></div>
+<!-- Addon: Force line break -->
+<div *ngIf="isLineBreakCh(ch)" class="special-ch-newline"></div>
+<!-- Case 3: Last character (= cannot add/remove boundary) -->
+<div *ngIf="isLast" class="final-ch" [innerHTML]="renderCh(ch)"></div>
+
+<!-- Context menu: character without boundary (right-click menu) -->
+<ng-template #context_menu>
+  <div class="example-menu" cdkMenu>
+    <button
+      class="example-menu-item"
+      (click)="addTokenBoundary(tokenLayerId, chId + 1)"
+      [disabled]="isLast || hasBoundary"
+      cdkMenuItem
+    >
+      <mat-icon>add</mat-icon><span>Add boundary</span>
+    </button>
+    <button
+      class="example-menu-item"
+      (click)="removeTokenBoundary(tokenLayerId, chId + 1)"
+      [disabled]="isLast || !hasBoundary"
+      cdkMenuItem
+    >
+      <mat-icon>delete</mat-icon><span>Remove boundary</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button
+      class="example-menu-item"
+      (click)="openClearAllTokensDialog(tokenLayerId)"
+      cdkMenuItem
+    >
+      <mat-icon>restart_alt</mat-icon><span>Clear all boundaries</span>
+    </button>
+  </div>
+</ng-template>

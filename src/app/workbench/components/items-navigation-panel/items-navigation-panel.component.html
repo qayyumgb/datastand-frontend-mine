@@ -1,0 +1,58 @@
+<section *ngIf="task && taskTextIds && taskTextId">
+  <div class="progress-bar">
+    <progress-bar [value]="task.status.ratio_completed"></progress-bar>
+  </div>
+  <div class="buttons">
+    <div class="progress-numbers">
+      <table class="no-padding">
+        <tr>
+          <td class="td-number">{{ task.status.num_new }}</td>
+          <td>new</td>
+        </tr>
+        <tr class="green">
+          <td class="td-number">{{ task.status.num_completed }}</td>
+          <td>completed</td>
+        </tr>
+        <tr class="yellow">
+          <td class="td-number">{{ task.status.num_pending }}</td>
+          <td>pending</td>
+        </tr>
+      </table>
+    </div>
+    <button
+      mat-icon-button
+      matTooltip="Previous"
+      (click)="navigateToPreviousTaskText()"
+      [disabled]="!hasPreviousTaskText()"
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button mat-icon-button class="red" matTooltip="Remove" (click)="delete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="green"
+      matTooltip="Mark as complete"
+      (click)="setStatusToCompleted()"
+    >
+      <mat-icon>check</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="yellow"
+      matTooltip="Mark as pending"
+      (click)="setStatusToPending()"
+    >
+      <mat-icon>warning</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="Next"
+      (click)="navigateToNextTaskText()"
+      [disabled]="!hasNextTaskText()"
+    >
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+</section>

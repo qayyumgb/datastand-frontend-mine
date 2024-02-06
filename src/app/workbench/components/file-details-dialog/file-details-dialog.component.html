@@ -1,0 +1,24 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <h1 mat-dialog-title>File details</h1>
+
+  <mat-dialog-content>
+    <div class="wrapper">
+      <div>File size</div>
+      <div>{{ vm.taskDataPrettyBytes }}</div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="wrapper">
+      <div>Created on</div>
+      <div>{{ vm.created | date : "mediumDate" }}</div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="wrapper">
+      <div>Last modified on</div>
+      <div>{{ vm.lastModified | date : "mediumDate" }}</div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</ng-container>

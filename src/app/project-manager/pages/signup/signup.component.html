@@ -1,0 +1,78 @@
+<div
+  class="login-page"
+  [ngStyle]="{ backgroundImage: 'url(assets/img/workbench-signup-bg.jpg)' }"
+>
+  <div class="login-square">
+    <h1 class="mb-48">Data Stand</h1>
+    <form *ngIf="!hasSignedUp" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field hideRequiredMarker="true" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          type="text"
+          name="username"
+          required
+          formControlName="username"
+        />
+      </mat-form-field>
+      <mat-form-field hideRequiredMarker="true" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          name="email"
+          required
+          formControlName="email"
+        />
+      </mat-form-field>
+      <mat-form-field hideRequiredMarker="true" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          password
+          type="password"
+          name="password"
+          required
+          formControlName="password"
+        />
+      </mat-form-field>
+      <mat-form-field hideRequiredMarker="true" appearance="outline">
+        <mat-label>Retype Password</mat-label>
+        <input
+          matInput
+          password
+          type="password"
+          name="re_password"
+          required
+          formControlName="re_password"
+        />
+      </mat-form-field>
+      <button
+        color="primary"
+        mat-raised-button
+        type="submit"
+        class="signup-button"
+      >
+        Sign up
+      </button>
+      <div class="sign-up">
+        <span
+          >Already have an account?
+          <a [routerLink]="urls.LOGIN_URL">Log in</a></span
+        >
+      </div>
+    </form>
+
+    <div *ngIf="hasSignedUp">
+      <h2>Thank you for signing up ✨</h2>
+      <p>
+        You will soon receive an email from us. Please click the link from the
+        email to activate your account. You will then be able to log in.
+      </p>
+      <p class="happy-labeling">Happy labeling!</p>
+      <button mat-raised-button [routerLink]="urls.LOGIN_URL" color="primary">
+        Back to login
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div
+    *ngIf="vm.window.isVisible"
+    cdkDrag
+    cdkDragBoundary=".workbench-body"
+    class="window"
+    [style.width]="'auto'"
+    [style.top]="top"
+    [style.left]="left"
+  >
+    <div cdkDragHandle class="window-top-bar">
+      <div class="window-title">{{ title }}</div>
+      <button
+        mat-button
+        class="small"
+        title="Close window"
+        (click)="closeWindow()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="window-body">
+      <!-- Visible layer -->
+      <div class="visible-layer">
+        <mat-icon class="eye-icon">visibility</mat-icon>
+        <span *ngIf="vm.isTokenLayersLoading">Loading...</span>
+        <span *ngIf="vm.isTokenLayersLoaded">{{
+          vm.currentTokenLayer ? vm.currentTokenLayer.name : "None"
+        }}</span>
+      </div>
+      <mat-divider></mat-divider>
+      <!-- List of layers -->
+      <div class="layers-section">
+        <ngx-skeleton-loader
+          *ngIf="vm.isTokenLayersLoading"
+          [theme]="{ height: '40px' }"
+        ></ngx-skeleton-loader>
+
+        <mat-selection-list
+          *ngIf="vm.isTokenLayersLoaded"
+          [multiple]="false"
+          (selectionChange)="changeSelection($event.options[0].value)"
+          [hideSingleSelectionIndicator]="true"
+        >
+          <mat-list-option
+            *ngFor="let layer of vm.allTokenLayers"
+            [value]="layer.id"
+            class="layer-item"
+            [selected]="vm.currentTokenLayerId == layer.id"
+          >
+            <span class="layer-name">{{ layer.name }}</span>
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <mat-divider></mat-divider>
+      <!-- Bottom section with action icons -->
+      <div class="bottom-icons-section">
+        <button
+          mat-button
+          class="small"
+          title="Add new layer"
+          (click)="openCreateTokenLayerDialog()"
+          [disabled]="!vm.canOpenCreateTokenLayerDialog"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-button
+          class="small"
+          title="Add basic layers"
+          (click)="addBasicTokenLayers()"
+        >
+          <mat-icon>free_breakfast</mat-icon>
+        </button>
+        <button
+          mat-button
+          class="small"
+          title="Edit layer"
+          (click)="openUpdateTokenLayerDialog(vm.currentTokenLayerId!)"
+          [disabled]="!vm.canOpenUpdateTokenLayerDialog"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-button
+          class="small"
+          title="Remove layer"
+          (click)="removeTokenLayerAndUpdateSelection(vm.currentTokenLayerId!)"
+          [disabled]="!vm.canRemoveTokenLayerAndUpdateSelection"
+        >
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+        <button
+          mat-button
+          class="small"
+          title="Clear all boundaries"
+          (click)="openClearAllTokensDialog(vm.currentTokenLayerId!)"
+          [disabled]="!vm.canOpenClearAllTokensDialog"
+        >
+          <mat-icon>restart_alt</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

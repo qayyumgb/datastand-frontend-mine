@@ -1,0 +1,71 @@
+<pm-details-header-card
+  *ngIf="corpus"
+  [entity]="corpus"
+  entityType="Corpus"
+  [icon]="'library_books'"
+>
+  <ng-container entityGreyInfo>
+    ID #{{ corpus.id }} · {{ corpus.langtag }} · Updated
+    {{ corpus.modified! | fromNow }}
+  </ng-container>
+  <ng-container entityActions>
+    <pm-upvote-button
+      [hasUpvoted]="corpus.has_upvoted!"
+      [numUpvotes]="corpus.num_upvotes!"
+      [element]="'corpus'"
+      [elementId]="corpus.id"
+    >
+    </pm-upvote-button>
+    <!-- Creator action buttons -->
+    <ng-container *ngIf="isCreator">
+      <button
+        mat-stroked-button
+        class="small"
+        (click)="openUpdateCorpusDialog()"
+      >
+        <mat-icon>edit</mat-icon>Edit
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="small"
+        (click)="openCorpusDownloadDialog()"
+      >
+        <mat-icon>download</mat-icon> Download
+      </button>
+      <button
+        mat-icon-button
+        mat-small-icon-button
+        [matMenuTriggerFor]="actionsMenu"
+        *ngIf="isCreator"
+      >
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+      <mat-menu #actionsMenu="matMenu">
+        <button *ngIf="isCreator" mat-menu-item>
+          <label [for]="'img-upload'" class="change-image-button"
+            ><mat-icon class="change-image-icon">image</mat-icon></label
+          >
+          <label [for]="'img-upload'" class="change-image-button"
+            >Change image</label
+          >
+        </button>
+        <input [id]="'img-upload'" type="file" (change)="changeImage($event)" />
+        <button mat-menu-item (click)="deleteCorpus()">
+          <mat-icon>delete</mat-icon>
+          <span>Remove</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+    <!-- Non-creator action buttons -->
+    <button
+      mat-flat-button
+      color="primary"
+      class="small"
+      (click)="forkCorpus()"
+      *ngIf="!isCreator"
+    >
+      <mat-icon>fork_right</mat-icon> Fork
+    </button>
+  </ng-container>
+</pm-details-header-card>

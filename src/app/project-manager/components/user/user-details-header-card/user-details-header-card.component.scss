@@ -1,0 +1,64 @@
+// Layout
+
+.user-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  outline-offset: 0px;
+  object-position: 50% 50%;
+  border-radius: 10px;
+  margin-right: 16px;
+}
+
+.top-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 400px;
+}
+
+.user-info {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// Fields
+.pronouns {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgb(0, 0, 0, 0.54);
+  vertical-align: middle;
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.links {
+  display: flex;
+  font-size: 0.8rem;
+  gap: 8px;
+}
+
+.followers {
+  font-weight: 500;
+  font-size: 0.8rem;
+  align-self: bottom;
+  margin-top: 16px;
+  > a {
+    cursor: pointer;
+  }
+}
+
+a {
+  color: rgb(0, 0, 0, 0.87);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

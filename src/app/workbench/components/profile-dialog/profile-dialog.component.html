@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Profile</h1>
+
+<ng-container *ngIf="user">
+  <mat-dialog-content>
+    <div class="wrapper">
+      <img [src]="user.image || urls.DEFAULT_IMG_URL" class="avatar" />
+    </div>
+    <div class="wrapper">
+      <div>Username</div>
+      <div>{{ user.username }}</div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="wrapper">
+      <div>Display</div>
+      <div>{{ user.first_name }} {{ user.last_name }}</div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="wrapper">
+      <div>Email</div>
+      <div>{{ user.email }}</div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</ng-container>

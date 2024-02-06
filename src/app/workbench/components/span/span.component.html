@@ -1,0 +1,87 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <span
+    *ngIf="spanForDisplay"
+    class="span"
+    (click)="
+      isPending(spanForDisplay!)
+        ? acceptSpan(spanForDisplay.id)
+        : removeSpan(spanForDisplay.id)
+    "
+    [cdkContextMenuTriggerFor]="context_menu"
+    [class.pending]="isPending(spanForDisplay!)"
+    [style.background-color]="spanForDisplay.color"
+    [innerHTML]="renderSpanContent(spanForDisplay)"
+  >
+  </span>
+
+  <!-- Context menu (right-click menu) 
+
+       IF CHANGING THIS ALSO CHANGE annotations-tab.component.html -->
+  <ng-template #context_menu>
+    <div class="example-menu" cdkMenu>
+      <button class="example-menu-item" disabled="true" cdkMenuItem>
+        <mat-icon>add</mat-icon><span>Add annotation</span>
+      </button>
+      <button
+        class="example-menu-item"
+        (click)="removeSpan(spanForDisplay.id)"
+        [disabled]="isPending(spanForDisplay!)"
+      >
+        <mat-icon>delete</mat-icon><span>Remove annotation</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button
+        class="example-menu-item"
+        disabled="true"
+        (click)="acceptSpan(spanForDisplay.id)"
+        [disabled]="!isPending(spanForDisplay!)"
+        cdkMenuItem
+      >
+        <mat-icon>done</mat-icon><span>Accept suggestion</span>
+      </button>
+      <button
+        class="example-menu-item"
+        disabled="true"
+        (click)="removeSpan(spanForDisplay.id)"
+        [disabled]="!isPending(spanForDisplay!)"
+        cdkMenuItem
+      >
+        <mat-icon>remove</mat-icon><span>Reject suggestion</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button
+        class="example-menu-item"
+        (click)="runAnnotator(vm.currentAnnotatorId!)"
+        [disabled]="!vm.currentAnnotatorId"
+        cdkMenuItem
+      >
+        <mat-icon>play_arrow</mat-icon><span>Run annotator</span>
+      </button>
+      <button
+        class="example-menu-item"
+        (click)="acceptSuggestions()"
+        [disabled]="!vm.canAcceptSuggestions"
+        cdkMenuItem
+      >
+        <mat-icon>done_all</mat-icon><span>Accept all suggestions</span>
+      </button>
+      <button
+        class="example-menu-item"
+        (click)="rejectSuggestions()"
+        [disabled]="!vm.canRejectSuggestions"
+        cdkMenuItem
+      >
+        <mat-icon>remove_done</mat-icon><span>Reject all suggestions</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button
+        class="example-menu-item"
+        (click)="openClearAllAnnotationsDialog()"
+        [disabled]="!vm.canOpenClearAllAnnotationsDialog"
+        cdkMenuItem
+      >
+        <mat-icon>restart_alt</mat-icon><span>Clear all annotations</span>
+      </button>
+    </div>
+  </ng-template>
+</ng-container>

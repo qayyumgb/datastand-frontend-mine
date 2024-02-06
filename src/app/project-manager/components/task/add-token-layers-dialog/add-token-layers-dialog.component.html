@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Tokenize all texts</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <section class="example-section" [formGroup]="form">
+      <p>Select the model(s) to be run:</p>
+      <mat-checkbox color="primary" formControlName="bytes">Bytes</mat-checkbox
+      ><br />
+      <mat-checkbox color="primary" formControlName="whitespace"
+        >Whitespace</mat-checkbox
+      ><br />
+      <mat-checkbox color="primary" formControlName="sentences"
+        >Sentences</mat-checkbox
+      >
+    </section>
+  </mat-dialog-content>
+  <mat-dialog-actions [align]="'end'">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="true"
+      [disabled]="!hasSelectedAModel()"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

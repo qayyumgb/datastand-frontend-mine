@@ -1,0 +1,52 @@
+// Put <section> fixed on the center bottom of the page
+
+section {
+  padding: 16px;
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: solid 1px #ddd;
+  border-radius: 16px 16px 0 0;
+}
+
+.green {
+  color: #0f9d58;
+}
+
+.yellow {
+  color: #f4b400;
+}
+
+.red {
+  color: #db4437;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.progress-numbers {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+table,
+tr,
+td {
+  padding: 2px;
+  margin: 0;
+  line-height: 1;
+}
+
+.td-number {
+  text-align: right;
+}

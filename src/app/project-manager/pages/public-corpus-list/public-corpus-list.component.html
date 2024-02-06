@@ -1,0 +1,40 @@
+<pm-layout-with-right-sidenav>
+  <ng-container content>
+    <section class="data-cards-section">
+      <pm-public-corpus-list-header-card></pm-public-corpus-list-header-card>
+
+      <loader-card *ngIf="isLoading()"></loader-card>
+      <pm-layout-results-with-paginator
+        *ngIf="isLoaded()"
+        singular="Corpus"
+        plural="Corpora"
+        [totalCount]="totalCount"
+        [page]="page"
+        [paginatedCount]="paginatedCount"
+        (refreshDataEvent)="getCorpora()"
+      >
+        <ng-container listItems>
+          <pm-corpus-li-item
+            *ngFor="let corpus of items"
+            [corpus]="corpus"
+            (deleteCorpusEvent)="deleteItemById($event)"
+          ></pm-corpus-li-item>
+        </ng-container>
+
+        <ng-container cardItems>
+          <pm-corpus-card
+            *ngFor="let corpus of items"
+            [corpus]="corpus"
+          ></pm-corpus-card>
+        </ng-container>
+      </pm-layout-results-with-paginator>
+    </section>
+  </ng-container>
+
+  <ng-container filters>
+    <pm-corpus-list-filters
+      [filters]="filters!"
+      [isPublicFilter]="true"
+    ></pm-corpus-list-filters>
+  </ng-container>
+</pm-layout-with-right-sidenav>

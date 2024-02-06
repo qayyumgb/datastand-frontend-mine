@@ -1,0 +1,158 @@
+$toolbar-height: 60px;
+$bg-color: #f8f9fa;
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: $toolbar-height;
+  background-color: #fff;
+  border: 1px solid #dadce0;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - $toolbar-height);
+  margin-top: $toolbar-height;
+}
+
+mat-sidenav {
+  width: 200px;
+  padding: 16px;
+}
+
+mat-sidenav-content {
+  overflow-y: auto;
+  margin: 0;
+  background-color: $bg-color;
+}
+
+.pm {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.pm-title {
+  font-family: "lemonade";
+  color: #9c27b0;
+  font-size: 28px;
+  margin-top: 8px;
+  line-height: 28px;
+  font-family: "lemonade";
+  text-decoration: none;
+}
+
+.pm-icon {
+  margin-right: 8px;
+  color: #9c27b0;
+  transform: scale(1.2);
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+// Sidenav styles
+h2 {
+  color: rgb(0, 0, 0, 0.8);
+  margin-bottom: -5px;
+  font-size: 18px;
+}
+
+.mat-mdc-list-item {
+  margin-top: 3px;
+  border-radius: 25px;
+}
+
+.mat-mdc-menu-item {
+  min-height: 32px !important;
+}
+
+.mdc-list-item--with-leading-icon .mdc-list-item__start {
+  margin-left: 16px !important;
+  margin-right: 8px !important;
+}
+
+a {
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.mat-mdc-list-item.mdc-list-item--with-leading-icon.mdc-list-item--with-one-line {
+  height: 32px !important;
+}
+
+mat-icon {
+  transform: scale(0.7);
+}
+
+mat-divider {
+  margin: 15px 0 !important;
+}
+
+.new-button {
+  margin-top: 15px;
+}
+
+mat-nav-list {
+  margin-top: 0 !important;
+}
+
+.usage {
+  margin: 10px 16px;
+}
+
+// + New button
+.mat-mdc-extended-fab {
+  margin-left: 16px !important;
+  height: 32px !important;
+  border-radius: 5px;
+}
+
+// Change the style of the mat-progress-bar
+
+.usage-text {
+  color: #9c27b0;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.usage-text:hover {
+  text-decoration: underline;
+}
+
+// Highlight active routes
+.is-active {
+  background-color: #f7eef9 !important;
+  color: #9c27b0 !important;
+  border-radius: 25px;
+  font-weight: 900;
+}
+
+.is-active .mdc-list-item__primary-text {
+  color: #9c27b0 !important;
+}
+
+// Overwrite menu style from main.scss
+.mat-mdc-menu-item {
+  min-height: 32px !important;
+}
+
+.mdc-list-item > mat-icon {
+  transform: scale(1);
+  font-size: 18px !important;
+  height: 18px !important;
+  width: 18px !important;
+  margin-right: 8px !important;
+  color: rgb(0, 0, 0, 0.54) !important;
+  vertical-align: middle !important;
+}
+
+.is-active > mat-icon {
+  color: #9c27b0 !important;
+}
+
+.mdc-list-item__primary-text {
+  font-size: 17px !important;
+  font-weight: 400;
+}

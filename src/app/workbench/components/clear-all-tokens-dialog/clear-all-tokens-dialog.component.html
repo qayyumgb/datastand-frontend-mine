@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Clear all boundaries</h1>
+<mat-dialog-content>
+  <p>Are you sure that you want to clear all token boundaries?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [mat-dialog-close]="true"
+    (click)="removeAllTokenBoundaries()"
+  >
+    Clear all
+  </button>
+</mat-dialog-actions>

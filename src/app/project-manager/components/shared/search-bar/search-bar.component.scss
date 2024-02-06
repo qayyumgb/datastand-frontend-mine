@@ -1,0 +1,21 @@
+$bg-color: #f8f9fa;
+
+.search-bar {
+  margin-left: calc(125px + 16px);
+  width: 450px;
+}
+
+.input-search-bar {
+  font: 400 1rem Roboto, "Helvetica Neue", sans-serif;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 0;
+  caret-color: #9c27b0;
+  background-color: $bg-color;
+  width: 100%;
+}
+
+.input-search-bar:focus {
+  background-color: #fff;
+  outline: 1px solid #9c27b0;
+}

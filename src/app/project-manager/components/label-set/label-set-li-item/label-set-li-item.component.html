@@ -1,0 +1,77 @@
+<pm-entity-li-item
+  *ngIf="labelSet"
+  [entity]="labelSet"
+  [entityType]="'Label set'"
+  [entityUrl]="urls.getLabelSetUrl(labelSet.id)"
+>
+  <ng-container entityGreyInfo class="ellipsis">
+    {{ labelSet.num_labels! | number }} label(s) · Updated
+    {{ labelSet.modified! | fromNow }}
+  </ng-container>
+
+  <ng-container buttons>
+    <pm-upvote-button
+      [hasUpvoted]="labelSet.has_upvoted!"
+      [numUpvotes]="labelSet.num_upvotes!"
+      [element]="'label-set'"
+      [elementId]="labelSet.id"
+    ></pm-upvote-button>
+  </ng-container>
+
+  <ng-container hoverButtons>
+    <!-- Creator actions -->
+    <ng-container *ngIf="isCreator()">
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Rename"
+        (click)="openRenameLabelSetDialog()"
+      >
+        <mat-icon>drive_file_rename_outline</mat-icon>
+      </button>
+      <input hidden type="file" #uploader (change)="changeImage($event)" />
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Change image"
+        (click)="uploader.click()"
+      >
+        <mat-icon>image</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Change tags"
+        (click)="openUpdateTagsDialog()"
+      >
+        <mat-icon>label</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Make a copy"
+        (click)="copyLabelSet()"
+      >
+        <mat-icon>file_copy</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Remove"
+        (click)="deleteLabelSet()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+    <!-- Non-creator actions -->
+    <button
+      *ngIf="!isCreator()"
+      mat-icon-button
+      class="medium"
+      matTooltip="Fork labelSet"
+      (click)="forkLabelSet()"
+    >
+      <mat-icon>fork_right</mat-icon>
+    </button>
+  </ng-container>
+</pm-entity-li-item>

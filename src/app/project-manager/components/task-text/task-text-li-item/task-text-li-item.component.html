@@ -1,0 +1,118 @@
+<pm-layout-li-with-actions *ngIf="taskText">
+  <ng-container content>
+    <div class="flex-column">
+      <div class="caption-2 ellipsis" *ngIf="taskText.name">
+        Title: "{{ taskText.name }}"
+      </div>
+      <div class="title-2">
+        <a
+          (click)="openViewTaskTextDialog(taskText)"
+          class="a-like clamp mw-80"
+          [title]="taskText.raw_string"
+          [innerText]="taskText.raw_string"
+        ></a>
+      </div>
+      <div class="caption-1 ellipsis">
+        ID #{{ taskText.id }} · {{ taskText.langtag }} ·
+        {{ taskText.raw_string.length! | number }} chars · Updated
+        {{ taskText.modified! | fromNow }}
+        <ng-container *ngIf="taskText.is_generated && taskText.is_pending"
+          >· 🤖 AI generated
+        </ng-container>
+        <div
+          *ngIf="taskText.description"
+          [innerText]="taskText.description"
+        ></div>
+      </div>
+      <pm-tag-list-truncated
+        *ngIf="taskText.tags?.length! > 0"
+        [tags]="taskText.tags"
+      ></pm-tag-list-truncated>
+    </div>
+  </ng-container>
+  <ng-container actions>
+    <ng-container *ngIf="isCreator()">
+      <button
+        *ngIf="taskText.status == statusEnum.PENDING"
+        mat-icon-button
+        class="medium"
+        matTooltip="Mark as completed"
+        (click)="setStatusToCompleted(taskText)"
+      >
+        <mat-icon>check</mat-icon>
+      </button>
+      <button
+        *ngIf="taskText.status != statusEnum.PENDING"
+        mat-icon-button
+        class="medium"
+        matTooltip="Mark as pending"
+        (click)="setStatusToPending(taskText)"
+      >
+        <mat-icon>warning</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Rename"
+        (click)="openRenameTaskTextDialog(taskText)"
+      >
+        <mat-icon>drive_file_rename_outline</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Edit"
+        (click)="openUpdateTaskTextDialog(taskText)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Change tags"
+        (click)="openUpdateTagsDialog(taskText)"
+      >
+        <mat-icon>label</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Make a copy"
+        (click)="copyTaskText(taskText)"
+      >
+        <mat-icon>file_copy</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Remove"
+        (click)="deleteTaskText(taskText)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+  </ng-container>
+  <ng-container extraActions>
+    <ng-container [ngSwitch]="taskText.status">
+      <a
+        *ngSwitchCase="statusEnum.COMPLETED"
+        [routerLink]="urls.getTaskTextUrl(taskId!, taskText.id!)"
+        target="_blank"
+        mat-stroked-button
+        class="small"
+      >
+        <mat-icon>done</mat-icon>Completed
+      </a>
+      <a
+        *ngSwitchDefault
+        [routerLink]="urls.getTaskTextUrl(taskId!, taskText.id!)"
+        target="_blank"
+        mat-flat-button
+        color="primary"
+        class="small"
+      >
+        <mat-icon>rocket_launch</mat-icon>Annotate
+      </a>
+    </ng-container>
+  </ng-container>
+</pm-layout-li-with-actions>

@@ -1,0 +1,40 @@
+mat-dialog-content {
+  width: 300px;
+  font-size: 13px !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+h2,
+h3 {
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 0px;
+}
+
+h3 {
+  font: 0.8em;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wrapper div:last-child {
+  margin-left: auto;
+}
+
+.mat-divider {
+  margin: 10px 0;
+  border-top-color: rgba(0, 0, 0, 0.12);
+  border-top-width: 3px;
+}

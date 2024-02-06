@@ -1,0 +1,12 @@
+<pm-layout-with-right-sidenav *ngIf="corpus">
+  <ng-container content>
+    <pm-corpus-details-header-card
+      [corpus]="corpus"
+    ></pm-corpus-details-header-card>
+    <pm-text-ul-card [corpus]="corpus"></pm-text-ul-card>
+  </ng-container>
+
+  <ng-container filters>
+    <pm-text-list-filters></pm-text-list-filters>
+  </ng-container>
+</pm-layout-with-right-sidenav>

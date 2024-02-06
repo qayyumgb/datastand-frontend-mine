@@ -1,0 +1,89 @@
+.mdc-list {
+  padding: 0;
+}
+
+.mdc-list-item {
+  padding: 0;
+  height: auto !important;
+}
+
+.bottom-icons-section {
+  display: flex;
+  gap: 5px;
+  margin: 5px 10px 5px 10px;
+}
+
+.mat-mdc-list-item-title {
+  font-size: 10pt;
+  text-align: left;
+  font-weight: 500;
+}
+
+.mat-mdc-list-item-meta {
+  margin: 0px;
+  font-size: 8pt;
+}
+
+.mat-mdc-list-item-line {
+  margin: 1px;
+  text-align: left;
+  font-size: 10pt;
+  overflow: visible;
+  white-space: break-spaces !important;
+  word-wrap: break-word;
+}
+
+.bottom-icons-section {
+  display: flex;
+  gap: 5px;
+  margin: 5px 10px 5px 10px;
+}
+
+.comment {
+  padding: 10px 15px;
+}
+
+.comment-title {
+  margin: 0;
+  padding: 0;
+  font-size: 8pt;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: left;
+  overflow: visible;
+  white-space: break-spaces !important;
+  word-wrap: break-word;
+}
+
+.comment-text {
+  margin: 3px 0 0 0;
+  padding: 0;
+  font-size: 7pt;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  overflow: visible;
+  white-space: break-spaces !important;
+  word-wrap: break-word;
+}
+
+.comments-section {
+  font-size: 8px;
+  font-weight: 500;
+  display: block;
+  scrollbar-width: thin;
+  overflow-y: scroll;
+  height: 150px;
+}
+
+.created-on {
+  font-size: 7pt;
+  font-weight: 400;
+  color: #bbb;
+}
+
+.sep {
+  font-size: 7pt;
+  font-weight: 400;
+  color: #bbb;
+}

@@ -1,0 +1,14 @@
+.entity-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.li-card:hover {
+  background-color: #f7eef9;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

@@ -1,0 +1,102 @@
+.entry-container {
+  display: flex;
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.entry-container:hover {
+  background-color: #f7eef9;
+}
+
+a,
+.a-like {
+  cursor: pointer;
+  text-decoration: none;
+  color: rgb(0, 0, 0, 0.87);
+}
+
+a:hover,
+.a-like:hover {
+  text-decoration: underline;
+}
+
+.entry-main-content {
+  padding: 15px;
+  display: flex;
+  width: 100%;
+  position: relative;
+  gap: 16px;
+}
+
+.entry-actions-container {
+  padding: 15px 20px 15px 15px;
+  min-width: 100px;
+}
+
+// Added via [class] to pending entries
+.is-pending {
+  background-color: #fffbde;
+}
+
+.entry-title {
+  font-size: 11pt;
+  line-height: 11pt;
+  font-weight: 500;
+  max-width: 500px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.entry-subtitle {
+  margin-top: -5px;
+  font-size: 9pt;
+  color: rgb(0, 0, 0, 0.54);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.entry-title > mat-icon {
+  transform: scale(0.75);
+  font-size: 20px !important;
+  vertical-align: middle;
+  text-align: left;
+  color: rgb(0, 0, 0, 0.54);
+
+  &.private {
+    transform: scale(0.75);
+    font-size: 16px !important;
+    color: #9c27b0 !important;
+  }
+}
+
+.entry-description {
+  font-size: 12px;
+  height: 20px;
+  color: rgb(0, 0, 0, 0.7);
+  max-width: 500px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+// Entry actions
+.easy-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+}
+.easy-actions > button {
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.hidden {
+  display: none;
+}
+// File upload button
+.easy-actions > label {
+  color: rgb(0, 0, 0, 0.7);
+}

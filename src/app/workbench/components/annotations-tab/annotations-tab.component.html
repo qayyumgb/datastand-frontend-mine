@@ -1,0 +1,173 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div
+    class="workbench-page"
+    (mousemove)="updateMouseLabelPosition($event)"
+    (mouseleave)="hideMouseLabel()"
+    (mouseenter)="showMouseLabel($event)"
+    [class.cursor-not-allowed]="!vm.elementsForDisplay || !vm.currentLabelName"
+  >
+    <ngx-skeleton-loader
+      *ngIf="vm.isSpansLoading || vm.isTokenLayersLoading || vm.isTextLoading"
+      [theme]="{ height: '30px' }"
+    ></ngx-skeleton-loader>
+    <ng-container
+      *ngIf="vm.isSpansLoaded && vm.isTokenLayersLoaded && vm.isTextLoaded"
+    >
+      <!-- Normal condition: there are token layers -->
+      <div class="spans-and-tokens">
+        <ng-container *ngIf="vm.hasTokenLayers; else noTokenLayers">
+          <ng-container *ngIf="vm.hasBoundaries; else noBoundaries">
+            <ng-container *ngIf="vm.hasLabelEntities; else noLabelEntities">
+              <ng-container
+                *ngIf="vm.elementsForDisplay?.length! > 0; else noElements"
+              >
+                <ng-container
+                  *ngFor="
+                    let spanOrToken of getPaginatedElements(
+                      vm.elementsForDisplay!,
+                      this.pageIndex,
+                      this.pageSize
+                    )
+                  "
+                >
+                  <!-- Render a span -->
+                  <ng-container
+                    *ngIf="
+                      isSpanForDisplay(spanOrToken);
+                      else isTokenForDisplay
+                    "
+                  >
+                    <app-span [spanForDisplay]="spanOrToken"> </app-span>
+                  </ng-container>
+                  <!-- Render a token -->
+                  <ng-template #isTokenForDisplay
+                    ><span
+                      class="token"
+                      [id]="makeTokenDivId(spanOrToken)"
+                      [attr.token-id]="spanOrToken.id"
+                      [attr.token-start]="spanOrToken.start"
+                      [attr.token-end]="spanOrToken.end"
+                      [class.special-ch-space]="
+                        isSpecialCh(spanOrToken.content)
+                      "
+                      (mousedown)="onMouseDown($event)"
+                      (mouseup)="onMouseUp($event)"
+                      [innerHTML]="renderContent(spanOrToken.content)"
+                      [cdkContextMenuTriggerFor]="token_context_menu"
+                    ></span>
+                    <!-- Addon: force line break -->
+                    <div
+                      *ngIf="isLineBreakCh(spanOrToken.content)"
+                      class="special-ch-newline"
+                    ></div>
+                  </ng-template>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+        <mat-paginator
+          #paginator
+          class="paginator"
+          showFirstLastButtons="true"
+          hidePageSize="false"
+          (page)="handlePageEvent($event)"
+          [length]="length"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          [pageIndex]="pageIndex"
+          aria-label="Select page"
+        >
+        </mat-paginator>
+      </div>
+      <app-mouse-label
+        [left]="labelLeft"
+        [top]="labelTop"
+        [isVisible]="labelIsVisible"
+        [content]="vm.currentLabelName!"
+        [color]="vm.currentLabel ? vm.currentLabel.color! : ''"
+      ></app-mouse-label>
+      <!-- Exception: no token layers -->
+      <ng-template #noTokenLayers>
+        <div class="error-tip">
+          Please add a token layer to edit annotations.
+        </div>
+      </ng-template>
+      <!-- Exception: no boundaries -->
+      <ng-template #noBoundaries>
+        <div class="error-tip">Please add token boundaries.</div>
+      </ng-template>
+      <!-- Exception: no labels in the label set -->
+      <ng-template #noLabelEntities>
+        <div class="error-tip">Please add labels to the label set.</div>
+      </ng-template>
+      <!-- Exception: no elements -->
+      <ng-template #noElements>
+        <div class="error-tip">No spans or tokens for display.</div>
+      </ng-template>
+    </ng-container>
+  </div>
+
+  <!-- Context menu for tokens (right-click menu)
+       Note: some buttons are disabled by default, it is much easier to approach it like
+       this than to have to infer the nature of the HTML element.  
+      
+       IF CHANGING THIS ALSO CHANGE span.component.html -->
+  <ng-template #token_context_menu>
+    <div class="example-menu" cdkMenu>
+      <button
+        class="example-menu-item"
+        (click)="
+          addSpanFromContextMenu(
+            onMouseDownStart!,
+            onMouseDownEnd!,
+            vm.currentLabelId!
+          )
+        "
+        cdkMenuItem
+      >
+        <mat-icon>add</mat-icon><span>Add annotation</span>
+      </button>
+      <button class="example-menu-item" disabled="true" cdkMenuItem>
+        <mat-icon>delete</mat-icon><span>Remove annotation</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button class="example-menu-item" disabled="true" cdkMenuItem>
+        <mat-icon>done</mat-icon><span>Accept suggestion</span>
+      </button>
+      <button class="example-menu-item" disabled="true" cdkMenuItem>
+        <mat-icon>remove</mat-icon><span>Reject suggestion</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button class="example-menu-item" cdkMenuItem>
+        <mat-icon>play_arrow</mat-icon><span>Run annotator</span>
+      </button>
+      <button
+        class="example-menu-item"
+        (click)="acceptSuggestions()"
+        [disabled]="!vm.hasPendingSpans"
+        cdkMenuItem
+      >
+        <mat-icon>done_all</mat-icon><span>Accept all suggestions</span>
+      </button>
+      <button
+        class="example-menu-item"
+        (click)="rejectSuggestions()"
+        [disabled]="!vm.hasPendingSpans"
+        cdkMenuItem
+      >
+        <mat-icon>remove_done</mat-icon><span>Reject all suggestions</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button
+        class="example-menu-item"
+        (click)="openClearAllAnnotationsDialog()"
+        [disabled]="!vm.canOpenClearAllAnnotationsDialog"
+        cdkMenuItem
+      >
+        <mat-icon>restart_alt</mat-icon><span>Clear all annotations</span>
+      </button>
+    </div>
+  </ng-template>
+</ng-container>

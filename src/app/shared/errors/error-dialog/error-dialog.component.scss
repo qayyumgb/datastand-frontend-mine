@@ -1,0 +1,21 @@
+p {
+  font-weight: 500;
+}
+
+.error-message {
+  margin-top: 32px;
+  background: #eee;
+  padding: 1rem;
+  font-family: monospace;
+  word-break: break-all;
+  font-size: 0.8rem;
+}
+
+.error-status {
+  font-size: 0.9rem;
+  color: rgb(0, 0, 0, 0.87);
+}
+
+.sad-message {
+  color: #9c27b0;
+}

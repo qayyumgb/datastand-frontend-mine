@@ -1,0 +1,15 @@
+// See https://stackoverflow.com/q/468881/.
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable-area,
+  .printable-area * {
+    visibility: visible;
+  }
+  .printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

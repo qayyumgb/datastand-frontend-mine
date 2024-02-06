@@ -1,0 +1,12 @@
+<pm-layout-with-right-sidenav *ngIf="labelSet">
+  <ng-container content>
+    <pm-label-set-details-header-card
+      [labelSet]="labelSet"
+    ></pm-label-set-details-header-card>
+    <pm-label-ul-card [labelSet]="labelSet"></pm-label-ul-card>
+  </ng-container>
+
+  <ng-container filters>
+    <pm-label-list-filters></pm-label-list-filters>
+  </ng-container>
+</pm-layout-with-right-sidenav>

@@ -1,0 +1,24 @@
+.span {
+  margin-right: 4px;
+  height: fit-content;
+  color: rgb(50, 50, 50);
+  padding: 3px 5px;
+  border-radius: 5px;
+  font-weight: 600;
+  font: 0.9em;
+  display: inline;
+  cursor: pointer;
+}
+
+.pending {
+  background-color: #f0f0f0 !important;
+}
+
+.pending:hover {
+  background-color: #d4d4d4;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.9em;
+}

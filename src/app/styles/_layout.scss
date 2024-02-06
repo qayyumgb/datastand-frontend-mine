@@ -1,0 +1,80 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// General layout
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-100 {
+  display: flex;
+  width: 100%;
+}
+
+.flex-100-sb {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.gap-16 {
+  gap: 16px;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.gap-4 {
+  gap: 4px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+}
+
+.p-16 {
+  padding: 16px;
+}
+
+.p-32 {
+  padding: 32px;
+}
+
+// Grid
+@for $i from 3 through 6 {
+  .grid-#{$i} {
+    display: grid;
+    grid-template-columns: repeat(#{$i}, 1fr);
+    grid-gap: 16px;
+  }
+}
+
+// Utility classes
+.hidden {
+  display: none;
+}
+
+.inline {
+  display: inline-block;
+}

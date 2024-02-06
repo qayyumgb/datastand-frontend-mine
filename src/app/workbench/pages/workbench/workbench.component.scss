@@ -1,0 +1,23 @@
+mat-tab-group {
+  width: 100%;
+  margin-bottom: 80px;
+}
+
+.workbench {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.workbench-body {
+  // Note: 100px is the height of <app-topbar>.
+  // For context see: https://stackoverflow.com/questions/22934016/
+  height: calc(100vh - 100px);
+  background: #f8f9fa;
+  overflow: auto;
+}
+
+.page-with-tabs {
+  width: 100%;
+  margin: 15px auto;
+}

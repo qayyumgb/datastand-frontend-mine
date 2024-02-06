@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{ data.name }}</h1>
+<mat-dialog-content>
+  <table class="table-lines">
+    <tr *ngFor="let line of getLines(); index as idx" class="line">
+      <td class="td-line-idx">{{ idx + 1 }}</td>
+      <td class="td-line-content">{{ line }}</td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions [align]="'end'">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

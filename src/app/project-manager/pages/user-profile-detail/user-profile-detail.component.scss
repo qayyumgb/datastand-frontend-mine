@@ -1,0 +1,72 @@
+section {
+  width: 81%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 16px 40px 16px;
+}
+
+// Stats
+.stats-summary {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+
+.stats-number > mat-icon {
+  color: rgb(0, 0, 0, 0.54);
+  transform: scale(0.75);
+  font-size: 20px !important;
+  vertical-align: middle;
+}
+
+h3 {
+  color: rgb(0, 0, 0, 0.87);
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 1px;
+}
+
+.stats-number {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.stats-suffix {
+  margin-left: 5px;
+  font-size: 0.7rem;
+  color: rgb(0, 0, 0, 0.54);
+}
+
+// Text link
+a {
+  color: rgb(0, 0, 0.7);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(0, 0, 0.87);
+  text-decoration: underline;
+}
+
+// Latest 4 section
+.data-first-4 {
+  display: flex;
+  gap: 16px;
+}
+
+.data-section {
+  padding: 20px 20px 40px 20px;
+}
+
+.data-section > .mat-mdc-card-header {
+  padding: 0px 0px 10px 0px !important;
+}
+
+.data-section-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

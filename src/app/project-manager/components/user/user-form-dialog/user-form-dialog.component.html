@@ -1,0 +1,117 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input matInput placeholder="e.g. John" formControlName="first_name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last name</mat-label>
+      <input matInput placeholder="e.g. Doe" formControlName="last_name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Headline</mat-label>
+      <input
+        matInput
+        placeholder="e.g. Linguist at Google"
+        formControlName="headline"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Pronouns</mat-label>
+      <mat-select formControlName="pronouns">
+        <mat-option
+          *ngFor="let pronouns of pronounsOptions"
+          [value]="pronouns.value"
+        >
+          {{ pronouns.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Show the input for custom pronouns if the pronouns value is "custom" -->
+    <mat-form-field *ngIf="this.form.get('pronouns')?.value == 'custom'">
+      <mat-label>Custom pronouns</mat-label>
+      <input
+        matInput
+        placeholder="e.g. zie/zim"
+        formControlName="custom_pronouns"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <mat-select [(value)]="this.form.value.country">
+        <mat-option
+          *ngFor="let country of countryOptions"
+          [value]="country.label"
+        >
+          {{ country.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>About</mat-label>
+      <textarea
+        matInput
+        formControlName="about"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="4"
+        cdkAutosizeMaxRows="8"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Social </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <mat-label>Github</mat-label>
+          <input
+            matInput
+            type="url"
+            placeholder="http://github.com/username"
+            formControlName="github"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>LinkedIn</mat-label>
+          <input
+            matInput
+            type="url"
+            placeholder="http://www.linkedin.com/in/username"
+            formControlName="linkedin"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Website</mat-label>
+          <input
+            matInput
+            type="url"
+            placeholder="http://yourwebsite.com"
+            formControlName="website"
+          />
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-dialog-content>
+  <mat-dialog-actions [align]="'end'">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="true"
+      [disabled]="!form.valid"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

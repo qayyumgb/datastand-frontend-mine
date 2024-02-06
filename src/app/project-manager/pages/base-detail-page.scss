@@ -1,0 +1,101 @@
+// Layout
+section {
+  padding: 16px;
+}
+
+.container {
+  display: flex;
+  gap: 5%;
+  margin-left: 10%;
+  margin-bottom: 50px;
+}
+
+.content {
+  width: 60%;
+}
+
+mat-divider {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+pm-upvote-button {
+  margin-left: 20px;
+}
+
+.thumbnail {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-height: 80px;
+  object-fit: cover;
+}
+
+// Corpus content
+
+mat-card {
+  padding: 40px;
+  border-radius: 20px;
+  word-wrap: break-word;
+}
+
+mat-card-subtitle {
+  margin-top: -5px;
+}
+
+pm-avatar {
+  margin-bottom: 5px;
+}
+
+.details {
+  width: 25%;
+  min-width: 350px;
+}
+
+.details > p {
+  color: rgb(0, 0, 0, 0.54);
+  margin-bottom: 0;
+}
+
+.icon-lock {
+  transform: scale(0.75);
+  color: #9c27b0;
+  font-size: 20px !important;
+  vertical-align: middle;
+}
+
+// Details
+
+pm-tag {
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+// Context menu
+
+.actions {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+
+  > mat-button {
+    border-radius: 20px !important;
+  }
+}
+
+.more-actions {
+  border-radius: 50%;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+.more-actions > mat-icon {
+  min-width: 0 !important;
+  border-radius: 50%;
+  padding: 0px !important;
+  margin: 0px !important;
+}

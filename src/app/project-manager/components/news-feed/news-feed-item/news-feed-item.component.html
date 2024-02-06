@@ -1,0 +1,40 @@
+<section *ngIf="element && user" class="news-item">
+  <div class="header flex">
+    <div class="header-line flex">
+      <pm-avatar [user]="user" [hideUsername]="true"></pm-avatar>
+      <div>
+        <div class="action">
+          <span
+            ><a
+              [routerLink]="urls.getUserUrl(user.username!)"
+              class="action-actor"
+              >{{ user.username }}</a
+            ></span
+          >
+          <span class="action-verb">{{ action }}</span>
+        </div>
+        <div class="modified">{{ element.modified! | fromNow }}</div>
+      </div>
+    </div>
+    <div class="more-actions" [matMenuTriggerFor]="moreActionsMenu">
+      <mat-icon>more_horiz</mat-icon>
+    </div>
+    <mat-menu #moreActionsMenu="matMenu">
+      <div class="show-reason">
+        You're seeing this because you follow {{ user.username }}
+      </div>
+      <!-- Actions -->
+      <button *ngIf="!hasUnfollowed" mat-menu-item (click)="unfollowUser()">
+        <mat-icon>person_remove</mat-icon>
+        <span>Unfollow user</span>
+      </button>
+      <button mat-menu-item (click)="unfollowUser()">
+        <mat-icon>thumb_down_alt</mat-icon>
+        <span>Show less updates like this</span>
+      </button>
+    </mat-menu>
+  </div>
+  <div class="action-target">
+    <ng-content></ng-content>
+  </div>
+</section>

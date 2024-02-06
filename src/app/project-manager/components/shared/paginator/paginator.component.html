@@ -1,0 +1,33 @@
+<section class="paginator" *ngIf="count">
+  <div class="pages">
+    <button
+      mat-stroked-button
+      (click)="navigateToPreviousPage()"
+      [disabled]="!hasPreviousPage()"
+    >
+      ‹
+    </button>
+    <button
+      mat-stroked-button
+      *ngFor="let pageNum of getPageNumbers(page, lastPage)"
+      (click)="navigateToPage(pageNum)"
+      [disabled]="pageNum === page"
+      [class.selected]="pageNum === page"
+    >
+      {{ pageNum }}
+    </button>
+    <button
+      mat-stroked-button
+      (click)="navigateToNextPage()"
+      [disabled]="!hasNextPage()"
+    >
+      ›
+    </button>
+  </div>
+  <div class="info">
+    <div *ngIf="count! > 0" class="items-count">
+      {{ count | number }} result(s) · Showing {{ start | number }} to
+      {{ end | number }}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        placeholder="e.g. Corpus of William Shakespeare sonnets"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Language</mat-label>
+      <mat-select formControlName="langtag">
+        <mat-option
+          *ngFor="let langtag of langtagOptions"
+          [value]="langtag.tag"
+        >
+          {{ langtag.language_name }} ({{ langtag.tag }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        placeholder="e.g. Compiliation of sonnets by William Shakespeare, extracted from the Gutenberg Project"
+        formControlName="description"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="2"
+        cdkAutosizeMaxRows="4"
+      ></textarea>
+    </mat-form-field>
+    <pm-tags-form-field
+      [tags]="form.value.tags!"
+      (updateTagsEvent)="updateTags($event)"
+    ></pm-tags-form-field>
+    <mat-form-field>
+      <mat-label>Visibility</mat-label>
+      <mat-select formControlName="is_public">
+        <mat-option [value]="false">🔒 Private</mat-option>
+        <mat-option [value]="true">Public</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions [align]="'end'">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="true"
+      [disabled]="!form.valid"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

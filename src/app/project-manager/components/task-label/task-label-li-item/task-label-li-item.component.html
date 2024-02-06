@@ -1,0 +1,86 @@
+<pm-layout-li-with-actions *ngIf="taskLabel">
+  <ng-container content>
+    <div class="flex-column">
+      <div
+        class="title-2 mb-8 ellipsis-400"
+        [title]="taskLabel.name"
+        [innerText]="taskLabel.name"
+      ></div>
+      <div class="caption-1">
+        <color-square [color]="taskLabel.color"></color-square>
+        · ID #{{ taskLabel.id }} · Updated
+        {{ taskLabel.modified! | fromNow }}
+      </div>
+      <div *ngIf="taskLabel.description" class="entry-description">
+        {{ taskLabel.description }}
+      </div>
+      <pm-tag-list-truncated
+        *ngIf="taskLabel.tags?.length! > 0"
+        [tags]="taskLabel.tags"
+      ></pm-tag-list-truncated>
+    </div>
+  </ng-container>
+
+  <ng-container actions>
+    <ng-container *ngIf="isCreator()">
+      <button
+        *ngIf="taskLabel.is_pending"
+        mat-icon-button
+        class="medium"
+        matTooltip="Mark as reviewed"
+        (click)="markLabelAsReviewed(taskLabel)"
+      >
+        <mat-icon>check</mat-icon>
+      </button>
+      <button
+        *ngIf="!taskLabel.is_pending"
+        mat-icon-button
+        class="medium"
+        matTooltip="Mark as pending"
+        (click)="markLabelAsPending(taskLabel)"
+      >
+        <mat-icon>warning</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Rename"
+        (click)="openRenameLabelDialog(taskLabel)"
+      >
+        <mat-icon>drive_file_rename_outline</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Edit"
+        (click)="openUpdateLabelDialog(taskLabel)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Change tags"
+        (click)="openUpdateTagsDialog(taskLabel)"
+      >
+        <mat-icon>label</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Make a copy"
+        (click)="copyLabel(taskLabel)"
+      >
+        <mat-icon>file_copy</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Remove"
+        (click)="deleteLabel(taskLabel)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+  </ng-container>
+</pm-layout-li-with-actions>

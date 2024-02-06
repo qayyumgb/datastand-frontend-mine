@@ -1,0 +1,122 @@
+<section *ngIf="this.filters" class="filters dense-2">
+  <div class="sub-section">
+    <h4>
+      Search texts
+      <span
+        class="clear-filter"
+        *ngIf="this.filters.search"
+        (click)="clearSearch()"
+      >
+        [x]
+      </span>
+    </h4>
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        placeholder="e.g. Shakespeare"
+        (keyup.enter)="updateSearch($event)"
+        [(ngModel)]="filters.search"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="sub-section">
+    <h4>Filter by</h4>
+    <label>Modified</label>
+    <span
+      class="clear-filter"
+      *ngIf="this.filters.modifiedLast"
+      (click)="clearModifiedLast()"
+    >
+      [x]
+    </span>
+    <mat-radio-group color="primary" (change)="updateModifiedLast($event)">
+      <mat-radio-button
+        *ngFor="let option of modifiedLastOptions"
+        [value]="option.value"
+        [checked]="option.value == this.filters.modifiedLast"
+        >{{ option.text }}</mat-radio-button
+      >
+    </mat-radio-group>
+
+    <label>Language</label>
+    <span
+      class="clear-filter"
+      *ngIf="this.filters.langtag"
+      (click)="clearLangTag()"
+    >
+      [x]
+    </span>
+    <br />
+    <mat-form-field>
+      <mat-select
+        (selectionChange)="updateLangTag($event)"
+        [(value)]="this.filters.langtag"
+      >
+        <mat-option
+          *ngFor="let langTag of langTagOptions"
+          [value]="langTag.tag"
+        >
+          {{ langTag.language_name }} ({{ langTag.tag }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br />
+    <label>Review</label>
+    <span
+      class="clear-filter"
+      *ngIf="this.filters.is_pending"
+      (click)="clearIsPending()"
+    >
+      [x]
+    </span>
+    <mat-radio-group color="primary" (change)="updateIsPending($event)">
+      <mat-radio-button
+        *ngFor="let option of isPendingOptions"
+        [value]="option.value"
+        [checked]="option.value == this.filters.is_pending"
+        >{{ option.text }}</mat-radio-button
+      >
+    </mat-radio-group>
+
+    <br />
+    <label>Tag</label>
+    <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
+      [x]
+    </span>
+    <br />
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        placeholder="e.g. blog"
+        (keyup.enter)="updateTag($event)"
+        [(ngModel)]="filters.tag"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="sub-section">
+    <h4>
+      Sort by
+      <span
+        class="clear-filter"
+        *ngIf="this.filters.ordering"
+        (click)="clearOrdering()"
+      >
+        [x]
+      </span>
+    </h4>
+
+    <mat-radio-group color="primary" (change)="updateOrdering($event)">
+      <mat-radio-button
+        *ngFor="let option of orderingOptions"
+        [value]="option.value"
+        [checked]="option.value == this.filters.ordering"
+        >{{ option.text }}</mat-radio-button
+      >
+    </mat-radio-group>
+  </div>
+</section>

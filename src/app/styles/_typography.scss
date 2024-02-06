@@ -1,0 +1,106 @@
+// Fonts
+@font-face {
+  font-family: lemonade;
+  src: url(../../assets/fonts/lemonade-party.ttf) format("opentype");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+}
+
+// Subtitle for h1
+.subtitle-1 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: +0.5px;
+  color: rgb(0, 0, 0, 0.7);
+}
+
+// Subtitle for h2
+.subtitle-2 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.title-2 {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.body-1 {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.body-2 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.caption-1 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: rgb(0, 0, 0, 0.54);
+}
+
+.caption-2 {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 500;
+  color: rgb(0, 0, 0, 0.54);
+}
+
+.caption-2 > mat-icon {
+  transform: scale(0.8);
+  font-size: 12px !important;
+  height: 14px;
+  width: 14px;
+  vertical-align: middle;
+  text-align: left;
+  color: rgb(0, 0, 0, 0.54);
+}
+
+$my-primary: mat.define-palette(mat.$purple-palette);
+$my-accent: mat.define-palette(mat.$pink-palette);
+
+// Typography levels
+// https://v16.material.angular.io/guide/typography
+//
+// headline-1:	One-off header, usually at the top of the page (e.g. a hero header).
+// headline-2:	One-off header, usually at the top of the page (e.g. a hero header).
+// headline-3:	One-off header, usually at the top of the page (e.g. a hero header).
+// headline-4:	One-off header, usually at the top of the page (e.g. a hero header).
+// headline-5:	Section heading corresponding to the <h1> tag.
+// headline-6:	Section heading corresponding to the <h2> tag.
+// subtitle-1:	Section heading corresponding to the <h3> tag.
+// subtitle-2:	Section heading corresponding to the <h4> tag.
+// body-1:	Base body text.
+// body-2:	Secondary body text.
+// caption:	Smaller body and hint text.
+// button:	Buttons and anchors.
+$my-typography: mat.define-typography-config(
+  $headline-5: mat.define-typography-level(24px, 32px, 500),
+  $headline-6: mat.define-typography-level(20px, 28px, 500),
+  $subtitle-1: mat.define-typography-level(18px, 24px, 500),
+  $subtitle-2: mat.define-typography-level(16px, 20px, 500),
+  $body-1: mat.define-typography-level(16px, 18px, 400),
+  $body-2: mat.define-typography-level(14px, 18px, 400),
+  $caption: mat.define-typography-level(12px, 16px, 300),
+);
+
+@include mat.all-component-typographies($my-typography);

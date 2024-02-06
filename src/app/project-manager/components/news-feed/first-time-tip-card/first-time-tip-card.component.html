@@ -1,0 +1,27 @@
+<section>
+  <div class="tip-top-header">
+    <div>
+      <mat-icon class="tip-icon" fontIcon="tips_and_updates"></mat-icon>
+      First-time user tip
+    </div>
+    <div class="more-actions">
+      <mat-icon class="more-actions-button" [matMenuTriggerFor]="actionsMenu"
+        >more_horiz</mat-icon
+      >
+    </div>
+    <mat-menu #actionsMenu="matMenu">
+      <button mat-menu-item (click)="hideTip()">
+        <mat-icon>block</mat-icon>
+        <span>Don't show this again</span>
+      </button>
+    </mat-menu>
+  </div>
+  <div class="flex-responsive">
+    <div class="content">
+      <ng-content select="[content]"></ng-content>
+    </div>
+    <div class="media">
+      <ng-content select="[media]"></ng-content>
+    </div>
+  </div>
+</section>

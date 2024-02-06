@@ -1,0 +1,37 @@
+.filters {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+mat-form-field {
+  margin-right: 10px;
+}
+
+label {
+  font-weight: 500;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0 20px 0;
+  align-items: flex-start;
+}
+
+mat-radio-button {
+  margin: -5px;
+}
+
+.filter {
+  border-radius: 20px;
+}
+
+.clear-filter {
+  cursor: pointer;
+  color: #9c27b0;
+}
+
+.sub-section {
+  margin-bottom: 20px;
+}

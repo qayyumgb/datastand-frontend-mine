@@ -1,0 +1,16 @@
+<section>
+  <div class="flex-wrapper">
+    <div>
+      <h1>{{ title }}</h1>
+      <div class="subtitle-1 mt-16 mb-16">
+        {{ subtitle }}<br />{{ extraText }}
+      </div>
+      <ng-content select="[button]"></ng-content>
+    </div>
+    <img
+      class="header-img"
+      [src]="imgUrl"
+      [class.hidden]="screen.isSmall$ | async"
+    />
+  </div>
+</section>

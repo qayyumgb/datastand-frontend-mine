@@ -1,0 +1,109 @@
+<h1 mat-dialog-title>Import Texts</h1>
+<mat-dialog-content>
+  <div class="flex-container">
+    <div class="items-to-add-window">
+      <form [formGroup]="searchForm" (ngSubmit)="onSearchFormSubmit()">
+        <mat-form-field style="margin-bottom: -1.25em">
+          <mat-label>Search corpora</mat-label>
+          <input matInput type="text" formControlName="search" />
+        </mat-form-field>
+      </form>
+      <div class="item-options">
+        <table class="table-items">
+          <tr *ngFor="let corpus of corpusOptions">
+            <td class="td-entry-image">
+              <img
+                [src]="corpus.image || urls.DEFAULT_IMG_URL"
+                class="entity-img-60"
+              />
+            </td>
+            <td class="td-text">
+              <a [routerLink]="urls.getCorpusUrl(corpus.id)" target="_blank"
+                >{{ corpus.name }}↗
+              </a>
+              <br />
+              <span class="item-subtitle"
+                >ID #{{ corpus.id }}
+                ·
+                {{ corpus.langtag }} · {{ corpus.num_texts! | number }} texts ·
+                Updated
+                {{ corpus.modified! | fromNow }}
+              </span>
+              <div class="avatar">
+                <pm-avatar [user]="corpus.creator" [size]="'mini'"></pm-avatar>
+              </div>
+            </td>
+            <td class="td-action-button">
+              <ng-container *ngIf="!isCorpusAdded(corpus)">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  (click)="addCorpus(corpus)"
+                >
+                  <mat-icon>add</mat-icon> Add
+                </button>
+              </ng-container>
+              <ng-container *ngIf="isCorpusAdded(corpus)">
+                <button mat-flat-button color="primary" [disabled]="true">
+                  <mat-icon>add</mat-icon> Added
+                </button>
+              </ng-container>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="added-items-window">
+      <div class="count">{{ addedCorpora?.length }} corpus(ora) added</div>
+      <div class="added-items-scroll">
+        <table class="table-items">
+          <tr *ngFor="let corpus of addedCorpora; index as idx" class="line">
+            <td class="td-entry-image">
+              <img
+                [src]="corpus.image || urls.DEFAULT_IMG_URL"
+                class="entity-img-60"
+              />
+            </td>
+            <td class="td-text">
+              <a [routerLink]="urls.getCorpusUrl(corpus.id)" target="_blank"
+                >{{ corpus.name }}↗
+              </a>
+              <br />
+              <span class="item-subtitle"
+                >ID #{{ corpus.id }}
+                ·
+                {{ corpus.langtag }} · {{ corpus.num_texts! | number }} texts ·
+                Updated
+                {{ corpus.modified! | fromNow }}
+              </span>
+              <div class="avatar">
+                <pm-avatar [user]="corpus.creator" [size]="'mini'"></pm-avatar>
+              </div>
+            </td>
+            <td class="td-action-button">
+              <button
+                mat-flat-button
+                color="primary"
+                (click)="deleteCorpus(corpus)"
+              >
+                <mat-icon>remove</mat-icon> Remove
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions [align]="'end'">
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    (click)="onSave()"
+    [disabled]="addedCorpora?.length == 0"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

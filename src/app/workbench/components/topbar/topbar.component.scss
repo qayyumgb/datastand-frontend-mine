@@ -1,0 +1,243 @@
+// topbar
+//   +-- header-and-menubar
+//         +-- topbar-icon
+//         +-- topbar-header
+//   +-- iconbar
+//         +-- mat-icon-button
+
+$menu-font-size: 11px;
+$menu-icon-size: 13px;
+$topbar-doc-logo-size: 34px;
+$iconbar-icon-size: 16px;
+
+section {
+  // Note: If you change the height, also change <app-body>
+  // For context see: https://stackoverflow.com/questions/22934016/
+  height: auto;
+  background-color: white;
+  border-bottom: solid 1px #dadce0;
+  overflow: hidden;
+}
+
+mat-select {
+  width: 45px;
+  font-size: $menu-font-size;
+  padding: 2px;
+}
+
+mat-option {
+  font-size: $menu-font-size;
+  padding: 4px;
+  min-height: 16px;
+}
+
+.header-and-menubar {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  border-bottom: solid 1px #dadce0;
+}
+
+.topbar-subsection {
+  padding: 10px 10px 3px 10px;
+}
+
+.iconbar {
+  padding: 3px 20px;
+  display: flex;
+  gap: 7px;
+}
+
+.topbar-header {
+  font-size: 18px;
+}
+
+.topbar-icon-container {
+  display: flex;
+  margin: 0 auto;
+}
+
+.avatar-container {
+  position: absolute;
+  top: 5px;
+  right: 30px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.topbar-icon {
+  width: $topbar-doc-logo-size;
+  height: $topbar-doc-logo-size;
+  font-size: $topbar-doc-logo-size;
+  line-height: $topbar-doc-logo-size !important;
+  color: #9c27b0;
+}
+
+.mat-divider-vertical {
+  height: auto;
+  margin: 3px;
+}
+
+// cdKMenu
+.cdk-menu-bar {
+  margin-top: 3px;
+}
+
+.example-menu-bar-item {
+  cursor: pointer;
+  border: none;
+
+  user-select: none;
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+  height: auto;
+  min-width: 0;
+  font-size: $menu-font-size;
+  line-height: $menu-font-size !important;
+  font-weight: 400;
+  background-color: inherit;
+}
+
+.example-menu-bar-item:first-of-type {
+  margin-left: -5px;
+}
+
+.example-menu-bar-item:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.example-menu {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 220px;
+  max-width: 280px;
+  background-color: rgb(255, 255, 255);
+  padding: 1px;
+  border-radius: 0 5px 5px 5px;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.3);
+}
+
+.example-menu > button > mat-icon {
+  margin: 3px 10px;
+  color: #5f6368;
+
+  width: $menu-icon-size;
+  height: $menu-icon-size;
+  font-size: $menu-icon-size;
+  line-height: $menu-icon-size !important;
+}
+
+button:disabled {
+  cursor: default !important;
+}
+
+.example-menu .example-menu-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.example-menu .example-menu-item {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+
+  user-select: none;
+  min-width: 64px;
+  padding: 3px;
+  font-size: $menu-font-size;
+  height: calc(2 * $menu-font-size);
+  line-height: calc(2 * $menu-font-size);
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex: 1;
+}
+
+.example-menu .example-menu-item:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.example-menu .example-menu-item[role="menuitemradio"][aria-checked="true"] {
+  background-color: rgb(240, 240, 240);
+}
+
+.example-menu .example-menu-item[role="menuitemcheckbox"][aria-checked="true"] {
+  background-color: rgb(240, 240, 240);
+}
+
+.example-menu .example-menu-item:active {
+  background-color: rgb(225, 225, 225);
+}
+
+.example-menu-bar-item[aria-expanded="true"] {
+  background-color: #f0cded !important;
+  border-radius: 5px 5px 0 0;
+}
+
+.example-menu-item[aria-expanded="true"] {
+  background-color: rgb(225, 225, 225) !important;
+}
+
+.example-menu-item > .menu-expand-icon {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print,
+  #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+.kbd-shortcut {
+  font-weight: 500;
+  float: right;
+  color: #5f6368;
+  margin-right: 10px;
+}
+
+.action {
+  float: left;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+// TODO(gustavoauma): Implement this in a better way.
+.profile-menu-icon {
+  width: $menu-icon-size;
+  height: $menu-icon-size;
+  font-size: $menu-icon-size;
+  line-height: $menu-icon-size;
+}
+
+.profile-menu-span {
+  font-size: $menu-font-size;
+  line-height: $menu-font-size;
+}
+
+.demo-chip {
+  margin: 10px 0 0 0;
+  display: block;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background: #9c27b0;
+  color: white;
+  font-weight: 500;
+}

@@ -1,0 +1,15 @@
+.li-card:hover {
+  background-color: #f7eef9;
+}
+
+.content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+}

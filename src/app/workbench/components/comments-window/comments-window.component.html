@@ -1,0 +1,82 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div
+    *ngIf="vm.window.isVisible"
+    cdkDrag
+    cdkDragBoundary=".workbench-body"
+    class="window"
+    [style.width]="width"
+    [style.top]="top"
+    [style.right]="right"
+  >
+    <div cdkDragHandle class="window-top-bar">
+      <div class="window-title">{{ title }}</div>
+      <button
+        mat-button
+        class="small"
+        title="Close window"
+        (click)="closeWindow()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="window-body">
+      <!-- List of comments -->
+      <div class="comments-section">
+        <ngx-skeleton-loader
+          *ngIf="vm.isCommentsLoading"
+          [theme]="{ height: '50px' }"
+        ></ngx-skeleton-loader>
+
+        <mat-selection-list
+          *ngIf="vm.isCommentsLoaded"
+          [multiple]="false"
+          (selectionChange)="selectComment($event.options[0].value)"
+          [hideSingleSelectionIndicator]="true"
+        >
+          <mat-list-option
+            *ngFor="let comment of vm.comments"
+            [value]="comment.id"
+          >
+            <div class="comment">
+              <div class="comment-title">
+                <span class="sep">● </span>
+                <span class="created-on">{{ comment.created! | fromNow }}</span>
+              </div>
+              <div class="comment-text">{{ comment.text }}</div>
+            </div>
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <mat-divider></mat-divider>
+      <!-- Bottom section with action icons -->
+      <div class="bottom-icons-section">
+        <button
+          mat-button
+          class="small"
+          title="Add comment"
+          (click)="openCreateCommentDialog()"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-button
+          class="small"
+          title="Edit comment"
+          (click)="openUpdateCommentDialog(vm.currentComment!)"
+          [disabled]="!vm.currentCommentId"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-button
+          class="small"
+          title="Remove comment"
+          (click)="removeComment(vm.currentCommentId!)"
+          [disabled]="!vm.currentCommentId"
+        >
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,17 @@
+mat-sidenav-container {
+  margin: 0;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+mat-sidenav-content {
+  position: relative;
+  overflow-y: scroll;
+  height: calc(100vh - 60px); // 60px == $topbar height.
+}
+
+mat-sidenav {
+  height: auto;
+  width: 250px;
+  padding: 16px;
+}

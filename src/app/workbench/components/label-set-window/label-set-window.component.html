@@ -1,0 +1,93 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div
+    *ngIf="vm.window.isVisible"
+    cdkDrag
+    cdkDragBoundary=".workbench-body"
+    class="window"
+    [style.width]="width"
+    [style.top]="top"
+    [style.left]="left"
+  >
+    <div cdkDragHandle class="window-top-bar">
+      <div class="window-title">{{ title }}</div>
+      <button
+        mat-button
+        class="small"
+        title="Close window"
+        (click)="closeWindow()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <!-- Visible layer -->
+    <div class="window-body">
+      <div class="visible-layer">
+        <mat-icon class="eye-icon">label</mat-icon>
+        <!-- Use initializing to prevent flickering in navigation -->
+        <span *ngIf="vm.isLabelsInitializing">Loading...</span>
+        <span *ngIf="!vm.isLabelsInitializing && vm.currentLabel; else noLabels"
+          >{{ vm.currentLabelIndex! + 1 }}. {{ vm.currentLabel.name! }}</span
+        >
+        <ng-template #noLabels>None</ng-template>
+      </div>
+      <mat-divider></mat-divider>
+      <!-- List of labels -->
+      <div class="labels-section">
+        <ngx-skeleton-loader
+          *ngIf="vm.isLabelsInitializing"
+          [theme]="{ height: '40px' }"
+        ></ngx-skeleton-loader>
+
+        <mat-selection-list
+          *ngIf="!vm.isLabelsInitializing"
+          [multiple]="false"
+          (selectionChange)="changeSelection($event.options[0].value)"
+          [hideSingleSelectionIndicator]="true"
+        >
+          <mat-list-option
+            *ngFor="let label of vm.currentLabels; index as labelIndex"
+            [value]="label?.id"
+            class="label-item"
+            [selected]="vm.currentLabelId == label?.id"
+          >
+            <div class="label-name">
+              {{ labelIndex + 1 }}. {{ label?.name }}
+            </div>
+            <div class="label-color" [style.color]="label?.color">▆</div>
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <mat-divider></mat-divider>
+      <!-- Bottom section with action icons -->
+      <div class="bottom-icons-section">
+        <button
+          mat-button
+          class="small"
+          title="Add new label"
+          [disabled]="!vm.canOpenCreateLabelDialog"
+          (click)="openCreateLabelDialog()"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-button
+          class="small"
+          title="Edit label"
+          [disabled]="!vm.canOpenUpdateLabelDialog"
+          (click)="openUpdateLabelDialog(vm.currentLabelId!)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-button
+          class="small"
+          title="Remove label"
+          [disabled]="!vm.canRemoveLabel"
+          (click)="removeLabel(vm.currentLabelId!)"
+        >
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

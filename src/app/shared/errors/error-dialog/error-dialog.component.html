@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Error</h1>
+<mat-dialog-content>
+  <p class="sad-message">We're sorry. Something went wrong... 😢</p>
+  <p>Please try again in a few minutes.</p>
+  <div class="error-message">
+    <p *ngIf="data.status" class="error-status">
+      Status Code: {{ data.status }}
+    </p>
+    <p>
+      {{ data.message }}
+    </p>
+  </div>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Details </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>{{ data.error | json }}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-dialog-content>
+<mat-dialog-actions [align]="'end'">
+  <button mat-raised-button mat-dialog-close color="primary">Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,504 @@
+<section>
+  <ng-container *ngIf="vm$ | async as vm">
+    <ng-container *ngIf="cvm$ | async as cvm">
+      <div class="header-and-menubar topbar-subsection">
+        <div class="topbar-icon-container">
+          <!-- Icon to identify the type of document -->
+          <mat-icon class="topbar-icon">description</mat-icon>
+        </div>
+        <div>
+          <!-- Document title -->
+          <div class="topbar-header printable-area">
+            <ngx-skeleton-loader
+              *ngIf="cvm.isTextLoading"
+              [theme]="{ margin: 0, padding: 0, height: '17px', width: '10%' }"
+            ></ngx-skeleton-loader>
+            <ng-container *ngIf="cvm.isTextLoaded">
+              {{ vm.name || "Untitled text" }}
+              <status-badge [status]="vm.status" size="small"></status-badge>
+            </ng-container>
+          </div>
+          <!-- Menubar -->
+          <div cdkMenuBar>
+            <button
+              class="example-menu-bar-item"
+              cdkMenuItem
+              [cdkMenuTriggerFor]="file"
+            >
+              File
+            </button>
+            <button
+              class="example-menu-bar-item"
+              cdkMenuItem
+              [cdkMenuTriggerFor]="text"
+            >
+              Text
+            </button>
+            <button
+              class="example-menu-bar-item"
+              cdkMenuItem
+              [cdkMenuTriggerFor]="tokens"
+            >
+              Tokens
+            </button>
+            <button
+              class="example-menu-bar-item"
+              cdkMenuItem
+              [cdkMenuTriggerFor]="annotations"
+            >
+              Annotations
+            </button>
+            <button
+              class="example-menu-bar-item"
+              cdkMenuItem
+              [cdkMenuTriggerFor]="comments"
+            >
+              Comments
+            </button>
+            <button
+              class="example-menu-bar-item"
+              cdkMenuItem
+              [cdkMenuTriggerFor]="windows"
+            >
+              Windows
+            </button>
+            <button
+              class="example-menu-bar-item"
+              cdkMenuItem
+              [cdkMenuTriggerFor]="help"
+            >
+              Help
+            </button>
+          </div>
+
+          <ng-template #file>
+            <div class="example-menu" cdkMenu>
+              <button
+                class="example-menu-item"
+                (click)="clearTask()"
+                cdkMenuItem
+              >
+                <mat-icon>restart_alt</mat-icon>
+                <span>Clear task</span>
+              </button>
+              <button
+                class="example-menu-item"
+                cdkMenuItem
+                (click)="openUpdateNameDialogComponent()"
+                (keydown.enter)="openUpdateNameDialogComponent()"
+              >
+                <mat-icon>drive_file_rename_outline</mat-icon>
+                <div class="wrapper">
+                  <div class="action">Rename</div>
+                  <div class="kbd-shortcut">F2</div>
+                </div>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                [cdkCopyToClipboard]="getUrl()"
+                (click)="showSnackBarLinkCopied()"
+                cdkMenuItem
+              >
+                <mat-icon>link</mat-icon>
+                <span>Copy shareable link</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="downloadContent()"
+                cdkMenuItem
+              >
+                <mat-icon>file_download</mat-icon>
+                <span>Download tab content</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                (click)="openFileDetailsDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>info_outline</mat-icon>
+                <span>File details</span>
+              </button>
+              <button class="example-menu-item" cdkMenuItem (click)="print()">
+                <mat-icon>print</mat-icon>
+                <div class="wrapper">
+                  <div class="action">Print</div>
+                  <div class="kbd-shortcut">Ctrl+P</div>
+                </div>
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #text>
+            <div class="example-menu" cdkMenu>
+              <button
+                class="example-menu-item"
+                (click)="openByteCountDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>plus_one</mat-icon>
+                <span>Byte count</span>
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #tokens>
+            <div class="example-menu" cdkMenu>
+              <button
+                class="example-menu-item"
+                (click)="openCreateTokenLayerDialog()"
+                [disabled]="!cvm.canOpenCreateTokenLayerDialog"
+                cdkMenuItem
+              >
+                <mat-icon>add</mat-icon>
+                <div class="wrapper">
+                  <div class="action">Add token layer</div>
+                  <div class="kbd-shortcut">Ctrl+Alt+K</div>
+                </div>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="openUpdateTokenLayerDialog(vm.currentTokenLayerId!)"
+                [disabled]="!cvm.canOpenUpdateTokenLayerDialog"
+                cdkMenuItem
+              >
+                <mat-icon>edit_outline</mat-icon>
+                <span>Edit token layer</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="removeTokenLayer(vm.currentTokenLayerId!)"
+                [disabled]="!cvm.canRemoveTokenLayer"
+                cdkMenuItem
+              >
+                <mat-icon>delete_outline</mat-icon>
+                <span>Remove token layer</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                [cdkCopyToClipboard]="vm.tokensForDisplay | json"
+                (click)="showSnackBarTokensCopied()"
+                [disabled]="!cvm.canCopyTokens"
+                cdkMenuItem
+              >
+                <mat-icon>content_copy</mat-icon>
+                <span>Copy tokens</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="openClearAllTokensDialog(vm.currentTokenLayerId!)"
+                [disabled]="!cvm.canOpenClearAllTokensDialog"
+                cdkMenuItem
+              >
+                <mat-icon>restart_alt</mat-icon>
+                <span>Reset tokens</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                (click)="openTokenCountDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>plus_one</mat-icon>
+                <span>Token count</span>
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #annotations>
+            <div class="example-menu" cdkMenu>
+              <button
+                class="example-menu-item"
+                (click)="openCreateLabelDialog()"
+                [disabled]="!cvm.canOpenCreateLabelDialog"
+                cdkMenuItem
+              >
+                <mat-icon>add</mat-icon>
+                <span>Add label</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="openUpdateLabelDialog(vm.currentLabelId!)"
+                [disabled]="!cvm.canOpenUpdateLabelDialog"
+                cdkMenuItem
+              >
+                <mat-icon>edit_outline</mat-icon>
+                <span>Edit label</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="removeLabel(vm.currentLabelId!)"
+                [disabled]="!cvm.canRemoveLabel"
+                cdkMenuItem
+              >
+                <mat-icon>delete_outline</mat-icon>
+                <span>Remove label</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                [cdkCopyToClipboard]="vm.spansForDisplay | json"
+                (click)="showSnackBarAnnotationsCopied()"
+                [disabled]="!cvm.canCopyAnnotations"
+                cdkMenuItem
+              >
+                <mat-icon>content_copy</mat-icon>
+                <span>Copy annotations</span>
+              </button>
+              <button
+                class="example-menu-item"
+                [disabled]="!cvm.canOpenClearAllAnnotationsDialog"
+                cdkMenuItem
+              >
+                <mat-icon>restart_alt</mat-icon>
+                <span>Reset annotations</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                (click)="openAnnotationCountDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>plus_one</mat-icon>
+                <span>Annotation count</span>
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #comments>
+            <div class="example-menu" cdkMenu>
+              <button
+                class="example-menu-item"
+                (click)="openCreateCommentDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>add</mat-icon>
+                <div class="wrapper">
+                  <div class="action">Add</div>
+                  <div class="kbd-shortcut">Ctrl+Alt+C</div>
+                </div>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="openUpdateCommentDialog(vm.currentCommentId!)"
+                [disabled]="!cvm.canOpenUpdateCommentDialog"
+                cdkMenuItem
+              >
+                <mat-icon>edit_outline</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="removeComment(vm.currentCommentId!)"
+                [disabled]="!cvm.canRemoveComment"
+                cdkMenuItem
+              >
+                <mat-icon>delete_outline</mat-icon>
+                <span>Remove</span>
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #windows>
+            <div class="example-menu" cdkMenu>
+              <button
+                class="example-menu-item"
+                (click)="resetWindows(vm.selectedTabId)"
+                cdkMenuItem
+              >
+                <mat-icon>done_all</mat-icon>
+                <span>Show all windows</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="closeAllWindows()"
+                cdkMenuItem
+              >
+                <mat-icon>close</mat-icon>
+                <span>Close all windows</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                (click)="toggleCommentsWindow()"
+                cdkMenuItem
+              >
+                <mat-icon>{{
+                  vm.windows.comments.isVisible ? "check" : ""
+                }}</mat-icon>
+                <span>Show comments</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="toggleLabelSetWindow()"
+                [disabled]="!cvm.canToggleLabelSetWindow"
+                cdkMenuItem
+              >
+                <mat-icon>{{
+                  vm.windows.labelSet.isVisible ? "check" : ""
+                }}</mat-icon>
+                <span>Show label set</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="toggleTokenLayersWindow()"
+                [disabled]="!cvm.canToggleTokenLayersWindow"
+                cdkMenuItem
+              >
+                <mat-icon>{{
+                  vm.windows.tokenLayers.isVisible ? "check" : ""
+                }}</mat-icon>
+                <span>Show token layers</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="toggleTokenizersWindow()"
+                [disabled]="!cvm.canToggleTokenizersWindow"
+                cdkMenuItem
+              >
+                <mat-icon>{{
+                  vm.windows.tokenizers.isVisible ? "check" : ""
+                }}</mat-icon>
+                <span>Show tokenizers</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="toggleSuggestionsWindow()"
+                [disabled]="!cvm.canToggleSuggestionsWindow"
+                cdkMenuItem
+              >
+                <mat-icon>{{
+                  vm.windows.suggestions.isVisible ? "check" : ""
+                }}</mat-icon>
+                <span>Show suggestions</span>
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #help>
+            <div class="example-menu" cdkMenu>
+              <button
+                class="example-menu-item"
+                (click)="openHelpDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>help_outline</mat-icon>
+                <span>Help (TBD)</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="openAboutDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>info</mat-icon>
+                <span>About</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                (click)="openPrivacyPolicyDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>policy</mat-icon>
+                <span>Privacy policy</span>
+              </button>
+              <button
+                class="example-menu-item"
+                (click)="openTermsOfUseDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>gavel</mat-icon>
+                <span>Terms of use</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                (click)="openSendFeedbackDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>bug_report</mat-icon>
+                <div class="wrapper">
+                  <div class="action">Send feedback</div>
+                  <div class="kbd-shortcut">Ctrl+B</div>
+                </div>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                class="example-menu-item"
+                (click)="openKeyboardShortcutsDialog()"
+                cdkMenuItem
+              >
+                <mat-icon>keyboard</mat-icon>
+                <span>Keyboard shortcuts</span>
+              </button>
+            </div>
+          </ng-template>
+        </div>
+        <!-- Profile menu -->
+        <!-- Render the profile menu if the user is logged in otherwise shows a demo chip. -->
+        <!-- TODO(gustavoauma): Implement this in a better way. -->
+        <div class="avatar-container">
+          <ng-container *ngIf="user; else noProfile">
+            <button
+              mat-icon-button
+              color="primary"
+              aria-label="Profile"
+              [matMenuTriggerFor]="profile"
+            >
+              <img [src]="user.image || urls.DEFAULT_IMG_URL" class="avatar" />
+            </button>
+          </ng-container>
+          <ng-template #noProfile>
+            <span class="demo-chip">Demo</span>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Iconbar -->
+      <div class="iconbar topbar-subsection">
+        <button
+          mat-button
+          class="small"
+          title="Copy shareable link"
+          [cdkCopyToClipboard]="getUrl()"
+          (click)="showSnackBarLinkCopied()"
+        >
+          <mat-icon>link</mat-icon>
+        </button>
+        <button mat-button class="small" title="Print" (click)="print()">
+          <mat-icon>print</mat-icon>
+        </button>
+        <button
+          mat-button
+          class="small"
+          title="Download tab content"
+          (click)="downloadContent()"
+        >
+          <mat-icon>download</mat-icon>
+        </button>
+        <mat-divider vertical></mat-divider>
+        <button
+          mat-button
+          class="small"
+          title="Add comment"
+          (click)="openCreateCommentDialog()"
+        >
+          <mat-icon>comment</mat-icon>
+        </button>
+      </div>
+      <!-- Menus -->
+      <mat-menu #profile="matMenu">
+        <button mat-menu-item (click)="openProfileDialog()">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item (click)="signOut()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+  </ng-container>
+</section>

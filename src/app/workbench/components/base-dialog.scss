@@ -1,0 +1,21 @@
+mat-dialog-content {
+  width: 300px;
+  font-size: 13px !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wrapper div:last-child {
+  margin-left: auto;
+}
+
+.mat-divider {
+  margin: 10px 0;
+  border-top-color: rgba(0, 0, 0, 0.12);
+  border-top-width: 3px;
+}

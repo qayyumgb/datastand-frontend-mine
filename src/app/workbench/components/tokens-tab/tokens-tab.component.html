@@ -1,0 +1,71 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div
+    class="workbench-page"
+    [class.cursor-not-allowed]="!vm.hasTokenLayers || !vm.selectedTokenLayerId"
+  >
+    <!-- Normal condition: there are token layers -->
+    <ngx-skeleton-loader
+      *ngIf="vm.isTokenLayersLoading || vm.isTextLoading"
+      [theme]="{ height: '30px' }"
+    ></ngx-skeleton-loader>
+    <ng-container *ngIf="vm.isTokenLayersLoaded && vm.isTextLoaded">
+      <ng-container *ngIf="vm.hasTokenLayers; else noTokenLayers">
+        <ng-container *ngIf="vm.selectedTokenLayerId; else noSelectedLayerId">
+          <div class="ch-section">
+            <ng-container
+              *ngFor="
+                let ch of getPaginatedCharacters(
+                  vm.text,
+                  this.pageIndex,
+                  this.pageSize
+                );
+                index as chId;
+                last as isLast
+              "
+            >
+              <app-char
+                [ch]="ch"
+                [chId]="chId + this.pageSize * this.pageIndex"
+                [isLast]="
+                  chId + this.pageSize * this.pageIndex === vm.text.length - 1
+                "
+                [hasBoundary]="
+                  vm.boundaries?.includes(
+                    chId + this.pageSize * this.pageIndex + 1
+                  )!
+                "
+                [tokenLayerId]="vm.selectedTokenLayerId!"
+              ></app-char>
+            </ng-container>
+          </div>
+        </ng-container>
+        <!-- Exception: no selected layer -->
+        <ng-template #noSelectedLayerId>
+          <div class="no-selected-layer-tip">
+            Please select a token layer to edit tokens
+          </div>
+        </ng-template>
+      </ng-container>
+      <!-- Exception: no token layers -->
+      <ng-template #noTokenLayers>
+        <div class="no-token-layers-tip">
+          Please add a token layer to edit tokens
+        </div>
+      </ng-template>
+      <!-- Paginator -->
+      <mat-paginator
+        #paginator
+        class="paginator"
+        showFirstLastButtons="true"
+        hidePageSize="false"
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </ng-container>
+  </div>
+</ng-container>

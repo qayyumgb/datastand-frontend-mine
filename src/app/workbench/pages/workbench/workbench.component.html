@@ -1,0 +1,30 @@
+<section class="workbench" #workbench>
+  <app-topbar></app-topbar>
+  <!-- .workbench-body is required here for cdkDragBoundary in <app-window> -->
+  <div class="workbench-body" (scroll)="updateMouseLabelScroll($event)">
+    <app-token-layers></app-token-layers>
+    <app-tokenizer></app-tokenizer>
+    <app-label-set></app-label-set>
+    <app-suggestions></app-suggestions>
+    <app-comments></app-comments>
+    <app-items-navigation-panel></app-items-navigation-panel>
+    <div class="page-with-tabs printable-area">
+      <mat-tab-group
+        [selectedIndex]="selectedTabId$ | async"
+        mat-stretch-tabs="false"
+        mat-align-tabs="center"
+        (selectedIndexChange)="selectTab($event)"
+      >
+        <mat-tab label="Tokens">
+          <app-tokens-tab></app-tokens-tab>
+        </mat-tab>
+        <mat-tab label="Spans">
+          <app-annotations-tab
+            [workbenchScrollTop]="workbenchScrollTop"
+            [isTabSelected]="(selectedTabId$ | async) === 1"
+          ></app-annotations-tab>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</section>

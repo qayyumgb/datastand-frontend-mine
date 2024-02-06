@@ -1,0 +1,43 @@
+.tip-top-header {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(0, 0, 0, 0.3);
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+  margin-bottom: 8px;
+}
+
+.tip-icon {
+  margin-left: -3px;
+  transform: scale(0.7);
+  font-size: 20px !important;
+  vertical-align: middle;
+}
+
+.more-actions > mat-icon {
+  color: rgb(0, 0, 0, 0.54);
+  transform: scale(0.75);
+  font-size: 24px !important;
+  vertical-align: middle;
+}
+
+.more-actions:hover > mat-icon {
+  cursor: pointer;
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.flex-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.content {
+  flex: 1 1 400px;
+}
+
+.media {
+  margin: 0 auto;
+}

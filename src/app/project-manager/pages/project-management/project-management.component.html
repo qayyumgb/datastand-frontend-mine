@@ -1,0 +1,141 @@
+<section class="pm">
+  <!-- Toolbar -->
+  <mat-toolbar>
+    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a routerLink="/pm" class="pm-title" (click)="closeMobileSidenav()"
+      >Data Stand</a
+    >
+    <pm-search-bar></pm-search-bar>
+    <span class="toolbar-spacer"></span>
+    <pm-avatar
+      [user]="user"
+      [hideUsername]="true"
+      [matMenuTriggerFor]="profile"
+    ></pm-avatar>
+    <mat-menu #profile="matMenu">
+      <button
+        mat-menu-item
+        [routerLink]="urls.getUserUrl(user?.username!)"
+        (click)="closeMobileSidenav()"
+      >
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item [routerLink]="urls.USER_SETTINGS_URL">
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <!-- Sidenav -->
+  <mat-sidenav-container autosize>
+    <mat-sidenav
+      [mode]="(screen.isLarge$ | async) ? 'over' : 'side'"
+      [opened]="(screen.isLarge$ | async) ? 'false' : 'true'"
+    >
+      <div class="pm-sidenav dense-2">
+        <div class="sub-section">
+          <a [routerLink]="urls.PM_URL" (click)="closeMobileSidenav()"
+            ><h2>Home</h2></a
+          >
+          <mat-divider></mat-divider>
+          <h2>My data</h2>
+          <button
+            mat-fab
+            extended
+            color="primary"
+            [matMenuTriggerFor]="menu"
+            class="new-button"
+            (click)="closeMobileSidenav()"
+          >
+            <mat-icon>add</mat-icon>
+            New
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openCreateCorpusDialog()">
+              Corpus
+            </button>
+            <button mat-menu-item (click)="openCreateLabelSetDialog()">
+              Label set
+            </button>
+            <button mat-menu-item (click)="openCreateTaskDialog()">Task</button>
+          </mat-menu>
+          <mat-nav-list>
+            <a
+              mat-list-item
+              [routerLink]="urls.TASKS_URL"
+              routerLinkActive="is-active"
+              (click)="closeMobileSidenav()"
+            >
+              <mat-icon matListItemIcon>task</mat-icon>
+              <span matListItemTitle> Tasks </span>
+            </a>
+            <a
+              mat-list-item
+              [routerLink]="urls.CORPORA_URL"
+              routerLinkActive="is-active"
+              (click)="closeMobileSidenav()"
+            >
+              <mat-icon matListItemIcon>library_books</mat-icon>
+              <span matListItemTitle> Corpora </span>
+            </a>
+            <a
+              mat-list-item
+              [routerLink]="urls.LABEL_SETS_URL"
+              routerLinkActive="is-active"
+              (click)="closeMobileSidenav()"
+            >
+              <mat-icon matListItemIcon>style</mat-icon>
+              <span matListItemTitle> Label sets </span>
+            </a>
+          </mat-nav-list>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="sub-section">
+          <span></span>
+          <h2>Public data</h2>
+          <mat-nav-list>
+            <a
+              mat-list-item
+              [routerLink]="urls.PUBLIC_CORPORA_URL"
+              routerLinkActive="is-active"
+              (click)="closeMobileSidenav()"
+            >
+              <mat-icon matListItemIcon>library_books</mat-icon>
+              <span matListItemTitle>Corpora</span>
+            </a>
+            <a
+              mat-list-item
+              [routerLink]="urls.PUBLIC_LABEL_SETS_URL"
+              routerLinkActive="is-active"
+              (click)="closeMobileSidenav()"
+            >
+              <mat-icon matListItemIcon>style</mat-icon>
+              <span matListItemTitle>Label sets</span>
+            </a>
+          </mat-nav-list>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="usage" *ngIf="usage">
+          <a class="usage-text" (click)="openUsageDialogComponent()"
+            >{{ usage.items | number }} items created</a
+          >
+        </div>
+      </div>
+    </mat-sidenav>
+
+    <!-- Main content -->
+    <mat-sidenav-content>
+      <div class="pm-body">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</section>

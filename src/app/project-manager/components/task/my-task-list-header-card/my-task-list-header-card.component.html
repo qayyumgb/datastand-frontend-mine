@@ -1,0 +1,18 @@
+<pm-list-header-card
+  title="My tasks"
+  subtitle="Create and explore your annotation tasks."
+  extraText="Happy labeling!"
+  imgUrl="assets/img/task-header-card-img.png"
+>
+  <ng-container button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="mt-16"
+      (click)="openCreateTaskDialog()"
+    >
+      <mat-icon>add</mat-icon>
+      New Task
+    </button>
+  </ng-container>
+</pm-list-header-card>

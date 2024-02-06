@@ -1,0 +1,41 @@
+<div
+  *ngIf="entity"
+  class="li-card"
+  (mouseenter)="displayActions()"
+  (mouseleave)="hideActions()"
+>
+  <pm-base-li-with-img [imgUrl]="entity.image">
+    <ng-container content>
+      <div class="entity-info">
+        <div class="flex-column">
+          <div class="caption-2 ellipsis">{{ entityType }}</div>
+          <div class="title-2 ellipsis">
+            <a
+              [routerLink]="entityUrl"
+              class="a-like ellipsis"
+              [title]="entity.name"
+              [innerText]="entity.name"
+            ></a>
+          </div>
+          <div class="caption-1 mb-16 ellipsis">
+            <ng-content select="[entityGreyInfo]"></ng-content>
+          </div>
+          <pm-tag-list-truncated [tags]="entity.tags"></pm-tag-list-truncated>
+          <div class="avatar mt-8">
+            <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div>
+        <div class="actions mb-16">
+          <ng-content select="[buttons]"></ng-content>
+        </div>
+        <div [class.hidden]="!actions">
+          <ng-content select="[hoverButtons]"></ng-content>
+          <br />
+        </div>
+      </div>
+    </ng-container>
+  </pm-base-li-with-img>
+</div>

@@ -1,0 +1,29 @@
+<div
+  class="login-page"
+  [ngStyle]="{ backgroundImage: 'url(assets/img/workbench-login-bg.jpg)' }"
+>
+  <div class="login-square">
+    <h1>Data Stand</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>UID</mat-label>
+        <input matInput formControlName="uid" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Token</mat-label>
+        <input matInput formControlName="token" />
+      </mat-form-field>
+      <button
+        color="primary"
+        mat-raised-button
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Activate account
+      </button>
+      <div class="sign-up">
+        <span>Back to <a [routerLink]="urls.LOGIN_URL">login page</a></span>
+      </div>
+    </form>
+  </div>
+</div>

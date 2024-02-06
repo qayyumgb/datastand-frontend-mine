@@ -1,0 +1,23 @@
+:host {
+  width: 600px;
+}
+
+.dialog-content {
+  height: 500px;
+  overflow-y: auto;
+}
+
+.flex-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.mat-mdc-row {
+  height: 25px;
+}
+
+.mat-column-description {
+  flex: none;
+  width: 300px;
+}

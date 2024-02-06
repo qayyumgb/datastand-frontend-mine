@@ -1,0 +1,91 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content #content>
+    <!-- Data -->
+    <mat-form-field>
+      <mat-label>Text</mat-label>
+      <textarea
+        matInput
+        placeholder="Here goes your text. You can use raw text or markdown. 
+  Newlines can be used for formatting. For example:
+  
+  Tyger Tyger, burning bright,
+  In the forests of the night;
+  What immortal hand or eye,
+  Could frame thy fearful symmetry?
+  
+  In what distant deeps or skies.
+  Burnt the fire of thine eyes? 
+  [...]"
+        formControlName="raw_string"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="20"
+        cdkAutosizeMaxRows="30"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Language</mat-label>
+      <mat-select formControlName="langtag">
+        <mat-option
+          *ngFor="let langtag of langtagOptions"
+          [value]="langtag.tag"
+        >
+          {{ langtag.language_name }} ({{ langtag.tag }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <pm-tags-form-field
+      [tags]="form.value.tags!"
+      (updateTagsEvent)="updateTags($event)"
+    ></pm-tags-form-field>
+    <!-- Metadata -->
+    <mat-accordion [displayMode]="'flat'">
+      <mat-expansion-panel (afterExpand)="scrollToBottom()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Metadata</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="metadata">
+          <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input
+              matInput
+              placeholder="e.g. Sonnet 18"
+              formControlName="name"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Author</mat-label>
+            <input
+              matInput
+              placeholder="e.g. William Shakespeare"
+              formControlName="author"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              placeholder="e.g. Sonnet 18 by William Shakespeare, extracted from the Gutenberg Project"
+              formControlName="description"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="4"
+              cdkAutosizeMaxRows="4"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-dialog-content>
+  <mat-dialog-actions [align]="'end'">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="true"
+      [disabled]="!form.valid"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

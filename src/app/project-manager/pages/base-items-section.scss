@@ -1,0 +1,73 @@
+// Layout
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.items-section {
+  // Remove top padding, this needs to be added to .sticky-header, so that
+  // the sticky header has some space on the top.
+  padding: 0 16px 16px 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid rgb(0, 0, 0, 0.12);
+}
+
+// Sticky header
+.sticky-header {
+  position: sticky;
+  top: 0;
+  padding: 16px 0 0 0;
+  z-index: 1;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px !important;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+}
+
+.title-with-icon {
+  font-weight: 500;
+  font-size: 1.15rem;
+}
+
+.icon-title {
+  color: #9c27b0;
+  transform: scale(0.75);
+  font-size: 24px !important;
+  vertical-align: middle;
+}
+
+.sticky-header-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+}
+
+// Paginator
+.paginator {
+  margin-top: 10px;
+}
+
+.items-list {
+  padding: 0 16px 16px 16px;
+  min-height: 450px !important;
+}
+
+.items-count {
+  font-size: 0.7rem;
+  color: rgb(0, 0, 0, 0.54);
+}
+
+.no-items {
+  margin-top: 20px;
+}

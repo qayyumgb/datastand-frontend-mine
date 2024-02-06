@@ -1,0 +1,24 @@
+<div
+  class="login-page"
+  [ngStyle]="{ backgroundImage: 'url(assets/img/workbench-signup-bg.jpg)' }"
+>
+  <div class="login-square">
+    <h1>Data Stand</h1>
+    <h2>Registration is closed 😢</h2>
+    <p>Sorry, access is by invitation only.</p>
+    <p>
+      If you would like to be one of our early adopters, please reach out and
+      tell us about your use case.
+    </p>
+    <a
+      mat-raised-button
+      class="btn-contact-sales"
+      [href]="salesEmailHref"
+      color="primary"
+      >Contact sales</a
+    >
+    <div class="back">
+      <span>Back to <a href="http://datastand.net">datastand.net</a></span>
+    </div>
+  </div>
+</div>

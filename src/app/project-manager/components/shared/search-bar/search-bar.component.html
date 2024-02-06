@@ -1,0 +1,10 @@
+<div class="search-bar">
+  <form [formGroup]="form" (submit)="navigateToSearchUrl()">
+    <input
+      matInput
+      formControlName="q"
+      class="input-search-bar"
+      placeholder="Search tasks, texts and label sets..."
+    />
+  </form>
+</div>

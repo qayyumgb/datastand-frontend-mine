@@ -1,0 +1,35 @@
+<section>
+  <loader-card *ngIf="isLoading()"></loader-card>
+  <ng-container *ngIf="isLoaded()">
+    <pm-user-details-header-card
+      [userProfile]="userProfile"
+    ></pm-user-details-header-card>
+
+    <!-- TODO(gustavoauma): Reenable this when the stats are correct.
+    <pm-user-details-statistics-card
+      [usage]="usage"
+    ></pm-user-details-statistics-card> -->
+
+    <div class="card" *ngIf="corpora?.length! > 0">
+      <h2><mat-icon class="icon-title">library_books</mat-icon> Corpora</h2>
+      <ul class="data-table">
+        <li *ngFor="let corpus of corpora">
+          <pm-corpus-li-item [corpus]="corpus"></pm-corpus-li-item>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card" *ngIf="labelSets?.length! > 0">
+      <h2><mat-icon class="icon-title">style</mat-icon> Label sets</h2>
+      <ul class="data-table">
+        <li *ngFor="let labelSet of labelSets">
+          <pm-label-set-li-item [labelSet]="labelSet"></pm-label-set-li-item>
+        </li>
+      </ul>
+    </div>
+
+    <pm-no-data-card
+      *ngIf="corpora?.length! == 0 && labelSets?.length! == 0"
+    ></pm-no-data-card>
+  </ng-container>
+</section>

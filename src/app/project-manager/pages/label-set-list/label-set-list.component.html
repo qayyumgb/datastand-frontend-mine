@@ -1,0 +1,36 @@
+<pm-layout-with-right-sidenav>
+  <ng-container content>
+    <section class="data-cards-section">
+      <pm-my-label-set-list-header-card></pm-my-label-set-list-header-card>
+
+      <loader-card *ngIf="isLoading()"></loader-card>
+      <pm-layout-results-with-paginator
+        *ngIf="isLoaded()"
+        singular="Label Set"
+        plural="Label Sets"
+        [totalCount]="totalCount"
+        [page]="page"
+        [paginatedCount]="paginatedCount"
+        (refreshDataEvent)="getLabelSets()"
+      >
+        <ng-container listItems>
+          <pm-label-set-li-item
+            *ngFor="let labelSet of items"
+            [labelSet]="labelSet!"
+            (deleteLabelSetEvent)="deleteItemById($event)"
+          ></pm-label-set-li-item>
+        </ng-container>
+        <ng-container cardItems>
+          <pm-label-set-card
+            *ngFor="let labelSet of items"
+            [labelSet]="labelSet"
+          ></pm-label-set-card>
+        </ng-container>
+      </pm-layout-results-with-paginator>
+    </section>
+  </ng-container>
+
+  <ng-container filters>
+    <pm-label-set-list-filters [filters]="filters!"></pm-label-set-list-filters>
+  </ng-container>
+</pm-layout-with-right-sidenav>

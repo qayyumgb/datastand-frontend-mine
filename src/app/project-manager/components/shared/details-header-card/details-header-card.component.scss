@@ -1,0 +1,15 @@
+.actions-container {
+  flex: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: fit-content;
+}
+
+.entity-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}

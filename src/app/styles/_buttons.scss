@@ -1,0 +1,58 @@
+// Rules for button sizes.
+$buttonInfo: (
+  "mini": 12px,
+  "small": 18px,
+  "medium": 24px,
+  "normal": 30px,
+  "large": 48px,
+);
+$button-ratio: 0.8;
+$icon-button-ratio: 0.666;
+
+.mat-mdc-button {
+  padding: 2px !important;
+  border-radius: 20%;
+}
+
+@each $name, $size in $buttonInfo {
+  .mat-mdc-button.#{$name} {
+    width: $size !important;
+    height: $size !important;
+    line-height: $size !important;
+    min-width: $size !important;
+
+    .mat-icon {
+      font-size: $size * $button-ratio !important;
+      width: $size * $button-ratio !important;
+      height: $size * $button-ratio !important;
+      line-height: $size * $button-ratio !important;
+      margin-right: 0 !important;
+    }
+  }
+}
+@each $name, $size in $buttonInfo {
+  .mat-mdc-icon-button.#{$name} {
+    width: $size !important;
+    height: $size !important;
+    padding: 0px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    & > *[role="img"] {
+      width: $size * $icon-button-ratio;
+      height: $size * $icon-button-ratio;
+      font-size: $size * $icon-button-ratio;
+
+      svg {
+        width: $size * $icon-button-ratio;
+        height: $size * $icon-button-ratio;
+      }
+    }
+
+    .mat-mdc-button-touch-target {
+      width: $size !important;
+      height: $size !important;
+    }
+  }
+}

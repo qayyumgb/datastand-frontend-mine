@@ -1,0 +1,83 @@
+<section *ngIf="userProfile" class="card">
+  <div class="flex">
+    <div class="flex-100">
+      <img
+        [src]="userProfile.image || urls.DEFAULT_IMG_URL"
+        class="user-image"
+      />
+      <div class="user-info">
+        <h1 class="mb-16">{{ userProfile.username }}@</h1>
+        <div *ngIf="userProfile.first_name || userProfile.last_name">
+          {{ userProfile.first_name }} {{ userProfile.last_name }}
+          <span *ngIf="this.getPronouns()" class="pronouns"
+            >({{ this.getPronouns() }})</span
+          >
+        </div>
+        <div>{{ userProfile.headline }}</div>
+        <div *ngIf="userProfile.country">{{ userProfile.country }}</div>
+        <div class="links">
+          <span *ngIf="userProfile.linkedin">
+            <a [href]="userProfile.linkedin" target="_blank">LinkedIn↗</a>
+          </span>
+          <span *ngIf="userProfile.github">
+            <a [href]="userProfile.github" target="_blank">GitHub↗</a>
+          </span>
+          <span *ngIf="userProfile.website">
+            <a [href]="userProfile.website" target="_blank"
+              >{{ userProfile.website }}↗
+            </a>
+          </span>
+        </div>
+        <div class="followers">
+          <a (click)="openFollowersDialog()"
+            >{{ userProfile.num_followers! }} Follower(s)</a
+          >
+          ·
+          <a (click)="openFollowingDialog()"
+            >{{ userProfile.num_following! }} Following</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="top-buttons">
+      <!-- Same user buttons -->
+      <ng-container *ngIf="userProfile.username != this.auth.username">
+        <button
+          *ngIf="!userProfile.am_i_following"
+          mat-flat-button
+          color="primary"
+          class="follow-button"
+          (click)="followUser()"
+        >
+          <mat-icon>person_add</mat-icon> Follow
+        </button>
+        <button
+          *ngIf="userProfile.am_i_following"
+          mat-stroked-button
+          class="follow-button"
+          (click)="unfollowUser()"
+        >
+          <mat-icon>person_remove</mat-icon> Unfollow
+        </button>
+      </ng-container>
+      <!-- Other user buttons -->
+      <ng-container *ngIf="userProfile.username! == this.auth.username!">
+        <label for="file-upload" title="Upload thumbnail">
+          <a mat-stroked-button class="small">
+            <mat-icon>image</mat-icon>
+            <span>Change Image</span>
+          </a>
+        </label>
+        <input id="file-upload" type="file" (change)="changeImage($event)" />
+        <button
+          mat-flat-button
+          color="primary"
+          class="follow-button"
+          (click)="openUpdateUserProfileDialog()"
+        >
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</section>

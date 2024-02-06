@@ -1,0 +1,104 @@
+<loader-card *ngIf="isLoading()"></loader-card>
+<section class="items-section" *ngIf="this.corpus && isLoaded()">
+  <div class="sticky-header">
+    <div>
+      <div class="title-with-icon">
+        <mat-icon class="icon-title">text_snippet</mat-icon>
+        Texts
+      </div>
+      <div>
+        <div class="paginator">
+          <pm-paginator
+            [page]="page!"
+            [count]="totalCount!"
+            [currentPageSize]="paginatedCount!"
+            [pageSize]="100"
+          ></pm-paginator>
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky-header-buttons">
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Refresh"
+        (click)="getTexts()"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="small"
+        (click)="openCreateTextDialog()"
+        *ngIf="isCreator"
+      >
+        <mat-icon>add</mat-icon>Add Text
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="small"
+        (click)="openCorpusEditTextsDialog()"
+        *ngIf="isCreator"
+      >
+        <mat-icon>recycling</mat-icon>Import Texts
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="small"
+        (click)="openGenerateTextsDialog()"
+        *ngIf="isCreator"
+        [disabled]="items.length! == 0"
+      >
+        <mat-icon>auto_awesome</mat-icon>AI Generate
+      </button>
+      <button
+        mat-icon-button
+        mat-small-icon-button
+        [matMenuTriggerFor]="textActionsMenu"
+        *ngIf="isCreator"
+      >
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+      <mat-menu #textActionsMenu="matMenu">
+        <button mat-menu-item (click)="corporaAcceptAllSuggestions()">
+          <mat-icon>done_all</mat-icon>
+          <span>Accept all suggestions</span>
+        </button>
+        <button mat-menu-item (click)="dedupeTexts()">
+          <mat-icon>filter_1</mat-icon>
+          <span>Remove duplicates</span>
+        </button>
+        <button mat-menu-item (click)="deleteAllTexts()">
+          <mat-icon>delete</mat-icon>
+          <span>Delete all texts</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div>
+    <div class="items-list" *ngIf="items?.length! > 0; else noItems">
+      <ul>
+        <li *ngFor="let text of items">
+          <pm-text-li-item
+            [text]="text"
+            [corpusId]="this.corpus.id!"
+            (deleteTextEvent)="deleteItemById($event)"
+            (copyTextEvent)="addItemAboveId($event.text, $event.originalTextId)"
+          ></pm-text-li-item>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noItems>
+      <pm-no-data-card
+        *ngIf="items?.length! == 0"
+        [useCard]="true"
+        title="No results"
+        text="No texts were found"
+      ></pm-no-data-card>
+    </ng-template>
+  </div>
+</section>

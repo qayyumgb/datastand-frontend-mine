@@ -1,0 +1,21 @@
+<pm-first-time-tip-card (hideTipEvent)="hideHomeWelcomeMessage()">
+  <ng-container content>
+    <h2>Welcome, {{ this.authService.first_name }}!</h2>
+    <div class="subtitle-2 mb-16 mt-8">
+      It's truly great to have you here ✨
+    </div>
+    <p>
+      We put a lot of ❤️ into making this platform, and we hope you enjoy using
+      it as much as we enjoyed building it.
+    </p>
+    <p>
+      If you need any help or have any suggestions for us, please drop us a line
+      in
+      <a href="mailto:support@datastand.net">support@datastand.net</a>.
+    </p>
+    <p>We will get back to you soon (often within in a few hours).</p>
+  </ng-container>
+  <ng-container media>
+    <img src="assets/img/news-feed-card-welcome.png" class="img-mw400" />
+  </ng-container>
+</pm-first-time-tip-card>

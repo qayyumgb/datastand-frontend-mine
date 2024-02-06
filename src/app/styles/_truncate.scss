@@ -1,0 +1,25 @@
+$width-sizes: 200, 300, 400, 500;
+
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@each $size in $width-sizes {
+  .ellipsis-#{$size} {
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: #{$size}px;
+  }
+}
+
+.clamp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

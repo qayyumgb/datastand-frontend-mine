@@ -1,0 +1,32 @@
+h3 {
+  color: rgb(0, 0, 0, 0.87);
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 1px;
+}
+
+mat-icon {
+  color: rgb(0, 0, 0, 0.54);
+  transform: scale(0.75);
+  font-size: 20px !important;
+  vertical-align: middle;
+}
+
+.value {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.symbol {
+  font-family: "Lucida Sans", sans-serif;
+  margin-right: 4px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: rgb(0, 0, 0, 0.54);
+}
+
+.subtitle {
+  margin-left: 5px;
+  font-size: 0.7rem;
+  color: rgb(0, 0, 0, 0.54);
+}

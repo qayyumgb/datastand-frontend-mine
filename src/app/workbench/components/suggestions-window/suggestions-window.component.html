@@ -1,0 +1,94 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div
+    *ngIf="vm.window.isVisible"
+    cdkDrag
+    cdkDragBoundary=".workbench-body"
+    class="window"
+    [style.top]="top"
+    [style.right]="right"
+  >
+    <div cdkDragHandle class="window-top-bar">
+      <div class="window-title">Suggestions</div>
+      <button
+        mat-button
+        class="small"
+        title="Close window"
+        (click)="closeWindow()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="window-body">
+      <ng-container *ngIf="allModels">
+        <!-- Selected annotator -->
+        <div class="visible-layer">
+          <mat-icon class="eye-icon">auto_fix_high</mat-icon>
+          <span>{{ allModels[vm.currentAnnotatorId!].name }}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <!-- Annotators list -->
+        <div class="annotators-section">
+          <mat-selection-list
+            #annotatorList
+            (selectionChange)="
+              onSelectionChange(annotatorList.selectedOptions.selected)
+            "
+            [multiple]="false"
+            [hideSingleSelectionIndicator]="true"
+          >
+            <mat-list-option
+              *ngFor="let item of allModels | keyvalue"
+              [selected]="item.key == vm.currentAnnotatorId"
+              [value]="item.key"
+              class="annotator-item"
+            >
+              <div class="event-snippet">{{ item.value.name }}</div>
+            </mat-list-option>
+          </mat-selection-list>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="annotator-item">
+          <mat-checkbox
+            class="annotator-item"
+            [checked]="vm.runAutomatically"
+            (click)="toggleRunAutomatically()"
+          >
+            <span class="auto-annotate">Run automatically?</span>
+          </mat-checkbox>
+        </div>
+        <mat-divider></mat-divider>
+        <!-- Bottom section with action icons -->
+        <div class="bottom-icons-section">
+          <button
+            mat-button
+            class="small"
+            title="Run annotator"
+            (click)="runAnnotator(vm.currentAnnotatorId!)"
+            [disabled]="!vm.currentAnnotatorId"
+          >
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+
+          <button
+            mat-button
+            class="small"
+            title="Accept all suggestions"
+            (click)="vm.hasPendingSpans ? acceptSuggestions() : ''"
+            [disabled]="!vm.hasPendingSpans"
+          >
+            <mat-icon>done_all</mat-icon>
+          </button>
+          <button
+            mat-button
+            class="small"
+            title="Discard all suggestions"
+            (click)="vm.hasPendingSpans ? rejectSuggestions() : ''"
+            [disabled]="!vm.hasPendingSpans"
+          >
+            <mat-icon>remove_done</mat-icon>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

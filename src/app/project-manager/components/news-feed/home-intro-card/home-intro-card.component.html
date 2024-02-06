@@ -1,0 +1,39 @@
+<pm-first-time-tip-card (hideTipEvent)="hideHomeIntroMessage()">
+  <ng-container content>
+    <h2 class="mb-16">First steps</h2>
+    <p>
+      <span class="logo-font">Data Stand</span> is a platform for creating,
+      labeling and sharing datasets for NLP.
+    </p>
+    <p>
+      You can create your own datasets, or explore and reuse the ones created by
+      the community.
+    </p>
+    <p>Overall the platform is organize around three main concepts:</p>
+    <ul>
+      <li>
+        <strong>Corpus</strong>: a collection of unlabeled texts, e.g. "a corpus
+        of 1,000 product reviews".
+      </li>
+      <li>
+        <strong>Label set</strong>: a collection of labels, e.g. for sentiment
+        analysis: POSITIVE, NEGATIVE, NEUTRAL.
+      </li>
+      <li>
+        <strong>Task</strong>: a labeling task, e.g. "annotate the sentiment of
+        1,000 product reviews".
+      </li>
+    </ul>
+    <p>Watch the intro video for an overview of how our platform works!</p>
+  </ng-container>
+  <ng-container media>
+    <iframe
+      width="300px"
+      height="196px"
+      src="https://www.youtube.com/embed/x4g-RFMOTf4"
+      frameborder="0"
+      allowfullscreen
+      style="border-radius: 10px"
+    ></iframe>
+  </ng-container>
+</pm-first-time-tip-card>

@@ -1,0 +1,98 @@
+<section *ngIf="this.filters" class="filters dense-2">
+  <div class="sub-section">
+    <h4>Filter by</h4>
+    <label>Modified</label>
+    <span
+      class="clear-filter"
+      *ngIf="this.filters.modifiedLast"
+      (click)="clearModifiedLast()"
+    >
+      [x]
+    </span>
+    <mat-radio-group color="primary" (change)="updateModifiedLast($event)">
+      <mat-radio-button
+        *ngFor="let option of modifiedLastOptions"
+        [value]="option.value"
+        [checked]="option.value == this.filters.modifiedLast"
+        >{{ option.text }}</mat-radio-button
+      >
+    </mat-radio-group>
+
+    <!-- Non-public filters -->
+    <ng-container *ngIf="!isPublicFilter">
+      <label>Visibility</label>
+      <span
+        class="clear-filter"
+        *ngIf="this.filters.is_public"
+        (click)="clearIsPublic()"
+      >
+        [x]
+      </span>
+      <mat-radio-group color="primary" (change)="updateIsPublic($event)">
+        <mat-radio-button
+          *ngFor="let option of isPublicOptions"
+          [value]="option.value"
+          [checked]="option.value == this.filters.is_public"
+          >{{ option.text }}</mat-radio-button
+        >
+      </mat-radio-group>
+    </ng-container>
+
+    <!-- Public filters -->
+    <ng-container *ngIf="isPublicFilter">
+      <label>User</label>
+      <span
+        class="clear-filter"
+        *ngIf="this.filters.creator"
+        (click)="clearCreator()"
+      >
+        [x]
+      </span>
+      <mat-form-field>
+        <mat-label>User</mat-label>
+        <input
+          matInput
+          placeholder="e.g. john"
+          (keyup)="updateCreator($event)"
+          [(ngModel)]="filters.creator"
+        />
+      </mat-form-field>
+    </ng-container>
+
+    <label>Tag</label>
+    <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
+      [x]
+    </span>
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        placeholder="e.g. blog"
+        (keyup)="updateTag($event)"
+        [(ngModel)]="filters.tag"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="sub-section">
+    <h4>
+      Sort by
+      <span
+        class="clear-filter"
+        *ngIf="this.filters.ordering"
+        (click)="clearOrdering()"
+      >
+        [x]
+      </span>
+    </h4>
+
+    <mat-radio-group color="primary" (change)="updateOrdering($event)">
+      <mat-radio-button
+        *ngFor="let option of orderingOptions"
+        [value]="option.value"
+        [checked]="option.value == this.filters.ordering"
+        >{{ option.text }}</mat-radio-button
+      >
+    </mat-radio-group>
+  </div>
+</section>

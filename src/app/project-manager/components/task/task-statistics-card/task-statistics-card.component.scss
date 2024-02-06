@@ -1,0 +1,60 @@
+// Stats
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 16px;
+}
+
+.text-length-card {
+  padding: 16px;
+}
+
+.table-and-chart {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.chart {
+  position: relative;
+  width: 350px;
+  height: 300px;
+}
+
+.longest-texts-card {
+  height: 300px;
+  width: 400px;
+  padding: 16px;
+}
+
+.label-frequency-card {
+  height: 300px;
+  width: 100%;
+  padding: 16px;
+}
+
+.card-inner-window {
+  position: relative;
+  height: 220px;
+  margin: 8px;
+  overflow-y: scroll;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  justify-content: space-between;
+}
+
+.label-distribution-chart {
+  height: 300px;
+}

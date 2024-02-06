@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Keyboard shortcuts</h1>
+
+<mat-dialog-content>
+  <div class="dialog-content">
+    <table
+      *ngFor="let dataSource of dataSources; first as isFirst"
+      mat-table
+      fixedLayout="true"
+      [dataSource]="dataSource"
+    >
+      <!-- description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ isFirst ? "Description" : "" }}
+        </th>
+        <td mat-cell *matCellDef="let keyboardShortcut">
+          {{ keyboardShortcut.description }}
+        </td>
+      </ng-container>
+
+      <!-- keyPattern Column -->
+      <ng-container matColumnDef="keyPattern">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ isFirst ? "Shortcut" : "" }}
+        </th>
+        <td mat-cell *matCellDef="let keyboardShortcut">
+          {{ keyboardShortcut.keyPattern }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,39 @@
+.ch {
+  display: inline-block;
+  border-right: 2px solid transparent;
+  padding-right: 2px;
+  line-height: 28px;
+}
+
+.ch:hover {
+  cursor: pointer;
+  background-color: #f0cded;
+  border-right: 2px dotted #9c27b0;
+}
+
+.special-ch-newline {
+  // This is intentionally set to table to force a break.
+  // - https://stackoverflow.com/q/14831866
+  display: table;
+  background-color: #f3f3f3;
+}
+
+.special-ch-space {
+  background-color: #f3f3f3;
+}
+
+.final-ch {
+  cursor: default;
+  display: inline-block;
+  background-color: #eee;
+  border-right: 2px dotted #ccc;
+}
+
+.has-boundary {
+  border-right: 2px solid #673ab7;
+}
+
+.has-boundary:hover {
+  background-color: #eee;
+  border-right: 2px dotted #ccc;
+}

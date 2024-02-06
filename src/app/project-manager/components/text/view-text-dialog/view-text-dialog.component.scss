@@ -1,0 +1,30 @@
+mat-dialog-content {
+  padding: 16px;
+  width: 700px !important;
+  height: 500px;
+  overflow-y: scroll;
+  margin: 16px;
+}
+
+// Text line
+.table-lines {
+  padding: 3px;
+}
+
+.td-line-idx {
+  font-family: "Roboto Mono", monospace;
+  font-size: 10px;
+  text-align: left;
+  vertical-align: top;
+  color: rgb(0, 0, 0, 0.3);
+  padding: 0;
+  padding-right: 10px;
+  user-select: none;
+}
+
+.td-line-content {
+  font-size: 13px;
+  line-height: 13px;
+  white-space: pre-wrap;
+  font-family: "Roboto Mono", monospace;
+}

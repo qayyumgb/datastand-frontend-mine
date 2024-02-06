@@ -1,0 +1,19 @@
+section.container {
+  max-width: 1200px;
+  width: calc(100% - 32px);
+  min-width: 0;
+  padding: 16px;
+  margin-bottom: 40px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.show-more-button {
+  width: 100%;
+  background-color: #fff;
+}
+
+h2 {
+  margin: 0;
+}

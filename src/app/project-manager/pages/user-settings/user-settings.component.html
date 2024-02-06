@@ -1,0 +1,65 @@
+<section>
+  <div class="settings-card" *ngIf="userSettings">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" ngNativeValidate>
+      <h1>User settings</h1>
+
+      <mat-divider></mat-divider>
+      <h3>Layout preferences</h3>
+      <p class="mt-16">Define how you want list items to be displayed.</p>
+      <mat-radio-group formControlName="layout">
+        <mat-radio-button color="primary" value="list"
+          >Use list layout</mat-radio-button
+        >
+        <br />
+        <mat-radio-button color="primary" value="card"
+          >Use card layout</mat-radio-button
+        >
+      </mat-radio-group>
+
+      <mat-divider></mat-divider>
+      <h3>Welcome messages</h3>
+      <p class="mt-16">
+        Enable/disable welcome cards with tips for first-time users.
+      </p>
+      <mat-slide-toggle
+        color="primary"
+        formControlName="show_home_welcome_message"
+        >Show welcome card in "Home"
+      </mat-slide-toggle>
+      <br />
+      <mat-slide-toggle
+        color="primary"
+        formControlName="show_home_intro_message"
+        >Show card with "First Steps" in "Home"
+      </mat-slide-toggle>
+      <br />
+      <mat-slide-toggle
+        color="primary"
+        formControlName="show_tasks_welcome_message"
+        >Show welcome card in "Tasks"
+      </mat-slide-toggle>
+      <br />
+      <mat-slide-toggle
+        color="primary"
+        formControlName="show_corpora_welcome_message"
+        >Show welcome card in "Corpora"
+      </mat-slide-toggle>
+      <br />
+      <mat-slide-toggle
+        color="primary"
+        formControlName="show_labelsets_welcome_message"
+        >Show welcome card in "Label Sets"
+      </mat-slide-toggle>
+      <mat-divider></mat-divider>
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Update preferences
+      </button>
+    </form>
+  </div>
+</section>

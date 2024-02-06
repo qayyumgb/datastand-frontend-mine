@@ -1,0 +1,57 @@
+<pm-news-feed-item
+  [action]="'created a new label set'"
+  [element]="labelSet"
+  [user]="user"
+>
+  <div
+    *ngIf="labelSet"
+    class="entry-container"
+    (mouseenter)="displayActions()"
+    (mouseleave)="hideActions()"
+  >
+    <div class="entry-main-content">
+      <img
+        [src]="labelSet.image || urls.DEFAULT_IMG_URL"
+        class="entity-img-120"
+      />
+      <div class="label-set-entry">
+        <div class="entry-title">
+          <mat-icon>style</mat-icon
+          ><a [routerLink]="urls.getLabelSetUrl(labelSet.id)">{{
+            labelSet.name
+          }}</a>
+          <mat-icon
+            *ngIf="!labelSet.is_public"
+            title="Private"
+            class="private"
+            color="primary"
+            >lock</mat-icon
+          >
+        </div>
+        <div class="entry-subtitle">
+          {{ labelSet.num_labels! | number }} labels
+        </div>
+        <div class="entry-description">{{ labelSet.description || "-" }}</div>
+        <pm-tag-list-truncated [tags]="labelSet.tags"></pm-tag-list-truncated>
+        <div class="show-likes">
+          <mat-icon class="like-icon">favorite_outline</mat-icon>
+          {{ labelSet.num_upvotes! | number }}
+        </div>
+      </div>
+    </div>
+    <div class="entry-actions-container">
+      <div class="easy-actions" [class.hidden]="!actions">
+        <!-- LabelSet non-creator actions -->
+        <button
+          *ngIf="!isCreator()"
+          mat-icon-button
+          class="medium"
+          matTooltip="Fork labelSet"
+          (click)="forkLabelSet()"
+        >
+          <mat-icon>fork_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</pm-news-feed-item>

@@ -1,0 +1,23 @@
+@use "@angular/material" as mat;
+
+$my-primary: mat.define-palette(mat.$purple-palette);
+$my-accent: mat.define-palette(mat.$pink-palette);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+    ),
+  )
+);
+
+@include mat.all-component-themes($my-theme);
+
+.dense-1 {
+  @include mat.all-component-densities(-1);
+}
+
+.dense-2 {
+  @include mat.all-component-densities(-2);
+}

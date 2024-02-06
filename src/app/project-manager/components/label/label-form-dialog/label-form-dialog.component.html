@@ -1,0 +1,107 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content #content>
+    <!-- Data -->
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Person" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Value</mat-label>
+      <input matInput placeholder="PERSON" formControlName="value" />
+    </mat-form-field>
+
+    <mat-form-field class="input-color-field">
+      <mat-label>Color</mat-label>
+      <input matInput class="input-color-input" formControlName="color" />
+      <div class="suffix" matSuffix>
+        <ngx-colors
+          ngx-colors-trigger
+          [palette]="labelColors"
+          [hideTextInput]="true"
+          [hideColorPicker]="true"
+          formControlName="colorPicker"
+        ></ngx-colors>
+      </div>
+      <mat-error *ngIf="this.form.controls['color'].hasError('invalidColor')">
+        The color is invalid.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        placeholder="Label used to tag personal names."
+        formControlName="description"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="10"
+      ></textarea>
+    </mat-form-field>
+    <pm-tags-form-field
+      [tags]="form.value.tags!"
+      (updateTagsEvent)="updateTags($event)"
+    ></pm-tags-form-field>
+    <ng-container formArrayName="examples">
+      <h2>Examples</h2>
+      <ng-container *ngFor="let example of examples.controls; let i = index">
+        <mat-form-field>
+          <input
+            matInput
+            id="example-{{ i }}"
+            type="text"
+            [formControlName]="i"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="deleteExample(i)"
+            title="Remove example"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-form-field>
+      </ng-container>
+      <button
+        mat-button
+        type="button"
+        id="add-example-btn"
+        (click)="addExample()"
+      >
+        + Add another example
+      </button>
+    </ng-container>
+    <br />
+
+    <!-- Metadata -->
+    <mat-accordion [displayMode]="'flat'">
+      <mat-expansion-panel (afterExpand)="scrollToBottom()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Metadata</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="metadata">
+          <mat-form-field>
+            <mat-label>Author</mat-label>
+            <input
+              matInput
+              placeholder="e.g. William Shakespeare"
+              formControlName="author"
+            />
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-dialog-content>
+  <mat-dialog-actions [align]="'end'">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="true"
+      [disabled]="!form.valid"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

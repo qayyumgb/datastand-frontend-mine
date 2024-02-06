@@ -1,0 +1,103 @@
+<loader-card *ngIf="isLoading()"></loader-card>
+<div *ngIf="this.task && isLoaded()" class="items-section">
+  <div class="sticky-header">
+    <div>
+      <div class="title-with-icon">
+        <mat-icon class="icon-title">label</mat-icon>Labels
+      </div>
+      <div>
+        <div class="paginator">
+          <pm-paginator
+            [page]="page!"
+            [count]="totalCount"
+            [currentPageSize]="paginatedCount"
+            [pageSize]="20"
+            (updatePaginatorEvent)="updatePaginatorAndTaskLabels($event)"
+          ></pm-paginator>
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky-header-buttons">
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Refresh"
+        (click)="getTaskLabels(this.filters)"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="small"
+        (click)="openCreateTaskLabelDialog()"
+        *ngIf="isCreator"
+      >
+        <mat-icon>add</mat-icon>Add Label
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="small"
+        (click)="openTaskEditTaskLabelsDialog()"
+        *ngIf="isCreator"
+      >
+        <mat-icon>recycling</mat-icon>Import Labels
+      </button>
+      <label for="csv-upload" title="Upload thumbnail">
+        <a mat-flat-button class="small" color="primary">
+          <mat-icon>file_upload</mat-icon>
+          <span>Import from CSV</span>
+        </a>
+      </label>
+      <input id="csv-upload" type="file" />
+      <button
+        mat-icon-button
+        mat-small-icon-button
+        [matMenuTriggerFor]="textActionsMenu"
+        *ngIf="isCreator"
+      >
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+      <mat-menu #textActionsMenu="matMenu">
+        <button mat-menu-item (click)="acceptAllLabels()">
+          <mat-icon>done_all</mat-icon>
+          <span>Mark all as reviewed</span>
+        </button>
+        <button mat-menu-item (click)="dedupeTaskLabels()">
+          <mat-icon>filter_1</mat-icon>
+          <span>Remove duplicates</span>
+        </button>
+        <button mat-menu-item (click)="deleteAllTaskLabels()">
+          <mat-icon>delete</mat-icon>
+          <span>Delete all labels</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div>
+    <div class="items-list" *ngIf="items?.length! > 0; else noItems">
+      <ul>
+        <li *ngFor="let taskLabel of items">
+          <pm-task-label-li-item
+            [taskLabel]="taskLabel"
+            [taskId]="this.task.id!"
+            (deleteLabelEvent)="deleteItemById($event)"
+            (copyLabelEvent)="
+              addItemAboveId($event.taskLabel, $event.originalTaskLabelId)
+            "
+          ></pm-task-label-li-item>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noItems>
+      <pm-no-data-card
+        *ngIf="items?.length! == 0"
+        [useCard]="true"
+        title="No results"
+        text="No labels were found"
+      ></pm-no-data-card>
+    </ng-template>
+  </div>
+</div>

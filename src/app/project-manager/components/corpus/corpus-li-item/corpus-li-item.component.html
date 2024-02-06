@@ -1,0 +1,78 @@
+<pm-entity-li-item
+  *ngIf="corpus"
+  [entity]="corpus"
+  [entityType]="'Corpus'"
+  [entityUrl]="urls.getCorpusUrl(corpus.id)"
+>
+  <ng-container entityGreyInfo class="ellipsis">
+    {{ corpus.langtag }} · {{ corpus.num_texts! | number }} texts · Updated
+    {{ corpus.modified! | fromNow }}
+  </ng-container>
+
+  <!-- Buttons -->
+  <ng-container buttons>
+    <pm-upvote-button
+      [hasUpvoted]="corpus.has_upvoted!"
+      [numUpvotes]="corpus.num_upvotes!"
+      [element]="'corpus'"
+      [elementId]="corpus.id"
+    ></pm-upvote-button>
+  </ng-container>
+
+  <ng-container hoverButtons>
+    <!-- Corpus creator actions -->
+    <ng-container *ngIf="isCreator()">
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Rename"
+        (click)="openRenameCorpusDialog()"
+      >
+        <mat-icon>drive_file_rename_outline</mat-icon>
+      </button>
+      <input hidden type="file" #uploader (change)="changeImage($event)" />
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Change image"
+        (click)="uploader.click()"
+      >
+        <mat-icon>image</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Change tags"
+        (click)="openUpdateTagsDialog()"
+      >
+        <mat-icon>label</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Make a copy"
+        (click)="copyCorpus()"
+      >
+        <mat-icon>file_copy</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Remove"
+        (click)="deleteCorpus()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+    <!-- Corpus non-creator actions -->
+    <button
+      *ngIf="!isCreator()"
+      mat-icon-button
+      class="medium"
+      matTooltip="Fork corpus"
+      (click)="forkCorpus()"
+    >
+      <mat-icon>fork_right</mat-icon>
+    </button>
+  </ng-container>
+</pm-entity-li-item>

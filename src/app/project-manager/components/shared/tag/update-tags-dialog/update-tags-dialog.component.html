@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Edit tags</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <pm-tags-form-field
+      [tags]="form.value.tags!"
+      (updateTagsEvent)="updateTags($event)"
+    ></pm-tags-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions [align]="'end'">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="true"
+      [disabled]="!form.valid"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

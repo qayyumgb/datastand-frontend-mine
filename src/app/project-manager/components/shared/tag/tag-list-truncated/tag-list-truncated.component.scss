@@ -1,0 +1,13 @@
+.tags {
+  display: flex;
+  gap: 3px;
+  height: 24px;
+  overflow-x: hidden;
+  vertical-align: middle;
+}
+
+.more-tags {
+  font-size: 0.7rem;
+  color: rgb(0, 0, 0, 0.7);
+  line-height: 24px;
+}

@@ -1,0 +1,32 @@
+<div *ngIf="usage" class="card">
+  <div class="grid-4 center">
+    <metric
+      title="Corpora"
+      symbol="library_books"
+      [isMatIcon]="true"
+      [value]="usage.corpora"
+      subtitle="created"
+    ></metric>
+    <metric
+      title="Texts"
+      symbol="text_snippet"
+      [isMatIcon]="true"
+      [value]="usage.texts"
+      subtitle="created"
+    ></metric>
+    <metric
+      title="Label Sets"
+      symbol="style"
+      [isMatIcon]="true"
+      [value]="usage.label_sets"
+      subtitle="created"
+    ></metric>
+    <metric
+      title="Labels"
+      symbol="label"
+      [isMatIcon]="true"
+      [value]="usage.labels"
+      subtitle="created"
+    ></metric>
+  </div>
+</div>

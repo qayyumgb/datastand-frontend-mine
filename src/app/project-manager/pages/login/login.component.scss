@@ -1,0 +1,117 @@
+h1 {
+  font-size: 32pt;
+  font-family: "lemonade";
+  color: #9c27b0;
+  margin-bottom: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+mat-error {
+  text-align: center;
+  margin: 10px auto 20px auto;
+
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: 1;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.login-page {
+  display: block;
+  width: 100%;
+  height: 100vh;
+}
+
+.login-square {
+  float: right;
+  margin-right: 300px;
+  margin-top: 200px;
+  width: 300px;
+  padding: 80px 60px 80px 60px;
+  background-color: #fff;
+  font-size: 14px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.45);
+}
+
+mat-form-field {
+  font-size: 14px !important;
+  width: 100%;
+}
+
+.wrapper {
+  vertical-align: middle;
+}
+
+.remember-me {
+  float: left;
+}
+
+.forgot-password {
+  line-height: 38px;
+  margin-right: 10px;
+  float: right;
+}
+
+.sign-up {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  margin-top: 20px;
+  padding: 28px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.mat-mdc-ripple-element {
+  display: none !important;
+}

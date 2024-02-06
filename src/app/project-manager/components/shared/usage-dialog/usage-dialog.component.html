@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Usage</h1>
+<mat-dialog-content *ngIf="this.usage">
+  <div class="table-container">
+    <table>
+      <tr>
+        <td class="td-text">Corpora</td>
+        <td class="td-number" [countUp]="this.usage.corpora!"></td>
+      </tr>
+      <tr>
+        <td class="td-text">Labels</td>
+        <td class="td-number" [countUp]="this.usage.labels!"></td>
+      </tr>
+      <tr>
+        <td class="td-text">Label sets</td>
+        <td class="td-number" [countUp]="this.usage.label_sets!"></td>
+      </tr>
+      <tr>
+        <td class="td-text">Tasks</td>
+        <td class="td-number" [countUp]="this.usage.tasks!"></td>
+      </tr>
+      <tr>
+        <td class="td-text">Texts</td>
+        <td class="td-number" [countUp]="this.usage.texts!"></td>
+      </tr>
+      <tr>
+        <td class="td-text td-total">Total</td>
+        <td class="td-number">
+          <strong [countUp]="this.usage.items!"></strong>
+        </td>
+      </tr>
+    </table>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

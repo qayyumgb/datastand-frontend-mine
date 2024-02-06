@@ -1,0 +1,43 @@
+section {
+  padding: 16px;
+}
+
+.card {
+  width: 81%;
+  text-align: center;
+}
+
+.card-text {
+  margin-top: 40px;
+  padding: 16px;
+  margin-bottom: 40px;
+}
+
+img {
+  width: 100%;
+}
+
+h1 {
+  font-size: 32pt;
+  line-height: 20pt;
+  font-family: "lemonade";
+  color: #9c27b0;
+  width: 100%;
+  text-align: center;
+}
+
+.input-search-bar {
+  margin-bottom: 20px;
+  font: 400 1rem Roboto, "Helvetica Neue", sans-serif;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 0;
+  caret-color: #9c27b0;
+  background-color: #f8f9fa;
+  width: 50%;
+}
+
+.input-search-bar:focus {
+  background-color: #fff;
+  outline: 1px solid #9c27b0;
+}

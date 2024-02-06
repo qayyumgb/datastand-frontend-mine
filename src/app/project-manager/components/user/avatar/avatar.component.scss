@@ -1,0 +1,53 @@
+img {
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px double #fff;
+  outline: 2px solid #9c27b0;
+  outline-offset: 0px;
+  object-position: 25% 25%;
+  cursor: pointer;
+}
+
+img:hover {
+  filter: brightness(95%);
+}
+
+.user {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.username {
+  margin-left: 5px;
+  font-size: 0.8rem;
+}
+
+a {
+  color: rgb(0, 0, 0, 0.87);
+  font-weight: 500;
+}
+
+a:hover {
+  color: rgb(0, 0, 0, 1);
+}
+
+.mini {
+  width: 16px;
+  height: 16px;
+}
+
+.small {
+  width: 20px;
+  height: 20px;
+}
+
+.medium {
+  width: 24px;
+  height: 24px;
+}
+
+.large {
+  width: 30px;
+  height: 30px;
+}

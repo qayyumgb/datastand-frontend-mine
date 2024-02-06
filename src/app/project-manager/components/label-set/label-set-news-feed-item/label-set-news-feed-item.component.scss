@@ -1,0 +1,115 @@
+section {
+  position: relative;
+  margin: 16px auto !important;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid rgb(0, 0, 0, 0.12);
+}
+
+.entry-container {
+  display: flex;
+  width: 100%;
+  position: relative;
+  background-color: rgb(0, 0, 0, 0.03);
+  border-radius: 4px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0, 0.87);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.entry-main-content {
+  padding: 15px;
+  display: flex;
+  width: 100%;
+  position: relative;
+  gap: 16px;
+}
+
+.entry-actions-container {
+  padding: 15px 20px 15px 15px;
+  min-width: 100px;
+}
+
+// Entry with title and image
+.entry-title {
+  font-size: 11pt;
+  line-height: 11pt;
+  font-weight: 500;
+  max-width: 500px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.entry-subtitle {
+  margin-top: -5px;
+  font-size: 9pt;
+  color: rgb(0, 0, 0, 0.54);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.entry-title > mat-icon {
+  transform: scale(0.75);
+  font-size: 20px !important;
+  vertical-align: middle;
+  text-align: left;
+  color: rgb(0, 0, 0, 0.54);
+
+  &.private {
+    transform: scale(0.75);
+    font-size: 16px !important;
+    color: #9c27b0 !important;
+  }
+}
+
+.entry-description {
+  font-size: 12px;
+  height: 20px;
+  color: rgb(0, 0, 0, 0.7);
+  max-width: 800px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+// Entry actions
+.easy-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+}
+.easy-actions > button {
+  color: rgb(0, 0, 0, 0.7);
+}
+
+// File upload button
+.easy-actions > label {
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.like-icon {
+  transform: scale(0.75);
+  font-size: 20px !important;
+  vertical-align: middle;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.show-likes {
+  cursor: pointer;
+  color: rgb(0, 0, 0, 0.54);
+}
+// apply transform and make darker on hover
+.show-likes:hover {
+  color: rgb(0, 0, 0, 0.87);
+}

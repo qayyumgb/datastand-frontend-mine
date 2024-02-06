@@ -1,0 +1,22 @@
+<h1 *ngIf="this.data.type == 'followers'" mat-dialog-title>Followers</h1>
+<h1 *ngIf="this.data.type == 'following'" mat-dialog-title>Following</h1>
+
+<mat-dialog-content>
+  <ng-container *ngIf="this.followers?.length! > 0; else noFollowers">
+    <div *ngFor="let follower of followers">
+      <pm-avatar [user]="follower.user" size="small" class="avatar"></pm-avatar>
+    </div>
+  </ng-container>
+  <ng-template #noFollowers>
+    <div *ngIf="this.data.type == 'followers'">
+      Nobody is following this user yet 😢
+    </div>
+    <div *ngIf="this.data.type == 'following'">
+      This user is not following anybody yet 👾
+    </div>
+  </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

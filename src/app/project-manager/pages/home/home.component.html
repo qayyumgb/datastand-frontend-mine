@@ -1,0 +1,35 @@
+<section class="container">
+  <h1>Home</h1>
+  <pm-home-welcome-card
+    *ngIf="userSettingsService.show_home_welcome_message"
+  ></pm-home-welcome-card>
+  <pm-home-intro-card
+    *ngIf="userSettingsService.show_home_intro_message"
+  ></pm-home-intro-card>
+
+  <loader-card *ngIf="isLoading()"></loader-card>
+  <ng-container *ngIf="isLoaded()">
+    <ng-container *ngFor="let action of actions" class="news-item">
+      <pm-corpus-news-feed-item
+        *ngIf="getType(action.target) == 'corpus'"
+        [corpus]="$any(action.target)"
+        [user]="action.actor"
+      ></pm-corpus-news-feed-item>
+      <pm-label-set-news-feed-item
+        *ngIf="getType(action.target) == 'label-set'"
+        [labelSet]="$any(action.target)"
+        [user]="action.actor"
+      ></pm-label-set-news-feed-item>
+
+      <!-- TODO(gustavoauma): Implement "show more" -->
+      <button
+        mat-stroked-button
+        color="primary"
+        class="show-more-button"
+        disabled
+      >
+        No more updates
+      </button>
+    </ng-container>
+  </ng-container>
+</section>

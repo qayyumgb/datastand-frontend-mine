@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Byte count</h1>
+
+<mat-dialog-content>
+  <div class="wrapper">
+    <div>Bytes</div>
+    <div>{{ textLenght$ | async }}</div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="wrapper">
+    <div>Bytes excluding spaces</div>
+    <div>{{ textLengthWithoutSpaces$ | async }}</div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

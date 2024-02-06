@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>AI Text Generate</h1>
+<form [formGroup]="form">
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Number of texts</mat-label>
+      <mat-select formControlName="numTexts">
+        <mat-option [value]="1"> 1 </mat-option>
+        <mat-option [value]="5"> 5 </mat-option>
+        <mat-option [value]="10"> 10 </mat-option>
+        <mat-option [value]="25"> 25 </mat-option>
+        <mat-option [value]="50"> 50 </mat-option>
+        <mat-option [value]="100"> 100 </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions [align]="'end'">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="this.form.value.numTexts"
+      [disabled]="!form.valid"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

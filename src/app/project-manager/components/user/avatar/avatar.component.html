@@ -1,0 +1,17 @@
+<ng-container *ngIf="user">
+  <span class="user">
+    <img
+      *ngIf="!hideImg"
+      mat-icon-button
+      [src]="user.image || urls.DEFAULT_IMG_URL"
+      [ngClass]="size"
+    />
+    <a
+      *ngIf="!hideUsername"
+      [routerLink]="urls.getUserUrl(user.username!)"
+      [title]="user.username"
+      [innerText]="user.username"
+      class="username ellipsis"
+    ></a>
+  </span>
+</ng-container>

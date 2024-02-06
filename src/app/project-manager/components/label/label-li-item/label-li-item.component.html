@@ -1,0 +1,85 @@
+<pm-layout-li-with-actions *ngIf="label">
+  <ng-container content>
+    <div class="flex-column">
+      <div
+        class="title-2 mb-8 ellipsis-400"
+        [title]="label.name"
+        [innerText]="label.name"
+      ></div>
+      <div class="caption-1">
+        <color-square [color]="label.color"></color-square>
+        · ID #{{ label.id }} · Updated {{ label.modified! | fromNow }}
+      </div>
+      <div *ngIf="label.description" class="entry-description">
+        {{ label.description }}
+      </div>
+      <pm-tag-list-truncated
+        *ngIf="label.tags?.length! > 0"
+        [tags]="label.tags"
+      ></pm-tag-list-truncated>
+    </div>
+  </ng-container>
+
+  <ng-container actions>
+    <ng-container *ngIf="isCreator()">
+      <button
+        *ngIf="label.is_pending"
+        mat-icon-button
+        class="medium"
+        matTooltip="Mark as reviewed"
+        (click)="markLabelAsReviewed(label)"
+      >
+        <mat-icon>check</mat-icon>
+      </button>
+      <button
+        *ngIf="!label.is_pending"
+        mat-icon-button
+        class="medium"
+        matTooltip="Mark as pending"
+        (click)="markLabelAsPending(label)"
+      >
+        <mat-icon>warning</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Rename"
+        (click)="openRenameLabelDialog(label)"
+      >
+        <mat-icon>drive_file_rename_outline</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Edit"
+        (click)="openUpdateLabelDialog(label)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Change tags"
+        (click)="openUpdateTagsDialog(label)"
+      >
+        <mat-icon>label</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Make a copy"
+        (click)="copyLabel(label)"
+      >
+        <mat-icon>file_copy</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="medium"
+        matTooltip="Remove"
+        (click)="deleteLabel(label)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+  </ng-container>
+</pm-layout-li-with-actions>

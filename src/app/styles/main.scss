@@ -1,0 +1,21 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+@import "./branding";
+@import "./buttons";
+@import "./cards";
+@import "./grid";
+@import "./icons";
+@import "./layout";
+@import "./links";
+@import "./lists";
+@import "./images";
+@import "./margins";
+@import "./media";
+@import "./menus";
+@import "./scrollbar";
+@import "./sizes";
+@import "./theme";
+@import "./truncate";
+@import "./typography";

@@ -1,0 +1,18 @@
+<pm-layout-with-right-sidenav *ngIf="task">
+  <ng-container content>
+    <pm-task-details-header-card [task]="task"></pm-task-details-header-card>
+
+    <div class="card">
+      <a [routerLink]="urls.getTaskTextsUrl(task.id)">Texts</a> |
+      <a [routerLink]="urls.getTaskLabelsUrl(task.id)">Labels</a> |
+      <a [routerLink]="urls.getTaskStatisticsUrl(task.id)">Statistics</a>
+    </div>
+
+    <!-- Use .hidden otherwise flex adds a double gap here. -->
+    <router-outlet name="content" class="hidden"></router-outlet>
+  </ng-container>
+
+  <ng-container filters>
+    <router-outlet name="filters"></router-outlet>
+  </ng-container>
+</pm-layout-with-right-sidenav>

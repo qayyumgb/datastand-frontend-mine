@@ -1,0 +1,12 @@
+<section
+  [class.flex-100-sb]="!(screen.isSmall$ | async)"
+  [class.flex-column]="screen.isSmall$ | async"
+  class="gap-16"
+>
+  <img
+    [src]="imgUrl || urls.DEFAULT_IMG_URL"
+    [class.entity-img-120]="!(screen.isSmall$ | async)"
+    [class.card-img]="screen.isSmall$ | async"
+  />
+  <ng-content select="[content]"></ng-content>
+</section>

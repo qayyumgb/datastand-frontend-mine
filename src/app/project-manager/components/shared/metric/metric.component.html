@@ -1,0 +1,13 @@
+<div>
+  <h3>{{ title }}</h3>
+  <div>
+    <!-- Use Material Icon if specified by the caller -->
+    <span *ngIf="!isMatIcon" class="symbol">{{ symbol }}</span>
+    <mat-icon *ngIf="isMatIcon" [fontIcon]="symbol!"></mat-icon>
+    <span class="value" [countUp]="value!"></span>
+    <ng-container *ngIf="total">
+      (<span [countUp]="(value! / total) * 100"></span>%)
+    </ng-container>
+  </div>
+  <div class="subtitle">{{ subtitle }}</div>
+</div>

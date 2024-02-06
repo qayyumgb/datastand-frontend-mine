@@ -1,0 +1,55 @@
+<pm-news-feed-item
+  [action]="'created a new corpus'"
+  [element]="corpus"
+  [user]="user"
+>
+  <div
+    *ngIf="corpus"
+    class="entry-container"
+    (mouseenter)="displayActions()"
+    (mouseleave)="hideActions()"
+  >
+    <div class="entry-main-content">
+      <img
+        [src]="corpus.image || urls.DEFAULT_IMG_URL"
+        class="entity-img-120"
+      />
+      <div class="corpus-entry">
+        <div class="entry-title">
+          <mat-icon>library_books</mat-icon
+          ><a [routerLink]="urls.getCorpusUrl(corpus.id)">{{ corpus.name }}</a>
+          <mat-icon
+            *ngIf="!corpus.is_public"
+            title="Private"
+            class="private"
+            color="primary"
+            >lock</mat-icon
+          >
+        </div>
+        <div class="entry-subtitle">
+          {{ corpus.langtag }} · {{ corpus.num_texts! | number }} texts
+        </div>
+        <div class="entry-description">{{ corpus.description || "-" }}</div>
+        <pm-tag-list-truncated [tags]="corpus.tags"></pm-tag-list-truncated>
+        <div class="show-likes">
+          <mat-icon class="like-icon">favorite_outline</mat-icon>
+          {{ corpus.num_upvotes! | number }}
+        </div>
+      </div>
+    </div>
+    <div class="entry-actions-container">
+      <div class="easy-actions" [class.hidden]="!actions">
+        <!-- Corpus non-creator actions -->
+        <button
+          *ngIf="!isCreator()"
+          mat-icon-button
+          class="medium"
+          matTooltip="Fork corpus"
+          (click)="forkCorpus()"
+        >
+          <mat-icon>fork_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</pm-news-feed-item>

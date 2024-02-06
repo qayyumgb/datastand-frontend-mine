@@ -1,0 +1,107 @@
+<section *ngIf="labelSet">
+  <img [src]="labelSet.image || urls.DEFAULT_IMG_URL" class="card-img" />
+  <div class="card-content">
+    <div class="card-header">
+      <mat-icon class="data-icon">style</mat-icon>
+      <div class="title-wigh-grey-info">
+        <div>
+          <!-- Truncate the name and add tooltip if needed -->
+          <a
+            *ngIf="labelSet.name.length > 25; else normalLink"
+            [routerLink]="urls.getLabelSetUrl(labelSet.id)"
+            class="title"
+            [matTooltip]="labelSet.name"
+            [innerText]="truncate(labelSet.name, 25)"
+          >
+          </a>
+          <ng-template #normalLink>
+            <a
+              [routerLink]="urls.getLabelSetUrl(labelSet.id)"
+              class="title"
+              [innerText]="labelSet.name"
+            >
+            </a>
+          </ng-template>
+          <!-- End name -->
+          <mat-icon
+            *ngIf="!labelSet.is_public"
+            class="private"
+            color="primary"
+            matTooltip="Private"
+            fontIcon="lock"
+          ></mat-icon>
+        </div>
+        <div class="grey-info">
+          {{ labelSet.num_labels! | number }} label(s) |
+          {{ labelSet.modified! | fromNow }}
+        </div>
+      </div>
+      <mat-icon class="more-actions-icon" [matMenuTriggerFor]="moreActionsMenu">
+        more_vert
+      </mat-icon>
+    </div>
+
+    <div class="description">{{ truncate(labelSet.description!, 128) }}</div>
+
+    <div class="tags">
+      <pm-tag-list-truncated [tags]="labelSet.tags"></pm-tag-list-truncated>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="card-bottom">
+    <pm-avatar [user]="labelSet.creator" size="small"></pm-avatar>
+    <pm-upvote-button
+      [hasUpvoted]="labelSet.has_upvoted!"
+      [numUpvotes]="labelSet.num_upvotes!"
+      [element]="'label-set'"
+      [elementId]="labelSet.id"
+    ></pm-upvote-button>
+  </div>
+
+  <!-- Context menu -->
+  <!-- Context menu -->
+  <mat-menu #moreActionsMenu="matMenu">
+    <!-- Corpus creator actions -->
+    <button
+      *ngIf="isCreator()"
+      mat-menu-item
+      (click)="openRenameLabelSetDialog()"
+    >
+      <mat-icon>edit</mat-icon>
+      <span>Rename</span>
+    </button>
+    <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
+    <button *ngIf="isCreator()" mat-menu-item>
+      <label
+        [for]="'file-upload-card-' + labelSet.id"
+        class="change-image-button"
+        ><mat-icon class="change-image-icon">image</mat-icon></label
+      >
+      <label
+        [for]="'file-upload-card-' + labelSet.id"
+        class="change-image-button"
+        >Change image</label
+      >
+    </button>
+    <input
+      [id]="'file-upload-card-' + labelSet.id"
+      type="file"
+      (change)="changeImage($event)"
+    />
+    <button *ngIf="isCreator()" mat-menu-item (click)="openUpdateTagsDialog()">
+      <mat-icon>label</mat-icon>
+      <span>Change tags</span>
+    </button>
+    <button *ngIf="isCreator()" mat-menu-item (click)="deleteLabelSet()">
+      <mat-icon>delete</mat-icon>
+      <span>Remove</span>
+    </button>
+    <!-- Corpus non-creator actions -->
+    <button *ngIf="!isCreator()" mat-menu-item (click)="forkLabelSet()">
+      <mat-icon>fork_right</mat-icon>
+      <span>Fork</span>
+    </button>
+  </mat-menu>
+</section>

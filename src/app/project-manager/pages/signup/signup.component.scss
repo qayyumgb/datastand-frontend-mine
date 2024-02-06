@@ -1,0 +1,78 @@
+h1 {
+  font-size: 32pt;
+  font-family: "lemonade";
+  color: #9c27b0;
+  margin-bottom: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-page {
+  display: block;
+  width: 100%;
+  height: 100vh;
+}
+
+.login-square {
+  float: right;
+  margin-right: 300px;
+  margin-top: 10vh;
+  width: 300px;
+  padding: 80px 60px 80px 60px;
+  height: 60vh;
+  background-color: #fff;
+  font-size: 14px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.45);
+}
+
+mat-form-field {
+  font-size: 14px !important;
+  width: 100%;
+}
+
+.wrapper {
+  vertical-align: middle;
+}
+
+.remember-me {
+  float: left;
+}
+
+.forgot-password {
+  line-height: 38px;
+  margin-right: 10px;
+  float: right;
+}
+
+.sign-up {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.signup-button {
+  margin-top: 20px;
+  padding: 28px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.happy-labeling {
+  margin-top: 30px;
+  font-family: "lemonade";
+  color: #9c27b0;
+  font-size: 20pt;
+}
+
+.mat-mdc-ripple-element {
+  display: none !important;
+}

@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://backend.datastand.ai",
+    "secure": true,
+    "changeOrigin": true
+  }
+}

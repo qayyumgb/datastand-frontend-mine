@@ -1,0 +1,38 @@
+<section class="card" *ngIf="entity">
+  <div class="flex-100-sb gap-16">
+    <!-- Image -->
+    <img [src]="entity.image || urls.DEFAULT_IMG_URL" class="entity-img-150" />
+    <!-- Info -->
+    <div class="entity-info">
+      <div class="flex-column gap-8">
+        <!-- Keep the top info closer -->
+        <div>
+          <div class="caption-2 ellipsis" [innerText]="entityType"></div>
+          <h1
+            class="ellipsis"
+            [title]="entity.name"
+            [innerText]="entity.name"
+          ></h1>
+          <div class="caption-1 ellipsis">
+            <ng-content select="[entityGreyInfo]"></ng-content>
+          </div>
+        </div>
+        <is-public-chip [isPublic]="is_public"></is-public-chip>
+        <pm-tag-list-truncated [tags]="entity.tags"></pm-tag-list-truncated>
+        <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
+      </div>
+    </div>
+    <!-- Actions -->
+    <div class="actions-container">
+      <div class="actions">
+        <ng-content select="[entityActions]"></ng-content>
+      </div>
+    </div>
+  </div>
+  <!-- Description -->
+  <p
+    *ngIf="entity.description"
+    class="mt-32"
+    [textContent]="entity.description"
+  ></p>
+</section>

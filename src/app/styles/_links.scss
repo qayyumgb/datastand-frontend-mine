@@ -1,0 +1,18 @@
+a {
+  color: #9c27b0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.a-like {
+  cursor: pointer;
+  text-decoration: none;
+  color: rgb(0, 0, 0, 0.87);
+}
+
+.a-like:hover {
+  text-decoration: underline;
+}

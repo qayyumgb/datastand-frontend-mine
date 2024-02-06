@@ -1,0 +1,19 @@
+<div
+  cdkDrag
+  cdkDragBoundary=".workbench-body"
+  class="window"
+  [style.width]="width"
+  [style.top]="top"
+  [style.left]="left"
+  *ngIf="isVisible"
+>
+  <div cdkDragHandle class="window-top-bar">
+    <div class="window-title">{{ title }}</div>
+    <button mat-button class="small" title="Close window" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="window-body">
+    <ng-content></ng-content>
+  </div>
+</div>
