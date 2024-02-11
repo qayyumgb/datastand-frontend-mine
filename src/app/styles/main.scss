@@ -19,3 +19,19 @@
 @import "./theme";
 @import "./truncate";
 @import "./typography";
+// @media (max-width:992px) {
+//     .filter-aside{
+//         &:not(.show){
+//             .mat-drawer-side.mat-drawer-end{
+//                 display: none;
+//             }
+//         }
+//         &.show{
+//             .mat-drawer[style*="visibility: hidden"],
+//             .mat-drawer-side.mat-drawer-end{
+//                 display: block !important;
+//                 visibility: visible !important;
+//             }
+//         }
+//     }
+// }
