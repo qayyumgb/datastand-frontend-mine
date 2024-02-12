@@ -4,7 +4,7 @@ $buttonInfo: (
   "small": 18px,
   "medium": 24px,
   "normal": 30px,
-  "large": 48px,
+  "large": 48px
 );
 $button-ratio: 0.8;
 $icon-button-ratio: 0.666;
@@ -27,6 +27,17 @@ $icon-button-ratio: 0.666;
       height: $size * $button-ratio !important;
       line-height: $size * $button-ratio !important;
       margin-right: 0 !important;
+    }
+  }
+}
+.show-text-lg {
+  @media (max-width: 768px) {
+    min-width: 0px !important;
+  }
+  .mdc-button__label {
+    display: block;
+    @media (max-width: 768px) {
+      display: none !important;
     }
   }
 }

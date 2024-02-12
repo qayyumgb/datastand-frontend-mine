@@ -2,7 +2,9 @@
   flex: 1 1 auto;
   min-width: 0;
 }
-
+.relative{
+  position: relative;
+}
 .li-card:hover {
   background-color: #f7eef9;
 }
@@ -11,4 +13,31 @@
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+}
+.avatar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hover-btn-wrapper {
+  position: absolute;
+  right: 0;
+}
+@media (min-width: 768px) {
+  .isMobile-hide {
+    display: none;
+  }
+  .hover-btn-wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 28px;
+    
+  }
+}
+
+.relative {
+  position: relative;
 }

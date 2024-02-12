@@ -5,10 +5,14 @@
       <mat-icon>menu</mat-icon>
     </button>
     <a routerLink="/pm" class="pm-title" (click)="closeMobileSidenav()"
-      >Data Stand</a
-    >
+      >Data Stand</a>
+   <div class="searchbar-wrapper" [ngClass]="showSearch?'show':''">
     <pm-search-bar></pm-search-bar>
-    <span class="toolbar-spacer"></span>
+   </div>
+   
+   <span class="toolbar-spacer"></span>
+   <mat-icon aria-hidden="false" (click)="toggleSearchbar()" *ngIf="!showSearch" class="search-icon" fontIcon="search"></mat-icon>
+   <mat-icon aria-hidden="false" (click)="toggleSearchbar()" *ngIf="showSearch" class="search-icon" fontIcon="close"></mat-icon>
     <pm-avatar
       [user]="user"
       [hideUsername]="true"

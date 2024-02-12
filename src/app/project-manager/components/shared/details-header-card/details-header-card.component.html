@@ -1,5 +1,5 @@
-<section class="card" *ngIf="entity">
-  <div class="flex-100-sb gap-16">
+<section class="card " *ngIf="entity">
+  <div class="flex-100-sb gap-16 top-card">
     <!-- Image -->
     <img [src]="entity.image || urls.DEFAULT_IMG_URL" class="entity-img-150" />
     <!-- Info -->
@@ -19,15 +19,19 @@
         </div>
         <is-public-chip [isPublic]="is_public"></is-public-chip>
         <pm-tag-list-truncated [tags]="entity.tags"></pm-tag-list-truncated>
-        <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
+        
+        <div class="flex gap-16 align-items-center" >
+          <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
+          <div class="actions-container">
+            <div class="actions">
+              <ng-content select="[entityActions]"></ng-content>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Actions -->
-    <div class="actions-container">
-      <div class="actions">
-        <ng-content select="[entityActions]"></ng-content>
-      </div>
-    </div>
+   
   </div>
   <!-- Description -->
   <p

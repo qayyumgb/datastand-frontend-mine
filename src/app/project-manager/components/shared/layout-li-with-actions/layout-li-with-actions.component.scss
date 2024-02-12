@@ -13,3 +13,26 @@
   align-items: center;
   flex-shrink: 0;
 }
+.li-card {
+  position: relative;
+  padding: 1rem;
+  .active-btn-group {
+   display: none;
+  }
+  &:hover{
+    .active-btn-group {
+      display: block;
+     }
+  }
+}
+@media (max-width: 768px) {
+  .active-btn-group {
+    position: absolute;
+    right: 16px;
+    bottom: 5px;
+    display: block !important;
+  }
+  .li-card {
+    padding: 16px  16px  35px  16px ;
+  }
+}

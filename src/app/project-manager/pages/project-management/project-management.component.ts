@@ -25,6 +25,7 @@ import {
 export class ProjectManagementPage implements OnInit {
   user?: UserProfile;
   usage?: Usage;
+  showSearch:boolean  = false
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   constructor(
@@ -39,7 +40,9 @@ export class ProjectManagementPage implements OnInit {
   logout(): void {
     this.auth.logout();
   }
-
+  toggleSearchbar(){
+    this.showSearch = !this.showSearch
+  }
   ngOnInit(): void {
     this.userService.retrieveMe().subscribe((res) => (this.user = res));
     this.usageService.getUsage().subscribe((usage) => {

@@ -21,7 +21,7 @@
     <div class="sticky-header-buttons">
       <button
         mat-icon-button
-        class="medium"
+        class="medium sm-btn-abs"
         matTooltip="Refresh"
         (click)="getTexts()"
       >
@@ -57,6 +57,7 @@
       </button>
       <button
         mat-icon-button
+        class="horizon-dot 7"
         mat-small-icon-button
         [matMenuTriggerFor]="textActionsMenu"
         *ngIf="isCreator"

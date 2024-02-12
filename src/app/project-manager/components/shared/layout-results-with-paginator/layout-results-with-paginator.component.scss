@@ -12,7 +12,11 @@
   color: rgb(0, 0, 0, 0.87);
   margin-bottom: -4px;
 }
-
+@media (max-width:675px){
+  .data-card-container{
+    display: block !important;
+  }
+}
 .data-card-container {
   background-color: #fff;
   border: 1px solid rgb(0, 0, 0, 0.12);

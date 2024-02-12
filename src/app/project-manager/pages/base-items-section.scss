@@ -33,7 +33,25 @@ ul {
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 16px;
 }
-
+@media (max-width:768px) {
+  .sticky-header{
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    &>div{
+      &:first-child{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .pages{
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
 .title-with-icon {
   font-weight: 500;
   font-size: 1.15rem;

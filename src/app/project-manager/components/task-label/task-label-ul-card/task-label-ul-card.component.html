@@ -21,7 +21,7 @@
     <div class="sticky-header-buttons">
       <button
         mat-icon-button
-        class="medium"
+        class="medium sm-btn-abs"
         matTooltip="Refresh"
         (click)="getTaskLabels(this.filters)"
       >
@@ -55,6 +55,7 @@
       <button
         mat-icon-button
         mat-small-icon-button
+        class="horizon-dot 5"
         [matMenuTriggerFor]="textActionsMenu"
         *ngIf="isCreator"
       >

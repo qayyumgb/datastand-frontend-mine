@@ -1,6 +1,6 @@
 <div
   *ngIf="entity"
-  class="li-card"
+  class="li-card relative"
   (mouseenter)="displayActions()"
   (mouseleave)="hideActions()"
 >
@@ -21,21 +21,25 @@
             <ng-content select="[entityGreyInfo]"></ng-content>
           </div>
           <pm-tag-list-truncated [tags]="entity.tags"></pm-tag-list-truncated>
-          <div class="avatar mt-8">
+          <div class="avatar avatar-wrapper mt-8">
             <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
+            <div class="hover-btn-wrapper" >
+              <ng-content select="[hoverButtons]"></ng-content>
+            </div>
           </div>
         </div>
       </div>
       <!-- Actions -->
-      <div>
+      <div> 
         <div class="actions mb-16">
           <ng-content select="[buttons]"></ng-content>
         </div>
-        <div [class.hidden]="!actions">
+        
+        <!-- <div >
           <ng-content select="[hoverButtons]"></ng-content>
-          <br />
-        </div>
+          <br/>
+        </div> -->
       </div>
     </ng-container>
-  </pm-base-li-with-img>
+  </pm-base-li-with-img>  
 </div>

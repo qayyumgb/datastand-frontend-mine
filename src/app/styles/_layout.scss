@@ -27,6 +27,7 @@ body {
   display: flex;
   justify-content: space-between;
   max-width: 100%;
+  gap: 5px;
 }
 
 .align-items-center {
@@ -77,4 +78,28 @@ body {
 
 .inline {
   display: inline-block;
+}
+@media (max-width: 768px) {
+  .paginator {
+    .pages {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .sticky-header-buttons{
+    flex-wrap: wrap;
+    justify-content: center !important;
+  }
+  .horizon-dot {
+    position: absolute !important;
+    top: 0;
+    transform: rotate(90deg);
+    right: 0;
+  }
+  .sm-btn-abs {
+    position: absolute !important;
+    top: 14px;
+    transform: rotate(90deg);
+    left: -5px;
+  }
 }

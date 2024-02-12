@@ -1,5 +1,5 @@
 <div
-  class="li-card flex-100-sb"
+  class="li-card card-box flex-100-sb"
   (mouseenter)="displayActions()"
   (mouseleave)="hideActions()"
 >
@@ -8,7 +8,7 @@
   </div>
 
   <div class="actions gap-8">
-    <div [class.hidden]="!actions">
+    <div class="active-btn-group">
       <ng-content select="[actions]"></ng-content>
     </div>
     <div>

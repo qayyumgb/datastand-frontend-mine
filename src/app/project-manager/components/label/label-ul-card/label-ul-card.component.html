@@ -20,7 +20,7 @@
     <div class="sticky-header-buttons">
       <button
         mat-icon-button
-        class="medium"
+        class="medium sm-btn-abs"
         matTooltip="Refresh"
         (click)="getLabels(this.filters)"
       >
@@ -58,9 +58,11 @@
       <button
         mat-icon-button
         mat-small-icon-button
+        class="horizon-dot 2"
         [matMenuTriggerFor]="textActionsMenu"
         *ngIf="isCreator"
       >
+      
         <mat-icon>more_horiz</mat-icon>
       </button>
       <mat-menu #textActionsMenu="matMenu">
