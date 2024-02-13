@@ -18,9 +18,9 @@ mat-sidenav-container {
   cursor: pointer;
 }
 @media (min-width: 550px) {
-.search-icon{
-  display: none;
-}
+  .search-icon {
+    display: none;
+  }
 }
 @media (max-width: 550px) {
   .searchbar-wrapper {
@@ -177,4 +177,8 @@ mat-nav-list {
 .mdc-list-item__primary-text {
   font-size: 17px !important;
   font-weight: 400;
+}
+.mat-mdc-menu-item .mat-icon {
+  margin: 0px !important;
+  
 }

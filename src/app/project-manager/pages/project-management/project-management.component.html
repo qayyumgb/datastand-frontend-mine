@@ -18,7 +18,7 @@
       [hideUsername]="true"
       [matMenuTriggerFor]="profile"
     ></pm-avatar>
-    <mat-menu #profile="matMenu">
+    <mat-menu class="user-dropdown" #profile="matMenu">
       <button
         mat-menu-item
         [routerLink]="urls.getUserUrl(user?.username!)"

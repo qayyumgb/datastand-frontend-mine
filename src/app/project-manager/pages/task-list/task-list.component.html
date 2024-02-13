@@ -20,7 +20,7 @@
             (deleteTaskEvent)="deleteItemById($event)"
           ></pm-task-li-item>
         </ng-container>
-        <ng-container cardItems>
+        <ng-container cardItems >
           <pm-task-card *ngFor="let task of items" [task]="task"></pm-task-card>
         </ng-container>
       </pm-layout-results-with-paginator>

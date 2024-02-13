@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 import { UserSettingsService } from '@app/services';
 
@@ -10,6 +10,7 @@ import { UserSettingsService } from '@app/services';
 export class LayoutResultsWithPaginatorComponent {
   @Input() singular?: string;
   @Input() plural?: string;
+  isMobile:boolean = window.innerWidth<768;
   // Paginator elements
   @Input() totalCount?: number;
   @Input() page?: number;
@@ -17,7 +18,10 @@ export class LayoutResultsWithPaginatorComponent {
   @Output() refreshDataEvent = new EventEmitter<void>();
 
   constructor(public userSettings: UserSettingsService) {}
-
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+  this.isMobile = window.innerWidth<768;
+  }
   refreshData(): void {
     this.refreshDataEvent.emit();
   }

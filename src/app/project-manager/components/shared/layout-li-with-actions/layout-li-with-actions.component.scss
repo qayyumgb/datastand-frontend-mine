@@ -16,23 +16,30 @@
 .li-card {
   position: relative;
   padding: 1rem;
+
   .active-btn-group {
-   display: none;
+    display: none;
   }
-  &:hover{
+  &:hover {
     .active-btn-group {
       display: block;
-     }
+    }
   }
 }
 @media (max-width: 768px) {
   .active-btn-group {
     position: absolute;
-    right: 16px;
+    right: 5px;
     bottom: 5px;
     display: block !important;
   }
   .li-card {
-    padding: 16px  16px  35px  16px ;
+    padding: 16px 16px 35px 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .li-card {
+    padding: 16px 0px 35px 0px !important;
   }
 }

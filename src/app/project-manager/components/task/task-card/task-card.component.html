@@ -1,4 +1,4 @@
-<section *ngIf="task">
+<section *ngIf="task" class="task-card">
   <img [src]="task.image || urls.DEFAULT_IMG_URL" class="card-img" />
   <div class="card-content">
     <div class="card-header">
@@ -33,9 +33,10 @@
       </mat-icon>
     </div>
 
-    <div class="description">{{ truncate(task.description!, 128) }}</div>
+    <div class="description" *ngIf="truncate(task.description!, 128)">{{ truncate(task.description!, 128) }}</div>
 
-    <div class="tags">
+    <div class="tags" *ngIf="showTags">
+      
       <pm-tag-list-truncated [tags]="task.tags"></pm-tag-list-truncated>
     </div>
   </div>

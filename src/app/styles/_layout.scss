@@ -2,7 +2,9 @@ html,
 body {
   height: 100%;
 }
-
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -79,6 +81,14 @@ body {
 .inline {
   display: inline-block;
 }
+@media (max-width: 388px) {
+  .sticky-header-buttons{
+    flex-wrap: wrap;
+    justify-content: center !important;
+    flex-direction: column;
+
+  }
+}
 @media (max-width: 768px) {
   .paginator {
     .pages {
@@ -89,6 +99,7 @@ body {
   .sticky-header-buttons{
     flex-wrap: wrap;
     justify-content: center !important;
+
   }
   .horizon-dot {
     position: absolute !important;
