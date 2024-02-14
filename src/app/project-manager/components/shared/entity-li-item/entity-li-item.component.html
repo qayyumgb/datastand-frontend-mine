@@ -1,45 +1,40 @@
-<div
-  *ngIf="entity"
-  class="li-card relative"
-  (mouseenter)="displayActions()"
-  (mouseleave)="hideActions()"
->
+<div *ngIf="entity" class="li-card mb-16-mob relative" (mouseenter)="displayActions()" (mouseleave)="hideActions()">
   <pm-base-li-with-img [imgUrl]="entity.image">
     <ng-container content>
       <div class="entity-info">
         <div class="flex-column">
           <div class="caption-2 ellipsis">{{ entityType }}</div>
           <div class="title-2 ellipsis">
-            <a
-              [routerLink]="entityUrl"
-              class="a-like ellipsis"
-              [title]="entity.name"
-              [innerText]="entity.name"
-            ></a>
+            <a [routerLink]="entityUrl" class="a-like ellipsis" [title]="entity.name" [innerText]="entity.name"></a>
           </div>
           <div class="caption-1 mb-16 ellipsis">
             <ng-content select="[entityGreyInfo]"></ng-content>
           </div>
           <pm-tag-list-truncated [tags]="entity.tags"></pm-tag-list-truncated>
-          <div class="avatar avatar-wrapper mt-8">
+          <div class="avatar avatar-wrapper mt-8 p-16">
             <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
-            <div class="hover-btn-wrapper" >
-              <ng-content select="[hoverButtons]"></ng-content>
-            </div>
+           
           </div>
         </div>
       </div>
       <!-- Actions -->
-      <div> 
-        <div class="actions mb-16">
+      <div class="hover-btn-wrapper flex">
+        <div class="actions">
           <ng-content select="[buttons]"></ng-content>
         </div>
-        
+        <div class="">
+          <button mat-icon-button class="medium"  [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <ng-content select="[hoverButtons]"></ng-content>
+          </mat-menu>
+        </div>
         <!-- <div >
           <ng-content select="[hoverButtons]"></ng-content>
           <br/>
         </div> -->
       </div>
     </ng-container>
-  </pm-base-li-with-img>  
+  </pm-base-li-with-img>
 </div>

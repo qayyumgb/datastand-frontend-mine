@@ -56,11 +56,9 @@
     </button>
     <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
     <button *ngIf="isCreator()" mat-menu-item>
+     
       <label [for]="'file-upload-card-' + task.id" class="change-image-button"
-        ><mat-icon class="change-image-icon">image</mat-icon></label
-      >
-      <label [for]="'file-upload-card-' + task.id" class="change-image-button"
-        >Change image</label
+        ><mat-icon >image</mat-icon>Change image</label
       >
     </button>
     <input

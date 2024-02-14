@@ -5,8 +5,25 @@
 .relative{
   position: relative;
 }
-.li-card:hover {
-  background-color: #f7eef9;
+.li-card{
+  &:hover {
+    background-color: #f7eef9;
+  }
+  @media (max-width:600px) {
+      padding: 0px;
+      border: 1px solid gainsboro;
+      border-radius: 16px;
+      .entity-info {
+       padding: 0 .5rem;
+      }
+  }
+}
+@media (max-width:600px) {
+  .hover-btn-wrapper {
+    position: absolute;
+    right:4px ;
+    bottom: 11px;
+  }
 }
 
 .actions {
@@ -19,21 +36,11 @@
   justify-content: space-between;
   align-items: center;
 }
-.hover-btn-wrapper {
-  position: absolute;
-  right: 0;
-}
-@media (min-width: 768px) {
-  .isMobile-hide {
-    display: none;
-  }
+
+@media (min-width: 600px) {
+
   .hover-btn-wrapper {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    height: 28px;
+ 
     
   }
 }

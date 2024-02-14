@@ -20,6 +20,19 @@
 @import "./truncate";
 @import "./typography";
 @import "./common.scss";
+
+.mdc-dialog__title{
+    padding: 0 15px 9px !important;
+}
+.mdc-dialog .mdc-dialog__content {
+    padding: 20px 15px 20px 15px !important;
+}
+.cdk-overlay-pane{
+    @media (max-width:500) {
+        max-width: 95vw !important;
+        width: 100% !important;
+    }
+}
 // @media (max-width:992px) {
 //     .filter-aside{
 //         &:not(.show){

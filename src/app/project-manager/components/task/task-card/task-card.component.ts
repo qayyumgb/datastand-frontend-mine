@@ -62,6 +62,8 @@ export class TaskCardComponent implements OnInit {
   openRenameTaskDialog() {
     this.dialog.open(RenameDialogComponent, {
       data: { element: this.task, type: 'task' },
+      maxWidth:"95vw",
+      minWidth:"300px"
     });
   }
 

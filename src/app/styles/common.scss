@@ -1,0 +1,65 @@
+.mat-mdc-menu-content {
+  .mat-mdc-menu-item {
+    display: flex;
+    gap: 5px;
+    .mat-icon {
+      margin: 0 !important;
+      font-size: 18px !important;
+    }
+  }
+  .span.mat-mdc-menu-item-text span {
+    font-size: inherit;
+  }
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white !important;
+  &:hover {
+    background-color: rgb(255, 255, 255) !important;
+  }
+}
+
+.pxb-3 {
+  padding: 0rem 1rem 1rem 1rem !important;
+}
+
+@media (max-width: 768px) {
+  .cdk-overlay-dark-backdrop + .cdk-global-overlay-wrapper {
+    .cdk-overlay-pane {
+      width: 100% !important;
+    }
+  }
+  .mat-typography h1 {
+    font-size: 20px !important;
+  }
+
+  .show-lg {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) {
+  .edit-modal-UI {
+    min-width: 600px;
+  }
+  .edit-course-modal form {
+    min-width: 600px !important;
+  }
+  .edit-task-dailog {
+    min-width: 600px !important;
+  }
+  .hide-lg {
+    display: none !important;
+  }
+}
+
+.show-lg {
+  display: block;
+}
+.relative {
+  position: relative;
+}
+.mb-16-mob {
+@media (max-width: 600px) {
+    margin-bottom: 1rem !important;
+    padding: 1rem;
+  }
+}

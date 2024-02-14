@@ -29,25 +29,46 @@
       <button
         mat-flat-button
         color="primary"
-        class="small"
+        class="small show-lg"
         (click)="openCreateLabelDialog()"
         *ngIf="isCreator"
       >
         <mat-icon>add</mat-icon>Add Label
       </button>
       <button
+      mat-mini-fab
+        color="primary"
+        class="small  hide-lg"
+        (click)="openCreateLabelDialog()"
+        *ngIf="isCreator"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <button
         mat-flat-button
         color="primary"
-        class="small"
+        class="small show-lg"
         (click)="openLabelSetEditLabelsDialog()"
         *ngIf="isCreator"
       >
         <mat-icon>recycling</mat-icon>Import Labels
       </button>
+      <button
+      mat-mini-fab
+        color="primary"
+        class="small hide-lg"
+        (click)="openLabelSetEditLabelsDialog()"
+        *ngIf="isCreator"
+      >
+        <mat-icon>recycling</mat-icon>
+      </button>
       <label *ngIf="isCreator" for="csv-upload" title="Upload thumbnail">
-        <a mat-flat-button class="small" color="primary">
+        <a mat-flat-button class="small show-lg" color="primary">
           <mat-icon>file_upload</mat-icon>
           <span>Import from CSV</span>
+        </a>
+        <a mat-mini-fab class="small hide-lg" color="primary">
+          <mat-icon>file_upload</mat-icon>
         </a>
       </label>
       <input
@@ -58,7 +79,7 @@
       <button
         mat-icon-button
         mat-small-icon-button
-        class="horizon-dot 2"
+        class="horizon-dot 2 medium"
         [matMenuTriggerFor]="textActionsMenu"
         *ngIf="isCreator"
       >

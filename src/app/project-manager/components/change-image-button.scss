@@ -16,17 +16,11 @@ input[type="file"] {
 // Fix the change image icon
 .change-image-button {
   cursor: pointer;
+  display: flex;
+  gap: 5px;
 }
 
-.change-image-icon {
-  transform: scale(0.8);
-  font-size: 18px !important;
-  height: 18px !important;
-  width: 18px !important;
-  margin-right: 8px !important;
-  color: rgb(0, 0, 0, 0.7) !important;
-  vertical-align: middle !important;
-}
+
 
 @media (max-width: 768px) {
   .show-md {

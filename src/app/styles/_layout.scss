@@ -81,31 +81,24 @@ body {
 .inline {
   display: inline-block;
 }
-@media (max-width: 388px) {
-  .sticky-header-buttons{
-    flex-wrap: wrap;
-    justify-content: center !important;
-    flex-direction: column;
 
-  }
-}
 @media (max-width: 768px) {
   .paginator {
     .pages {
       display: flex;
       justify-content: center;
     }
+  
   }
   .sticky-header-buttons{
-    flex-wrap: wrap;
     justify-content: center !important;
 
   }
   .horizon-dot {
     position: absolute !important;
-    top: 0;
+    top: 10px;
     transform: rotate(90deg);
-    right: 0;
+    right: -10px;
   }
   .sm-btn-abs {
     position: absolute !important;
@@ -113,4 +106,9 @@ body {
     transform: rotate(90deg);
     left: -5px;
   }
+}
+.cdk-overlay-pane{
+ @media (max-width:500px) {
+  max-width: 95vw !important;
+ }
 }

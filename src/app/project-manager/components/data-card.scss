@@ -1,4 +1,4 @@
-// Card layout
+@import "../../styles/common.scss";
 .corpus-card {
   // width: 290px;
   height: 100%;
@@ -15,13 +15,10 @@
 }
 @media (max-width: 675px) {
   .corpus-card {
-
     margin-top: 1rem;
     width: 100%;
     overflow: hidden;
-    .title {
-      font-size: 1rem;
-    }
+
     .card-img {
       border-radius: 0px;
       min-height: 150px;
@@ -33,25 +30,26 @@
     .card-content {
       height: unset !important;
       flex-grow: 1;
-      padding: 0;
     }
     .card-bottom {
       border-top: 1px solid gainsboro;
-      padding: 10px 0;
+      padding: 10px;
     }
     .card-content-wrapper {
       grid-column: 2/4;
       display: flex;
       flex-direction: column;
-      padding: 1rem 1rem 0 1rem;
- 
+      // padding: 1rem 1rem 0 1rem;
     }
   }
 }
-.card-content-wrapper{
+.card-content-wrapper {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  .card-content{
+    // padding: 0  !important;
+  }
 }
 .card-img {
   width: 100%;
@@ -70,7 +68,7 @@
 .card-header {
   display: flex;
   justify-content: space-between;
-  align-items: top;
+  gap: 5px;
 }
 
 .card-bottom {
@@ -82,29 +80,41 @@
 
 // Header
 .title-wigh-grey-info {
-  width: 100%;
+  width: 70%;
 }
 
 .title {
-  font-size: 0.9rem;
+  font-size: .9rem;
   word-break: break-word;
   font-weight: 500;
+  color: #9c27b0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
 .grey-info {
-  margin-top: -3px;
-  color: rgb(0, 0, 0, 0.54);
+  margin-top: -2px;
+  color: rgb(0, 0, 0, 0.84);
   font-size: 0.7rem;
 }
 
 .data-icon {
-  color: rgb(0, 0, 0, 0.3);
-  margin-right: 10px;
-  width: 30px;
+  color: rgb(156, 39, 176);
+  width: 35px;
+  min-width: 35px;
+  background: rgba(156, 39, 176, 0.18);
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 20px;
 }
 
 .private {
-  transform: scale(0.75);
+  // transform: scale(0.75);
   font-size: 15px !important;
   line-height: 15px !important;
   height: 18px !important;
@@ -144,4 +154,8 @@ a:hover {
 .more-actions-icon:hover {
   cursor: pointer;
   color: rgb(0, 0, 0, 0.7);
+}
+.title-wrapper {
+  display: flex;
+  white-space: nowrap;
 }

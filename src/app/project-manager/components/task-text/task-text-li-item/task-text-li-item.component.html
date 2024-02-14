@@ -35,6 +35,7 @@
       <button
         *ngIf="taskText.status == statusEnum.PENDING"
         mat-icon-button
+        
         class="medium"
         matTooltip="Mark as completed"
         (click)="setStatusToCompleted(taskText)"
@@ -52,7 +53,7 @@
       </button>
       <button
         mat-icon-button
-        class="medium"
+        class="medium 6"
         matTooltip="Rename"
         (click)="openRenameTaskTextDialog(taskText)"
       >

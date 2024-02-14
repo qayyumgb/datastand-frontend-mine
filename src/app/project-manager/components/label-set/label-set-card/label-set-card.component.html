@@ -1,10 +1,10 @@
-<section *ngIf="labelSet">
+<section *ngIf="labelSet" class="corpus-card">
   <img [src]="labelSet.image || urls.DEFAULT_IMG_URL" class="card-img" />
   <div class="card-content">
     <div class="card-header">
       <mat-icon class="data-icon">style</mat-icon>
       <div class="title-wigh-grey-info">
-        <div>
+        <div class="title-wrapper">
           <!-- Truncate the name and add tooltip if needed -->
           <a
             *ngIf="labelSet.name.length > 25; else normalLink"
@@ -74,15 +74,13 @@
     </button>
     <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
     <button *ngIf="isCreator()" mat-menu-item>
+      
       <label
         [for]="'file-upload-card-' + labelSet.id"
         class="change-image-button"
-        ><mat-icon class="change-image-icon">image</mat-icon></label
-      >
-      <label
-        [for]="'file-upload-card-' + labelSet.id"
-        class="change-image-button"
-        >Change image</label
+        >
+        <mat-icon class="change-image-icon">image</mat-icon>
+        Change image</label
       >
     </button>
     <input

@@ -48,8 +48,11 @@
               </a>
             </label>
             <input id="file-upload" type="file" (change)="changeImage($event)" />
-            <button mat-flat-button color="primary" class="follow-button" (click)="openUpdateUserProfileDialog()">
+            <button mat-flat-button color="primary" class="follow-button show-lg" (click)="openUpdateUserProfileDialog()">
               <mat-icon>edit</mat-icon> Edit
+            </button>
+            <button mat-flat-button color="primary" class="follow-button hide-lg" (click)="openUpdateUserProfileDialog()">
+              <mat-icon>edit</mat-icon> 
             </button>
           </ng-container>
         </div>

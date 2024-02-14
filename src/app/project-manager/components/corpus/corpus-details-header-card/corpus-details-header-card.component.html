@@ -32,7 +32,7 @@
         <mat-icon>download</mat-icon> Download
       </button>
 
-        <button (click)="openCorpusDownloadDialog()" class="show-md-0 btn-download-sm"  title="Download"  >
+      <button (click)="openCorpusDownloadDialog()" class="show-md-0 btn-download-sm"  title="Download"  >
         <mat-icon>download</mat-icon>
       </button>
   
@@ -42,7 +42,7 @@
         mat-icon-button
         mat-small-icon-button
         [matMenuTriggerFor]="actionsMenu"
-        class="horizon-dot 1 top-horizontal-dot"
+        class="horizon-dot 1 top-horizontal-dot medium"
         *ngIf="isCreator"
       >
         <mat-icon>more_horiz</mat-icon>
@@ -50,10 +50,7 @@
       <mat-menu #actionsMenu="matMenu">
         <button *ngIf="isCreator" mat-menu-item>
           <label [for]="'img-upload'" class="change-image-button"
-            ><mat-icon class="change-image-icon">image</mat-icon></label
-          >
-          <label [for]="'img-upload'" class="change-image-button"
-            >Change image</label
+            ><mat-icon class="change-image-icon">image</mat-icon> Change image</label
           >
         </button>
         <input [id]="'img-upload'" type="file" (change)="changeImage($event)" />

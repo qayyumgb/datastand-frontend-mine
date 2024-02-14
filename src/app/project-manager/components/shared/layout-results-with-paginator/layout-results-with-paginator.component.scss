@@ -15,6 +15,9 @@
 @media (max-width:675px){
   .data-card-container{
     display: block !important;
+    background-color: transparent !important ;
+    padding: 0 !important;
+    border: 0px solid transparent !important;
   }
 }
 .data-card-container {
@@ -22,7 +25,7 @@
   border: 1px solid rgb(0, 0, 0, 0.12);
   border-radius: 4px;
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(260px ,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px ,1fr));
   gap: 16px;
   padding: 16px;
 }

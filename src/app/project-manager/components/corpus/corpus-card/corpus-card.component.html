@@ -5,7 +5,7 @@
       <div class="card-header">
         <mat-icon class="data-icon">library_books</mat-icon>
         <div class="title-wigh-grey-info">
-          <div>
+          <div class="flex">
             <!-- Truncate the name and add tooltip if needed -->
             <a *ngIf="corpus.name.length > 25; else normalLink" [routerLink]="urls.getCorpusUrl(corpus.id)"
               class="title" [matTooltip]="corpus.name" [innerText]="truncate(corpus.name, 25)">
@@ -54,8 +54,7 @@
     <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
     <button *ngIf="isCreator()" mat-menu-item>
       <label [for]="'file-upload-card-' + corpus.id" class="change-image-button"><mat-icon
-          class="change-image-icon">image</mat-icon></label>
-      <label [for]="'file-upload-card-' + corpus.id" class="change-image-button">Change image</label>
+        class="change-image-icon">image</mat-icon>Change image</label>
     </button>
     <input [id]="'file-upload-card-' + corpus.id" type="file" (change)="changeImage($event)" />
     <button *ngIf="isCreator()" mat-menu-item (click)="openUpdateTagsDialog()">

@@ -13,7 +13,7 @@ export class DetailsHeaderCardComponent implements OnInit {
   @Input() entityType?: string;
   @Input() icon?: string;
   @Input() is_public: boolean = false;
-
+  isMobile:boolean = window.innerWidth <768;
   constructor(public urls: UrlsService) {}
 
   ngOnInit(): void {
