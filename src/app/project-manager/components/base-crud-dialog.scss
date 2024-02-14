@@ -1,7 +1,5 @@
 mat-dialog-content {
-  // We intentionally use 600px vs. 768px here as there is a big margin and padding
-  // due to CDK backdrop.
-  width: 600px;
+ 
   font-size: 14px !important;
   display: flex;
   flex-direction: column;
