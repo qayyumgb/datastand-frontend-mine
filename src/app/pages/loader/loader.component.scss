@@ -1,0 +1,19 @@
+.loader-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    .loader-blur {
+        background-color: #ffffff9d;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+            width: 50px;
+        }
+    }
+}
