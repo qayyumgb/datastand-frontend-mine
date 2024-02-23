@@ -1,17 +1,16 @@
-<section *ngIf="task" class="task-card">
+<section *ngIf="task" class="ds-card">
   <img [src]="task.image || urls.DEFAULT_IMG_URL" class="card-img" />
   <div class="card-content">
-    <div class="card-header">
-      <mat-icon class="data-icon">task</mat-icon>
-      <div class="title-wigh-grey-info">
-        <div>
+    <div class="ds-card-header">
+      <!-- <mat-icon class="data-icon">task</mat-icon> -->
+      <div class="ds-card-title-wrapper">
           <!-- Truncate the name and add tooltip if needed -->
           <a
             *ngIf="task.name.length > 25; else normalLink"
             [routerLink]="urls.getTaskUrl(task.id)"
             class="title"
             [matTooltip]="task.name"
-            [innerText]="truncate(task.name, 25)"
+            [innerText]="truncate(task.name, 30)"
           >
           </a>
           <ng-template #normalLink>
@@ -23,10 +22,7 @@
             </a>
           </ng-template>
           <!-- End name -->
-        </div>
-        <div class="grey-info">
-          {{ task.langtag }} | {{ task.modified! | fromNow }}
-        </div>
+       
       </div>
       <mat-icon class="more-actions-icon" [matMenuTriggerFor]="moreActionsMenu">
         more_vert
@@ -34,7 +30,9 @@
     </div>
 
     <div class="description" *ngIf="truncate(task.description!, 128)">{{ truncate(task.description!, 128) }}</div>
-
+    <div class="published-date">
+      {{ task.langtag }} | {{ task.modified! | fromNow }}
+    </div>
     <div class="tags" *ngIf="showTags">
       
       <pm-tag-list-truncated [tags]="task.tags"></pm-tag-list-truncated>

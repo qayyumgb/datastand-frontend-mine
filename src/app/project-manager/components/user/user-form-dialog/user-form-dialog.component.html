@@ -1,17 +1,17 @@
 <h1 mat-dialog-title>{{ title }}</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>First name</mat-label>
       <input matInput placeholder="e.g. John" formControlName="first_name" />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Last name</mat-label>
       <input matInput placeholder="e.g. Doe" formControlName="last_name" />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Headline</mat-label>
       <input
         matInput
@@ -20,7 +20,7 @@
       />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Pronouns</mat-label>
       <mat-select formControlName="pronouns">
         <mat-option
@@ -42,7 +42,7 @@
       />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Country</mat-label>
       <mat-select [(value)]="this.form.value.country">
         <mat-option
@@ -54,7 +54,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>About</mat-label>
       <textarea
         matInput
@@ -70,7 +70,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title> Social </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-form-field>
+        <mat-form-field  appearance="outline">
           <mat-label>Github</mat-label>
           <input
             matInput
@@ -80,7 +80,7 @@
           />
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field  appearance="outline">
           <mat-label>LinkedIn</mat-label>
           <input
             matInput
@@ -90,7 +90,7 @@
           />
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field  appearance="outline">
           <mat-label>Website</mat-label>
           <input
             matInput

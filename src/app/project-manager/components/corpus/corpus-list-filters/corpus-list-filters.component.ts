@@ -51,4 +51,30 @@ export class CorpusListFiltersComponent extends BaseListFiltersDirective {
     this.filters.langtag = change.value;
     this.emitAndNavigate();
   }
+  updateLanguage(lan:any){
+    this.filteredLanguage = lan.language_name
+    this.filters.langtag = lan.tag;
+    this.emitAndNavigate();
+  }
+
+  searchHandling(e:any){
+    switch(this.searchType){
+      case 'Tags':
+        this.filters.tag = this.searchInput
+        this.updateTag(e)
+        break
+      case 'User':
+        this.filters.creator = this.searchInput
+        this.updateCreator(e)
+        break
+      case 'Labels':
+        this.filters.search = this.searchInput
+        this.updateSearch(e)
+        break
+      default:
+        this.filters.search = this.searchInput
+        this.updateSearch(e)
+        break
+    }
+  }
 }

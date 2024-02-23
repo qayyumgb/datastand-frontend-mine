@@ -53,7 +53,7 @@ export class TextListFiltersComponent extends BaseListFiltersDirective {
     }
   }
 
-  updateIsPending(change: MatRadioChange) {
+  updateIsPending(change: any) {
     this.filters.is_pending = change.value;
     this.emitAndNavigate();
   }
@@ -61,5 +61,27 @@ export class TextListFiltersComponent extends BaseListFiltersDirective {
   updateLangTag(change: MatSelectChange) {
     this.filters.langtag = change.value;
     this.emitAndNavigate();
+  }
+  updateLanguage(lan:any){
+    this.filteredLanguage = lan.language_name
+    this.filters.langtag = lan.tag;
+    this.emitAndNavigate();
+  }
+
+  searchHandling(e:any){
+    switch(this.searchType){
+      case 'Tags':
+        this.filters.tag = this.searchInput
+        this.updateTag(e)
+        break
+      case 'Text':
+        this.filters.search = this.searchInput
+        this.updateSearch(e)
+        break
+      default:
+        this.filters.search = this.searchInput
+        this.updateSearch(e)
+        break
+    }
   }
 }

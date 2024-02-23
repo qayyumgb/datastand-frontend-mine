@@ -1,7 +1,7 @@
 <section class="pm">
   <!-- Toolbar -->
   <mat-toolbar>
-    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+    <button mat-icon-button aria-label="large Menu icon" (click)="toggleMenu()">
       <mat-icon>menu</mat-icon>
     </button>
     <a routerLink="/pm" class="pm-title" (click)="closeMobileSidenav()"
@@ -46,13 +46,13 @@
     >
       <div class="pm-sidenav dense-2">
         <div class="sub-section">
-          <a [routerLink]="urls.PM_URL" (click)="closeMobileSidenav()"
+          <!-- <a [routerLink]="urls.PM_URL" (click)="closeMobileSidenav()"
             ><h2>Home</h2></a
           >
-          <mat-divider></mat-divider>
+          <mat-divider></mat-divider> -->
           <h2>My data</h2>
           <button
-            mat-fab
+          mat-flat-button
             extended
             color="primary"
             [matMenuTriggerFor]="menu"
@@ -74,6 +74,7 @@
           <mat-nav-list>
             <a
               mat-list-item
+              class="nav-item"
               [routerLink]="urls.TASKS_URL"
               routerLinkActive="is-active"
               (click)="closeMobileSidenav()"
@@ -82,6 +83,7 @@
               <span matListItemTitle> Tasks </span>
             </a>
             <a
+            class="nav-item"
               mat-list-item
               [routerLink]="urls.CORPORA_URL"
               routerLinkActive="is-active"
@@ -91,6 +93,7 @@
               <span matListItemTitle> Corpora </span>
             </a>
             <a
+            class="nav-item"
               mat-list-item
               [routerLink]="urls.LABEL_SETS_URL"
               routerLinkActive="is-active"
@@ -107,6 +110,7 @@
           <h2>Public data</h2>
           <mat-nav-list>
             <a
+            class="nav-item"
               mat-list-item
               [routerLink]="urls.PUBLIC_CORPORA_URL"
               routerLinkActive="is-active"
@@ -116,6 +120,7 @@
               <span matListItemTitle>Corpora</span>
             </a>
             <a
+            class="nav-item"
               mat-list-item
               [routerLink]="urls.PUBLIC_LABEL_SETS_URL"
               routerLinkActive="is-active"

@@ -2,7 +2,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-dialog-content #content>
     <!-- Data -->
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Text</mat-label>
       <textarea
         matInput
@@ -23,7 +23,7 @@
         cdkAutosizeMaxRows="30"
       ></textarea>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Language</mat-label>
       <mat-select formControlName="langtag">
         <mat-option
@@ -45,7 +45,7 @@
           <mat-panel-title>Metadata</mat-panel-title>
         </mat-expansion-panel-header>
         <div class="metadata">
-          <mat-form-field>
+          <mat-form-field  appearance="outline">
             <mat-label>Title</mat-label>
             <input
               matInput
@@ -53,7 +53,7 @@
               formControlName="name"
             />
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field  appearance="outline">
             <mat-label>Author</mat-label>
             <input
               matInput
@@ -61,7 +61,7 @@
               formControlName="author"
             />
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field  appearance="outline">
             <mat-label>Description</mat-label>
             <textarea
               matInput

@@ -1,9 +1,10 @@
 .tags {
   display: flex;
   gap: 3px;
-  height: 24px;
+  // height: 24px;
   overflow-x: hidden;
   vertical-align: middle;
+  padding: 5px 0;
 }
 
 .more-tags {

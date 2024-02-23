@@ -14,6 +14,13 @@ export class BaseListFiltersDirective {
   isPublicOptions?;
   modifiedLastOptions?;
   orderingOptions?;
+  searchInput:string = ''
+  showSearch:boolean = false
+  searchType:string |null = null 
+  filteredLanguage:string|null =null 
+  currentVisibility:string|null = null
+  currentModification:string|null = null
+
 
   constructor(public router: Router, public route: ActivatedRoute) {
     // We intentionally use values as strings here, otherwise the filter comparison
@@ -34,6 +41,12 @@ export class BaseListFiltersDirective {
       { text: 'Most recent', value: '-pk' },
       { text: 'Name', value: 'name' },
     ];
+  }
+  showSearchHandling(){
+    this.showSearch = !this.showSearch
+  }
+  handleSearchType(t:string){
+    this.searchType = t
   }
 
   clearModifiedLast() {
@@ -94,14 +107,28 @@ export class BaseListFiltersDirective {
     this.filters.is_public = change.value;
     this.emitAndNavigate();
   }
+  updateIsPublic2(change:any) {
+    this.filters.is_public = change.value;
+    this.currentVisibility = change.text
+    this.emitAndNavigate();
+  }
 
   updateModifiedLast(change: MatRadioChange) {
     this.filters.modifiedLast = change.value;
     this.emitAndNavigate();
   }
+  updateModifiedLast2(change: any) {
+    this.filters.modifiedLast = change.value;
+    this.currentModification = change.text
+    this.emitAndNavigate();
+  }
 
   updateOrdering(change: MatRadioChange) {
     this.filters.ordering = change.value;
+    this.emitAndNavigate();
+  }
+  updateOrdering2(change:string) {
+    this.filters.ordering = change;
     this.emitAndNavigate();
   }
 

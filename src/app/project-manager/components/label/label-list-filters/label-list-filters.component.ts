@@ -39,8 +39,24 @@ export class LabelListFiltersComponent extends BaseListFiltersDirective {
     }
   }
 
-  updateIsPending(change: MatRadioChange) {
+  updateIsPending(change: any) {
     this.filters.is_pending = change.value;
     this.emitAndNavigate();
+  }
+  searchHandling(e:any){
+    switch(this.searchType){
+      case 'Tags':
+        this.filters.tag = this.searchInput
+        this.updateTag(e)
+        break
+      case 'Labels':
+        this.filters.search = this.searchInput
+        this.updateSearch(e)
+        break
+      default:
+        this.filters.search = this.searchInput
+        this.updateSearch(e)
+        break
+    }
   }
 }

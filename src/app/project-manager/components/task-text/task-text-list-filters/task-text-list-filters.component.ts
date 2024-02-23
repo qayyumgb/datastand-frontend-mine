@@ -66,4 +66,31 @@ export class TaskTextListFiltersComponent extends BaseListFiltersDirective {
     this.filters.status = change.value;
     this.emitAndNavigate();
   }
+  updateStatus2(change: string) {
+    this.filters.status = change;
+    this.emitAndNavigate();
+  }
+
+  updateLanguage(lan:any){
+    this.filteredLanguage = lan.language_name
+    this.filters.langtag = lan.tag;
+    this.emitAndNavigate();
+  }
+
+  searchHandling(e:any){
+    switch(this.searchType){
+      case 'Tags':
+        this.filters.tag = this.searchInput
+        this.updateTag(e)
+        break
+      case 'Text':
+        this.filters.search = this.searchInput
+        this.updateSearch(e)
+        break
+      default:
+        this.filters.search = this.searchInput
+        this.updateSearch(e)
+        break
+    }
+  }
 }

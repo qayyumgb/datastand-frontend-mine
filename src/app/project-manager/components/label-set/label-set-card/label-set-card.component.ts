@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -18,7 +18,7 @@ import {
   templateUrl: './label-set-card.component.html',
   styleUrls: ['../../data-card.scss', '../../change-image-button.scss'],
 })
-export class LabelSetCardComponent {
+export class LabelSetCardComponent implements OnInit {
   @Input() labelSet?: LabelSet;
   @Output() deleteLabelSetEvent = new EventEmitter<number>(); // labelSetId
   truncate = truncate;
@@ -31,6 +31,10 @@ export class LabelSetCardComponent {
     private snackBar: MatSnackBar,
     public urls: UrlsService
   ) {}
+  ngOnInit(): void {
+    console.log(this.labelSet);
+    
+  }
 
   changeImage(event: any): void {
     if (event.target.files && event.target.files[0]) {

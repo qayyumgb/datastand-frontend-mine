@@ -34,4 +34,79 @@ mat-radio-button {
 
 .sub-section {
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid gainsboro;
+  padding: 0.8rem;
+  background-color: white;
+  border-radius: 8px;
+  .sub-nav-filters {
+    display: flex;
+    gap: 1rem;
+    h5 {
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+  }
 }
+.search-div {
+  * {
+    border: 0px solid transparent;
+  }
+
+  border: 1px solid gainsboro;
+  border-radius: 50px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  transition: all ease 0.4s;
+  input {
+    height: 100%;
+    min-width: 30px;
+    padding: 4px 14px;
+    &:focus {
+      border: unset;
+      outline: unset;
+    }
+  }
+  .search-type {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .show-full {
+    width: 280px;
+    animation: showfull ease 0.4s;
+  }
+  &:not(.show-full) {
+    width: 37px;
+    input {
+      display: none;
+    }
+    .search-type {
+      display: none;
+    }
+    .show-search {
+      padding: 5px !important;
+    }
+  }
+}
+@keyframes showfull {
+  0% {
+    width: 37px;
+  }
+  100% {
+    width: 280px;
+  }
+}
+

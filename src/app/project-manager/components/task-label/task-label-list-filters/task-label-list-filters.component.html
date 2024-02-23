@@ -1,7 +1,7 @@
 <section *ngIf="this.filters" class="filters dense-2">
   <div class="sub-section">
     <h4>
-      Search labels
+      Search labels 3
       <span
         class="clear-filter"
         *ngIf="this.filters.search"
@@ -10,7 +10,7 @@
         [x]
       </span>
     </h4>
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Search</mat-label>
       <input
         matInput
@@ -61,7 +61,7 @@
     <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
       [x]
     </span>
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Search</mat-label>
       <input
         matInput

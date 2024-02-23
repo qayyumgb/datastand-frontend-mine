@@ -1,5 +1,5 @@
 <section *ngIf="this.filters" class="filters dense-2">
-  <div class="sub-section">
+  <!-- <div class="sub-section">
     <h4>
       Search texts
       <span
@@ -10,7 +10,7 @@
         [x]
       </span>
     </h4>
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Search</mat-label>
       <input
         matInput
@@ -19,11 +19,12 @@
         [(ngModel)]="filters.search"
       />
     </mat-form-field>
-  </div>
+  </div> -->
 
   <div class="sub-section">
-    <h4>Filter by</h4>
-    <label>Modified</label>
+    <div class="sub-nav-filters">
+      <h5>Filter by</h5>
+      <!-- <label>Modified</label>
     <span
       class="clear-filter"
       *ngIf="this.filters.modifiedLast"
@@ -38,8 +39,16 @@
         [checked]="option.value == this.filters.modifiedLast"
         >{{ option.text }}</mat-radio-button
       >
-    </mat-radio-group>
+    </mat-radio-group> -->
 
+
+      <button mat-stroked-button [matMenuTriggerFor]="menuModification">Modified</button>
+      <mat-menu #menuModification="matMenu">
+        <ng-container *ngFor="let option of modifiedLastOptions">
+          <button mat-menu-item (click)="updateModifiedLast2(option)">{{ option.text }}</button>
+        </ng-container>
+      </mat-menu>
+      <!-- 
     <label>Language</label>
     <span
       class="clear-filter"
@@ -49,7 +58,7 @@
       [x]
     </span>
     <br />
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-select
         (selectionChange)="updateLangTag($event)"
         [(value)]="this.filters.langtag"
@@ -61,9 +70,21 @@
           {{ langTag.language_name }} ({{ langTag.tag }})
         </mat-option>
       </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
 
-    <label>Status</label>
+
+      <div class="">
+        <button mat-stroked-button [matMenuTriggerFor]="menuSort">{{filteredLanguage ||"Language"}}</button>
+        <mat-menu #menuSort="matMenu" class="language-menu">
+          <ng-container *ngFor="let langTag of langTagOptions">
+            <button mat-menu-item (click)="updateLanguage(langTag)">
+              {{ langTag.language_name }} ({{ langTag.tag }})</button>
+          </ng-container>
+        </mat-menu>
+      </div>
+
+
+      <!-- <label>Status</label>
     <span
       class="clear-filter"
       *ngIf="this.filters.status"
@@ -78,14 +99,24 @@
         [checked]="option.value == this.filters.status"
         >{{ option.text }}</mat-radio-button
       >
-    </mat-radio-group>
+    </mat-radio-group> -->
 
+      <button mat-stroked-button [matMenuTriggerFor]="statusmenu">Status</button>
+      <mat-menu #statusmenu="matMenu">
+        <mat-radio-group color="primary" (change)="updateOrdering($event)">
+          <ng-container *ngFor="let option of statusOptions">
+            <button mat-menu-item (click)="updateStatus2(option.value)">{{ option.text }}</button>
+          </ng-container>
+        </mat-radio-group>
+      </mat-menu>
+
+      <!-- 
     <label>Tag</label>
     <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
       [x]
     </span>
     <br />
-    <mat-form-field>
+    <mat-form-field  appearance="outline">
       <mat-label>Search</mat-label>
       <input
         matInput
@@ -93,11 +124,9 @@
         (keyup.enter)="updateTag($event)"
         [(ngModel)]="filters.tag"
       />
-    </mat-form-field>
-  </div>
+    </mat-form-field> -->
 
-  <div class="sub-section">
-    <h4>
+      <!-- <h4>
       Sort by
       <span
         class="clear-filter"
@@ -115,6 +144,37 @@
         [checked]="option.value == this.filters.ordering"
         >{{ option.text }}</mat-radio-button
       >
-    </mat-radio-group>
+    </mat-radio-group> -->
+
+      <button mat-stroked-button [matMenuTriggerFor]="menuSort2">Sort by</button>
+      <mat-menu #menuSort2="matMenu">
+        <mat-radio-group color="primary" (change)="updateOrdering($event)">
+          <ng-container *ngFor="let option of orderingOptions">
+            <button mat-menu-item (click)="updateOrdering2(option.value)">{{ option.text }}</button>
+          </ng-container>
+        </mat-radio-group>
+      </mat-menu>
+
+    </div>
+
+    <div class="search-div " [ngClass]="showSearch?'show-full':''">
+
+      <input type="text" name="" [(ngModel)]="searchInput" (keyup)="searchHandling($event)" id="" placeholder="search">
+      <span class="search-type" [matMenuTriggerFor]="searchtype">
+        {{searchType || "type"}}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </span>
+
+      <mat-menu #searchtype="matMenu">
+        <button (click)="handleSearchType('Tags')" mat-menu-item>Tags</button>
+        <button (click)="handleSearchType('Text')" mat-menu-item>Text</button>
+      </mat-menu>
+      <button class="search" *ngIf="showSearch">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button *ngIf="!showSearch" (click)="showSearchHandling()" class="show-search">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
   </div>
 </section>

@@ -77,7 +77,7 @@ mat-sidenav-content {
 h2 {
   color: rgb(0, 0, 0, 0.8);
   margin-bottom: -5px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .mat-mdc-list-item {
@@ -89,11 +89,6 @@ h2 {
   min-height: 32px !important;
 }
 
-.mdc-list-item--with-leading-icon .mdc-list-item__start {
-  margin-left: 16px !important;
-  margin-right: 8px !important;
-}
-
 a {
   font-size: 0.8rem;
   text-decoration: none;
@@ -103,9 +98,10 @@ a {
   height: 32px !important;
 }
 
-mat-icon {
-  transform: scale(0.7);
-}
+// mat-icon {
+//   transform: scale(1);
+//   color: #5f6368 !important;
+// }
 
 mat-divider {
   margin: 15px 0 !important;
@@ -165,7 +161,7 @@ mat-nav-list {
   font-size: 18px !important;
   height: 18px !important;
   width: 18px !important;
-  margin-right: 8px !important;
+  margin-right: 0px !important;
   color: rgb(0, 0, 0, 0.54) !important;
   vertical-align: middle !important;
 }
@@ -175,10 +171,18 @@ mat-nav-list {
 }
 
 .mdc-list-item__primary-text {
-  font-size: 17px !important;
-  font-weight: 400;
+  font-size: .875rem !important;
 }
 .mat-mdc-menu-item .mat-icon {
   margin: 0px !important;
   
 }
+
+// new{
+  .gap-3{
+    gap: 1rem;
+  }
+  .nav-item{
+    display: flex;
+    gap: 1rem;
+  }
