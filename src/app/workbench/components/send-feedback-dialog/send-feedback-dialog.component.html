@@ -2,7 +2,7 @@
 
 <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
   <mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input
         matInput
@@ -14,7 +14,7 @@
         #name="ngModel"
       />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input
         matInput
@@ -27,7 +27,7 @@
         #email="ngModel"
       />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Message</mat-label>
       <textarea
         matInput

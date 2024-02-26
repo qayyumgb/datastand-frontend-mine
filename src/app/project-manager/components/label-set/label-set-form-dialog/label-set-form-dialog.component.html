@@ -1,11 +1,11 @@
 <h1 mat-dialog-title>{{ title }}</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput placeholder="Person" formControlName="name" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Author</mat-label>
       <input
         matInput
@@ -13,7 +13,7 @@
         formControlName="author"
       />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <textarea
         matInput
@@ -28,7 +28,7 @@
       [tags]="form.value.tags!"
       (updateTagsEvent)="updateTags($event)"
     ></pm-tags-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Visibility</mat-label>
       <mat-select formControlName="is_public">
         <mat-option [value]="false">🔒 Private</mat-option>

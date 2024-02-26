@@ -2,11 +2,11 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-dialog-content #content>
     <!-- Data -->
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput placeholder="Person" formControlName="name" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Value</mat-label>
       <input matInput placeholder="PERSON" formControlName="value" />
     </mat-form-field>
@@ -27,7 +27,7 @@
         The color is invalid.
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <textarea
         matInput
@@ -45,7 +45,7 @@
     <ng-container formArrayName="examples">
       <h2>Examples</h2>
       <ng-container *ngFor="let example of examples.controls; let i = index">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <input
             matInput
             id="example-{{ i }}"
@@ -80,7 +80,7 @@
           <mat-panel-title>Metadata</mat-panel-title>
         </mat-expansion-panel-header>
         <div class="metadata">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Author</mat-label>
             <input
               matInput

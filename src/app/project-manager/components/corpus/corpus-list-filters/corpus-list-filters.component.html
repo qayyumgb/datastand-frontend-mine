@@ -10,7 +10,7 @@
         [x]
       </span>
     </h4>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Search</mat-label>
       <input
         matInput
@@ -70,7 +70,7 @@
       >
         [x]
       </span>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>User</mat-label>
         <input
           matInput
@@ -90,7 +90,7 @@
       [x]
     </span>
     <br />
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-select
         (selectionChange)="updateLangTag($event)"
         [(value)]="this.filters.langtag"
@@ -108,7 +108,7 @@
     <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
       [x]
     </span>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Search</mat-label>
       <input
         matInput

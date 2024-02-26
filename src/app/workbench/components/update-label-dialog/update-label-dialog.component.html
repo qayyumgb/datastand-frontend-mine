@@ -1,16 +1,16 @@
 <h1 mat-dialog-title>Edit label</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" />
       <mat-error *ngIf="name.invalid">{{ getNameErrorMessage() }}</mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Value</mat-label>
       <input matInput formControlName="value" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <textarea
         matInput
@@ -41,7 +41,7 @@
     <ng-container formArrayName="examples">
       <h2>Examples</h2>
       <ng-container *ngFor="let example of examples.controls; let i = index">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <input
             matInput
             id="example-{{ i }}"
