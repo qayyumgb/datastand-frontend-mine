@@ -5,11 +5,15 @@
 }
 
 button {
+  &.next,
+  &.prev{
+    font-size: 25px;
+  }
   color: rgba(0, 0, 0, 0.87);
   font-size: 0.7rem;
-  height: 25px !important;
+  height: 29px !important;
   border-radius: 4px;
-  width: 25px !important;
+  width: 30px !important;
 }
 
 .mdc-button {
@@ -36,6 +40,11 @@ button {
 }
 
 .items-count {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: rgb(0, 0, 0, 0.54);
+}
+.paginator{
+  display: flex;
+ align-items: center;
+ gap: 1rem;
 }

@@ -1,35 +1,48 @@
-<div *ngIf="entity" class="li-card mb-16-mob relative" (mouseenter)="displayActions()" (mouseleave)="hideActions()">
+<div *ngIf="entity" class="list-card " (mouseenter)="displayActions()" (mouseleave)="hideActions()">
   <pm-base-li-with-img [imgUrl]="entity.image">
     <ng-container content>
       <div class="entity-info">
-        <div class="flex-column">
           <div class="caption-2 ellipsis">{{ entityType }}</div>
           <div class="title-2 ellipsis">
-            <a [routerLink]="entityUrl" class="a-like ellipsis" [title]="entity.name" [innerText]="entity.name"></a>
+            <a [routerLink]="entityUrl" class="a-like list-title ellipsis" [title]="entity.name"
+              [innerText]="entity.name"></a>
           </div>
-          <div class="caption-1 mb-16 ellipsis">
-            <ng-content select="[entityGreyInfo]"></ng-content>
+          <div class="description">
+            <p>{{entity.description}}</p>
           </div>
+        
           <pm-tag-list-truncated [tags]="entity.tags"></pm-tag-list-truncated>
-          <div class="avatar avatar-wrapper mt-8 p-16">
-            <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
-           
+          <div class="avatar avatar-wrapper mt-8 ">
+            <div class="avatar-item">
+              <mat-icon>person</mat-icon>
+              <span class="pointer" [routerLink]="urls.getUserUrl(entity.creator.username!)">
+                @{{entity.creator.username}}
+              </span>
+            </div>
+            <ng-content select="[buttons]"></ng-content>
+
+            <div class="avatar-item">
+              <mat-icon>label</mat-icon>
+              <span>
+                {{entity.num_labels}} Label
+              </span>
+            </div>
+            <div class="avatar-item">
+              <mat-icon class="mini">alarm</mat-icon>
+              <span>{{entity.modified | fromNow}}</span>
+            </div>
+            <!-- <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar> -->
+
           </div>
-        </div>
       </div>
       <!-- Actions -->
       <div class="hover-btn-wrapper flex">
-        <div class="actions">
-          <ng-content select="[buttons]"></ng-content>
-        </div>
-        <div class="">
-          <button mat-icon-button class="medium"  [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <ng-content select="[hoverButtons]"></ng-content>
-          </mat-menu>
-        </div>
+        <button mat-icon-button class="action-btn-absolute-sm" [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <ng-content select="[hoverButtons]"></ng-content>
+        </mat-menu>
         <!-- <div >
           <ng-content select="[hoverButtons]"></ng-content>
           <br/>

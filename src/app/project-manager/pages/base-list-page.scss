@@ -18,9 +18,9 @@ mat-sidenav {
   padding: 16px;
 }
 
-section {
-  padding: 16px;
-}
+// section {
+//   padding: 16px;
+// }
 
 ul {
   list-style-type: none;
@@ -31,9 +31,7 @@ ul {
   border-bottom: 0px !important;
   @media (max-width:768px) {
     border:0px solid white !important;
-    .li-card{
-      padding: 0 !important;
-    }
+  
   }
 }
 

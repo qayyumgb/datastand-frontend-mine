@@ -1,6 +1,4 @@
-.li-card:hover {
-  background-color: #f7eef9;
-}
+
 
 .content {
   flex: 1 1 auto;
@@ -13,19 +11,7 @@
   align-items: center;
   flex-shrink: 0;
 }
-.li-card {
-  position: relative;
-  padding: 1rem;
 
-  .active-btn-group {
-    display: none;
-  }
-  &:hover {
-    .active-btn-group {
-      display: block;
-    }
-  }
-}
 @media (max-width: 768px) {
   .active-btn-group {
     position: absolute;
@@ -33,13 +19,10 @@
     bottom: 5px;
     display: block !important;
   }
-  .li-card {
-    padding: 16px 16px 35px 16px;
-  }
+.action-btn-absolute-md{
+  position: absolute;
+  top: 9px;
+  right: 9px;
+}
 }
 
-@media (max-width: 400px) {
-  .li-card {
-    padding: 16px 0px 35px 0px !important;
-  }
-}

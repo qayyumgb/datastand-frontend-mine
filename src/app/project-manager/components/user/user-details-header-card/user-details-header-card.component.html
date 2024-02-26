@@ -6,13 +6,14 @@
     <div class="flex-column flex grow-1">
       <div class="grow-1 ">
         <div class="user-info">
-          <h1 class="mb-16">{{ userProfile.username }}@</h1>
+          <h1 class="username-o">@{{ userProfile.username }}</h1>
           <div *ngIf="userProfile.first_name || userProfile.last_name">
+            <span *ngIf="this.getPronouns()" class="">{{ this.getPronouns() }}</span>
             {{ userProfile.first_name }} {{ userProfile.last_name }}
-            <span *ngIf="this.getPronouns()" class="pronouns">({{ this.getPronouns() }})</span>
           </div>
           <div>{{ userProfile.headline }}</div>
-          <div *ngIf="userProfile.country">{{ userProfile.country }}</div>
+          <div *ngIf="userProfile.country" class="location-address"> <mat-icon> place</mat-icon>
+            {{ userProfile.country }}</div>
           <div class="links">
             <span *ngIf="userProfile.linkedin">
               <a [href]="userProfile.linkedin" target="_blank">LinkedIn↗</a>
@@ -20,7 +21,8 @@
             <span *ngIf="userProfile.github">
               <a [href]="userProfile.github" target="_blank">GitHub↗</a>
             </span>
-            <span *ngIf="userProfile.website">
+            <span *ngIf="userProfile.website" class="website-location">
+              <mat-icon>language</mat-icon>
               <a [href]="userProfile.website" target="_blank">{{ userProfile.website }}↗
               </a>
             </span>

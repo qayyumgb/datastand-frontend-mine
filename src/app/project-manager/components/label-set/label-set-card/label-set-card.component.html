@@ -141,12 +141,13 @@
     
 
     <div class="description">{{ truncate(labelSet.description!, 128) }}</div>
+    
+    <div class="tags">
+      <pm-tag-list-truncated [tags]="labelSet.tags"></pm-tag-list-truncated>
+    </div>
     <div class="published-date">
       {{ labelSet.modified! | fromNow }} | 
       {{ labelSet.num_labels! | number }} label(s) 
-    </div>
-    <div class="tags">
-      <pm-tag-list-truncated [tags]="labelSet.tags"></pm-tag-list-truncated>
     </div>
   </div>
 

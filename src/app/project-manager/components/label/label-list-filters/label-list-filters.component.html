@@ -22,92 +22,95 @@
   </div> -->
 
   <div class="sub-section">
+    <div>
+      <h5 class="filter-by">Filter by</h5>
+    </div>
     <div class="sub-nav-filters">
-    <h5>Filter by</h5>
-    <!-- <label>Modified</label>
-    <span
-      class="clear-filter"
-      *ngIf="this.filters.modifiedLast"
-      (click)="clearModifiedLast()"
-    >
-      [x]
-    </span>
-    <mat-radio-group color="primary" (change)="updateModifiedLast($event)">
-      <mat-radio-button
-        *ngFor="let option of modifiedLastOptions"
-        [value]="option.value"
-        [checked]="option.value == this.filters.modifiedLast"
-        >{{ option.text }}</mat-radio-button
-      >
-    </mat-radio-group> -->
-
-    <button mat-stroked-button [matMenuTriggerFor]="menuModification">{{currentModification||'Modified'}}</button>
-    <mat-menu #menuModification="matMenu">
-      <ng-container *ngFor="let option of modifiedLastOptions">
-        <button mat-menu-item (click)="updateModifiedLast2(option)">
-          {{ option.text }}</button>
-      </ng-container>
-    </mat-menu>
-
-    <!-- <label>Review</label>
-    <span  class="clear-filter" *ngIf="this.filters.is_pending" (click)="clearIsPending()" >[x]</span>
-    <mat-radio-group color="primary" (change)="updateIsPending($event)">
-      <mat-radio-button *ngFor="let option of isPendingOptions" [value]="option.value" [checked]="option.value == this.filters.is_pending"
-        >{{ option.text }}</mat-radio-button
-      >
-    </mat-radio-group> -->
-
-    <button mat-stroked-button [matMenuTriggerFor]="Reviewdd">Review</button>
-    <mat-menu #Reviewdd="matMenu">
-      <ng-container *ngFor="let option of isPendingOptions">
-        <button (click)="updateIsPending(option)" mat-menu-item>{{ option.text }}</button>
-      </ng-container>
-    </mat-menu>
-
-
-
-<!-- 
-    <label>Tag</label>
-    <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
-      [x]
-    </span>
-    <mat-form-field  appearance="outline">
-      <mat-label>Search</mat-label>
-      <input
-        matInput
-        placeholder="e.g. blog"
-        (keyup)="updateTag($event)"
-        [(ngModel)]="filters.tag"
-      />
-    </mat-form-field> -->
-
-    <!-- <h4>
-      Sort by
+      <!-- <label>Modified</label>
       <span
         class="clear-filter"
-        *ngIf="this.filters.ordering"
-        (click)="clearOrdering()"
+        *ngIf="this.filters.modifiedLast"
+        (click)="clearModifiedLast()"
       >
         [x]
       </span>
-    </h4>
-
-    <mat-radio-group color="primary" (change)="updateOrdering($event)">
-      <mat-radio-button
-        *ngFor="let option of orderingOptions"
-        [value]="option.value"
-        [checked]="option.value == this.filters.ordering"
-        >{{ option.text }}</mat-radio-button
-      >
-    </mat-radio-group> -->
-    
-    <button mat-stroked-button [matMenuTriggerFor]="menuSort2">Sort by</button>
-    <mat-menu #menuSort2="matMenu">
-      <ng-container *ngFor="let option of orderingOptions">
-        <button (click)="updateOrdering2(option.value)" mat-menu-item>{{ option.text }}</button>
-      </ng-container>
-    </mat-menu>
-  </div>
+      <mat-radio-group color="primary" (change)="updateModifiedLast($event)">
+        <mat-radio-button
+          *ngFor="let option of modifiedLastOptions"
+          [value]="option.value"
+          [checked]="option.value == this.filters.modifiedLast"
+          >{{ option.text }}</mat-radio-button
+        >
+      </mat-radio-group> -->
+  
+      <button mat-stroked-button [matMenuTriggerFor]="menuModification">{{currentModification||'Modified'}}</button>
+      <mat-menu #menuModification="matMenu">
+        <ng-container *ngFor="let option of modifiedLastOptions">
+          <button mat-menu-item (click)="updateModifiedLast2(option)">
+            {{ option.text }}</button>
+        </ng-container>
+      </mat-menu>
+  
+      <!-- <label>Review</label>
+      <span  class="clear-filter" *ngIf="this.filters.is_pending" (click)="clearIsPending()" >[x]</span>
+      <mat-radio-group color="primary" (change)="updateIsPending($event)">
+        <mat-radio-button *ngFor="let option of isPendingOptions" [value]="option.value" [checked]="option.value == this.filters.is_pending"
+          >{{ option.text }}</mat-radio-button
+        >
+      </mat-radio-group> -->
+  
+      <button mat-stroked-button [matMenuTriggerFor]="Reviewdd">Review</button>
+      <mat-menu #Reviewdd="matMenu">
+        <ng-container *ngFor="let option of isPendingOptions">
+          <button (click)="updateIsPending(option)" mat-menu-item>{{ option.text }}</button>
+        </ng-container>
+      </mat-menu>
+  
+  
+  
+  <!-- 
+      <label>Tag</label>
+      <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
+        [x]
+      </span>
+      <mat-form-field  appearance="outline">
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          placeholder="e.g. blog"
+          (keyup)="updateTag($event)"
+          [(ngModel)]="filters.tag"
+        />
+      </mat-form-field> -->
+  
+      <!-- <h4>
+        Sort by
+        <span
+          class="clear-filter"
+          *ngIf="this.filters.ordering"
+          (click)="clearOrdering()"
+        >
+          [x]
+        </span>
+      </h4>
+  
+      <mat-radio-group color="primary" (change)="updateOrdering($event)">
+        <mat-radio-button
+          *ngFor="let option of orderingOptions"
+          [value]="option.value"
+          [checked]="option.value == this.filters.ordering"
+          >{{ option.text }}</mat-radio-button
+        >
+      </mat-radio-group> -->
+      
+      <button mat-stroked-button [matMenuTriggerFor]="menuSort2">Sort by</button>
+      <mat-menu #menuSort2="matMenu">
+        <ng-container *ngFor="let option of orderingOptions">
+          <button (click)="updateOrdering2(option.value)" mat-menu-item>{{ option.text }}</button>
+        </ng-container>
+      </mat-menu>
+    </div>
+   <div class="flex-search-wrapper">
     <div class="search-div " [ngClass]="showSearch?'show-full':''">
 
       <input type="text" name="" [(ngModel)]="searchInput" (keyup)="searchHandling($event)" id="" placeholder="search">
@@ -132,7 +135,6 @@
         <mat-icon>search</mat-icon>
       </button>
     </div>
-
-    
+   </div>
   </div>
 </section>

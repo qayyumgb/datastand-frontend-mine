@@ -12,9 +12,9 @@ export class EntityLiItemComponent {
   actions: boolean = false;
   @Input() entityUrl?: string;
   @Input() imgUrl?: string;
-  @Input() entity?: Entity;
+  @Input() entity?: Entity|any;
   @Input() entityType?: string;
-
+num_of_label:number = NaN
   constructor(public urls: UrlsService) {}
 
   hideActions() {

@@ -6,8 +6,8 @@ mat-sidenav-container {
 
 mat-sidenav-content {
   position: relative;
-  overflow-y: scroll;
-  height: calc(100vh - 60px); // 60px == $topbar height.
+  overflow-y: auto;
+  // height: calc(100vh - 60px); // 60px == $topbar height.
 }
 
 mat-sidenav {

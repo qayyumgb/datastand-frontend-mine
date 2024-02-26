@@ -14,18 +14,18 @@ $img-width-sizes: 100, 200, 300, 400, 500;
   object-position: 50% 50%;
 }
 
-$entity-img-width-sizes: 60, 120, 150;
+$entity-img-width-sizes: 60, 120, 140, 150, 230;
 
 @each $size in $entity-img-width-sizes {
   .entity-img-#{$size} {
     // Make the image responsive
     max-width: #{$size}px;
-    height: auto;
+    height: 100%;
     width: 100%;
     object-fit: cover;
     outline-offset: 0px;
     object-position: 50% 50%;
-    border-radius: 10px;
+    // border-radius: 10px;
   }
 }
 
@@ -36,4 +36,16 @@ $entity-img-width-sizes: 60, 120, 150;
   outline-offset: 0px;
   object-position: 50% 50%;
   border-radius: 10px;
+}
+.entity-img-140{
+  max-height: 130px;
+
+}
+.list-image{
+  max-width: 210px;
+  width: 100%;
+  height: 184px;
+  object-fit: cover;
+  min-width: 210px;
+
 }

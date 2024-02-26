@@ -25,16 +25,7 @@ a:hover {
   width: 100%;
   gap: 16px;
   position: relative;
-  @media (max-width:768px) {
-    flex-direction: column;
-    .entity-img-120{
-      max-width: 100% !important;
-      height: 180px;
-    }
-  }
-  @media (max-width:500px) {
-    padding: 0 !important;
-  }
+ 
 
 }
 
@@ -86,15 +77,15 @@ a:hover {
   }
 }
 
-.entry-description {
-  font-size: 12px;
-  height: 20px;
-  color: rgb(0, 0, 0, 0.7);
-  max-width: 800px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
+// .entry-description {
+//   font-size: 12px;
+//   height: 20px;
+//   color: rgb(0, 0, 0, 0.7);
+//   max-width: 800px;
+//   white-space: nowrap;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+// }
 
 // Entry actions
 .easy-actions {

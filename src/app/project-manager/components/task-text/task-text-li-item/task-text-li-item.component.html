@@ -19,11 +19,11 @@
         <ng-container *ngIf="taskText.is_generated && taskText.is_pending"
           >· 🤖 AI generated
         </ng-container>
-        <div
-          *ngIf="taskText.description"
-          [innerText]="taskText.description"
-        ></div>
       </div>
+      <div class="entry-description"
+        *ngIf="taskText.description"
+        [innerText]="taskText.description"
+      ></div>
       <pm-tag-list-truncated
         *ngIf="taskText.tags?.length! > 0"
         [tags]="taskText.tags"
@@ -34,62 +34,61 @@
     <ng-container *ngIf="isCreator()">
       <button
         *ngIf="taskText.status == statusEnum.PENDING"
-        mat-icon-button
-        
+        mat-menu-item
         class="medium"
         matTooltip="Mark as completed"
         (click)="setStatusToCompleted(taskText)"
       >
-        <mat-icon>check</mat-icon>
+        <mat-icon>check</mat-icon>Mark as completed
       </button>
       <button
         *ngIf="taskText.status != statusEnum.PENDING"
-        mat-icon-button
-        class="medium"
+        mat-menu-item
+        class="medium 3"
         matTooltip="Mark as pending"
         (click)="setStatusToPending(taskText)"
       >
-        <mat-icon>warning</mat-icon>
+        <mat-icon>warning</mat-icon> Marks as pending
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium 6"
         matTooltip="Rename"
         (click)="openRenameTaskTextDialog(taskText)"
       >
-        <mat-icon>drive_file_rename_outline</mat-icon>
+        <mat-icon>drive_file_rename_outline</mat-icon>Rename
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Edit"
         (click)="openUpdateTaskTextDialog(taskText)"
       >
-        <mat-icon>edit</mat-icon>
+        <mat-icon>edit</mat-icon> Edit
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Change tags"
         (click)="openUpdateTagsDialog(taskText)"
       >
-        <mat-icon>label</mat-icon>
+        <mat-icon>label</mat-icon>Label
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Make a copy"
         (click)="copyTaskText(taskText)"
       >
-        <mat-icon>file_copy</mat-icon>
+        <mat-icon>file_copy</mat-icon>Make a copy
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Remove"
         (click)="deleteTaskText(taskText)"
       >
-        <mat-icon>delete</mat-icon>
+        <mat-icon>delete</mat-icon>Remove
       </button>
     </ng-container>
   </ng-container>

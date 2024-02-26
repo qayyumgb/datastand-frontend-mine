@@ -4,14 +4,14 @@
       <div class="caption-2 ellipsis" *ngIf="text.name">
         Title: "{{ text.name }}"
       </div>
-      <div class="title-2">
-        <p
+      <div class="title-2 mb-2">
+        <span
           (click)="openViewTextDialog(text)"
-          class="a-like clamp mw-80"
+          class="a-like clamp mw-80 "
           [title]="text.raw_string"
         >
           {{ text.raw_string }}
-        </p>
+      </span>
       </div>
       <div class="caption-1 ellipsis">
         ID #{{ text.id }} · {{ text.langtag }} ·
@@ -20,82 +20,83 @@
         <ng-container *ngIf="text.is_generated && text.is_pending"
           >· 🤖 AI generated
         </ng-container>
-        <div *ngIf="text.description" [innerText]="text.description"></div>
       </div>
       <pm-tag-list-truncated
         *ngIf="text.tags?.length! > 0"
         [tags]="text.tags"
       ></pm-tag-list-truncated>
     </div>
+    <div class="entry-description" *ngIf="text.description" [innerText]="text.description"></div>
+
   </ng-container>
 
   <ng-container actions>
     <button
-      mat-icon-button
+      mat-menu-item
       class="medium"
       matTooltip="Display text"
       (click)="openViewTextDialog(text)"
     >
-      <mat-icon>visibility</mat-icon>
+      <mat-icon>visibility</mat-icon> View
     </button>
     <ng-container *ngIf="isCreator()">
       <button
         *ngIf="text.is_pending"
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Mark as reviewed"
         (click)="markTextAsReviewed(text)"
       >
-        <mat-icon>check</mat-icon>
+        <mat-icon>check</mat-icon> Review
       </button>
       <button
         *ngIf="!text.is_pending"
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Mark as pending"
         (click)="markTextAsPending(text)"
       >
-        <mat-icon>warning</mat-icon>
+        <mat-icon>warning</mat-icon>Pending
       </button>
       <button
-        mat-icon-button
-        class="medium 7"
+        mat-menu-item
+        class="medium"
         matTooltip="Rename"
         (click)="openRenameTextDialog(text)"
       >
-        <mat-icon>drive_file_rename_outline</mat-icon>
+        <mat-icon>drive_file_rename_outline</mat-icon>Rename
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Edit"
         (click)="openUpdateTextDialog(text)"
       >
-        <mat-icon>edit</mat-icon>
+        <mat-icon>edit</mat-icon> Edit
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Change tags"
         (click)="openUpdateTagsDialog(text)"
       >
-        <mat-icon>label</mat-icon>
+        <mat-icon>label</mat-icon> Change Tags
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Make a copy"
         (click)="copyText(text)"
       >
-        <mat-icon>file_copy</mat-icon>
+        <mat-icon>file_copy</mat-icon>Copy
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Remove"
         (click)="deleteText(text)"
       >
-        <mat-icon>delete</mat-icon>
+        <mat-icon>delete</mat-icon> Remove
       </button>
     </ng-container>
   </ng-container>

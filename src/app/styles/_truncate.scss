@@ -24,14 +24,3 @@ $width-sizes: 200, 300, 400, 500;
   -webkit-box-orient: vertical;
 }
 
-@media (min-width:768px){
-  .li-card{
-    .hover-btn-wrapper{
-    }
-    &:hover{
-      .hover-btn-wrapper{
-        display: flex;
-      }
-    }
-  }
-}

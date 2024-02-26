@@ -22,8 +22,10 @@
   </div> -->
 
   <div class="sub-section">
+    <div>
+    <h5 class="filter-by">Filter by</h5>
+    </div>
     <div class="sub-nav-filters">
-    <h5>Filter by</h5>
     <!-- <label>Modified</label>
     <span
       class="clear-filter"
@@ -155,29 +157,31 @@
 
   </div>
 
-    <div class="search-div " [ngClass]="showSearch?'show-full':''">
+    <div class="flex-search-wrapper">
+      <div class="search-div " [ngClass]="showSearch?'show-full':''">
 
-      <input type="text" name="" [(ngModel)]="searchInput" (keyup)="searchHandling($event)" id="" placeholder="search">
-      <span class="search-type" [matMenuTriggerFor]="searchtype">
-        {{searchType || "type"}}
-        <mat-icon>arrow_drop_down</mat-icon>
-      </span>
-
-      <mat-menu #searchtype="matMenu">
-        <button (click)="handleSearchType('Tags')" mat-menu-item>Tags</button>
-        <button (click)="handleSearchType('Text')" mat-menu-item>Text</button>
-      </mat-menu>
-      <!-- <select name="" id="">
-        <option value="">Tag</option>
-        <option value="">User</option>
-        <option value="">Label</option>
-      </select> -->
-      <button class="search" *ngIf="showSearch">
-        <mat-icon>search</mat-icon>
-      </button>
-      <button *ngIf="!showSearch" (click)="showSearchHandling()" class="show-search">
-        <mat-icon>search</mat-icon>
-      </button>
+        <input type="text" name="" [(ngModel)]="searchInput" (keyup)="searchHandling($event)" id="" placeholder="search">
+        <span class="search-type" [matMenuTriggerFor]="searchtype">
+          {{searchType || "type"}}
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+  
+        <mat-menu #searchtype="matMenu">
+          <button (click)="handleSearchType('Tags')" mat-menu-item>Tags</button>
+          <button (click)="handleSearchType('Text')" mat-menu-item>Text</button>
+        </mat-menu>
+        <!-- <select name="" id="">
+          <option value="">Tag</option>
+          <option value="">User</option>
+          <option value="">Label</option>
+        </select> -->
+        <button class="search" *ngIf="showSearch">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button *ngIf="!showSearch" (click)="showSearchHandling()" class="show-search">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </section>

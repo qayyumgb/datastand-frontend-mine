@@ -1,5 +1,5 @@
-<loader-card *ngIf="isLoading()"></loader-card>
-<div class="items-section" *ngIf="labelSet && isLoaded()">
+<!-- <loader-card *ngIf="isLoading()"></loader-card> -->
+<div class="" *ngIf="labelSet && isLoaded()">
   <div class="sticky-header">
     <div>
       <div class="title-with-icon">
@@ -104,8 +104,8 @@
   </div>
   <div>
     <div class="items-list" *ngIf="items?.length! > 0; else noItems">
-      <ul>
-        <li *ngFor="let label of items">
+      <div class="list-card-wrapper">
+        <div class="card" *ngFor="let label of items">
           <pm-label-li-item
             [label]="label"
             [labelSetId]="this.labelSet.id!"
@@ -114,8 +114,8 @@
               addItemAboveId($event.label, $event.originalLabelId)
             "
           ></pm-label-li-item>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
     <ng-template #noItems>
       <pm-no-data-card

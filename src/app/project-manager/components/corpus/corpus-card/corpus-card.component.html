@@ -1,11 +1,9 @@
-<section *ngIf="corpus" class="corpus-card">
+<section *ngIf="corpus" class="ds-card">
   <img [src]="corpus.image || urls.DEFAULT_IMG_URL" class="card-img" />
-  <div class="card-content-wrapper">
     <div class="card-content">
-      <div class="card-header">
-        <mat-icon class="data-icon">library_books</mat-icon>
-        <div class="title-wigh-grey-info">
-          <div class="flex">
+      <div class="ds-card-header">
+        
+          <div class="ds-card-title-wrapper">
             <!-- Truncate the name and add tooltip if needed -->
             <a *ngIf="corpus.name.length > 25; else normalLink" [routerLink]="urls.getCorpusUrl(corpus.id)"
               class="title" [matTooltip]="corpus.name" [innerText]="truncate(corpus.name, 25)">
@@ -17,24 +15,22 @@
             <!-- End name -->
             <mat-icon *ngIf="!corpus.is_public" class="private" color="primary" matTooltip="Private"
               fontIcon="lock"></mat-icon>
-          </div>
-          <div class="grey-info">
-            {{ corpus.langtag }} | {{ corpus.num_texts }} text(s) |
-            {{ corpus.modified! | fromNow }}
-          </div>
-        </div>
+          </div>   
         <mat-icon class="more-actions-icon" [matMenuTriggerFor]="moreActionsMenu">
           more_vert
         </mat-icon>
       </div>
 
       <div class="description">{{ truncate(corpus.description!, 128) }}</div>
-
+     
       <div class="tags" *ngIf="corpus.tags?.length">
         <pm-tag-list-truncated [tags]="corpus.tags"></pm-tag-list-truncated>
       </div>
     </div>
-
+    <div class="published-date">
+      {{ corpus.langtag }} | {{ corpus.num_texts }} text(s) |
+      {{ corpus.modified! | fromNow }}
+    </div>
     <mat-divider></mat-divider>
 
     <div class="card-bottom">
@@ -42,7 +38,7 @@
       <pm-upvote-button [hasUpvoted]="corpus.has_upvoted!" [numUpvotes]="corpus.num_upvotes!" [element]="'corpus'"
         [elementId]="corpus.id"></pm-upvote-button>
     </div>
-  </div>
+
 
   <!-- Context menu -->
   <mat-menu #moreActionsMenu="matMenu">

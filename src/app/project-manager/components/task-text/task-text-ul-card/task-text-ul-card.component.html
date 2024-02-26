@@ -1,5 +1,5 @@
-<loader-card *ngIf="isLoading()"></loader-card>
-<div *ngIf="this.task && isLoaded()" class="items-section">
+<!-- <loader-card *ngIf="isLoading()"></loader-card> -->
+<div *ngIf="this.task && isLoaded()" class="">
   <div class="sticky-header">
     <div>
       <div class="title-with-icon">
@@ -85,8 +85,8 @@
   </div>
   <div>
     <div class="items-list" *ngIf="items?.length! > 0; else noItems">
-      <ul>
-        <li *ngFor="let taskText of items">
+      <div class="list-card-wrapper 7">
+        <div class="card" *ngFor="let taskText of items">
           <pm-task-text-li-item
             [taskText]="taskText"
             [taskId]="this.task.id"
@@ -95,8 +95,8 @@
               addItemAboveId($event.taskText, $event.originalTaskTextId)
             "
           ></pm-task-text-li-item>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
     <ng-template #noItems>
       <pm-no-data-card

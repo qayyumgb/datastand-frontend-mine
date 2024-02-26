@@ -13,6 +13,7 @@ mat-toolbar {
 mat-sidenav-container {
   height: calc(100vh - $toolbar-height);
   margin-top: $toolbar-height;
+  background-color: #efefef80 !important;
 }
 .search-icon {
   cursor: pointer;
@@ -38,12 +39,12 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-  width: 200px;
+  width: 240px;
   padding: 16px;
 }
 
 mat-sidenav-content {
-  overflow-y: auto;
+  // overflow-y: hidden;
   margin: 0;
   background-color: $bg-color;
 }

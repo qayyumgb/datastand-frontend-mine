@@ -42,8 +42,10 @@ mat-radio-button {
   padding: 0.8rem;
   background-color: white;
   border-radius: 8px;
+  flex-wrap: wrap;
   .sub-nav-filters {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     h5 {
       font-size: 16px;

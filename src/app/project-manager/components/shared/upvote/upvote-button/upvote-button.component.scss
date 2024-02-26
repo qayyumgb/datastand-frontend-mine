@@ -49,3 +49,18 @@ button {
 .has-voted {
   background-color: red;
 }
+
+.avatar-item{
+  display: flex;
+  align-items: center;
+  color: rgb(101 102 111);
+  font-size: 12px;
+  font-weight: 400;
+  .mat-icon{
+    font-size: 17px !important;
+    // color: gray;
+    height: 15px;
+    width: 18px;
+
+  }
+}

@@ -1,20 +1,18 @@
-<loader-card *ngIf="isLoading()"></loader-card>
+<!-- <loader-card *ngIf="isLoading()"></loader-card> -->
 <div *ngIf="this.task && isLoaded()" class="items-section">
   <div class="sticky-header">
     <div>
       <div class="title-with-icon">
         <mat-icon class="icon-title">label</mat-icon>Labels
       </div>
-      <div>
-        <div class="paginator">
-          <pm-paginator
-            [page]="page!"
-            [count]="totalCount"
-            [currentPageSize]="paginatedCount"
-            [pageSize]="20"
-            (updatePaginatorEvent)="updatePaginatorAndTaskLabels($event)"
-          ></pm-paginator>
-        </div>
+      <div class="">
+        <pm-paginator
+          [page]="page!"
+          [count]="totalCount"
+          [currentPageSize]="paginatedCount"
+          [pageSize]="20"
+          (updatePaginatorEvent)="updatePaginatorAndTaskLabels($event)"
+        ></pm-paginator>
       </div>
     </div>
 

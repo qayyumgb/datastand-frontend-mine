@@ -33,52 +33,52 @@
       </button>
       <button
         *ngIf="!label.is_pending"
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Mark as pending"
         (click)="markLabelAsPending(label)"
       >
-        <mat-icon>warning</mat-icon>
+        <mat-icon>warning</mat-icon> Pending
       </button>
       <button
-        mat-icon-button
-        class="medium 3"
+        mat-menu-item
+        class="medium"
         matTooltip="Rename"
         (click)="openRenameLabelDialog(label)"
       >
-        <mat-icon>drive_file_rename_outline</mat-icon>
+        <mat-icon>drive_file_rename_outline</mat-icon> Rename
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Edit"
         (click)="openUpdateLabelDialog(label)"
       >
-        <mat-icon>edit</mat-icon>
+        <mat-icon>edit</mat-icon> Edit
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Change tags"
         (click)="openUpdateTagsDialog(label)"
       >
-        <mat-icon>label</mat-icon>
+        <mat-icon>label</mat-icon>Tags
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Make a copy"
-        (click)="copyLabel(label)"
+        (click)="copyLabel(label)" 
       >
-        <mat-icon>file_copy</mat-icon>
+        <mat-icon>file_copy</mat-icon>Copy
       </button>
       <button
-        mat-icon-button
+        mat-menu-item
         class="medium"
         matTooltip="Remove"
         (click)="deleteLabel(label)"
       >
-        <mat-icon>delete</mat-icon>
+        <mat-icon>delete</mat-icon>Delete
       </button>
     </ng-container>
   </ng-container>

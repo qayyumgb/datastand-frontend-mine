@@ -14,6 +14,7 @@ export class UpvoteButtonComponent {
   @Input() numUpvotes?: number;
   @Input() elementId?: number;
   @Input() element?: 'corpus' | 'label' | 'label-set';
+  @Input() defaultStyle?:boolean   
 
   constructor(
     private dialog: MatDialog,

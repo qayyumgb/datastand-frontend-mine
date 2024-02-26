@@ -22,17 +22,67 @@
 @import "./typography";
 @import "./common.scss";
 
-.mdc-dialog__title{
-    padding: 0 15px 9px !important;
+.mdc-dialog__title {
+  padding: 0 15px 9px !important;
 }
 .mdc-dialog .mdc-dialog__content {
-    padding: 20px 15px 20px 15px !important;
+  padding: 20px 15px 20px 15px !important;
 }
-.cdk-overlay-pane{
-    @media (max-width:500) {
-        max-width: 95vw !important;
-        width: 100% !important;
+.cdk-overlay-pane {
+  @media (max-width: 500) {
+    max-width: 95vw !important;
+    width: 100% !important;
+  }
+}
+.entry-description {
+  font-size: 13px;
+  margin-top: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+.filter-by{
+  font-size: 14px !important;
+    font-weight: 500 !important;
+}
+.flex-search-wrapper{
+  flex-grow: 1;
+  display: flex;
+  justify-content: end;
+}
+.sticky-header {
+  .paginator {
+    flex-wrap: wrap;
+    @media (max-width: 768px) {
+      align-items: center;
+      justify-content: center;
+      gap: 5px !important;
+      margin-top: 9px;
+      margin-bottom: 10px;
     }
+  }
+}
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+.mb-0 {
+  margin-bottom: 0rem !important;
+}
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+.mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+.mt-3 {
+  margin-top: 1rem !important;
+}
+.mt-0 {
+  margin-top: 0rem !important;
+}
+.mt-2 {
+  margin-top: 0.5rem !important;
+}
+.mt-1 {
+  margin-top: 0.25rem !important;
 }
 // @media (max-width:992px) {
 //     .filter-aside{
@@ -50,132 +100,134 @@
 //         }
 //     }
 // }
-*{
-    &:not(.mat-icon,.pm-title){
-
-        font-family: "Poppins", sans-serif !important;
-    }
+* {
+  &:not(.mat-icon, .pm-title) {
+    font-family: "Poppins", sans-serif !important;
+  }
 }
 .poppins-thin {
-    font-family: "Poppins", sans-serif;
-    font-weight: 100;
-    font-style: normal;
-  }
-  
-  .poppins-extralight {
-    font-family: "Poppins", sans-serif;
-    font-weight: 200;
-    font-style: normal;
-  }
-  
-  .poppins-light {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-  }
-  
-  .poppins-regular {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .poppins-medium {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-  }
-  
-  .poppins-semibold {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-  }
-  
-  .poppins-bold {
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-  }
-  
-  .poppins-extrabold {
-    font-family: "Poppins", sans-serif;
-    font-weight: 800;
-    font-style: normal;
-  }
-  
-  .poppins-black {
-    font-family: "Poppins", sans-serif;
-    font-weight: 900;
-    font-style: normal;
-  }
-  
-  .poppins-thin-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 100;
-    font-style: italic;
-  }
-  
-  .poppins-extralight-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 200;
-    font-style: italic;
-  }
-  
-  .poppins-light-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: italic;
-  }
-  
-  .poppins-regular-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: italic;
-  }
-  
-  .poppins-medium-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: italic;
-  }
-  
-  .poppins-semibold-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: italic;
-  }
-  
-  .poppins-bold-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-style: italic;
-  }
-  
-  .poppins-extrabold-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 800;
-    font-style: italic;
-  }
-  
-  .poppins-black-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 900;
-    font-style: italic;
-  }
-  .mat-mdc-menu-panel{
-    min-width: 250px !important;
-    padding: 0 .5rem;
-  }
-  .language-menu {
-    max-height: 300px !important;
-  }
-  @media (min-width:768px) {
-    .mat-mdc-dialog-container {
-      .mdc-dialog__surface{
-        padding: 0.7rem 2rem;
-        border-radius: 32px !important;
-        min-width: 640px !IMPORTANT;
-      }
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+.mat-mdc-menu-panel {
+  min-width: 250px !important;
+  padding: 0 0.5rem;
+}
+.language-menu {
+  max-height: 300px !important;
+}
+.pointer {
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .mat-mdc-dialog-container {
+    .mdc-dialog__surface {
+      padding: 0.7rem 2rem;
+      border-radius: 32px !important;
+      min-width: 640px !important;
     }
   }
+}

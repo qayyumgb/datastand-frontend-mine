@@ -1,20 +1,18 @@
-<loader-card *ngIf="isLoading()"></loader-card>
-<section class="items-section" *ngIf="this.corpus && isLoaded()">
+<!-- <loader-card *ngIf="isLoading()"></loader-card> -->
+<section class="" *ngIf="this.corpus && isLoaded()">
   <div class="sticky-header">
     <div>
       <div class="title-with-icon">
         <mat-icon class="icon-title">text_snippet</mat-icon>
         Texts
       </div>
-      <div>
-        <div class="paginator">
-          <pm-paginator
-            [page]="page!"
-            [count]="totalCount!"
-            [currentPageSize]="paginatedCount!"
-            [pageSize]="100"
-          ></pm-paginator>
-        </div>
+      <div class="">
+        <pm-paginator
+          [page]="page!"
+          [count]="totalCount!"
+          [currentPageSize]="paginatedCount!"
+          [pageSize]="100"
+        ></pm-paginator>
       </div>
     </div>
 
@@ -109,17 +107,17 @@
     </div>
   </div>
   <div>
-    <div class="items-list" *ngIf="items?.length! > 0; else noItems">
-      <ul>
-        <li *ngFor="let text of items">
+    <div class="items-list " *ngIf="items?.length! > 0; else noItems">
+      <div class="list-card-wrapper">
+        <div class="card" *ngFor="let text of items">
           <pm-text-li-item
             [text]="text"
             [corpusId]="this.corpus.id!"
             (deleteTextEvent)="deleteItemById($event)"
             (copyTextEvent)="addItemAboveId($event.text, $event.originalTextId)"
           ></pm-text-li-item>
-        </li>
-      </ul>
+        </div>
+      </div >
     </div>
     <ng-template #noItems>
       <pm-no-data-card

@@ -4,10 +4,12 @@
 
 
   <div class="sub-section">
+    <div >
+      <h5 class="filter-by">Filter by</h5>
+    </div>
     <div class="sub-nav-filters">
-
-    <h5>Filter by</h5>
-    <!-- <label>Modified</label>
+      
+      <!-- <label>Modified</label>
     <span class="clear-filter" *ngIf="this.filters.modifiedLast" (click)="clearModifiedLast()">
       [x]
     </span>
@@ -17,16 +19,16 @@
     </mat-radio-group> -->
 
 
-    <button mat-stroked-button [matMenuTriggerFor]="menuModification">{{currentModification||'Modified'}}</button>
-    <mat-menu #menuModification="matMenu">
-      <ng-container *ngFor="let option of modifiedLastOptions">
-        <button mat-menu-item (click)="updateModifiedLast2(option)">
-          {{ option.text }}</button>
-      </ng-container>
-    </mat-menu>
-    <!-- Non-public filters -->
-    <ng-container *ngIf="!isPublicFilter">
-      <!-- <label>Visibility</label>
+      <button mat-stroked-button [matMenuTriggerFor]="menuModification">{{currentModification||'Modified'}}</button>
+      <mat-menu #menuModification="matMenu">
+        <ng-container *ngFor="let option of modifiedLastOptions">
+          <button mat-menu-item (click)="updateModifiedLast2(option)">
+            {{ option.text }}</button>
+        </ng-container>
+      </mat-menu>
+      <!-- Non-public filters -->
+      <ng-container *ngIf="!isPublicFilter">
+        <!-- <label>Visibility</label>
       <span class="clear-filter" *ngIf="this.filters.is_public" (click)="clearIsPublic()">
         [x]
       </span>
@@ -35,19 +37,19 @@
           [checked]="option.value == this.filters.is_public">{{ option.text }}</mat-radio-button>
       </mat-radio-group> -->
 
-      <div class="">
-        <button mat-stroked-button [matMenuTriggerFor]="menuSort">{{currentVisibility||"Visibility"}}</button>
-        <mat-menu #menuSort="matMenu" class="language-menu">
-          <ng-container *ngFor="let option of isPublicOptions">
-            <button mat-menu-item (click)="updateIsPublic2(option)">
-              {{ option.text }}</button>
-          </ng-container>
-        </mat-menu>
-      </div>
-    </ng-container>
+        <div class="">
+          <button mat-stroked-button [matMenuTriggerFor]="menuSort">{{currentVisibility||"Visibility"}}</button>
+          <mat-menu #menuSort="matMenu" class="language-menu">
+            <ng-container *ngFor="let option of isPublicOptions">
+              <button mat-menu-item (click)="updateIsPublic2(option)">
+                {{ option.text }}</button>
+            </ng-container>
+          </mat-menu>
+        </div>
+      </ng-container>
 
-    <!-- Public filters -->
-    <!-- <ng-container *ngIf="isPublicFilter">
+      <!-- Public filters -->
+      <!-- <ng-container *ngIf="isPublicFilter">
       <label>User</label>
       <span class="clear-filter" *ngIf="this.filters.creator" (click)="clearCreator()">
         [x]
@@ -58,7 +60,7 @@
       </mat-form-field>
     </ng-container> -->
 
-    <!-- <label>Language</label>
+      <!-- <label>Language</label>
     <span class="clear-filter" *ngIf="this.filters.langtag" (click)="clearLangTag()">
       [x]
     </span>
@@ -73,17 +75,17 @@
 
 
 
-    <div class="">
-      <button mat-stroked-button [matMenuTriggerFor]="menuSort">{{filteredLanguage ||"Language"}}</button>
-      <mat-menu #menuSort="matMenu" class="language-menu">
-        <ng-container *ngFor="let langTag of langTagOptions">
-          <button mat-menu-item (click)="updateLanguage(langTag)">
-            {{ langTag.language_name }} ({{ langTag.tag }})</button>
-        </ng-container>
-      </mat-menu>
-    </div>
+      <div class="">
+        <button mat-stroked-button [matMenuTriggerFor]="menuSort">{{filteredLanguage ||"Language"}}</button>
+        <mat-menu #menuSort="matMenu" class="language-menu">
+          <ng-container *ngFor="let langTag of langTagOptions">
+            <button mat-menu-item (click)="updateLanguage(langTag)">
+              {{ langTag.language_name }} ({{ langTag.tag }})</button>
+          </ng-container>
+        </mat-menu>
+      </div>
 
-    <!-- <label>Tag</label>
+      <!-- <label>Tag</label>
     <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
       [x]
     </span>
@@ -97,7 +99,7 @@
       />
     </mat-form-field> -->
 
-    <!-- <h4>
+      <!-- <h4>
       Sort by
       <span
         class="clear-filter"
@@ -118,15 +120,16 @@
     </mat-radio-group> -->
 
 
-    <button mat-stroked-button [matMenuTriggerFor]="menuSort2">Sort by</button>
-    <mat-menu #menuSort2="matMenu">
-      <ng-container *ngFor="let option of orderingOptions">
-        <button (click)="updateOrdering2(option.value)" mat-menu-item>{{ option.text }}</button>
-      </ng-container>
-    </mat-menu>
+      <button mat-stroked-button [matMenuTriggerFor]="menuSort2">Sort by</button>
+      <mat-menu #menuSort2="matMenu">
+        <ng-container *ngFor="let option of orderingOptions">
+          <button (click)="updateOrdering2(option.value)" mat-menu-item>{{ option.text }}</button>
+        </ng-container>
+      </mat-menu>
 
-  </div>
+    </div>
 
+   <div class="flex-search-wrapper" >
     <div class="search-div " [ngClass]="showSearch?'show-full':''">
 
       <input type="text" name="" [(ngModel)]="searchInput" (keyup)="searchHandling($event)" id="" placeholder="search">
@@ -152,6 +155,7 @@
         <mat-icon>search</mat-icon>
       </button>
     </div>
+   </div>
   </div>
 
 

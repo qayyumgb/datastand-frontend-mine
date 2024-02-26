@@ -2,113 +2,112 @@
 
 
   <div class="sub-section">
-   <div class="sub-nav-filters">
-    <h5>Filter by</h5>
-
     <div class="">
-      <!-- <label>
-        Search label sets
-         <span class="clear-filter" *ngIf="this.filters.search" (click)="clearSearch()">
-          [x]
-        </span> 
-      </label> -->
-      <!-- <mat-form-field appearance="outline">
-        <mat-label> Search label sets</mat-label>
-        <input matInput placeholder="e.g. Shakespeare" (keyup)="updateSearch($event)" [(ngModel)]="filters.search" />
-      </mat-form-field> -->
+      <h5 class="filter-by">Filter by</h5>
     </div>
-    <!-- <label>Modified</label>
-    <span class="clear-filter" *ngIf="this.filters.modifiedLast" (click)="clearModifiedLast()">
-      [x]
-    </span> -->
-    <button mat-stroked-button [matMenuTriggerFor]="menuModification">Modified</button>
-    <mat-menu #menuModification="matMenu">
-      <mat-radio-group color="primary" (change)="updateModifiedLast($event)">
-        <mat-radio-button *ngFor="let option of modifiedLastOptions" [value]="option.value"
-          [checked]="option.value == this.filters.modifiedLast">{{ option.text }}</mat-radio-button>
-      </mat-radio-group>
-    </mat-menu>
-    <!-- Non-public filters -->
-    <ng-container *ngIf="!isPublicFilter">
-      <!-- <label>Visibility</label>
-      <span class="clear-filter" *ngIf="this.filters.is_public" (click)="clearIsPublic()">
+    <div class="sub-nav-filters">
+      <!-- <label>
+      Search label sets
+       <span class="clear-filter" *ngIf="this.filters.search" (click)="clearSearch()">
         [x]
-      </span> -->
-      <button mat-stroked-button [matMenuTriggerFor]="menuVisibility">Visibility</button>
-      <mat-menu #menuVisibility="matMenu">
-        <mat-radio-group color="primary" (change)="updateIsPublic($event)">
-          <mat-radio-button *ngFor="let option of isPublicOptions" [value]="option.value"
-            [checked]="option.value == this.filters.is_public">{{ option.text }}</mat-radio-button>
-        </mat-radio-group>
-      </mat-menu>
-     
-    </ng-container>
-
-    <!-- Public filters -->
-    <!-- <ng-container *ngIf="isPublicFilter">
-      <label>User</label>
-      <span class="clear-filter" *ngIf="this.filters.creator" (click)="clearCreator()">
-        [x]
-      </span>
-      <mat-form-field  appearance="outline">
-        <mat-label>User</mat-label>
-        <input matInput placeholder="e.g. john" (keyup)="updateCreator($event)" [(ngModel)]="filters.creator" />
-      </mat-form-field>
-    </ng-container> -->
-    <!-- <label></label> -->
-    
-    <!-- <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
-      [x]
-    </span> -->
-    <!-- <mat-form-field appearance="outline">
-      <mat-label>Search by Tag</mat-label>
-      <input matInput placeholder="e.g. blog" (keyup)="updateTag($event)" [(ngModel)]="filters.tag" />
+      </span> 
+    </label> -->
+      <!-- <mat-form-field appearance="outline">
+      <mat-label> Search label sets</mat-label>
+      <input matInput placeholder="e.g. Shakespeare" (keyup)="updateSearch($event)" [(ngModel)]="filters.search" />
     </mat-form-field> -->
 
-    <div class="">
-      <!-- <h4>
-        Sort by
-        <span class="clear-filter" *ngIf="this.filters.ordering" (click)="clearOrdering()">
-          [x]
-        </span>
-      </h4> -->
-      <button mat-stroked-button [matMenuTriggerFor]="menuSort2">Sort by</button>
-      <mat-menu #menuSort2="matMenu">
-        <mat-radio-group color="primary" (change)="updateOrdering($event)">
-          <mat-radio-button *ngFor="let option of orderingOptions" [value]="option.value"
-            [checked]="option.value == this.filters.ordering">{{ option.text }}</mat-radio-button>
+      <!-- <label>Modified</label>
+  <span class="clear-filter" *ngIf="this.filters.modifiedLast" (click)="clearModifiedLast()">
+    [x]
+  </span> -->
+      <button mat-stroked-button [matMenuTriggerFor]="menuModification">Modified</button>
+      <mat-menu #menuModification="matMenu">
+        <mat-radio-group color="primary" (change)="updateModifiedLast($event)">
+          <mat-radio-button *ngFor="let option of modifiedLastOptions" [value]="option.value"
+            [checked]="option.value == this.filters.modifiedLast">{{ option.text }}</mat-radio-button>
         </mat-radio-group>
       </mat-menu>
-     
-    </div>
+      <!-- Non-public filters -->
+      <ng-container *ngIf="!isPublicFilter">
+        <!-- <label>Visibility</label>
+    <span class="clear-filter" *ngIf="this.filters.is_public" (click)="clearIsPublic()">
+      [x]
+    </span> -->
+        <button mat-stroked-button [matMenuTriggerFor]="menuVisibility">Visibility</button>
+        <mat-menu #menuVisibility="matMenu">
+          <mat-radio-group color="primary" (change)="updateIsPublic($event)">
+            <mat-radio-button *ngFor="let option of isPublicOptions" [value]="option.value"
+              [checked]="option.value == this.filters.is_public">{{ option.text }}</mat-radio-button>
+          </mat-radio-group>
+        </mat-menu>
 
-    
+      </ng-container>
 
-   </div>
-    <div class="search-div " [ngClass]="showSearch?'show-full':''">
-      
-      <input type="text" name="" [(ngModel)]="searchInput" (keyup)="searchHandling($event)" id="" placeholder="search">
-      <span class="search-type"  [matMenuTriggerFor]="searchtype">
-        {{searchType || "type"}}
-      <mat-icon>arrow_drop_down</mat-icon>
+      <!-- Public filters -->
+      <!-- <ng-container *ngIf="isPublicFilter">
+    <label>User</label>
+    <span class="clear-filter" *ngIf="this.filters.creator" (click)="clearCreator()">
+      [x]
+    </span>
+    <mat-form-field  appearance="outline">
+      <mat-label>User</mat-label>
+      <input matInput placeholder="e.g. john" (keyup)="updateCreator($event)" [(ngModel)]="filters.creator" />
+    </mat-form-field>
+  </ng-container> -->
+      <!-- <label></label> -->
+
+      <!-- <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
+    [x]
+  </span> -->
+      <!-- <mat-form-field appearance="outline">
+    <mat-label>Search by Tag</mat-label>
+    <input matInput placeholder="e.g. blog" (keyup)="updateTag($event)" [(ngModel)]="filters.tag" />
+  </mat-form-field> -->
+
+      <div class="">
+        <!-- <h4>
+      Sort by
+      <span class="clear-filter" *ngIf="this.filters.ordering" (click)="clearOrdering()">
+        [x]
       </span>
+    </h4> -->
+        <button mat-stroked-button [matMenuTriggerFor]="menuSort2">Sort by</button>
+        <mat-menu #menuSort2="matMenu">
+          <mat-radio-group color="primary" (change)="updateOrdering($event)">
+            <mat-radio-button *ngFor="let option of orderingOptions" [value]="option.value"
+              [checked]="option.value == this.filters.ordering">{{ option.text }}</mat-radio-button>
+          </mat-radio-group>
+        </mat-menu>
 
-      <mat-menu #searchtype="matMenu">
-        <button (click)="handleSearchType('Tags')" mat-menu-item>Tags</button>
-        <button  *ngIf="isPublicFilter" (click)="handleSearchType('User')" mat-menu-item>User</button>
-        <button (click)="handleSearchType('Labels')" mat-menu-item>Labels</button>
-      </mat-menu>
-      <!-- <select name="" id="">
-        <option value="">Tag</option>
-        <option value="">User</option>
-        <option value="">Label</option>
-      </select> -->
-      <button class="search" *ngIf="showSearch">
-        <mat-icon>search</mat-icon>
-      </button>
-      <button *ngIf="!showSearch" (click)="showSearchHandling()" class="show-search">
-        <mat-icon>search</mat-icon>
-      </button>
+      </div>
+    </div>
+    <div class="flex-search-wrapper">
+      <div class="search-div " [ngClass]="showSearch?'show-full':''">
+
+        <input type="text" name="" [(ngModel)]="searchInput" (keyup)="searchHandling($event)" id="" placeholder="search">
+        <span class="search-type" [matMenuTriggerFor]="searchtype">
+          {{searchType || "type"}}
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+  
+        <mat-menu #searchtype="matMenu">
+          <button (click)="handleSearchType('Tags')" mat-menu-item>Tags</button>
+          <button *ngIf="isPublicFilter" (click)="handleSearchType('User')" mat-menu-item>User</button>
+          <button (click)="handleSearchType('Labels')" mat-menu-item>Labels</button>
+        </mat-menu>
+        <!-- <select name="" id="">
+          <option value="">Tag</option>
+          <option value="">User</option>
+          <option value="">Label</option>
+        </select> -->
+        <button class="search" *ngIf="showSearch">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button *ngIf="!showSearch" (click)="showSearchHandling()" class="show-search">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 

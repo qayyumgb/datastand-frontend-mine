@@ -1,42 +1,33 @@
-<section class="card " *ngIf="entity">
-  <div class="flex-100-sb gap-16 top-card">
-    <!-- Image -->
-    <img [src]="entity.image || urls.DEFAULT_IMG_URL" class="entity-img-150" />
-    <!-- Info -->
-    <div class="entity-info">
-      <div class="flex-column gap-8 relative">
-        <div>
-          <div class="caption-2 ellipsis" [innerText]="entityType"></div>
-          <h1
-            class="ellipsis"
-            [title]="entity.name"
-            [innerText]="entity.name"
-          ></h1>
-          <div class="caption-1 ellipsis">
-            <ng-content select="[entityGreyInfo]"></ng-content>
-          </div>
-        </div>
-        
-        <is-public-chip [isPublic]="is_public"></is-public-chip>
-        <pm-tag-list-truncated [tags]="entity.tags"></pm-tag-list-truncated>
-        
-        <div class="flex gap-16 align-items-center" >
-          <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
-          <div class="actions-container">
-            <div class="actions">
-              <ng-content select="[entityActions]"></ng-content>
-            </div>
-          </div>
-        </div>
-      </div>
+<section class="detail-card" *ngIf="entity">
+  <!-- Image -->
+  <img [src]="entity.image || urls.DEFAULT_IMG_URL" class="entity-img-150" />
+  <div class="title-cover">
+    <div class="caption-2 ellipsis" [innerText]="entityType"></div>
+    <h1
+      class="ellipsis"
+      [title]="entity.name"
+      [innerText]="entity.name"
+    ></h1>
+    <div class="caption-1 ellipsis">
+      <ng-content select="[entityGreyInfo]"></ng-content>
     </div>
-    <!-- Actions -->
-   
   </div>
-  <!-- Description -->
+  
+<div class="visibility-wrapper">
+  <is-public-chip [isPublic]="is_public"></is-public-chip>
+</div>
+<div class="tags-wrapper">
+  <pm-tag-list-truncated [tags]="entity.tags"></pm-tag-list-truncated>
+</div>  
+ <div class="card-avatar">
+  <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
+ </div>
+  <div class="actions">
+    <ng-content select="[entityActions]"></ng-content>
+  </div>
   <p
     *ngIf="entity.description"
-    class="mt-32"
+    class=" detail-description"
     [textContent]="entity.description"
   ></p>
 </section>

@@ -1,6 +1,6 @@
 <div class="flex-column gap-16">
   <!-- Layout button -->
-  <div class="flex-100-sb align-items-center results">
+  <div class="flex-100-sb align-items-center results" *ngIf="totalCount">
     <span class="results-count" *ngIf="totalCount! == 1">
       {{ totalCount | number }} {{ singular }}
     </span>
@@ -26,15 +26,26 @@
       </div>
   </div>
   <!-- List layout -->
-  <div *ngIf="userSettings.isListLayout() && !isMobile">
-    <ul class="data-table">
+  <ng-container *ngIf="userSettings.isListLayout() && !isMobile">
+    <div class="list-card-wrapper 2">
       <ng-content select="[listItems]"></ng-content>
-    </ul>
-  </div>
+    </div>
+  </ng-container>
   <!-- Grid layout -->
-  <div class="data-card-container" *ngIf="userSettings.isCardLayout() || isMobile">
-    <ng-content select="[cardItems]"></ng-content>
-  </div>
+  <ng-container *ngIf="totalCount else noDataFound">
+    <div class="data-card-container" *ngIf="userSettings.isCardLayout() || isMobile">
+      <ng-content select="[cardItems]"></ng-content>
+    </div>
+  </ng-container>
   <!-- Paginator -->
   <pm-paginator [page]="page!" [count]="totalCount!" [currentPageSize]="paginatedCount"></pm-paginator>
 </div>
+
+<ng-template #noDataFound>
+  <div class="data-not-found mt-3 card">
+  <div>
+    <img src="https://img.freepik.com/premium-vector/no-data-concept-illustration_86047-486.jpg" alt="" srcset="">
+    <p>no {{ plural }} found</p>
+  </div>
+  </div>
+</ng-template>
