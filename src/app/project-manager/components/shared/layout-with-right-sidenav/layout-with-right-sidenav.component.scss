@@ -20,3 +20,9 @@ mat-sidenav {
     display: none !important;
   }
 }
+.filter-btn-wrapper button{
+  position: fixed;
+  bottom: 25px;
+  right: 20px;
+  z-index: 99;
+}

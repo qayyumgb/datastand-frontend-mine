@@ -25,7 +25,11 @@
           <!-- End name -->
         </div>
         <div class="grey-info">
-          {{ task.langtag }} | {{ task.modified! | fromNow }}
+          <!-- {{ task.langtag }} | {{ task.modified! | fromNow }} -->
+          {{ task.status.ratio_completed | percent }} completed · {{ task.langtag }} ·
+          {{ task.num_texts! | number }} texts ·
+          {{ task.num_labels! | number }} labels · Updated
+          {{ task.modified! | fromNow }}
         </div>
       </div>
       <mat-icon class="more-actions-icon" [matMenuTriggerFor]="moreActionsMenu">

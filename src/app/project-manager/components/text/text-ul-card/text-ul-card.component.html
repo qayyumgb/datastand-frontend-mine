@@ -20,8 +20,7 @@
 
     <div class="sticky-header-buttons">
       <button
-        mat-icon-button
-        class="medium sm-btn-abs"
+      mat-flat-button color="primary"
         matTooltip="Refresh"
         (click)="getTexts()"
       >
@@ -37,13 +36,14 @@
         <mat-icon>add</mat-icon>Add Text
       </button>
       <button
-      mat-mini-fab
+      
+      mat-flat-button
         color="primary"
         class="small hide-lg"
         (click)="openCreateTextDialog()"
         *ngIf="isCreator"
       >
-        <mat-icon>add</mat-icon>
+        Add
       </button>
       <button
         mat-flat-button
@@ -55,13 +55,13 @@
         <mat-icon>recycling</mat-icon>Import Texts
       </button>
       <button
-        mat-mini-fab
+      mat-flat-button
         color="primary"
         class="small hide-lg"
         (click)="openCorpusEditTextsDialog()"
         *ngIf="isCreator"
       >
-        <mat-icon>recycling</mat-icon>
+        Import
       </button>
       <button
         mat-flat-button
@@ -74,14 +74,14 @@
         <mat-icon>auto_awesome</mat-icon>AI Generate
       </button>
       <button
-      mat-mini-fab
+      mat-flat-button
         color="primary"
         class="small hide-lg"
         (click)="openGenerateTextsDialog()"
         *ngIf="isCreator"
         [disabled]="items.length! == 0"
       >
-        <mat-icon>auto_awesome</mat-icon>
+      AI Generate
       </button>
       <button
         mat-icon-button

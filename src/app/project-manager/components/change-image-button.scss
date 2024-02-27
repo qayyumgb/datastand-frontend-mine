@@ -22,13 +22,17 @@ input[type="file"] {
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .show-md {
     display: none;
   }
   .top-horizontal-dot {
     transform: translate3d(-11px, 13px, 0) rotate(90deg);
-    color: gainsboro;
+    // color: gainsboro;   
+     right: -26px;
+    top: -25px;
+    position: absolute;
+
 
   }
   .btn-download-sm {
@@ -44,7 +48,7 @@ input[type="file"] {
     }
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .show-md-0 {
     display: none !important;
   }

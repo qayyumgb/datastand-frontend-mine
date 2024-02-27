@@ -82,6 +82,14 @@ body {
   display: inline-block;
 }
 
+@media (max-width: 992px) {
+  .horizon-dot {
+    position: absolute !important;
+    top: 10px;
+    transform: rotate(90deg);
+    right: -10px;
+  }
+}
 @media (max-width: 768px) {
   .paginator {
     .pages {
@@ -92,14 +100,10 @@ body {
   }
   .sticky-header-buttons{
     justify-content: center !important;
+    flex-wrap: wrap;
 
   }
-  .horizon-dot {
-    position: absolute !important;
-    top: 10px;
-    transform: rotate(90deg);
-    right: -10px;
-  }
+ 
   .sm-btn-abs {
     position: absolute !important;
     top: 14px;
