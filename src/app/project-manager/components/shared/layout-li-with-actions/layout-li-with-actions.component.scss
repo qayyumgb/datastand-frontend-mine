@@ -9,7 +9,6 @@
 
 .actions {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   flex-shrink: 0;
 }
@@ -35,6 +34,7 @@
   }
   .li-card {
     padding: 16px 16px 35px 16px;
+    flex-direction: column;
   }
 }
 

@@ -26,15 +26,7 @@ input[type="file"] {
   .show-md {
     display: none;
   }
-  .top-horizontal-dot {
-    transform: translate3d(-11px, 13px, 0) rotate(90deg);
-    // color: gainsboro;   
-     right: -26px;
-    top: -25px;
-    position: absolute;
 
-
-  }
   .btn-download-sm {
     border: 0px solid transparent;
     width: 28px;
@@ -51,5 +43,19 @@ input[type="file"] {
 @media (min-width: 992px) {
   .show-md-0 {
     display: none !important;
+  }
+}
+@media (max-width: 768px) {
+  .show-md-0 {
+    display: none !important;
+  }
+  .top-horizontal-dot {
+    transform: translate3d(-11px, 13px, 0) rotate(90deg);
+    // color: gainsboro;   
+     right: -26px;
+    top: -10px;
+    position: absolute;
+
+
   }
 }

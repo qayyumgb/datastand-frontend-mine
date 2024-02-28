@@ -29,9 +29,14 @@ export class TaskCardComponent implements OnInit {
     private snackBar: MatSnackBar,
     private taskService: TaskService,
     public urls: UrlsService
-  ) { }
-  ngOnInit(): void {
+  ) {
+   
     
+   }
+  ngOnInit(): void {
+    if (this.task?.tags?.length) {
+      this.showTags = this.task?.tags?.length > 0
+    }
   }
 
   changeImage(event: any): void {

@@ -33,19 +33,17 @@
         width: 100% !important;
     }
 }
-// @media (max-width:992px) {
-//     .filter-aside{
-//         &:not(.show){
-//             .mat-drawer-side.mat-drawer-end{
-//                 display: none;
-//             }
-//         }
-//         &.show{
-//             .mat-drawer[style*="visibility: hidden"],
-//             .mat-drawer-side.mat-drawer-end{
-//                 display: block !important;
-//                 visibility: visible !important;
-//             }
-//         }
-//     }
-// }
+.my-1{
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+.pointer{
+    cursor: pointer;
+}
+
+@media (min-width:768px) {
+    .mat-mdc-dialog-container .mdc-dialog__surface{
+        min-width: 700px !important;
+        width: 100% !important;
+    }
+}

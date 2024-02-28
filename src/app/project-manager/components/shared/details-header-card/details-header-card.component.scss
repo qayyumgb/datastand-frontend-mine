@@ -50,3 +50,18 @@
     display: none;
   }
 }
+.header-avatar-wrapper{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+ 
+  @media (max-width:470px) {
+    flex-direction: column;
+  align-items: start !important;
+
+    .actions{
+      flex-wrap: wrap;
+    }
+  }
+}

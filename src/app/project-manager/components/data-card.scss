@@ -151,9 +151,7 @@ a:hover {
 
 // More actions button
 .more-actions-icon {
-  transform: scale(0.7);
   font-size: 24px !important;
-  color: rgb(0, 0, 0, 0.54);
   margin-top: -4px;
 }
 
@@ -164,4 +162,7 @@ a:hover {
 .title-wrapper {
   display: flex;
   white-space: nowrap;
+}
+.progressbar {
+  margin-top: .2rem;
 }

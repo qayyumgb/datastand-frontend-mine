@@ -2,7 +2,8 @@
   display: flex;
   gap: 3px;
   height: 24px;
-  overflow-x: hidden;
+  overflow: hidden;
+  white-space: nowrap;
   vertical-align: middle;
 }
 

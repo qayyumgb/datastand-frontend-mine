@@ -23,9 +23,9 @@
           <ng-content select="[buttons]"></ng-content>
         </div>
         <div class="">
-          <button mat-icon-button class="medium"  [matMenuTriggerFor]="menu">
+          <span  class="pointer"  [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
-          </button>
+          </span>
           <mat-menu #menu="matMenu">
             <ng-content select="[hoverButtons]"></ng-content>
           </mat-menu>

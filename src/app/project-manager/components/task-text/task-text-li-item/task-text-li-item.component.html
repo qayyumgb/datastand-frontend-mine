@@ -18,12 +18,12 @@
         {{ taskText.modified! | fromNow }}
         <ng-container *ngIf="taskText.is_generated && taskText.is_pending"
           >· 🤖 AI generated
-        </ng-container>
-        <div
-          *ngIf="taskText.description"
-          [innerText]="taskText.description"
-        ></div>
+        </ng-container>   
       </div>
+      <div class="task-text-detail"
+      *ngIf="taskText.description"
+      [innerText]="taskText.description"
+    ></div>
       <pm-tag-list-truncated
         *ngIf="taskText.tags?.length! > 0"
         [tags]="taskText.tags"

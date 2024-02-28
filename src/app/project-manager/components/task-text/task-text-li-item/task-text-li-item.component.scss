@@ -10,3 +10,14 @@ a:hover {
 .annotate-btn-container {
   margin: 16px;
 }
+.task-text-detail{
+  overflow: hidden;
+  font-size: 13px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+
+}

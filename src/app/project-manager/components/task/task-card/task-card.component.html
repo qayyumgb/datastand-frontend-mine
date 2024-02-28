@@ -6,24 +6,16 @@
       <div class="title-wigh-grey-info">
         <div>
           <!-- Truncate the name and add tooltip if needed -->
-          <a
-            *ngIf="task.name.length > 25; else normalLink"
-            [routerLink]="urls.getTaskUrl(task.id)"
-            class="title"
-            [matTooltip]="task.name"
-            [innerText]="truncate(task.name, 25)"
-          >
+          <a *ngIf="task.name.length > 25; else normalLink" [routerLink]="urls.getTaskUrl(task.id)" class="title"
+            [matTooltip]="task.name" [innerText]="truncate(task.name, 25)">
           </a>
           <ng-template #normalLink>
-            <a
-              [routerLink]="urls.getTaskUrl(task.id)"
-              class="title"
-              [innerText]="task.name"
-            >
+            <a [routerLink]="urls.getTaskUrl(task.id)" class="title" [innerText]="task.name">
             </a>
           </ng-template>
           <!-- End name -->
         </div>
+
         <div class="grey-info">
           <!-- {{ task.langtag }} | {{ task.modified! | fromNow }} -->
           {{ task.status.ratio_completed | percent }} completed · {{ task.langtag }} ·
@@ -31,6 +23,8 @@
           {{ task.num_labels! | number }} labels · Updated
           {{ task.modified! | fromNow }}
         </div>
+        <mat-progress-bar class="progressbar" mode="determinate" [value]="task.status.ratio_completed * 100"
+          style="max-width: 250px"></mat-progress-bar>
       </div>
       <mat-icon class="more-actions-icon" [matMenuTriggerFor]="moreActionsMenu">
         more_vert
@@ -40,7 +34,6 @@
     <div class="description" *ngIf="truncate(task.description!, 128)">{{ truncate(task.description!, 128) }}</div>
 
     <div class="tags" *ngIf="showTags">
-      
       <pm-tag-list-truncated [tags]="task.tags"></pm-tag-list-truncated>
     </div>
   </div>
@@ -60,16 +53,10 @@
     </button>
     <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
     <button *ngIf="isCreator()" mat-menu-item>
-     
-      <label [for]="'file-upload-card-' + task.id" class="change-image-button"
-        ><mat-icon >image</mat-icon>Change image</label
-      >
+      <label [for]="'file-upload-card-' + task.id" class="change-image-button"><mat-icon>image</mat-icon>Change
+        image</label>
     </button>
-    <input
-      [id]="'file-upload-card-' + task.id"
-      type="file"
-      (change)="changeImage($event)"
-    />
+    <input [id]="'file-upload-card-' + task.id" type="file" (change)="changeImage($event)" />
     <button *ngIf="isCreator()" mat-menu-item (click)="openUpdateTagsDialog()">
       <mat-icon>label</mat-icon>
       <span>Change tags</span>

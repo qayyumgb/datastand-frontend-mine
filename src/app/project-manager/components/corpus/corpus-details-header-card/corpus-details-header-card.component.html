@@ -20,23 +20,15 @@
     <ng-container *ngIf="isCreator">
       <button
         mat-stroked-button
-        class="small show-md"
+        class="small"
         (click)="openUpdateCorpusDialog()"
       >
         <mat-icon>edit</mat-icon>Edit
       </button>
-      <button (click)="openUpdateCorpusDialog()" class="show-md-0  btn-download-sm"  title="Download"  >
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-flat-button color="primary" class="small  show-md" (click)="openCorpusDownloadDialog()">
+   
+      <button mat-flat-button color="primary" class="small " (click)="openCorpusDownloadDialog()">
         <mat-icon>download</mat-icon> Download
       </button>
-
-      <button (click)="openCorpusDownloadDialog()" class="show-md-0 btn-download-sm"  title="Download"  >
-        <mat-icon>download</mat-icon>
-      </button>
-  
-
 
       <button
         mat-icon-button

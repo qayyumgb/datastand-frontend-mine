@@ -29,63 +29,36 @@
       <button
         mat-flat-button
         color="primary"
-        class="small show-lg"
+        class="small"
         (click)="openCreateTextDialog()"
         *ngIf="isCreator"
       >
         <mat-icon>add</mat-icon>Add Text
       </button>
-      <button
-      
-      mat-flat-button
-        color="primary"
-        class="small hide-lg"
-        (click)="openCreateTextDialog()"
-        *ngIf="isCreator"
-      >
-        Add
-      </button>
+  
       <button
         mat-flat-button
         color="primary"
-        class="small show-lg"
+        class="small "
         (click)="openCorpusEditTextsDialog()"
         *ngIf="isCreator"
       >
         <mat-icon>recycling</mat-icon>Import Texts
       </button>
       <button
-      mat-flat-button
-        color="primary"
-        class="small hide-lg"
-        (click)="openCorpusEditTextsDialog()"
-        *ngIf="isCreator"
-      >
-        Import
-      </button>
-      <button
         mat-flat-button
         color="primary"
-        class="small show-lg"
+        class="small "
         (click)="openGenerateTextsDialog()"
         *ngIf="isCreator"
         [disabled]="items.length! == 0"
       >
         <mat-icon>auto_awesome</mat-icon>AI Generate
       </button>
-      <button
-      mat-flat-button
-        color="primary"
-        class="small hide-lg"
-        (click)="openGenerateTextsDialog()"
-        *ngIf="isCreator"
-        [disabled]="items.length! == 0"
-      >
-      AI Generate
-      </button>
+
       <button
         mat-icon-button
-        class="horizon-dot mdeium 7"
+        class="top-horizontal-dot mdeium 7"
         mat-small-icon-button
         [matMenuTriggerFor]="textActionsMenu"
         *ngIf="isCreator"

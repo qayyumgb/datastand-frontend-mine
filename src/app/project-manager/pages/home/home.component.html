@@ -1,4 +1,4 @@
-<section class="container">
+<section class="home-section">
   <h1>Home</h1>
   <pm-home-welcome-card
     *ngIf="userSettingsService.show_home_welcome_message"
@@ -7,7 +7,7 @@
     *ngIf="userSettingsService.show_home_intro_message"
   ></pm-home-intro-card>
 
-  <loader-card *ngIf="isLoading()"></loader-card>
+  <!-- <loader-card *ngIf="isLoading()"></loader-card> -->
   <ng-container *ngIf="isLoaded()">
     <ng-container *ngFor="let action of actions" class="news-item">
       <pm-corpus-news-feed-item
