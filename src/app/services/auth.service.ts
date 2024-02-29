@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '@app/environments';
 import { User } from '@app/interfaces';
 import { UrlsService } from './urls.service';
+import { LoaderService } from './loader.service';
 
 interface UserAuth {
   username: string;
@@ -62,7 +63,9 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private snackbar: MatSnackBar,
-    private urls: UrlsService
+    private urls: UrlsService,
+    private loader:LoaderService
+
   ) {}
 
   activateUserAccount(uid: string, token: string): Observable<Object> {
@@ -121,8 +124,11 @@ export class AuthService {
           this.router.navigateByUrl(this.urls.LOGIN_URL);
         },
         error: (err) => this.snackbar.open('❌ Failed to logout'),
-        complete: () =>
-          this.snackbar.open('✅ Logged out succesfully', 'Dismiss'),
+        complete: () =>{
+          this.snackbar.open('✅ Logged out succesfully', 'Dismiss')
+          this.loader.showLoader.next(false)
+        
+        }
       });
   }
 
