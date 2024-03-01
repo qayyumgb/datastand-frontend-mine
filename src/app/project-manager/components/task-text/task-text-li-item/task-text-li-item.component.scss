@@ -1,12 +1,9 @@
-// Needed for the a <button>.
 a {
   z-index: 0;
+  &:hover {
+    text-decoration: none !important;
+  }
 }
-
-a:hover {
-  text-decoration: none !important;
-}
-
 .annotate-btn-container {
   margin: 16px;
 }

@@ -39,7 +39,7 @@
       <button
         mat-flat-button
         color="primary"
-        class="small "
+        class="small"
         (click)="openCorpusEditTextsDialog()"
         *ngIf="isCreator"
       >
@@ -48,7 +48,7 @@
       <button
         mat-flat-button
         color="primary"
-        class="small "
+        class="small"
         (click)="openGenerateTextsDialog()"
         *ngIf="isCreator"
         [disabled]="items.length! == 0"
@@ -58,7 +58,7 @@
 
       <button
         mat-icon-button
-        class="top-horizontal-dot mdeium 7"
+        class="top-horizontal-dot medium"
         mat-small-icon-button
         [matMenuTriggerFor]="textActionsMenu"
         *ngIf="isCreator"

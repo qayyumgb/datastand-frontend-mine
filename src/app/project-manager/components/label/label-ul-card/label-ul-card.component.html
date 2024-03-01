@@ -19,7 +19,7 @@
 
     <div class="sticky-header-buttons">
       <button
-      mat-flat-button color="primary"
+        mat-flat-button color="primary"
         matTooltip="Refresh"
         (click)="getLabels(this.filters)"
       >
@@ -46,7 +46,7 @@
       </button>
    
       <label *ngIf="isCreator" for="csv-upload" title="Upload thumbnail">
-        <a mat-flat-button class="small " color="primary">
+        <a mat-flat-button class="small" color="primary">
           <mat-icon>file_upload</mat-icon>
           <span>Import from CSV</span>
         </a>
@@ -59,7 +59,6 @@
       />
       <button
         mat-icon-button
-        mat-small-icon-button
         class="top-horizontal-dot"
         [matMenuTriggerFor]="textActionsMenu"
         *ngIf="isCreator"

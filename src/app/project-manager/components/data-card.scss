@@ -1,6 +1,5 @@
 @import "../../styles/common.scss";
 .corpus-card {
-  // width: 290px;
   height: 100%;
   word-wrap: break-word;
   border-radius: 16px;
@@ -42,7 +41,6 @@
       grid-column: 2/4;
       display: flex;
       flex-direction: column;
-      // padding: 1rem 1rem 0 1rem;
     }
   }
 }
@@ -50,9 +48,6 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  .card-content{
-    // padding: 0  !important;
-  }
 }
 .card-img {
   width: 100%;
@@ -87,23 +82,20 @@
 }
 
 .title {
-  font-size: .9rem;
+  font-size: 0.9rem;
   word-break: break-word;
   font-weight: 500;
   color: #9c27b0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
 }
 
 .grey-info {
-
   margin-top: -2px;
-    color: rgb(0 0 0 / 58%);
-    font-size: 0.7rem;
-    line-height: 1.4;
-
+  color: rgb(0 0 0 / 58%);
+  font-size: 0.7rem;
+  line-height: 1.4;
 }
 
 .data-icon {
@@ -120,7 +112,6 @@
 }
 
 .private {
-  // transform: scale(0.75);
   font-size: 15px !important;
   line-height: 15px !important;
   height: 18px !important;
@@ -164,5 +155,5 @@ a:hover {
   white-space: nowrap;
 }
 .progressbar {
-  margin-top: .2rem;
+  margin-top: 0.2rem;
 }

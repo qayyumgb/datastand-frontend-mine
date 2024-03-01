@@ -20,34 +20,19 @@
     <ng-container *ngIf="isCreator">
       <button
         mat-stroked-button
-        class="small show-lg"
+        class="small"
         (click)="openUpdateLabelSetDialog()"
       >
         <mat-icon>edit</mat-icon>Edit
       </button>
-      <button
-      mat-icon-button
-        class="medium hide-lg"
-        (click)="openUpdateLabelSetDialog()"
-      >
-        <mat-icon>edit</mat-icon>
-      </button>
+    
       <button
         mat-flat-button
         color="primary"
-        class="small 1 show-lg"
+        class="small"
         (click)="openLabelSetDownloadDialog()"
       >
         <mat-icon>download</mat-icon> Download
-      </button>
-      <button
-      mat-mini-fab
-        color="primary"
-        class="small 1  hide-lg"
-        matTooltip="Download"
-        (click)="openLabelSetDownloadDialog()"
-      >
-        <mat-icon>download</mat-icon> 
       </button>
       <button
         mat-icon-button

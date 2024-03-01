@@ -17,7 +17,6 @@
         </div>
 
         <div class="grey-info">
-          <!-- {{ task.langtag }} | {{ task.modified! | fromNow }} -->
           {{ task.status.ratio_completed | percent }} completed · {{ task.langtag }} ·
           {{ task.num_texts! | number }} texts ·
           {{ task.num_labels! | number }} labels · Updated
@@ -30,16 +29,12 @@
         more_vert
       </mat-icon>
     </div>
-
     <div class="description" *ngIf="truncate(task.description!, 128)">{{ truncate(task.description!, 128) }}</div>
-
     <div class="tags" *ngIf="showTags">
       <pm-tag-list-truncated [tags]="task.tags"></pm-tag-list-truncated>
     </div>
   </div>
-
   <mat-divider></mat-divider>
-
   <div class="card-bottom">
     <pm-avatar [user]="task.creator" size="small"></pm-avatar>
   </div>
@@ -53,15 +48,27 @@
     </button>
     <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
     <button *ngIf="isCreator()" mat-menu-item>
-      <label [for]="'file-upload-card-' + task.id" class="change-image-button"><mat-icon>image</mat-icon>Change
-        image</label>
+      <label 
+        [for]="'file-upload-card-' + task.id" 
+        class="change-image-button">
+        <mat-icon>image</mat-icon>Change image
+      </label>
     </button>
-    <input [id]="'file-upload-card-' + task.id" type="file" (change)="changeImage($event)" />
-    <button *ngIf="isCreator()" mat-menu-item (click)="openUpdateTagsDialog()">
+    <input 
+      [id]="'file-upload-card-' + task.id" 
+      type="file" 
+      (change)="changeImage($event)" />
+    <button 
+      *ngIf="isCreator()" 
+      mat-menu-item 
+      (click)="openUpdateTagsDialog()">
       <mat-icon>label</mat-icon>
       <span>Change tags</span>
     </button>
-    <button *ngIf="isCreator()" mat-menu-item (click)="deleteTask()">
+    <button 
+       *ngIf="isCreator()" 
+        mat-menu-item 
+        (click)="deleteTask()">
       <mat-icon>delete</mat-icon>
       <span>Remove</span>
     </button>

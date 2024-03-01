@@ -21,9 +21,9 @@
         </ng-container>   
       </div>
       <div class="task-text-detail"
-      *ngIf="taskText.description"
-      [innerText]="taskText.description"
-    ></div>
+        *ngIf="taskText.description"
+        [innerText]="taskText.description"
+      ></div>
       <pm-tag-list-truncated
         *ngIf="taskText.tags?.length! > 0"
         [tags]="taskText.tags"
@@ -35,7 +35,6 @@
       <button
         *ngIf="taskText.status == statusEnum.PENDING"
         mat-icon-button
-        
         class="medium"
         matTooltip="Mark as completed"
         (click)="setStatusToCompleted(taskText)"
@@ -53,7 +52,7 @@
       </button>
       <button
         mat-icon-button
-        class="medium 6"
+        class="medium"
         matTooltip="Rename"
         (click)="openRenameTaskTextDialog(taskText)"
       >

@@ -19,7 +19,8 @@
 
     <div class="sticky-header-buttons">
       <button
-      mat-flat-button color="primary"
+        mat-flat-button 
+        color="primary"
         matTooltip="Refresh"
         (click)="getTaskTexts(this.filters)"
       >
@@ -56,7 +57,7 @@
       <button
         mat-icon-button
         mat-small-icon-button
-        class=" top-horizontal-dot"
+        class="top-horizontal-dot"
         [matMenuTriggerFor]="textActionsMenu"
         *ngIf="isCreator"
       >
