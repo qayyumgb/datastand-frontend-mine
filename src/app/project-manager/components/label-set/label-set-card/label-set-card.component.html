@@ -1,56 +1,54 @@
-<section *ngIf="labelSet" class="corpus-card">
+<section *ngIf="labelSet" class="card">
   <img [src]="labelSet.image || urls.DEFAULT_IMG_URL" class="card-img" />
   <div class="card-content">
     <div class="card-header">
-      <mat-icon class="data-icon">style</mat-icon>
-      <div class="title-wigh-grey-info">
-        <div class="title-wrapper">
-          <!-- Truncate the name and add tooltip if needed -->
+      <div class="title-wrapper">
+        <!-- Truncate the name and add tooltip if needed -->
+        <a
+          *ngIf="labelSet.name.length > 25; else normalLink"
+          [routerLink]="urls.getLabelSetUrl(labelSet.id)"
+          class="title"
+          [matTooltip]="labelSet.name"
+          [innerText]="labelSet.name"
+        >
+        </a>
+        <ng-template #normalLink>
           <a
-            *ngIf="labelSet.name.length > 25; else normalLink"
             [routerLink]="urls.getLabelSetUrl(labelSet.id)"
             class="title"
-            [matTooltip]="labelSet.name"
-            [innerText]="truncate(labelSet.name, 25)"
+            [innerText]="labelSet.name"
           >
           </a>
-          <ng-template #normalLink>
-            <a
-              [routerLink]="urls.getLabelSetUrl(labelSet.id)"
-              class="title"
-              [innerText]="labelSet.name"
-            >
-            </a>
-          </ng-template>
-          <!-- End name -->
-          <mat-icon
-            *ngIf="!labelSet.is_public"
-            class="private"
-            color="primary"
-            matTooltip="Private"
-            fontIcon="lock"
-          ></mat-icon>
-        </div>
-        <div class="grey-info">
-          {{ labelSet.num_labels! | number }} label(s) |
-          {{ labelSet.modified! | fromNow }}
-        </div>
+        </ng-template>
+        <!-- End name -->
+        <mat-icon
+          *ngIf="!labelSet.is_public"
+          class="private"
+          color="primary"
+          matTooltip="Private"
+          fontIcon="lock"
+        ></mat-icon>
       </div>
+     
       <mat-icon class="more-actions-icon" [matMenuTriggerFor]="moreActionsMenu">
         more_vert
       </mat-icon>
     </div>
-
+    <div class="grey-info">
+      {{ labelSet.num_labels! | number }} label(s) |
+      {{ labelSet.modified! | fromNow }}
+    </div>
     <div class="description">{{ truncate(labelSet.description!, 128) }}</div>
 
-    <div class="tags">
+    <ng-container>
+    
       <pm-tag-list-truncated [tags]="labelSet.tags"></pm-tag-list-truncated>
-    </div>
+    </ng-container>
   </div>
 
   <mat-divider></mat-divider>
 
-  <div class="card-bottom">
+  <div class="card-footer">
     <pm-avatar [user]="labelSet.creator" size="small"></pm-avatar>
     <pm-upvote-button
       [hasUpvoted]="labelSet.has_upvoted!"

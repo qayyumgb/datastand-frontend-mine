@@ -31,7 +31,9 @@ export class TaskCardComponent implements OnInit {
     public urls: UrlsService
   ) { }
   ngOnInit(): void {
-    
+    if (this.task?.tags?.length) {
+      this.showTags = this.task?.tags?.length > 0
+    }
   }
 
   changeImage(event: any): void {

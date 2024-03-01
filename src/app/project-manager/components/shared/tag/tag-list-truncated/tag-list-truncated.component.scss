@@ -1,13 +1,39 @@
-.tags {
+.tags-wrapper {
   display: flex;
-  gap: 3px;
-  height: 24px;
-  overflow-x: hidden;
-  vertical-align: middle;
+  gap: 5px;
+  overflow: auto;
+  padding: 5px 0;
+  white-space: nowrap;
+ align-items: center;
+  .tag {
+    border: 1px solid;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 0 12px;
+    border-radius: 35px;
+    white-space: nowrap;
+    &:nth-child(4n) {
+      border-color: #9c27b0;
+    }
+    &:nth-child(1n) {
+      border-color: #fdca17;
+    }
+    &:nth-child(2n) {
+      border-color: #2d9cdb;
+    }
+    &:nth-child(3n) {
+      border-color: #ff6370;
+    }
+  }
+ 
 }
-
 .more-tags {
   font-size: 0.7rem;
   color: rgb(0, 0, 0, 0.7);
   line-height: 24px;
 }
+
+::-webkit-scrollbar {
+  height: 0px;
+}
+

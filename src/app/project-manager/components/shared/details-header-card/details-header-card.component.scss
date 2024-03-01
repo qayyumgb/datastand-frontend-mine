@@ -27,6 +27,7 @@
   width: fit-content;
   align-items: center;
   flex-direction: row-reverse;
+  flex-wrap: wrap;
 }
 
 .entity-info {
@@ -48,5 +49,14 @@
 @media (min-width: 768px) {
   .fs-icon {
     display: none;
+  }
+}
+.avatar-wrapper{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  @media (max-width: 460px) {
+    flex-direction: column;
+    align-items: start;
   }
 }

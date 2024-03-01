@@ -1,4 +1,3 @@
-<loader-card *ngIf="isLoading()"></loader-card>
 <div *ngIf="this.task && isLoaded()" class="items-section">
   <div class="sticky-header">
     <div>
@@ -55,7 +54,7 @@
       <button
         mat-icon-button
         mat-small-icon-button
-        class="horizon-dot 5"
+        class="horizon-dot"
         [matMenuTriggerFor]="textActionsMenu"
         *ngIf="isCreator"
       >

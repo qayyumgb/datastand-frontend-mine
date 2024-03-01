@@ -21,9 +21,6 @@
   }
 }
 .data-card-container {
-  background-color: #fff;
-  border: 1px solid rgb(0, 0, 0, 0.12);
-  border-radius: 4px;
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(240px ,1fr));
   gap: 16px;

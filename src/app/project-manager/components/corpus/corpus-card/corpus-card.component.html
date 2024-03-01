@@ -1,43 +1,42 @@
-<section *ngIf="corpus" class="corpus-card">
+<section *ngIf="corpus" class="card">
   <img [src]="corpus.image || urls.DEFAULT_IMG_URL" class="card-img" />
   <div class="card-content-wrapper">
     <div class="card-content">
       <div class="card-header">
-        <mat-icon class="data-icon">library_books</mat-icon>
-        <div class="title-wigh-grey-info">
-          <div class="flex">
-            <!-- Truncate the name and add tooltip if needed -->
-            <a *ngIf="corpus.name.length > 25; else normalLink" [routerLink]="urls.getCorpusUrl(corpus.id)"
-              class="title" [matTooltip]="corpus.name" [innerText]="truncate(corpus.name, 25)">
+        <div class="flex">
+          <!-- Truncate the name and add tooltip if needed -->
+          <a *ngIf="corpus.name.length > 25; else normalLink" [routerLink]="urls.getCorpusUrl(corpus.id)"
+            class="title" [matTooltip]="corpus.name" [innerText]="truncate(corpus.name, 25)">
+          </a>
+          <ng-template #normalLink>
+            <a [routerLink]="urls.getCorpusUrl(corpus.id)" class="title" [innerText]="corpus.name">
             </a>
-            <ng-template #normalLink>
-              <a [routerLink]="urls.getCorpusUrl(corpus.id)" class="title" [innerText]="corpus.name">
-              </a>
-            </ng-template>
-            <!-- End name -->
-            <mat-icon *ngIf="!corpus.is_public" class="private" color="primary" matTooltip="Private"
-              fontIcon="lock"></mat-icon>
-          </div>
-          <div class="grey-info">
-            {{ corpus.langtag }} | {{ corpus.num_texts }} text(s) |
-            {{ corpus.modified! | fromNow }}
-          </div>
+          </ng-template>
+          <!-- End name -->
+          <mat-icon *ngIf="!corpus.is_public" class="private" color="primary" matTooltip="Private"
+            fontIcon="lock"></mat-icon>
         </div>
+       
         <mat-icon class="more-actions-icon" [matMenuTriggerFor]="moreActionsMenu">
           more_vert
         </mat-icon>
       </div>
-
+      <div class="grey-info">
+        {{ corpus.langtag }} | {{ corpus.num_texts }} text(s) |
+        {{ corpus.modified! | fromNow }}
+      </div>
       <div class="description">{{ truncate(corpus.description!, 128) }}</div>
 
-      <div class="tags" *ngIf="corpus.tags?.length">
+      <ng-container  *ngIf=" corpus.tags">
         <pm-tag-list-truncated [tags]="corpus.tags"></pm-tag-list-truncated>
-      </div>
+
+        
+      </ng-container>
     </div>
 
     <mat-divider></mat-divider>
 
-    <div class="card-bottom">
+    <div class="card-footer">
       <pm-avatar [user]="corpus.creator" size="small"></pm-avatar>
       <pm-upvote-button [hasUpvoted]="corpus.has_upvoted!" [numUpvotes]="corpus.num_upvotes!" [element]="'corpus'"
         [elementId]="corpus.id"></pm-upvote-button>

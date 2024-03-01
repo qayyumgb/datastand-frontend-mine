@@ -9,7 +9,7 @@
     </span>
     <span class="results-count" *ngIf="!totalCount">No {{ plural }} found 👾</span>
 
-    <div class="layout-buttons 2">
+    <div class="layout-buttons">
         <ng-container *ngIf="!isMobile">
         <button *ngIf="!userSettings.isCardLayout()" mat-icon-button matTooltip="Grid layout" class="normal"
           (click)="userSettings.toggleLayout()">

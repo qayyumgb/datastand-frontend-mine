@@ -1,49 +1,49 @@
-<section *ngIf="task" class="task-card">
+<section *ngIf="task" class="card">
   <img [src]="task.image || urls.DEFAULT_IMG_URL" class="card-img" />
   <div class="card-content">
     <div class="card-header">
-      <mat-icon class="data-icon">task</mat-icon>
-      <div class="title-wigh-grey-info">
-        <div>
-          <!-- Truncate the name and add tooltip if needed -->
-          <a
-            *ngIf="task.name.length > 25; else normalLink"
-            [routerLink]="urls.getTaskUrl(task.id)"
-            class="title"
-            [matTooltip]="task.name"
-            [innerText]="truncate(task.name, 25)"
-          >
-          </a>
-          <ng-template #normalLink>
-            <a
-              [routerLink]="urls.getTaskUrl(task.id)"
-              class="title"
-              [innerText]="task.name"
-            >
-            </a>
-          </ng-template>
-          <!-- End name -->
-        </div>
-        <div class="grey-info">
-          {{ task.langtag }} | {{ task.modified! | fromNow }}
-        </div>
-      </div>
+      <a
+      *ngIf="task.name.length > 25; else normalLink"
+      [routerLink]="urls.getTaskUrl(task.id)"
+      class="title"
+      [matTooltip]="task.name"
+      [innerText]="task.name"
+    >
+    </a>
+    <ng-template #normalLink>
+      <a
+        [routerLink]="urls.getTaskUrl(task.id)"
+        class="title"
+        [innerText]="task.name"
+      >
+      </a>
+    </ng-template>
       <mat-icon class="more-actions-icon" [matMenuTriggerFor]="moreActionsMenu">
         more_vert
       </mat-icon>
     </div>
-
-    <div class="description" *ngIf="truncate(task.description!, 128)">{{ truncate(task.description!, 128) }}</div>
-
-    <div class="tags" *ngIf="showTags">
-      
-      <pm-tag-list-truncated [tags]="task.tags"></pm-tag-list-truncated>
+    <div class="grey-info">
+      {{ task.status.ratio_completed | percent }} completed · {{ task.langtag }} ·
+      {{ task.num_texts! | number }} texts ·
+      {{ task.num_labels! | number }} labels · 
+      {{ task.modified! | fromNow }}
+      <br />
+     
     </div>
+    <div class="description" *ngIf="task.description">{{task.description }}</div>
+
+    <ng-container *ngIf="showTags">
+     
+      <pm-tag-list-truncated [tags]="task.tags"></pm-tag-list-truncated>
+    </ng-container>
   </div>
 
-  <mat-divider></mat-divider>
-
-  <div class="card-bottom">
+  <mat-progress-bar
+  mode="determinate"
+  [value]="task.status.ratio_completed * 100"
+  style="max-width: 100%; height:2px; margin-top: 4px;"
+></mat-progress-bar>
+  <div class="card-footer">
     <pm-avatar [user]="task.creator" size="small"></pm-avatar>
   </div>
 
