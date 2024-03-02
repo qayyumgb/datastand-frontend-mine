@@ -18,18 +18,14 @@
         </div>
       </div>
       <!-- Actions -->
-      <div class="hover-btn-wrapper flex">
+      <div class="hover-btn-wrapper flex-column">
         <div class="actions">
           <ng-content select="[buttons]"></ng-content>
         </div>
-        <div>
-          <button  class="pointer list-action-btn"  [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <ng-content select="[hoverButtons]"></ng-content>
-          </mat-menu>
+        <div class="action-group flex-grow-1">
+          <ng-content select="[hoverButtons]"></ng-content>
         </div>
+       
         <!-- <div >
           <ng-content select="[hoverButtons]"></ng-content>
           <br/>

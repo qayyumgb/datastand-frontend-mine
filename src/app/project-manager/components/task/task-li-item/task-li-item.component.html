@@ -23,45 +23,45 @@
     <!-- Corpus creator actions -->
     <ng-container *ngIf="isCreator()">
       <button
-        mat-menu-item
+        mat-icon-button
         class="medium"
         matTooltip="Rename"
         (click)="openRenameTaskDialog()"
       >
-        <mat-icon>drive_file_rename_outline</mat-icon>Rename
+        <mat-icon>drive_file_rename_outline</mat-icon>
       </button>
       <input hidden type="file" #uploader (change)="changeImage($event)" />
       <button
-        mat-menu-item
+        mat-icon-button
         class="medium"
         matTooltip="Change image"
         (click)="uploader.click()"
       >
-        <mat-icon>image</mat-icon>Change image
+        <mat-icon>image</mat-icon>
       </button>
       <button
-        mat-menu-item
+        mat-icon-button
         class="medium"
         matTooltip="Change tags"
         (click)="openUpdateTagsDialog()"
       >
-        <mat-icon>label</mat-icon>Change tags
+        <mat-icon>label</mat-icon>
       </button>
       <button
-        mat-menu-item
+        mat-icon-button
         class="medium"
         matTooltip="Make a copy"
         (click)="copyTask()"
       >
-        <mat-icon>file_copy</mat-icon>Make a copy
+        <mat-icon>file_copy</mat-icon>
       </button>
       <button
-        mat-menu-item
+        mat-icon-button
         class="medium"
         matTooltip="Remove"
         (click)="deleteTask()"
       >
-        <mat-icon>delete</mat-icon>Remove
+        <mat-icon>delete</mat-icon>
       </button>
     </ng-container>
   </ng-container>
