@@ -1,4 +1,4 @@
-<span class="votes">
+<span class="votes" *ngIf="!showAsNormal">
   <button
     *ngIf="!hasUpvoted"
     mat-button
@@ -15,4 +15,20 @@
   <button mat-button class="vote-count" (click)="openUpvotesDialogComponent()">
     {{ numUpvotes }}
   </button>
+</span>
+<span class="like-list" *ngIf="showAsNormal">
+  <button
+    *ngIf="!hasUpvoted"
+    mat-button
+    class="upvote"
+    (click)="toggleUpvote()"
+  >
+    <mat-icon>favorite_outline</mat-icon>
+  </button>
+  <button *ngIf="hasUpvoted" mat-button class="upvote" (click)="toggleUpvote()">
+    <mat-icon color="warn">favorite</mat-icon>
+  </button>
+  <span class="pointer" mat-button (click)="openUpvotesDialogComponent()">
+    {{ numUpvotes }} {{numUpvotes !=undefined && numUpvotes > 1? "likes":"like"}}
+  </span>
 </span>

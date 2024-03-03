@@ -13,6 +13,7 @@ export class UpvoteButtonComponent {
   @Input() hasUpvoted?: boolean;
   @Input() numUpvotes?: number;
   @Input() elementId?: number;
+  @Input() showAsNormal:boolean = false;
   @Input() element?: 'corpus' | 'label' | 'label-set';
 
   constructor(

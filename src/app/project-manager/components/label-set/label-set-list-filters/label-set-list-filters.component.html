@@ -7,7 +7,7 @@
         *ngIf="this.filters.search"
         (click)="clearSearch()"
       >
-        [x]
+        clear
       </span>
     </h4>
     <mat-form-field appearance="outline">
@@ -22,15 +22,16 @@
   </div>
 
   <div class="sub-section">
-    <h4>Filter by</h4>
-    <label>Modified</label>
-    <span
+    <h4  class="filter-title">
+      Modified
+      <span
       class="clear-filter"
       *ngIf="this.filters.modifiedLast"
       (click)="clearModifiedLast()"
-    >
-      [x]
+      >
+      clear
     </span>
+  </h4>
     <mat-radio-group color="primary" (change)="updateModifiedLast($event)">
       <mat-radio-button
         *ngFor="let option of modifiedLastOptions"
@@ -42,14 +43,16 @@
 
     <!-- Non-public filters -->
     <ng-container *ngIf="!isPublicFilter">
-      <label>Visibility</label>
+     <div class="filter-title">
+      Visibility
       <span
         class="clear-filter"
         *ngIf="this.filters.is_public"
         (click)="clearIsPublic()"
       >
-        [x]
+        clear
       </span>
+     </div>
       <mat-radio-group color="primary" (change)="updateIsPublic($event)">
         <mat-radio-button
           *ngFor="let option of isPublicOptions"
@@ -62,14 +65,16 @@
 
     <!-- Public filters -->
     <ng-container *ngIf="isPublicFilter">
-      <label>User</label>
+     <h4 class="filter-title">
+      User
       <span
         class="clear-filter"
         *ngIf="this.filters.creator"
         (click)="clearCreator()"
       >
-        [x]
+        clear
       </span>
+     </h4>
       <mat-form-field appearance="outline">
         <mat-label>User</mat-label>
         <input
@@ -80,10 +85,12 @@
         />
       </mat-form-field>
     </ng-container>
-    <label>Tag</label>
+   <h4 class="filter-title">
+    Tag
     <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
-      [x]
+      clear
     </span>
+   </h4>
     <mat-form-field appearance="outline">
       <mat-label>Search</mat-label>
       <input
@@ -96,14 +103,14 @@
   </div>
 
   <div class="sub-section">
-    <h4>
+    <h4 class="filter-by">
       Sort by
       <span
         class="clear-filter"
         *ngIf="this.filters.ordering"
         (click)="clearOrdering()"
       >
-        [x]
+        clear
       </span>
     </h4>
 

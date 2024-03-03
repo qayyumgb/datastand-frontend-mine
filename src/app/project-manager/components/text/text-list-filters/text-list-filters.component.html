@@ -7,7 +7,7 @@
         *ngIf="this.filters.search"
         (click)="clearSearch()"
       >
-        [x]
+        clear
       </span>
     </h4>
     <mat-form-field appearance="outline">
@@ -22,15 +22,16 @@
   </div>
 
   <div class="sub-section">
-    <h4>Filter by</h4>
-    <label>Modified</label>
-    <span
+    <h4  class="filter-title">
+      Modified
+      <span
       class="clear-filter"
       *ngIf="this.filters.modifiedLast"
       (click)="clearModifiedLast()"
-    >
-      [x]
+      >
+      clear
     </span>
+  </h4>
     <mat-radio-group color="primary" (change)="updateModifiedLast($event)">
       <mat-radio-button
         *ngFor="let option of modifiedLastOptions"
@@ -40,14 +41,16 @@
       >
     </mat-radio-group>
 
-    <label>Language</label>
-    <span
-      class="clear-filter"
-      *ngIf="this.filters.langtag"
-      (click)="clearLangTag()"
-    >
-      [x]
-    </span>
+    <h4 class="filter-title">
+      Language
+      <span
+        class="clear-filter"
+        *ngIf="this.filters.langtag"
+        (click)="clearLangTag()"
+      >
+        clear
+      </span>
+     </h4>
     <br />
     <mat-form-field appearance="outline">
       <mat-select
@@ -64,13 +67,13 @@
     </mat-form-field>
 
     <br />
-    <label>Review</label>
+    Review
     <span
       class="clear-filter"
       *ngIf="this.filters.is_pending"
       (click)="clearIsPending()"
     >
-      [x]
+      clear
     </span>
     <mat-radio-group color="primary" (change)="updateIsPending($event)">
       <mat-radio-button
@@ -82,9 +85,9 @@
     </mat-radio-group>
 
     <br />
-    <label>Tag</label>
+    Tag
     <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
-      [x]
+      clear
     </span>
     <br />
     <mat-form-field appearance="outline">
@@ -106,7 +109,7 @@
         *ngIf="this.filters.ordering"
         (click)="clearOrdering()"
       >
-        [x]
+        clear
       </span>
     </h4>
 

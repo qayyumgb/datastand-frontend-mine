@@ -1,16 +1,16 @@
 <section *ngIf="this.filters" class="filters dense-2">
   <div class="sub-section">
-    <h4>
+    <h4 class="filter-title">
       Search tasks
       <span
         class="clear-filter"
         *ngIf="this.filters.search"
         (click)="clearSearch()"
       >
-        [x]
+        clear
       </span>
     </h4>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="filter-input">
       <mat-label>Search</mat-label>
       <input
         matInput
@@ -22,15 +22,16 @@
   </div>
 
   <div class="sub-section">
-    <h4>Filter by</h4>
-    <label>Modified</label>
+    <h4 class="filter-title">
+      Modified
     <span
       class="clear-filter"
       *ngIf="this.filters.modifiedLast"
       (click)="clearModifiedLast()"
     >
-      [x]
+      clear
     </span>
+  </h4>
     <mat-radio-group color="primary" (change)="updateModifiedLast($event)">
       <mat-radio-button
         *ngFor="let option of modifiedLastOptions"
@@ -41,14 +42,16 @@
     </mat-radio-group>
 
     <ng-container *ngIf="isPublicFilter">
-      <label>User</label>
+     <h4 class="filter-title">
+      User
       <span
         class="clear-filter"
         *ngIf="this.filters.creator"
         (click)="clearCreator()"
       >
-        [x]
+        clear
       </span>
+     </h4>
       <mat-form-field appearance="outline">
         <mat-label>User</mat-label>
         <input
@@ -59,17 +62,17 @@
         />
       </mat-form-field>
     </ng-container>
-
-    <label>Language</label>
+<h4 class="filter-title">
+  Language
     <span
-      class="clear-filter"
-      *ngIf="this.filters.langtag"
-      (click)="clearLangTag()"
-    >
-      [x]
-    </span>
-    <br />
-    <mat-form-field appearance="outline">
+  class="clear-filter"
+  *ngIf="this.filters.langtag"
+  (click)="clearLangTag()"
+  >
+  clear
+</span>
+</h4>
+    <mat-form-field appearance="outline" class="filter-input">
       <mat-select
         (selectionChange)="updateLangTag($event)"
         [(value)]="this.filters.langtag"
@@ -82,12 +85,15 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-    <label>Tag</label>
-    <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
-      [x]
-    </span>
-    <mat-form-field appearance="outline">
+    <br>
+    <br>
+<h4 class="filter-title">
+  Tag
+  <span class="clear-filter" *ngIf="this.filters.tag" (click)="clearTag()">
+    clear
+  </span>
+</h4>
+    <mat-form-field appearance="outline" class="filter-input">
       <mat-label>Search</mat-label>
       <input
         matInput
@@ -99,14 +105,14 @@
   </div>
 
   <div class="sub-section">
-    <h4>
+<h4 class="filter-title">
       Sort by
       <span
         class="clear-filter"
         *ngIf="this.filters.ordering"
         (click)="clearOrdering()"
       >
-        [x]
+        clear
       </span>
     </h4>
 

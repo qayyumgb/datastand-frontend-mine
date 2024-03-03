@@ -2,38 +2,61 @@
   <pm-base-li-with-img [imgUrl]="entity.image">
     <ng-container content>
       <div class="entity-info">
-        <div class="flex-column">
+        <div class="flex-column h-100">
           <div class="caption-2 ellipsis">{{ entityType }}</div>
-          <div class="title-2 ellipsis">
+          <div class="list-title ellipsis">
             <a [routerLink]="entityUrl" class="a-like ellipsis" [title]="entity.name" [innerText]="entity.name"></a>
           </div>
-          <div class="caption-1 mb-16 ellipsis">
-            <ng-content select="[entityGreyInfo]"></ng-content>
+          <div class="caption-1 mb-8 ellipsis">
+            <!-- <ng-content select="[entityGreyInfo]"></ng-content> -->
+             Updated {{ entity.modified! | fromNow }}
           </div>
+          <p class="description flex-grow-1">
+            {{entity.description}}
+          </p>
           <pm-tag-list-truncated [tags]="entity.tags"></pm-tag-list-truncated>
-          <div class="avatar avatar-wrapper mt-8 p-16">
+          <!-- <div class="avatar avatar-wrapper mt-8 p-16">
             <pm-avatar [user]="entity.creator" [size]="'mini'"></pm-avatar>
            
-          </div>
+          </div> -->
+         <ul class="labels-wrapper">
+          <li class="pointer" [routerLink]="urls.getUserUrl(entity.creator?.username!)">
+            <mat-icon>person</mat-icon>
+            <span>@{{entity.creator?.username}}</span>
+          </li>
+          <li *ngIf="entity.status?.ratio_completed">
+            <mat-icon> bar_chart</mat-icon>
+            <span>{{entity.status.ratio_completed}} %</span>
+          </li>
+          <li>
+            <mat-icon>label</mat-icon>
+            <span>{{entity.num_labels}} Label</span>
+          </li>
+          <li>
+            <mat-icon> textsms</mat-icon>
+            <span>{{entity.num_texts}} Text</span>
+          </li>
+          <li>
+            <mat-icon>language</mat-icon>
+            <span>{{entity.langtag}} Text</span>
+          </li>
+          <li>
+            <ng-content select="[buttons]"></ng-content>
+          </li>
+         </ul>
         </div>
       </div>
       <!-- Actions -->
       <div class="hover-btn-wrapper flex">
-        <div class="actions">
-          <ng-content select="[buttons]"></ng-content>
-        </div>
-        <div class="">
-          <button mat-icon-button class="medium"  [matMenuTriggerFor]="menu">
+      
+        <div>
+          <button mat-icon-button  [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
             <ng-content select="[hoverButtons]"></ng-content>
           </mat-menu>
         </div>
-        <!-- <div >
-          <ng-content select="[hoverButtons]"></ng-content>
-          <br/>
-        </div> -->
       </div>
     </ng-container>
   </pm-base-li-with-img>

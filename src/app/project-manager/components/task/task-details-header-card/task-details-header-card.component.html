@@ -21,7 +21,7 @@
       </button>
       <mat-menu #actionsMenu="matMenu">
         <input hidden type="file" #uploader (change)="changeImage($event)" />
-        <button mat-menu-item (click)="uploader.click()">
+        <button class="" mat-menu-item (click)="uploader.click()">
           <mat-icon>image</mat-icon>
           <span>Change image</span>
         </button>
@@ -39,7 +39,7 @@
     <button
       mat-flat-button
       color="primary"
-      class="small"
+      class="small fork-btn"
       (click)="forkTask()"
       *ngIf="!isCreator"
     >

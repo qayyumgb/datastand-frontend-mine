@@ -13,45 +13,14 @@
       [numUpvotes]="labelSet.num_upvotes!"
       [element]="'label-set'"
       [elementId]="labelSet.id"
-      class="medium"
+      class="medium head-like-btn"
     >
     </pm-upvote-button>
     <!-- Creator action buttons -->
     <ng-container *ngIf="isCreator">
-      <button
-        mat-stroked-button
-        class="small show-lg"
-        (click)="openUpdateLabelSetDialog()"
-      >
-        <mat-icon>edit</mat-icon>Edit
-      </button>
-      <button
-      mat-icon-button
-        class="medium hide-lg"
-        (click)="openUpdateLabelSetDialog()"
-      >
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button
-        mat-flat-button
-        color="primary"
-        class="small show-lg"
-        (click)="openLabelSetDownloadDialog()"
-      >
-        <mat-icon>download</mat-icon> Download
-      </button>
-      <button
-      mat-mini-fab
-        color="primary"
-        class="small  hide-lg"
-        matTooltip="Download"
-        (click)="openLabelSetDownloadDialog()"
-      >
-        <mat-icon>download</mat-icon> 
-      </button>
+    
       <button
         mat-icon-button
-        mat-small-icon-button
         class="horizon-dot medium"
         [matMenuTriggerFor]="actionsMenu"
         *ngIf="isCreator"

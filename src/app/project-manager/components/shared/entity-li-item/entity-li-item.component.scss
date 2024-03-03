@@ -6,9 +6,6 @@
   position: relative;
 }
 .li-card{
-  &:hover {
-    background-color: #f7eef9;
-  }
   @media (max-width:600px) {
       padding: 0px;
       border: 1px solid gainsboro;
@@ -35,14 +32,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-@media (min-width: 600px) {
-
-  .hover-btn-wrapper {
- 
-    
-  }
 }
 
 .relative {

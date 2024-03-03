@@ -27,9 +27,9 @@
   </div>
   <!-- List layout -->
   <div *ngIf="userSettings.isListLayout() && !isMobile">
-    <ul class="data-table">
+    <div class="list-wrapper">
       <ng-content select="[listItems]"></ng-content>
-    </ul>
+    </div>
   </div>
   <!-- Grid layout -->
   <div class="data-card-container" *ngIf="userSettings.isCardLayout() || isMobile">
