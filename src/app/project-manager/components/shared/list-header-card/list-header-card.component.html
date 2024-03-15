@@ -2,10 +2,9 @@
   <div class="flex-wrapper">
     <div>
       <h1>{{ title }}</h1>
-      <p class="subtitle-1 ">
-        {{ subtitle }}
-      </p>
-      <p class="m-0">{{ extraText }}</p>
+      <div class="subtitle-1 mt-16 mb-16">
+        {{ subtitle }}<br />{{ extraText }}
+      </div>
       <ng-content select="[button]"></ng-content>
     </div>
     <img

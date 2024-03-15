@@ -12,20 +12,14 @@
   color: rgb(0, 0, 0, 0.87);
   margin-bottom: -4px;
 }
-@media (max-width:675px){
-  .data-card-container{
-    display: block !important;
-    background-color: transparent !important ;
-    padding: 0 !important;
-    border: 0px solid transparent !important;
-  }
-}
+
 .data-card-container {
   background-color: #fff;
   border: 1px solid rgb(0, 0, 0, 0.12);
   border-radius: 4px;
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(280px ,1fr));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
   gap: 16px;
   padding: 16px;
 }

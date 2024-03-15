@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import {
   templateUrl: './label-set-details-header-card.component.html',
   styleUrls: ['../../change-image-button.scss'],
 })
-export class LabelSetDetailsHeaderCardComponent implements OnInit {
+export class LabelSetDetailsHeaderCardComponent implements OnInit, OnChanges {
   @Input() labelSet?: LabelSet;
   isCreator?: boolean;
 
@@ -29,6 +29,11 @@ export class LabelSetDetailsHeaderCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isCreator = this.labelSet?.creator?.username === this.auth.username;
+  }
+
+  ngOnChanges(): void {
+    // Required so that we update the component when we fork a labelSet.
     this.isCreator = this.labelSet?.creator?.username === this.auth.username;
   }
 

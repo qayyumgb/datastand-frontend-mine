@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Mixin } from 'ts-mixer';
 
 import { Task } from '@app/interfaces';
@@ -25,8 +26,8 @@ export class TaskListPage
     super();
   }
 
-  override get items(): Task[] {
-    return <Task[]>this._items;
+  get tasks$(): Observable<Task[]> {
+    return <Observable<Task[]>>this.items$;
   }
 
   getTasks() {

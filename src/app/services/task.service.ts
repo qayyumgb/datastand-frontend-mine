@@ -1,9 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, merge } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { saveAs } from 'file-saver';
+import { Observable } from 'rxjs';
 
 import { environment } from '@app/environments';
 import { Task, Text } from '@app/interfaces';
+import { runParallelHttpCallsInChunks } from '@pm/utils';
+
 import { AuthService } from './auth.service';
 import {
   BaseFilters,
@@ -92,7 +96,11 @@ interface TaskStats {
 export class TaskService {
   url = `${environment.backendApiUrl}/tasks`;
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private http: HttpClient,
+    private snackBar: MatSnackBar
+  ) {}
 
   acceptAllLabels(taskId: number): Observable<NumChangedResponse> {
     return this.http.post<NumChangedResponse>(
@@ -178,16 +186,50 @@ export class TaskService {
     );
   }
 
+  deleteTexts(
+    taskId: number,
+    textIds: number[]
+  ): Observable<NumDeletedResponse> {
+    return this.http.post<NumDeletedResponse>(
+      `${this.url}/${taskId}/delete-texts/`,
+      { ids: textIds }
+    );
+  }
+
+  download(
+    taskId: number,
+    taskFields: string[] = [],
+    textFields: string[] = [],
+    labelFields: string[] = []
+  ) {
+    this.snackBar.open('⌛ Preparing Task download...', 'Dismiss', {
+      duration: 600_000,
+    });
+    let params = new HttpParams({
+      fromObject: {
+        fields: taskFields.join(','),
+        text_fields: textFields.join(','),
+        label_fields: labelFields.join(','),
+      },
+    });
+    return this.http
+      .get(`${this.url}/${taskId}/download/`, {
+        params,
+        responseType: 'blob',
+      })
+      .subscribe((blob) => {
+        saveAs(blob, `task-${taskId}.json`);
+        this.snackBar.open('✅ Task downloaded successfully', 'Dismiss');
+      });
+  }
+
   generateText(taskId: number): Observable<Text> {
     return this.http.post<Text>(`${this.url}/${taskId}/generate-text/`, null);
   }
 
   generateTexts(taskId: number, numTexts: number): Observable<Text> {
-    let subscriptions: Observable<Text>[] = [];
-    for (let i = 0; i < numTexts; i++) {
-      subscriptions.push(this.generateText(taskId));
-    }
-    return merge(...subscriptions);
+    const httpCallFn = () => this.generateText(taskId);
+    return runParallelHttpCallsInChunks<Text>(numTexts, httpCallFn);
   }
 
   list(filters: TaskFilters = {}): Observable<TasksApiResponse> {
@@ -227,6 +269,46 @@ export class TaskService {
 
   retrieve(taskId: number): Observable<Task> {
     return this.http.get<Task>(`${this.url}/${taskId}/`);
+  }
+
+  setTextsAsNotSeeds(
+    taskId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${taskId}/set-texts-as-not-seeds/`,
+      { ids: textIds }
+    );
+  }
+
+  setTextsAsPending(
+    taskId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${taskId}/set-texts-as-pending/`,
+      { ids: textIds }
+    );
+  }
+
+  setTextsAsReviewed(
+    taskId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${taskId}/set-texts-as-reviewed/`,
+      { ids: textIds }
+    );
+  }
+
+  setTextsAsSeeds(
+    taskId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${taskId}/set-texts-as-seeds/`,
+      { ids: textIds }
+    );
   }
 
   stats(taskId: number): Observable<TaskStats> {

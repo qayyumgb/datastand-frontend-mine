@@ -1,10 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { saveAs } from 'file-saver';
-import { Observable, merge } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { environment } from '@app/environments';
 import { Corpus, Text, User } from '@app/interfaces';
+import { runParallelHttpCallsInChunks } from '@pm/utils';
+
 import { AuthService } from './auth.service';
 import {
   BaseFilters,
@@ -33,7 +36,11 @@ interface CorporaApiResponse extends BaseListApiResponse {
 export class CorpusService {
   url = `${environment.backendApiUrl}/corpora`;
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private http: HttpClient,
+    private snackBar: MatSnackBar
+  ) {}
 
   acceptAllSuggestions(corpusId: number): Observable<NumChangedResponse> {
     return this.http.post<NumChangedResponse>(
@@ -68,6 +75,16 @@ export class CorpusService {
     return this.http.delete(`${this.url}/${corpusId}/`);
   }
 
+  deleteTexts(
+    corpusId: number,
+    textIds: number[]
+  ): Observable<NumDeletedResponse> {
+    return this.http.post<NumDeletedResponse>(
+      `${this.url}/${corpusId}/delete-texts/`,
+      { ids: textIds }
+    );
+  }
+
   deleteAllTexts(corpusId: number): Observable<NumDeletedResponse> {
     return this.http.post<NumDeletedResponse>(
       `${this.url}/${corpusId}/delete-all-texts/`,
@@ -80,6 +97,9 @@ export class CorpusService {
     corpusFields: string[] = [],
     textFields: string[] = []
   ) {
+    this.snackBar.open('⌛ Preparing Corpus download...', 'Dismiss', {
+      duration: 600_000,
+    });
     let params = new HttpParams({
       fromObject: {
         fields: corpusFields.join(','),
@@ -93,6 +113,7 @@ export class CorpusService {
       })
       .subscribe((blob) => {
         saveAs(blob, `corpus-${corpusId}.json`);
+        this.snackBar.open('✅ Corpus downloaded successfully', 'Dismiss');
       });
   }
 
@@ -109,11 +130,8 @@ export class CorpusService {
   }
 
   generateTexts(corpusId: number, numTexts: number): Observable<Text> {
-    let subscriptions: Observable<Text>[] = [];
-    for (let i = 0; i < numTexts; i++) {
-      subscriptions.push(this.generateText(corpusId));
-    }
-    return merge(...subscriptions);
+    const httpCallFn = () => this.generateText(corpusId);
+    return runParallelHttpCallsInChunks<Text>(numTexts, httpCallFn);
   }
 
   list(filters: CorpusFilters = {}): Observable<CorporaApiResponse> {
@@ -157,6 +175,46 @@ export class CorpusService {
 
   retrieve(corpusId: number): Observable<Corpus> {
     return this.http.get<Corpus>(`${this.url}/${corpusId}/`);
+  }
+
+  setTextsAsNotSeeds(
+    corpusId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${corpusId}/set-texts-as-not-seeds/`,
+      { ids: textIds }
+    );
+  }
+
+  setTextsAsPending(
+    corpusId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${corpusId}/set-texts-as-pending/`,
+      { ids: textIds }
+    );
+  }
+
+  setTextsAsReviewed(
+    corpusId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${corpusId}/set-texts-as-reviewed/`,
+      { ids: textIds }
+    );
+  }
+
+  setTextsAsSeeds(
+    corpusId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${corpusId}/set-texts-as-seeds/`,
+      { ids: textIds }
+    );
   }
 
   upvote(corpusId: number): Observable<Object> {

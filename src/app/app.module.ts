@@ -17,7 +17,6 @@ import { environment } from './environments';
 import { ProjectManagerModule } from './project-manager/project-manager.module';
 import { SharedModule } from './shared/shared.module';
 import { WorkbenchModule } from './workbench/workbench.module';
-import { LoaderComponent } from './pages/loader/loader.component';
 
 let imports = [
   AppRoutingModule,
@@ -45,7 +44,6 @@ let imports = [
     AppComponent,
     AppPages.NotFoundComponent,
     BaseComponents.OnlyBigScreenComponent,
-    LoaderComponent,
   ],
   imports: imports,
   providers: [

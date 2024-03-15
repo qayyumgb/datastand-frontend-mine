@@ -1,3 +1,5 @@
+import { BehaviorSubject, Observable, map } from 'rxjs';
+
 export enum LoadingStatus {
   Loading = 'loading',
   Loaded = 'loaded',
@@ -5,17 +7,27 @@ export enum LoadingStatus {
 }
 
 export class LoadingStatusMixin {
-  _loadingStatus: LoadingStatus = LoadingStatus.Loading;
-  _error: any = null;
+  private _loadingStatus: LoadingStatus = LoadingStatus.Loading;
+  private _error: any = null;
+  loadingStatus$ = new BehaviorSubject<LoadingStatus>(this._loadingStatus);
 
   constructor() {}
 
-  get loadingStatus(): LoadingStatus {
-    return this._loadingStatus;
+  get isLoading$(): Observable<boolean> {
+    return this.loadingStatus$.pipe(
+      map((status) => status === LoadingStatus.Loading)
+    );
   }
 
-  set loadingStatus(state: LoadingStatus) {
+  get isLoaded$(): Observable<boolean> {
+    return this.loadingStatus$.pipe(
+      map((status) => status === LoadingStatus.Loaded)
+    );
+  }
+
+  private set loadingStatus(state: LoadingStatus) {
     this._loadingStatus = state;
+    this.loadingStatus$.next(state);
   }
 
   get error(): any {
@@ -24,14 +36,6 @@ export class LoadingStatusMixin {
 
   set error(err: any) {
     this._error = err;
-  }
-
-  isLoading(): boolean {
-    return this.loadingStatus === LoadingStatus.Loading;
-  }
-
-  isLoaded(): boolean {
-    return this.loadingStatus === LoadingStatus.Loaded;
   }
 
   startLoading() {

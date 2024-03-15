@@ -16,46 +16,14 @@ input[type="file"] {
 // Fix the change image icon
 .change-image-button {
   cursor: pointer;
-  display: flex;
-  gap: 5px;
 }
 
-
-
-@media (max-width: 992px) {
-  .show-md {
-    display: none;
-  }
-
-  .btn-download-sm {
-    border: 0px solid transparent;
-    width: 28px;
-    cursor: pointer;
-    background-color: whitesmoke;
-
-    .mat-icon {
-      font-size: 16px !important;
-      display: flex;
-      align-items: center;
-    }
-  }
-}
-@media (min-width: 992px) {
-  .show-md-0 {
-    display: none !important;
-  }
-}
-@media (max-width: 768px) {
-  .show-md-0 {
-    display: none !important;
-  }
-  .top-horizontal-dot {
-    transform: translate3d(-11px, 13px, 0) rotate(90deg);
-    // color: gainsboro;   
-     right: -26px;
-    top: -10px;
-    position: absolute;
-
-
-  }
+.change-image-icon {
+  transform: scale(0.8);
+  font-size: 18px !important;
+  height: 18px !important;
+  width: 18px !important;
+  margin-right: 8px !important;
+  color: rgb(0, 0, 0, 0.7) !important;
+  vertical-align: middle !important;
 }

@@ -1,4 +1,4 @@
-<div *ngIf="tags" class="tags 1">
+<div *ngIf="tags" class="tags">
   <pm-tag *ngFor="let tag of tags?.slice(0, 3)" [tag]="tag"></pm-tag>
   <span *ngIf="tags.length! > 3" class="more-tags">
     +{{ tags.length! - 3 }} more

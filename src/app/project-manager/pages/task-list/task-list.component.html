@@ -3,9 +3,9 @@
     <section class="data-cards-section">
       <pm-my-task-list-header-card></pm-my-task-list-header-card>
 
-      <loader-card *ngIf="isLoading()"></loader-card>
+      <loader-card *ngIf="isLoading$ | async"></loader-card>
       <pm-layout-results-with-paginator
-        *ngIf="isLoaded()"
+        *ngIf="isLoaded$ | async"
         singular="Task"
         plural="Tasks"
         [totalCount]="totalCount"
@@ -15,13 +15,16 @@
       >
         <ng-container listItems>
           <pm-task-li-item
-            *ngFor="let task of items"
+            *ngFor="let task of tasks$ | async"
             [task]="task"
             (deleteTaskEvent)="deleteItemById($event)"
           ></pm-task-li-item>
         </ng-container>
-        <ng-container cardItems >
-          <pm-task-card *ngFor="let task of items" [task]="task"></pm-task-card>
+        <ng-container cardItems>
+          <pm-task-card
+            *ngFor="let task of tasks$ | async"
+            [task]="task"
+          ></pm-task-card>
         </ng-container>
       </pm-layout-results-with-paginator>
     </section>

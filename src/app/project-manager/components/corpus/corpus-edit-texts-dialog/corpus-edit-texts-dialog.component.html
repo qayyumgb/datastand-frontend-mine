@@ -36,17 +36,16 @@
             <td class="td-action-button">
               <ng-container *ngIf="!isCorpusAdded(corpus)">
                 <button
-                  mat-mini-fab
-                  class="show-text-lg"
+                  mat-flat-button
                   color="primary"
                   (click)="addCorpus(corpus)"
                 >
-                  <mat-icon>add</mat-icon> 
+                  <mat-icon>add</mat-icon> Add
                 </button>
               </ng-container>
               <ng-container *ngIf="isCorpusAdded(corpus)">
-                <button mat-mini-fab color="primary" [disabled]="true">
-                  <mat-icon>add</mat-icon>
+                <button mat-flat-button color="primary" [disabled]="true">
+                  <mat-icon>add</mat-icon> Added
                 </button>
               </ng-container>
             </td>
@@ -83,11 +82,11 @@
             </td>
             <td class="td-action-button">
               <button
-              mat-mini-fab
+                mat-flat-button
                 color="primary"
                 (click)="deleteCorpus(corpus)"
               >
-                <mat-icon>remove</mat-icon> 
+                <mat-icon>remove</mat-icon> Remove
               </button>
             </td>
           </tr>

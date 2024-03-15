@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WorkbenchUiState } from '@workbench/interfaces';
+import { WorkbenchUiState } from '@workbench/store/workbench-ui';
 import { initialWorkbenchUiState } from './reducer';
 
 import * as selectors from './selectors';

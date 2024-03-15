@@ -22,6 +22,7 @@ export interface TextFilters extends BaseFilters {
   langtag?: string; // en
   status?: StatusEnum | string;
   is_pending?: boolean | string;
+  is_seed?: boolean | string;
   corpus?: number | string;
   task?: number | string;
 }
@@ -126,6 +127,7 @@ export class TextService {
   setStatusToNew(taskTextId: number): Observable<Text> {
     return this._setStatus(taskTextId, StatusEnum.NEW);
   }
+
   setStatusToPending(taskTextId: number): Observable<Text> {
     return this.http.patch<Text>(`${this.url}/${taskTextId}/`, {
       is_pending: true,
@@ -136,6 +138,11 @@ export class TextService {
   setStatusToRejected(taskTextId: number): Observable<Text> {
     return this._setStatus(taskTextId, StatusEnum.REJECTED);
   }
+
+  setAsNotSeed(textId: number): Observable<Text> {
+    return this.http.patch<Text>(`${this.url}/${textId}/`, { is_seed: false });
+  }
+
   setAsPending(textId: number): Observable<Text> {
     return this.http.patch<Text>(`${this.url}/${textId}/`, {
       is_pending: true,
@@ -148,5 +155,9 @@ export class TextService {
       is_pending: false,
       status: StatusEnum.REVIEWED,
     });
+  }
+
+  setAsSeed(textId: number): Observable<Text> {
+    return this.http.patch<Text>(`${this.url}/${textId}/`, { is_seed: true });
   }
 }

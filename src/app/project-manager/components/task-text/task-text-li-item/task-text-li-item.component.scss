@@ -1,20 +1,12 @@
+// Needed for the a <button>.
 a {
   z-index: 0;
-  &:hover {
-    text-decoration: none !important;
-  }
 }
+
+a:hover {
+  text-decoration: none !important;
+}
+
 .annotate-btn-container {
   margin: 16px;
-}
-.task-text-detail{
-  overflow: hidden;
-  font-size: 13px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
-
 }

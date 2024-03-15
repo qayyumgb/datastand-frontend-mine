@@ -3,11 +3,14 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Mixin } from 'ts-mixer';
 
 import { Task, Text } from '@app/interfaces';
-import { LoadingStatusMixin, PaginatedItemListMixin } from '@app/mixins';
+import {
+  LoadingStatusMixin,
+  PaginatedItemListWithMultiSelectionMixin,
+} from '@app/mixins';
 import {
   AuthService,
   TaskService,
@@ -31,7 +34,7 @@ import {
   ],
 })
 export class TaskTextUlCardComponent
-  extends Mixin(LoadingStatusMixin, PaginatedItemListMixin)
+  extends Mixin(LoadingStatusMixin, PaginatedItemListWithMultiSelectionMixin)
   implements OnDestroy
 {
   searchForm = this.fb.group({
@@ -71,6 +74,7 @@ export class TaskTextUlCardComponent
             this.filters = {
               creator: params.get('creator')!,
               is_public: params.get('is_public')!,
+              is_seed: params.get('is_seed')!,
               langtag: params.get('langtag')!,
               page: params.get('page')! || 1,
               modifiedLast: params.get('modifiedLast')!,
@@ -86,11 +90,11 @@ export class TaskTextUlCardComponent
     }
   }
 
-  override get items(): Text[] {
-    return <Text[]>this._items;
+  get texts$(): Observable<Text[]> {
+    return <Observable<Text[]>>this.items$;
   }
 
-  corporaAcceptAllSuggestions() {
+  acceptAllSuggestions() {
     this.taskService.acceptAllSuggestions(this.task?.id!).subscribe((res) => {
       this.snackBar.open(
         `✅ ${res.num_changed} suggestion(s) accepted`,
@@ -101,22 +105,24 @@ export class TaskTextUlCardComponent
   }
 
   generateTexts(numTexts: number) {
-    var isSnackBarOpen = false;
+    let numGeneratedTexts = 0; // Counter for generated texts
+
     this.taskService.generateTexts(this.task?.id!, numTexts).subscribe({
       next: (res: Text) => {
-        if (!isSnackBarOpen) {
-          this.snackBar.open(
-            `🤖 Generating texts in the background...`,
-            'Dismiss',
-            { duration: 60_000 }
-          );
-          isSnackBarOpen = true;
-        }
+        numGeneratedTexts++;
+        this.snackBar.open(
+          `🤖 Generating texts... (${numGeneratedTexts}/${numTexts})`,
+          'Dismiss',
+          { duration: 600_000 }
+        );
         this.setItems([res, ...this.items!]);
         this._increaseCounts();
       },
       complete: () =>
-        this.snackBar.open('✅ Texts generated successfully', 'Dismiss'),
+        this.snackBar.open(
+          `✅ ${numGeneratedTexts} Text(s) generated successfully`,
+          'Dismiss'
+        ),
     });
   }
 
@@ -131,6 +137,13 @@ export class TaskTextUlCardComponent
         );
       }
       this.resetTaskTexts();
+    });
+  }
+
+  deleteTaskTexts(taskId: number, textIds: number[]) {
+    this.taskService.deleteTexts(taskId, textIds).subscribe(() => {
+      this.resetTaskTexts();
+      this.clearSelection();
     });
   }
 
@@ -207,17 +220,43 @@ export class TaskTextUlCardComponent
   }
 
   openGenerateTaskTextsDialog(): void {
-    let dialogRef = this.dialog.open(GenerateTextsDialogComponent, {});
-    // dialogRef returns the number of taskTexts to be generated.
-    dialogRef.afterClosed().subscribe((numTaskTexts: number) => {
-      if (numTaskTexts) {
-        this.generateTexts(numTaskTexts);
-      }
+    let dialogRef = this.dialog.open(GenerateTextsDialogComponent, {
+      data: { entityId: this.task?.id!, entityType: 'task' },
     });
+    // Texts are generated in the dialog, so we just need to reset the texts.
+    dialogRef.afterClosed().subscribe(() => this.resetTaskTexts());
   }
 
   resetTaskTexts(): void {
     this.filters = { page: 1 };
     this.getTaskTexts(this.filters);
+  }
+
+  setTextsAsSeeds(taskId: number, textIds: number[]) {
+    this.taskService.setTextsAsSeeds(taskId, textIds).subscribe(() => {
+      this.resetTaskTexts();
+      this.clearSelection();
+    });
+  }
+
+  setTextsAsNotSeeds(taskId: number, textIds: number[]) {
+    this.taskService.setTextsAsNotSeeds(taskId, textIds).subscribe(() => {
+      this.resetTaskTexts();
+      this.clearSelection();
+    });
+  }
+
+  setTextsAsPending(taskId: number, textIds: number[]) {
+    this.taskService.setTextsAsPending(taskId, textIds).subscribe(() => {
+      this.resetTaskTexts();
+      this.clearSelection();
+    });
+  }
+
+  setTextsAsNotPending(taskId: number, textIds: number[]) {
+    this.taskService.setTextsAsReviewed(taskId, textIds).subscribe(() => {
+      this.resetTaskTexts();
+      this.clearSelection();
+    });
   }
 }

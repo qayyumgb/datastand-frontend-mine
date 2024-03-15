@@ -1,4 +1,4 @@
-<section *ngIf="task" class="task-card">
+<section *ngIf="task">
   <img [src]="task.image || urls.DEFAULT_IMG_URL" class="card-img" />
   <div class="card-content">
     <div class="card-header">
@@ -6,35 +6,42 @@
       <div class="title-wigh-grey-info">
         <div>
           <!-- Truncate the name and add tooltip if needed -->
-          <a *ngIf="task.name.length > 25; else normalLink" [routerLink]="urls.getTaskUrl(task.id)" class="title"
-            [matTooltip]="task.name" [innerText]="truncate(task.name, 25)">
+          <a
+            *ngIf="task.name.length > 25; else normalLink"
+            [routerLink]="urls.getTaskUrl(task.id)"
+            class="title"
+            [matTooltip]="task.name"
+            [innerText]="truncate(task.name, 25)"
+          >
           </a>
           <ng-template #normalLink>
-            <a [routerLink]="urls.getTaskUrl(task.id)" class="title" [innerText]="task.name">
+            <a
+              [routerLink]="urls.getTaskUrl(task.id)"
+              class="title"
+              [innerText]="task.name"
+            >
             </a>
           </ng-template>
           <!-- End name -->
         </div>
-
         <div class="grey-info">
-          {{ task.status.ratio_completed | percent }} completed · {{ task.langtag }} ·
-          {{ task.num_texts! | number }} texts ·
-          {{ task.num_labels! | number }} labels · Updated
-          {{ task.modified! | fromNow }}
+          {{ task.langtag }} | {{ task.modified! | fromNow }}
         </div>
-        <mat-progress-bar class="progressbar" mode="determinate" [value]="task.status.ratio_completed * 100"
-          style="max-width: 250px"></mat-progress-bar>
       </div>
       <mat-icon class="more-actions-icon" [matMenuTriggerFor]="moreActionsMenu">
         more_vert
       </mat-icon>
     </div>
-    <div class="description" *ngIf="truncate(task.description!, 128)">{{ truncate(task.description!, 128) }}</div>
-    <div class="tags" *ngIf="showTags">
+
+    <div class="description">{{ truncate(task.description!, 128) }}</div>
+
+    <div class="tags">
       <pm-tag-list-truncated [tags]="task.tags"></pm-tag-list-truncated>
     </div>
   </div>
+
   <mat-divider></mat-divider>
+
   <div class="card-bottom">
     <pm-avatar [user]="task.creator" size="small"></pm-avatar>
   </div>
@@ -48,27 +55,23 @@
     </button>
     <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
     <button *ngIf="isCreator()" mat-menu-item>
-      <label 
-        [for]="'file-upload-card-' + task.id" 
-        class="change-image-button">
-        <mat-icon>image</mat-icon>Change image
-      </label>
+      <label [for]="'file-upload-card-' + task.id" class="change-image-button"
+        ><mat-icon class="change-image-icon">image</mat-icon></label
+      >
+      <label [for]="'file-upload-card-' + task.id" class="change-image-button"
+        >Change image</label
+      >
     </button>
-    <input 
-      [id]="'file-upload-card-' + task.id" 
-      type="file" 
-      (change)="changeImage($event)" />
-    <button 
-      *ngIf="isCreator()" 
-      mat-menu-item 
-      (click)="openUpdateTagsDialog()">
+    <input
+      [id]="'file-upload-card-' + task.id"
+      type="file"
+      (change)="changeImage($event)"
+    />
+    <button *ngIf="isCreator()" mat-menu-item (click)="openUpdateTagsDialog()">
       <mat-icon>label</mat-icon>
       <span>Change tags</span>
     </button>
-    <button 
-       *ngIf="isCreator()" 
-        mat-menu-item 
-        (click)="deleteTask()">
+    <button *ngIf="isCreator()" mat-menu-item (click)="deleteTask()">
       <mat-icon>delete</mat-icon>
       <span>Remove</span>
     </button>

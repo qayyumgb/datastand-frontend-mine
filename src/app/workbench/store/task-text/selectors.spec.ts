@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TaskTextState, initialTextState } from '@workbench/interfaces';
+import { TaskTextState, initialTextState } from '@workbench/store/task-text';
 
 import * as selectors from './selectors';
 

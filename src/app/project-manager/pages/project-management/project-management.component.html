@@ -5,20 +5,16 @@
       <mat-icon>menu</mat-icon>
     </button>
     <a routerLink="/pm" class="pm-title" (click)="closeMobileSidenav()"
-      >Data Stand</a>
-   <div class="searchbar-wrapper" [ngClass]="showSearch?'show':''">
+      >Data Stand</a
+    >
     <pm-search-bar></pm-search-bar>
-   </div>
-   
-   <span class="toolbar-spacer"></span>
-   <mat-icon aria-hidden="false" (click)="toggleSearchbar()" *ngIf="!showSearch" class="search-icon" fontIcon="search"></mat-icon>
-   <mat-icon aria-hidden="false" (click)="toggleSearchbar()" *ngIf="showSearch" class="search-icon" fontIcon="close"></mat-icon>
+    <span class="toolbar-spacer"></span>
     <pm-avatar
       [user]="user"
       [hideUsername]="true"
       [matMenuTriggerFor]="profile"
     ></pm-avatar>
-    <mat-menu class="user-dropdown" #profile="matMenu">
+    <mat-menu #profile="matMenu">
       <button
         mat-menu-item
         [routerLink]="urls.getUserUrl(user?.username!)"

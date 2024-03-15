@@ -22,7 +22,13 @@ export class CreateTextDialogComponent {
 
   onSubmit(text: Partial<Text>): void {
     this.textService
-      .create({ ...text, content_type: 'corpus', object_id: this.data.id })
+      .create({
+        ...text,
+        content_type: 'corpus',
+        object_id: this.data.id,
+        // Texts added manually are considered seed for generation.
+        is_seed: true,
+      })
       .subscribe(() => {
         this.dialogRef.close(true);
         this.snackbar.open('✅ Text created successfully', 'Dismiss');

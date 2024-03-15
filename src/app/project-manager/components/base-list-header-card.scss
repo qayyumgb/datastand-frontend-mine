@@ -1,11 +1,11 @@
 section {
+  // -2px to account for the border
+  // -32px to account for the padding
+  width: calc(100% - 2px - 32px);
   background-color: #fff;
   border: 1px solid #0000001f;
   border-radius: 4px;
   padding: 16px;
-  @media (max-width:768px){
-    width: 100% !important;
-  }
 }
 
 .flex-wrapper {

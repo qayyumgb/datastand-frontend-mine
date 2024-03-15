@@ -14,28 +14,6 @@ mat-sidenav-container {
   height: calc(100vh - $toolbar-height);
   margin-top: $toolbar-height;
 }
-.search-icon {
-  cursor: pointer;
-}
-@media (min-width: 550px) {
-  .search-icon {
-    display: none;
-  }
-}
-@media (max-width: 550px) {
-  .searchbar-wrapper {
-    position: absolute;
-    width: calc(100% - 100px);
-  }
-  .search-bar {
-    margin-left: 0;
-  }
-  .searchbar-wrapper {
-    &:not(.show) {
-      display: none !important;
-    }
-  }
-}
 
 mat-sidenav {
   width: 200px;
@@ -177,8 +155,4 @@ mat-nav-list {
 .mdc-list-item__primary-text {
   font-size: 17px !important;
   font-weight: 400;
-}
-.mat-mdc-menu-item .mat-icon {
-  margin: 0px !important;
-  
 }

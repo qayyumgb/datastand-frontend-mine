@@ -72,3 +72,5 @@ export const NGX_COLOR_SCHEME: Color = {
   group: ScaleType.Ordinal,
   domain: ['#f0cded'],
 };
+
+export const USERNAME_PATTERN = /^[a-z0-9_]+$/;

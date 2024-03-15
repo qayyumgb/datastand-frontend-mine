@@ -63,6 +63,24 @@
       </mat-select>
     </mat-form-field>
 
+    <br />
+    <label>AI Generation</label>
+    <span
+      class="clear-filter"
+      *ngIf="this.filters.is_seed"
+      (click)="clearIsSeed()"
+    >
+      [x]
+    </span>
+    <mat-radio-group color="primary" (change)="updateIsSeed($event)">
+      <mat-radio-button
+        *ngFor="let option of isSeedOptions"
+        [value]="option.value"
+        [checked]="option.value == this.filters.is_seed"
+        >{{ option.text }}</mat-radio-button
+      >
+    </mat-radio-group>
+
     <label>Status</label>
     <span
       class="clear-filter"

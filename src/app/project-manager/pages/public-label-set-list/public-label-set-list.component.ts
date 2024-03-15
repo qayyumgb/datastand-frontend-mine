@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Mixin } from 'ts-mixer';
 
 import { LabelSet } from '@app/interfaces';
@@ -29,8 +30,8 @@ export class PublicLabelSetListPage extends Mixin(
     super();
   }
 
-  override get items(): LabelSet[] {
-    return <LabelSet[]>this._items;
+  get labelSets$(): Observable<LabelSet[]> {
+    return <Observable<LabelSet[]>>this.items$;
   }
 
   getLabelSets() {

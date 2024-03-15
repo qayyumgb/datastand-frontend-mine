@@ -1,57 +1,16 @@
-@import "../../styles/common.scss";
-.corpus-card {
+// Card layout
+section {
+  width: 290px;
   height: 100%;
   word-wrap: break-word;
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
 }
-.task-card {
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 16px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-@media (max-width: 675px) {
-  .corpus-card {
-    margin-top: 1rem;
-    width: 100%;
-    overflow: hidden;
 
-    .card-img {
-      border-radius: 0px;
-      min-height: 150px;
-      max-height: 180px;
-    }
-    .mat-divider {
-      display: none;
-    }
-    .card-content {
-      height: unset !important;
-      flex-grow: 1;
-    }
-    .card-bottom {
-      border-top: 1px solid gainsboro;
-      padding: 10px;
-    }
-    .card-content-wrapper {
-      grid-column: 2/4;
-      display: flex;
-      flex-direction: column;
-    }
-  }
-}
-.card-content-wrapper {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
 .card-img {
   width: 100%;
-  height: 180px;
+  height: 80px;
   object-fit: cover;
   outline-offset: 0px;
   object-position: 50% 50%;
@@ -59,14 +18,14 @@
 }
 
 .card-content {
+  height: 180px;
   padding: 10px 16px;
-  flex-grow: 1;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
-  gap: 5px;
+  align-items: top;
 }
 
 .card-bottom {
@@ -78,40 +37,29 @@
 
 // Header
 .title-wigh-grey-info {
-  width: 70%;
+  width: 100%;
 }
 
 .title {
   font-size: 0.9rem;
   word-break: break-word;
   font-weight: 500;
-  color: #9c27b0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .grey-info {
-  margin-top: -2px;
-  color: rgb(0 0 0 / 58%);
+  margin-top: -3px;
+  color: rgb(0, 0, 0, 0.54);
   font-size: 0.7rem;
-  line-height: 1.4;
 }
 
 .data-icon {
-  color: rgb(156, 39, 176);
-  width: 35px;
-  min-width: 35px;
-  background: rgba(156, 39, 176, 0.18);
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-size: 20px;
+  color: rgb(0, 0, 0, 0.3);
+  margin-right: 10px;
+  width: 30px;
 }
 
 .private {
+  transform: scale(0.75);
   font-size: 15px !important;
   line-height: 15px !important;
   height: 18px !important;
@@ -142,18 +90,13 @@ a:hover {
 
 // More actions button
 .more-actions-icon {
+  transform: scale(0.7);
   font-size: 24px !important;
+  color: rgb(0, 0, 0, 0.54);
   margin-top: -4px;
 }
 
 .more-actions-icon:hover {
   cursor: pointer;
   color: rgb(0, 0, 0, 0.7);
-}
-.title-wrapper {
-  display: flex;
-  white-space: nowrap;
-}
-.progressbar {
-  margin-top: 0.2rem;
 }

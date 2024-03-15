@@ -1,31 +1,45 @@
 <pm-layout-li-with-actions *ngIf="text">
   <ng-container content>
-    <div class="flex-column">
-      <div class="caption-2 ellipsis" *ngIf="text.name">
-        Title: "{{ text.name }}"
+    <div class="flex gap-8">
+      <mat-checkbox
+        color="primary"
+        [checked]="isSelected"
+        (click)="toggleSelection()"
+      ></mat-checkbox>
+
+      <div class="flex-column">
+        <div class="caption-2 ellipsis" *ngIf="text.name">
+          Title: "{{ text.name }}"
+        </div>
+        <div class="mw-700px">
+          <div
+            (click)="openViewTextDialog(text)"
+            class="title-2 a-like clamp-3"
+            [title]="text.raw_string"
+            [innerText]="text.raw_string"
+          ></div>
+        </div>
+        <div class="caption-1 ellipsis">
+          ID #{{ text.id }} · {{ text.langtag }} ·
+          {{ text.raw_string.length! | number }} chars · Updated
+          {{ text.modified! | fromNow }}
+          <div *ngIf="text.description" [innerText]="text.description"></div>
+        </div>
+        <div class="flex gap-4">
+          <is-seed-chip
+            *ngIf="text.is_seed"
+            [isSeed]="text.is_seed"
+          ></is-seed-chip>
+          <is-pending-chip
+            *ngIf="text.status == 'pending'"
+            [isPending]="text.status == 'pending'"
+          ></is-pending-chip>
+        </div>
+        <pm-tag-list-truncated
+          *ngIf="text.tags?.length! > 0"
+          [tags]="text.tags"
+        ></pm-tag-list-truncated>
       </div>
-      <div class="title-2">
-        <p
-          (click)="openViewTextDialog(text)"
-          class="a-like clamp mw-80"
-          [title]="text.raw_string"
-        >
-          {{ text.raw_string }}
-        </p>
-      </div>
-      <div class="caption-1 ellipsis">
-        ID #{{ text.id }} · {{ text.langtag }} ·
-        {{ text.raw_string.length! | number }} chars · Updated
-        {{ text.modified! | fromNow }}
-        <ng-container *ngIf="text.is_generated && text.is_pending"
-          >· 🤖 AI generated
-        </ng-container>
-        <div *ngIf="text.description" [innerText]="text.description"></div>
-      </div>
-      <pm-tag-list-truncated
-        *ngIf="text.tags?.length! > 0"
-        [tags]="text.tags"
-      ></pm-tag-list-truncated>
     </div>
   </ng-container>
 
@@ -40,7 +54,7 @@
     </button>
     <ng-container *ngIf="isCreator()">
       <button
-        *ngIf="text.is_pending"
+        *ngIf="text.status != 'reviewed'"
         mat-icon-button
         class="medium"
         matTooltip="Mark as reviewed"
@@ -49,13 +63,31 @@
         <mat-icon>check</mat-icon>
       </button>
       <button
-        *ngIf="!text.is_pending"
+        *ngIf="text.status != 'pending'"
         mat-icon-button
         class="medium"
         matTooltip="Mark as pending"
         (click)="markTextAsPending(text)"
       >
         <mat-icon>warning</mat-icon>
+      </button>
+      <button
+        *ngIf="!text.is_seed"
+        mat-icon-button
+        class="medium"
+        matTooltip="Use as seed for AI generation"
+        (click)="markTextAsSeed(text)"
+      >
+        <mat-icon>local_florist</mat-icon>
+      </button>
+      <button
+        *ngIf="text.is_seed"
+        mat-icon-button
+        class="medium"
+        matTooltip="Don't use as seed for AI generation"
+        (click)="markTextAsNotSeed(text)"
+      >
+        <mat-icon>macro_off</mat-icon>
       </button>
       <button
         mat-icon-button

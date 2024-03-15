@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Mixin } from 'ts-mixer';
 
 import { Corpus } from '@app/interfaces';
@@ -29,8 +30,8 @@ export class PublicCorpusListPage extends Mixin(
     super();
   }
 
-  override get items(): Corpus[] {
-    return <Corpus[]>this._items;
+  get corpora$(): Observable<Corpus[]> {
+    return <Observable<Corpus[]>>this.items$;
   }
 
   getCorpora() {

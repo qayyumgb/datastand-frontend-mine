@@ -1,10 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { saveAs } from 'file-saver';
 import { Observable } from 'rxjs';
 
 import { environment } from '@app/environments';
 import { Label, LabelSet, User } from '@app/interfaces';
+
 import { AuthService } from './auth.service';
 import {
   BaseFilters,
@@ -31,7 +33,11 @@ interface LabelSetsApiResponse extends BaseListApiResponse {
 export class LabelSetService {
   url = `${environment.backendApiUrl}/label-sets`;
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private http: HttpClient,
+    private snackBar: MatSnackBar
+  ) {}
 
   copy(labelSetId: number): Observable<LabelSet> {
     return this.http.post<LabelSet>(`${this.url}/${labelSetId}/copy/`, null);
@@ -60,6 +66,9 @@ export class LabelSetService {
     labelSetFields: string[] = [],
     labelFields: string[] = []
   ) {
+    this.snackBar.open('⌛ Preparing Label Set download...', 'Dismiss', {
+      duration: 600_000,
+    });
     let params = new HttpParams({
       fromObject: {
         fields: labelSetFields.join(','),
@@ -73,6 +82,7 @@ export class LabelSetService {
       })
       .subscribe((blob) => {
         saveAs(blob, `label-set-${labelSetId}.json`);
+        this.snackBar.open('✅ Label Set downloaded successfully', 'Dismiss');
       });
   }
 

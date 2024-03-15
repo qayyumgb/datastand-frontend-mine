@@ -3,9 +3,9 @@
     <section class="data-cards-section">
       <pm-my-corpus-list-header-card></pm-my-corpus-list-header-card>
 
-      <loader-card *ngIf="isLoading()"></loader-card>
+      <loader-card *ngIf="isLoading$ | async"></loader-card>
       <pm-layout-results-with-paginator
-        *ngIf="isLoaded()"
+        *ngIf="isLoaded$ | async"
         singular="Corpus"
         plural="Corpora"
         [totalCount]="totalCount"
@@ -15,7 +15,7 @@
       >
         <ng-container listItems>
           <pm-corpus-li-item
-            *ngFor="let corpus of items"
+            *ngFor="let corpus of corpora$ | async"
             [corpus]="corpus"
             (deleteCorpusEvent)="deleteItemById($event)"
           ></pm-corpus-li-item>
@@ -23,7 +23,7 @@
 
         <ng-container cardItems>
           <pm-corpus-card
-            *ngFor="let corpus of items"
+            *ngFor="let corpus of corpora$ | async"
             [corpus]="corpus"
           ></pm-corpus-card>
         </ng-container>

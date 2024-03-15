@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Mixin } from 'ts-mixer';
 
 import { Corpus, LabelSet, Task } from '@app/interfaces';
-import { PaginatedItemListMixin } from '@app/mixins';
+import { LoadingStatusMixin, PaginatedItemListMixin } from '@app/mixins';
 import {
   AuthService,
   SearchFilters,
@@ -16,7 +17,10 @@ import {
   templateUrl: './search.component.html',
   styleUrls: ['../base-list-page.scss', '../../components/data-cards.scss'],
 })
-export class SearchPage extends Mixin(PaginatedItemListMixin) {
+export class SearchPage extends Mixin(
+  LoadingStatusMixin,
+  PaginatedItemListMixin
+) {
   filters: SearchFilters = { ordering: '-modified' };
   page?: number;
 
@@ -27,6 +31,7 @@ export class SearchPage extends Mixin(PaginatedItemListMixin) {
     public userSettings: UserSettingsService
   ) {
     super();
+    this.startLoading();
     this.route.queryParamMap.subscribe((params) => {
       this.filters = {
         creator: params.get('creator')!,
@@ -38,6 +43,7 @@ export class SearchPage extends Mixin(PaginatedItemListMixin) {
         ordering: params.get('ordering')!,
         tag: params.get('tag')!,
       };
+      this.page = Number(this.filters?.page!);
       // Use merge to combine the observables from the three services
       // into one observable that emits a single array of results
       // when all three observables have emitted their results.
@@ -46,13 +52,13 @@ export class SearchPage extends Mixin(PaginatedItemListMixin) {
         .subscribe((res) => {
           this.setItems(res.results);
           this.setTotalCount(res.count);
+          this.stopLoading();
         });
-      this.page = Number(this.filters?.page!);
     });
   }
 
-  override get items(): (Corpus | LabelSet | Task)[] {
-    return <(Corpus | LabelSet | Task)[]>this._items;
+  get elements$(): Observable<(Corpus | LabelSet | Task)[]> {
+    return <Observable<(Corpus | LabelSet | Task)[]>>this.items$;
   }
 
   asCorpus(item: any): Corpus {

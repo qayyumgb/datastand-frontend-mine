@@ -69,7 +69,7 @@ export class TopbarComponent {
     private store: Store,
     private auth: AuthService,
     public urls: UrlsService
-    ) {
+  ) {
     this.taskTextId = Number(this.route.snapshot.paramMap.get('taskTextId')!);
   }
 

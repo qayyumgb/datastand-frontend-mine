@@ -3,90 +3,94 @@
     <section class="data-cards-section">
       <pm-search-header-card></pm-search-header-card>
 
-      <div class="container" *ngIf="items">
-        <!-- Layout button -->
-        <div class="flex results">
-          <span class="results-count" *ngIf="totalCount! == 1">
-            {{ totalCount | number }} Result for <i>"{{ this.filters.q }}"</i>
-          </span>
-          <span class="results-count" *ngIf="totalCount! > 1">
-            {{ totalCount | number }} Results for <i>"{{ this.filters.q }}"</i>
-          </span>
-          <span class="results-count" *ngIf="!totalCount"
-            >No results found for <i>"{{ this.filters.q }}"</i> 👾</span
-          >
+      <loader-card *ngIf="isLoading$ | async"></loader-card>
+      <ng-container *ngIf="isLoaded$ | async">
+        <div class="container" *ngIf="elements$ | async as items">
+          <!-- Layout button -->
+          <div class="flex results">
+            <span class="results-count" *ngIf="totalCount! == 1">
+              {{ totalCount | number }} Result for <i>"{{ this.filters.q }}"</i>
+            </span>
+            <span class="results-count" *ngIf="totalCount! > 1">
+              {{ totalCount | number }} Results for
+              <i>"{{ this.filters.q }}"</i>
+            </span>
+            <span class="results-count" *ngIf="!totalCount"
+              >No results found for <i>"{{ this.filters.q }}"</i> 👾</span
+            >
 
-          <div class="layout-buttons 1">
-            <button
-              *ngIf="!userSettings.isCardLayout()"
-              mat-icon-button
-              matTooltip="Grid layout"
-              class="normal"
-              (click)="userSettings.toggleLayout()"
-            >
-              <mat-icon>grid_on</mat-icon>
-            </button>
-            <button
-              *ngIf="!userSettings.isListLayout()"
-              mat-icon-button
-              matTooltip="List layout"
-              class="normal"
-              (click)="userSettings.toggleLayout()"
-            >
-              <mat-icon>view_list</mat-icon>
-            </button>
+            <div class="layout-buttons">
+              <button
+                *ngIf="!userSettings.isCardLayout()"
+                mat-icon-button
+                matTooltip="Grid layout"
+                class="normal"
+                (click)="userSettings.toggleLayout()"
+              >
+                <mat-icon>grid_on</mat-icon>
+              </button>
+              <button
+                *ngIf="!userSettings.isListLayout()"
+                mat-icon-button
+                matTooltip="List layout"
+                class="normal"
+                (click)="userSettings.toggleLayout()"
+              >
+                <mat-icon>view_list</mat-icon>
+              </button>
+            </div>
           </div>
-        </div>
-        <!-- List layout -->
-        <div *ngIf="userSettings.isListLayout()">
-          <ul class="data-table">
-            <li *ngFor="let item of items">
-              <ng-container [ngSwitch]="item.klass">
-                <pm-corpus-li-item
-                  *ngSwitchCase="'corpus'"
-                  [corpus]="asCorpus(item)"
-                ></pm-corpus-li-item>
-                <pm-label-set-li-item
-                  *ngSwitchCase="'label-set'"
-                  [labelSet]="asLabelSet(item)"
-                ></pm-label-set-li-item>
-                <pm-task-li-item
-                  *ngSwitchCase="'task'"
-                  [task]="asTask(item)"
-                ></pm-task-li-item>
-              </ng-container>
-            </li>
-          </ul>
-        </div>
-        <!-- Grid layout -->
-        <div class="data-card-container" *ngIf="userSettings.isCardLayout()">
-          <ng-container *ngIf="items?.length! > 0">
-            <ng-container *ngFor="let item of items">
-              <ng-container [ngSwitch]="item.klass">
-                <pm-corpus-card
-                  *ngSwitchCase="'corpus'"
-                  [corpus]="asCorpus(item)"
-                ></pm-corpus-card>
-                <pm-label-set-card
-                  *ngSwitchCase="'label-set'"
-                  [labelSet]="asLabelSet(item)"
-                ></pm-label-set-card>
-                <pm-task-card
-                  *ngSwitchCase="'task'"
-                  [task]="asTask(item)"
-                ></pm-task-card>
+          <!-- List layout -->
+          <div *ngIf="userSettings.isListLayout()">
+            <ul class="data-table">
+              <li *ngFor="let item of elements$ | async">
+                <ng-container [ngSwitch]="item.klass">
+                  <pm-corpus-li-item
+                    *ngSwitchCase="'corpus'"
+                    [corpus]="asCorpus(item)"
+                  ></pm-corpus-li-item>
+                  <pm-label-set-li-item
+                    *ngSwitchCase="'label-set'"
+                    [labelSet]="asLabelSet(item)"
+                  ></pm-label-set-li-item>
+                  <pm-task-li-item
+                    *ngSwitchCase="'task'"
+                    [task]="asTask(item)"
+                  ></pm-task-li-item>
+                </ng-container>
+              </li>
+            </ul>
+          </div>
+          <!-- Grid layout -->
+          <div class="data-card-container" *ngIf="userSettings.isCardLayout()">
+            <ng-container *ngIf="(elements$ | async)?.length! > 0">
+              <ng-container *ngFor="let item of elements$ | async">
+                <ng-container [ngSwitch]="item.klass">
+                  <pm-corpus-card
+                    *ngSwitchCase="'corpus'"
+                    [corpus]="asCorpus(item)"
+                  ></pm-corpus-card>
+                  <pm-label-set-card
+                    *ngSwitchCase="'label-set'"
+                    [labelSet]="asLabelSet(item)"
+                  ></pm-label-set-card>
+                  <pm-task-card
+                    *ngSwitchCase="'task'"
+                    [task]="asTask(item)"
+                  ></pm-task-card>
+                </ng-container>
               </ng-container>
             </ng-container>
-          </ng-container>
+          </div>
+          <!-- Paginator -->
+          <pm-paginator
+            [page]="page!"
+            [count]="totalCount!"
+            [pageSize]="50"
+            [currentPageSize]="paginatedCount"
+          ></pm-paginator>
         </div>
-        <!-- Paginator -->
-        <pm-paginator
-          [page]="page!"
-          [count]="totalCount!"
-          [pageSize]="50"
-          [currentPageSize]="paginatedCount"
-        ></pm-paginator>
-      </div>
+      </ng-container>
     </section>
   </mat-sidenav-content>
   <mat-sidenav mode="side" position="end" opened>

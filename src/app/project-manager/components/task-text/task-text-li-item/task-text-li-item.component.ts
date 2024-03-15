@@ -25,9 +25,13 @@ export interface IcopyTaskTextEvent {
 export class TaskTextLiItemComponent {
   @Input() taskText?: Text;
   @Input() taskId?: number;
+  @Input() isSelected?: boolean = false;
   @Output() acceptSuggestionEvent = new EventEmitter<Text>();
   @Output() copyTaskTextEvent = new EventEmitter<IcopyTaskTextEvent>(); // copied TaskText
   @Output() deleteTaskTextEvent = new EventEmitter<number>(); // taskTextId
+  @Output() selectTaskTextEvent = new EventEmitter<number>(); // textId
+  @Output() deselectTaskTextEvent = new EventEmitter<number>(); // textId
+
   statusEnum = StatusEnum;
 
   constructor(
@@ -67,6 +71,18 @@ export class TaskTextLiItemComponent {
     return this.auth.username === this.taskText?.creator?.username;
   }
 
+  setAsNotSeed(taskText: Text) {
+    this.textService
+      .setAsNotSeed(taskText.id!)
+      .subscribe((res: Text) => (this.taskText = res));
+  }
+
+  setAsSeed(taskText: Text) {
+    this.textService
+      .setAsSeed(taskText.id!)
+      .subscribe((res: Text) => (this.taskText = res));
+  }
+
   setStatusToPending(taskText: Text) {
     this.textService
       .setStatusToPending(taskText.id!)
@@ -101,5 +117,14 @@ export class TaskTextLiItemComponent {
     this.dialog.open(ViewTaskTextDialogComponent, {
       data: taskText,
     });
+  }
+
+  toggleSelection() {
+    this.isSelected = !this.isSelected;
+    if (this.isSelected) {
+      this.selectTaskTextEvent.emit(this.taskText?.id!);
+    } else {
+      this.deselectTaskTextEvent.emit(this.taskText?.id!);
+    }
   }
 }

@@ -11,10 +11,10 @@ describe('TokenizerUtils', () => {
   it('test adjustBoundariesToSpans (conformant: no change)', () => {
     const spans = [
       {
-        id: '1',
+        id: 1,
         start: 0,
         end: 1,
-        labelId: '1',
+        label: 1,
         created: new Date('2023-06-14T19:53:11.864Z'),
       },
     ];
@@ -27,10 +27,10 @@ describe('TokenizerUtils', () => {
   it('test adjustBoundariesToSpans (add start + end)', () => {
     const spans = [
       {
-        id: '1',
+        id: 1,
         start: 1,
         end: 2,
-        labelId: '1',
+        label: 1,
         created: new Date('2023-06-14T19:53:11.864Z'),
       },
     ];
@@ -43,10 +43,10 @@ describe('TokenizerUtils', () => {
   it('test adjustBoundariesToSpans (add end)', () => {
     const spans = [
       {
-        id: '1',
+        id: 1,
         start: 1,
         end: 2,
-        labelId: '1',
+        label: 1,
         created: new Date('2023-06-14T19:53:11.864Z'),
       },
     ];
@@ -59,10 +59,10 @@ describe('TokenizerUtils', () => {
   it('test adjustBoundariesToSpans (add start)', () => {
     const spans = [
       {
-        id: '1',
+        id: 1,
         start: 1,
         end: 2,
-        labelId: '1',
+        label: 1,
         created: new Date('2023-06-14T19:53:11.864Z'),
       },
     ];
@@ -75,10 +75,10 @@ describe('TokenizerUtils', () => {
   it('test adjustBoundariesToSpans (remove boundaries inside)', () => {
     const spans = [
       {
-        id: '1',
+        id: 1,
         start: 1,
         end: 4,
-        labelId: '1',
+        label: 1,
         created: new Date('2023-06-14T19:53:11.864Z'),
       },
     ];
@@ -91,10 +91,10 @@ describe('TokenizerUtils', () => {
   it('test adjustBoundariesToSpans (remove + add boundaries)', () => {
     const spans = [
       {
-        id: '1',
+        id: 1,
         start: 1,
         end: 4,
-        labelId: '1',
+        label: 1,
         created: new Date('2023-06-14T19:53:11.864Z'),
       },
     ];

@@ -19,9 +19,9 @@ const OVERLAPPING_SPAN_RESULT = <ValidationResult>{
 
 describe('AnnotationUtils', () => {
   it('test createSpan', () => {
-    let span1 = annotation.createSpan(0, 1, '1');
-    let span2 = annotation.createSpan(0, 2, '1');
-    let span3 = annotation.createSpan(1, 3, '1');
+    let span1 = annotation.createSpan(0, 1, 1);
+    let span2 = annotation.createSpan(0, 2, 1);
+    let span3 = annotation.createSpan(1, 3, 1);
 
     let sortedSpans = annotation.sortSpans([span2, span1, span3]);
     expect(sortedSpans.length).toEqual(3);
@@ -31,27 +31,29 @@ describe('AnnotationUtils', () => {
   });
 
   it('test createSpanId', () => {
-    expect(annotation.createSpanId(0, 1)).toEqual('0,1');
+    expect(annotation.createSpanId(1, 2)).toEqual(-1);
   });
 
   it('test getElementsForDisplay', () => {
     let spans: Span[] = [
       {
-        id: '1,2',
+        id: -1,
         start: 1,
         end: 2,
-        label: 'label1',
+        label: 1,
         source: SpanSource.Manual,
         status: SpanStatus.Accepted,
         created: new Date('2023-06-14T19:53:11.864Z'),
       },
     ];
     let labelEntities: Dictionary<Label> = {
-      label1: {
-        id: 'label1',
+      1: {
+        id: 1,
         name: 'label 1',
         value: 'LABEL_1',
         color: '#fff',
+        object_id: 1,
+        content_type: 'labelset',
       },
     };
 
@@ -69,10 +71,11 @@ describe('AnnotationUtils', () => {
       content: 'a',
     });
     expect(tokensOrSpans[1]).toEqual(<SpanForDisplay>{
-      id: '1,2',
+      id: -1,
       start: 1,
       end: 2,
-      label: 'label1',
+      object_id: 1,
+      content_type: 'labelset',
       labelContent: 'label 1',
       content: 'b',
       source: SpanSource.Manual,
@@ -91,21 +94,23 @@ describe('AnnotationUtils', () => {
   it('test getSpansForDisplay', () => {
     let spans: Span[] = [
       {
-        id: '1,2',
+        id: -1,
         start: 1,
         end: 2,
-        label: 'label1',
+        label: 1,
         source: SpanSource.Manual,
         status: SpanStatus.Accepted,
         created: new Date('2023-06-14T19:53:11.864Z'),
       },
     ];
     let labelEntities: Dictionary<Label> = {
-      label1: {
-        id: 'label1',
+      1: {
+        id: 1,
         name: 'label 1',
         value: 'LABEL_1',
         color: '#fff',
+        object_id: 1,
+        content_type: 'labelset',
       },
     };
     let spansForDisplay = annotation.getSpansForDisplay(
@@ -115,10 +120,10 @@ describe('AnnotationUtils', () => {
     );
     expect(spansForDisplay.length).toEqual(1);
     expect(spansForDisplay[0]).toEqual(<SpanForDisplay>{
-      id: '1,2',
+      id: -1,
       start: 1,
       end: 2,
-      label: 'label1',
+      label: 1,
       labelContent: 'label 1',
       content: 'b',
       source: SpanSource.Manual,
@@ -131,21 +136,23 @@ describe('AnnotationUtils', () => {
   it('test getSpansForDisplayDict', () => {
     let spans: Span[] = [
       {
-        id: '1,2',
+        id: -1,
         start: 1,
         end: 2,
-        label: 'label1',
+        label: 1,
         source: SpanSource.Manual,
         status: SpanStatus.Accepted,
         created: new Date('2023-06-14T19:53:11.864Z'),
       },
     ];
     let labelEntities: Dictionary<Label> = {
-      label1: {
-        id: 'label1',
+      1: {
+        id: 1,
         name: 'label 1',
         value: 'LABEL_1',
         color: '#fff',
+        object_id: 1,
+        content_type: 'labelset',
       },
     };
     let spansForDisplay = annotation.getSpansForDisplayDict(
@@ -155,10 +162,10 @@ describe('AnnotationUtils', () => {
     );
     expect(Object.keys(spansForDisplay).length).toEqual(1);
     expect(spansForDisplay['1,2']).toEqual(<SpanForDisplay>{
-      id: '1,2',
+      id: -1,
       start: 1,
       end: 2,
-      label: 'label1',
+      label: 1,
       labelContent: 'label 1',
       content: 'b',
       source: SpanSource.Manual,
@@ -173,7 +180,7 @@ describe('AnnotationUtils', () => {
       id: -1,
       start: 0,
       end: 3,
-      label: 'label1',
+      label: 1,
       source: SpanSource.Manual,
       status: SpanStatus.Accepted,
     };
@@ -186,7 +193,7 @@ describe('AnnotationUtils', () => {
       id: -1,
       start: 0,
       end: 1,
-      label: 'label1',
+      label: 1,
     };
     let result = annotation.validateSpan(span);
     expect(result).toEqual({
@@ -197,10 +204,9 @@ describe('AnnotationUtils', () => {
 
   it('test validateSpan with an invalid span (empty-label-id)', () => {
     let span = <Span>{
-      id: 'span0',
+      id: 0,
       start: 0,
       end: 1,
-      label: '',
     };
     let result = annotation.validateSpan(span);
     expect(result).toEqual({
@@ -211,10 +217,10 @@ describe('AnnotationUtils', () => {
 
   it('test validateSpan with an invalid span (negative-start)', () => {
     let span = <Span>{
-      id: 'span0',
+      id: 0,
       start: -1,
       end: 1,
-      label: 'label1',
+      label: 1,
     };
     let result = annotation.validateSpan(span);
     expect(result).toEqual({
@@ -227,10 +233,10 @@ describe('AnnotationUtils', () => {
 
   it('test validateSpan with an invalid span (negative-end)', () => {
     let span = <Span>{
-      id: 'span0',
+      id: 0,
       start: 0,
       end: -1,
-      label: 'label1',
+      label: 1,
     };
     let result = annotation.validateSpan(span);
     expect(result).toEqual({
@@ -248,10 +254,10 @@ describe('AnnotationUtils', () => {
 
   it('test validateSpan with an invalid span (invalid-range)', () => {
     let span = <Span>{
-      id: 'span0',
+      id: 0,
       start: 1,
       end: 0,
-      label: 'label1',
+      label: 1,
     };
     let result = annotation.validateSpan(span);
     expect(result).toEqual({
@@ -267,10 +273,10 @@ describe('AnnotationUtils', () => {
 
   it('test validateSpan with an invalid span (invalid-range: zero)', () => {
     let span = <Span>{
-      id: 'span0',
+      id: 0,
       start: 1,
       end: 0,
-      label: 'label1',
+      label: 1,
     };
     let result = annotation.validateSpan(span);
     expect(result).toEqual({
@@ -286,10 +292,10 @@ describe('AnnotationUtils', () => {
 
   it('test validateSpanInContext with a valid span', () => {
     const span = {
-      id: 'span0',
+      id: 0,
       start: 0,
       end: 1,
-      labelId: 'label1',
+      labelId: 1,
       created: new Date('2023-06-14T19:53:11.864Z'),
     };
     const spans = <Span[]>[];
@@ -299,26 +305,26 @@ describe('AnnotationUtils', () => {
 
   it('test validateSpanInContext with a valid span (adjacent left)', () => {
     const span = {
-      id: 'span0',
+      id: 0,
       start: 0,
       end: 2,
-      labelId: 'label1',
+      labelId: 1,
       created: new Date('2023-06-14T19:53:11.864Z'),
     };
-    const spans = <Span[]>[{ id: 'span1', start: 2, end: 3, label: 'label1' }];
+    const spans = <Span[]>[{ id: 1, start: 2, end: 3, label: 1 }];
     const result = annotation.validateSpanInContext(span, spans);
     expect(result).toEqual({ isValid: true, errors: [] });
   });
 
   it('test validateSpanInContext with a valid span (adjacent right)', () => {
     const span = {
-      id: 'span0',
+      id: 0,
       start: 0,
       end: 2,
-      labelId: 'label1',
+      labelId: 1,
       created: new Date('2023-06-14T19:53:11.864Z'),
     };
-    const spans = <Span[]>[{ id: 'span1', start: 2, end: 3, label: 'label1' }];
+    const spans = <Span[]>[{ id: 1, start: 2, end: 3, label: 1 }];
     const result = annotation.validateSpanInContext(span, spans);
     expect(result).toEqual({ isValid: true, errors: [] });
   });
@@ -327,10 +333,10 @@ describe('AnnotationUtils', () => {
     // Note: other cases which test the validity of the span in isolation are already
     // tested under validateSpan().
     const span = {
-      id: 'span0',
+      id: 0,
       start: -1,
       end: 1,
-      labelId: 'label1',
+      labelId: 1,
       created: new Date('2023-06-14T19:53:11.864Z'),
     };
     const spans = <Span[]>[];
@@ -345,65 +351,65 @@ describe('AnnotationUtils', () => {
 
   it('test validateSpanInContext with an invalid span (repeated)', () => {
     const span = {
-      id: 'span0',
+      id: 0,
       start: 0,
       end: 1,
-      labelId: 'label1',
+      labelId: 1,
       created: new Date('2023-06-14T19:53:11.864Z'),
     };
-    const spans = <Span[]>[{ id: 'span0', start: 0, end: 1, label: 'label1' }];
+    const spans = <Span[]>[{ id: 0, start: 0, end: 1, label: 1 }];
     const result = annotation.validateSpanInContext(span, spans);
     expect(result).toEqual(OVERLAPPING_SPAN_RESULT);
   });
 
   it('test validateSpanInContext with an invalid span (contained)', () => {
     const span = {
-      id: 'span0',
+      id: 0,
       start: 0,
       end: 1,
-      labelId: 'label1',
+      labelId: 1,
       created: new Date('2023-06-14T19:53:11.864Z'),
     };
-    const spans = <Span[]>[{ id: 'span0', start: 0, end: 2, label: 'label1' }];
+    const spans = <Span[]>[{ id: 0, start: 0, end: 2, label: 1 }];
     const result = annotation.validateSpanInContext(span, spans);
     expect(result).toEqual(OVERLAPPING_SPAN_RESULT);
   });
 
   it('test validateSpanInContext with an invalid span (contains)', () => {
     const span = {
-      id: 'span0',
+      id: 0,
       start: 0,
       end: 3,
-      labelId: 'label1',
+      labelId: 1,
       created: new Date('2023-06-14T19:53:11.864Z'),
     };
-    const spans = <Span[]>[{ id: 'span0', start: 1, end: 2, label: 'label1' }];
+    const spans = <Span[]>[{ id: 0, start: 1, end: 2, label: 1 }];
     const result = annotation.validateSpanInContext(span, spans);
     expect(result).toEqual(OVERLAPPING_SPAN_RESULT);
   });
 
   it('test validateSpanInContext with an invalid span (overlap left)', () => {
     const span = {
-      id: 'span0',
+      id: 0,
       start: 1,
       end: 3,
-      labelId: 'label1',
+      labelId: 1,
       created: new Date('2023-06-14T19:53:11.864Z'),
     };
-    const spans = <Span[]>[{ id: 'span0', start: 0, end: 2, label: 'label1' }];
+    const spans = <Span[]>[{ id: 0, start: 0, end: 2, label: 1 }];
     const result = annotation.validateSpanInContext(span, spans);
     expect(result).toEqual(OVERLAPPING_SPAN_RESULT);
   });
 
   it('test validateSpanInContext with an invalid span (overlap right)', () => {
     const span = {
-      id: 'span0',
+      id: 0,
       start: 1,
       end: 3,
-      labelId: 'label1',
+      labelId: 1,
       created: new Date('2023-06-14T19:53:11.864Z'),
     };
-    const spans = <Span[]>[{ id: 'span0', start: 2, end: 4, label: 'label1' }];
+    const spans = <Span[]>[{ id: 0, start: 2, end: 4, label: 1 }];
     const result = annotation.validateSpanInContext(span, spans);
     expect(result).toEqual(OVERLAPPING_SPAN_RESULT);
   });

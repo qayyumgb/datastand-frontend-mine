@@ -1,13 +1,13 @@
 <section class="paginator" *ngIf="count">
   <div class="pages">
-    <button class="prev"
+    <button
       mat-stroked-button
       (click)="navigateToPreviousPage()"
       [disabled]="!hasPreviousPage()"
     >
       ‹
     </button>
-    <button class="page-num"
+    <button
       mat-stroked-button
       *ngFor="let pageNum of getPageNumbers(page, lastPage)"
       (click)="navigateToPage(pageNum)"
@@ -16,7 +16,7 @@
     >
       {{ pageNum }}
     </button>
-    <button class="next"
+    <button
       mat-stroked-button
       (click)="navigateToNextPage()"
       [disabled]="!hasNextPage()"

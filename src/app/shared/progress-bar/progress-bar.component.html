@@ -1,4 +1,7 @@
 <div class="progress-bar" *ngIf="value">
-  <mat-progress-bar mode="determinate" [value]="value * 100"></mat-progress-bar>
+  <mat-progress-bar
+    mode="determinate"
+    [value]="valueForDisplay"
+  ></mat-progress-bar>
   <div class="value">{{ value | percent }}</div>
 </div>

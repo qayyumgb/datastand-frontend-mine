@@ -18,6 +18,7 @@ export class TaskTextListFiltersComponent extends BaseListFiltersDirective {
   @Output() override updateFiltersEvent = new EventEmitter<TextFilters>();
   langTagOptions?: LangTag[];
   statusOptions?;
+  isSeedOptions?;
 
   constructor(
     private langTagService: LangTagService,
@@ -25,6 +26,10 @@ export class TaskTextListFiltersComponent extends BaseListFiltersDirective {
     public override route: ActivatedRoute
   ) {
     super(router, route);
+    this.isSeedOptions = [
+      { text: 'Seed texts', value: 'true' },
+      { text: 'Not seed texts', value: 'false' },
+    ];
     // Override ordering options
     this.orderingOptions = [
       { text: 'Last updated', value: '-modified' },
@@ -43,6 +48,13 @@ export class TaskTextListFiltersComponent extends BaseListFiltersDirective {
       .subscribe((langTags) => (this.langTagOptions = langTags));
   }
 
+  clearIsSeed() {
+    if (this.filters.is_seed) {
+      delete this.filters.is_seed;
+      this.emitAndNavigate();
+    }
+  }
+
   clearLangTag() {
     if (this.filters.langtag) {
       delete this.filters.langtag;
@@ -55,6 +67,11 @@ export class TaskTextListFiltersComponent extends BaseListFiltersDirective {
       delete this.filters.status;
       this.emitAndNavigate();
     }
+  }
+
+  updateIsSeed(change: MatRadioChange) {
+    this.filters.is_seed = change.value;
+    this.emitAndNavigate();
   }
 
   updateLangTag(change: MatSelectChange) {

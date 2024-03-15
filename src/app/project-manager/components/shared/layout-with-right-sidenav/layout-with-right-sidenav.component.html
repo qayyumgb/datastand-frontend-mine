@@ -1,16 +1,13 @@
-<mat-sidenav-container autosize class="filter-aside show">
+<mat-sidenav-container autosize>
   <mat-sidenav-content>
     <section class="flex-column gap-16 p-16">
-<div class="filter-btn-wrapper">
-  <button mat-raised-button color="primary" (click)="showfilterhandling($event)">  <mat-icon>filter_list</mat-icon> Filter</button>
-</div>
       <ng-content select="[content]"></ng-content>
     </section>
   </mat-sidenav-content>
   <mat-sidenav
     position="end"
     [mode]="(screen.isExtraLarge$ | async) ? 'over' : 'side'"
-    [opened]="!(screen.isExtraLarge$ | async) || showfilter ? 'true' : 'false'"
+    [opened]="(screen.isExtraLarge$ | async) ? 'false' : 'true'"
   >
     <ng-content select="[filters]"></ng-content>
   </mat-sidenav>

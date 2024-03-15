@@ -19,31 +19,3 @@
 @import "./theme";
 @import "./truncate";
 @import "./typography";
-@import "./common.scss";
-
-.mdc-dialog__title{
-    padding: 0 15px 9px !important;
-}
-.mdc-dialog .mdc-dialog__content {
-    padding: 20px 15px 20px 15px !important;
-}
-.cdk-overlay-pane{
-    @media (max-width:500) {
-        max-width: 95vw !important;
-        width: 100% !important;
-    }
-}
-.my-1{
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-}
-.pointer{
-    cursor: pointer;
-}
-
-@media (min-width:768px) {
-    .mat-mdc-dialog-container .mdc-dialog__surface{
-        min-width: 700px !important;
-        width: 100% !important;
-    }
-}

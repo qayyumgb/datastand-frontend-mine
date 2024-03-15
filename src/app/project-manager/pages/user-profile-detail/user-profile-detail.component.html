@@ -1,6 +1,6 @@
 <section>
-  <loader-card *ngIf="isLoading()"></loader-card>
-  <ng-container *ngIf="isLoaded()">
+  <loader-card *ngIf="isLoading$ | async"></loader-card>
+  <ng-container *ngIf="isLoaded$ | async">
     <pm-user-details-header-card
       [userProfile]="userProfile"
     ></pm-user-details-header-card>

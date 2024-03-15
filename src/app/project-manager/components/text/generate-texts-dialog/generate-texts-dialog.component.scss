@@ -1,5 +1,19 @@
-
+mat-dialog-content {
+  width: 600px !important;
+}
 
 mat-form-field {
   width: 100%;
+}
+
+.generated-texts {
+  border: 1px solid rgb(0, 0, 0, 0.12);
+  border-radius: 4px;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.text {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+  padding: 16px;
 }

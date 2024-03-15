@@ -12,8 +12,15 @@
     <!-- Creator action buttons -->
     <ng-container *ngIf="isCreator">
       <button
+        mat-flat-button
+        color="primary"
+        class="small"
+        (click)="openTaskDownloadDialog()"
+      >
+        <mat-icon>download</mat-icon> Download
+      </button>
+      <button
         mat-icon-button
-        class="horizon-dot"
         [matMenuTriggerFor]="actionsMenu"
         *ngIf="isCreator"
       >

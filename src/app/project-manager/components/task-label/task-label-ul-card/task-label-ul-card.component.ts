@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Mixin } from 'ts-mixer';
 
 import { Label, Task } from '@app/interfaces';
@@ -44,8 +44,8 @@ export class TaskLabelUlCardComponent
   // Paginator data
   page?: number;
 
-  override get items(): Label[] {
-    return <Label[]>this._items;
+  get labels$(): Observable<Label[]> {
+    return <Observable<Label[]>>this.items$;
   }
 
   constructor(

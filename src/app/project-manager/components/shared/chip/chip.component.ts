@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+type ChipColor = 'purple' | 'orange' | 'red' | 'grey';
+
 @Component({
   selector: 'chip',
   templateUrl: './chip.component.html',
@@ -8,4 +10,5 @@ import { Component, Input } from '@angular/core';
 export class ChipComponent {
   @Input() matIcon?: string;
   @Input() text?: string;
+  @Input() color?: ChipColor = 'purple';
 }

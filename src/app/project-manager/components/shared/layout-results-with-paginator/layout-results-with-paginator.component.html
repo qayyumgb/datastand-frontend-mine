@@ -7,34 +7,53 @@
     <span class="results-count" *ngIf="totalCount! > 1">
       {{ totalCount | number }} {{ plural }}
     </span>
-    <span class="results-count" *ngIf="!totalCount">No {{ plural }} found 👾</span>
+    <span class="results-count" *ngIf="!totalCount"
+      >No {{ plural }} found 👾</span
+    >
 
-    <div class="layout-buttons 2">
-        <ng-container *ngIf="!isMobile">
-        <button *ngIf="!userSettings.isCardLayout()" mat-icon-button matTooltip="Grid layout" class="normal"
-          (click)="userSettings.toggleLayout()">
-          <mat-icon>grid_on</mat-icon>
-        </button>
-        <button *ngIf="!userSettings.isListLayout()" mat-icon-button matTooltip="List layout" class="normal"
-          (click)="userSettings.toggleLayout()">
-          <mat-icon>view_list</mat-icon>
-        </button>
-      </ng-container>
-        <button mat-icon-button matTooltip="Refresh" class="normal" (click)="refreshData()">
-          <mat-icon>refresh</mat-icon>
-        </button>
-      </div>
+    <div class="layout-buttons">
+      <button
+        *ngIf="!userSettings.isCardLayout()"
+        mat-icon-button
+        matTooltip="Grid layout"
+        class="normal"
+        (click)="userSettings.toggleLayout()"
+      >
+        <mat-icon>grid_on</mat-icon>
+      </button>
+      <button
+        *ngIf="!userSettings.isListLayout()"
+        mat-icon-button
+        matTooltip="List layout"
+        class="normal"
+        (click)="userSettings.toggleLayout()"
+      >
+        <mat-icon>view_list</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="Refresh"
+        class="normal"
+        (click)="refreshData()"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
   </div>
   <!-- List layout -->
-  <div *ngIf="userSettings.isListLayout() && !isMobile">
+  <div *ngIf="userSettings.isListLayout()">
     <ul class="data-table">
       <ng-content select="[listItems]"></ng-content>
     </ul>
   </div>
   <!-- Grid layout -->
-  <div class="data-card-container" *ngIf="userSettings.isCardLayout() || isMobile">
+  <div class="data-card-container" *ngIf="userSettings.isCardLayout()">
     <ng-content select="[cardItems]"></ng-content>
   </div>
   <!-- Paginator -->
-  <pm-paginator [page]="page!" [count]="totalCount!" [currentPageSize]="paginatedCount"></pm-paginator>
+  <pm-paginator
+    [page]="page!"
+    [count]="totalCount!"
+    [currentPageSize]="paginatedCount"
+  ></pm-paginator>
 </div>

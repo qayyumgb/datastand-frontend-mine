@@ -4,23 +4,10 @@
   border: 1px solid rgb(0, 0, 0, 0.12);
   border-radius: 4px;
   background-color: #fff;
-  position: relative;
 }
 
 .li-card {
   padding: 16px;
   background-color: #fff;
   border-bottom: 1px solid rgb(0, 0, 0, 0.12);
-  @media (max-width:768px) {
-  //  padding: 0 !important;
-  }
-}
-.action-group{
-  display: none;
-}
-.li-card:hover{
-  .action-group{
-    display: flex;
-    align-items: center;
-  }
 }

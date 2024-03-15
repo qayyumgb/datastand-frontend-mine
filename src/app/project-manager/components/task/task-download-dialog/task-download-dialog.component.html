@@ -1,0 +1,118 @@
+<h1 mat-dialog-title>Download Corpus</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <section class="entities-fields">
+      <div formGroupName="taskFields">
+        <p>Corpus field(s):</p>
+        <mat-checkbox color="primary" formControlName="created"
+          >created</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="creator"
+          >creator</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="description"
+          >description</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="forked_from"
+          >forked_from</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="image"
+          >image</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="is_public"
+          >is_public</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="langtag"
+          >langtag</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="modified"
+          >modified</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="name">name</mat-checkbox>
+      </div>
+      <div formGroupName="textFields">
+        <p>Text field(s):</p>
+        <mat-checkbox color="primary" formControlName="author"
+          >author</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="created"
+          >created</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="date_published"
+          >date_published</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="description"
+          >description</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="id">id</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="is_pending"
+          >is_pending</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="langtag"
+          >langtag</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="modified"
+          >modified</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="name">name</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="status"
+          >status</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="raw_string"
+          >raw_string</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="tags">tags</mat-checkbox>
+      </div>
+      <div formGroupName="labelFields">
+        <p>Label field(s):</p>
+        <mat-checkbox color="primary" formControlName="author"
+          >author</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="created"
+          >created</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="date_published"
+          >date_published</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="description"
+          >description</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="id">id</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="is_pending"
+          >is_pending</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="modified"
+          >modified</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="name">name</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="status"
+          >status</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="raw_string"
+          >raw_string</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="tags">tags</mat-checkbox
+        ><br />
+        <mat-checkbox color="primary" formControlName="value"
+          >value</mat-checkbox
+        ><br />
+      </div>
+    </section>
+  </mat-dialog-content>
+  <mat-dialog-actions [align]="'end'">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="true"
+      [disabled]="!hasSelectedFields()"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

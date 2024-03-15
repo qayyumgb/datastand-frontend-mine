@@ -7,8 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class TagListTruncatedComponent {
   @Input() tags?: string[];
- constructor(){
-
- }
-  
 }

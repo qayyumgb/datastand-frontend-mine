@@ -4,7 +4,7 @@ $buttonInfo: (
   "small": 18px,
   "medium": 24px,
   "normal": 30px,
-  "large": 48px
+  "large": 48px,
 );
 $button-ratio: 0.8;
 $icon-button-ratio: 0.666;
@@ -30,23 +30,12 @@ $icon-button-ratio: 0.666;
     }
   }
 }
-.show-text-lg {
-  @media (max-width: 768px) {
-    min-width: 0px !important;
-  }
-  .mdc-button__label {
-    display: block;
-    @media (max-width: 768px) {
-      display: none !important;
-    }
-  }
-}
 @each $name, $size in $buttonInfo {
   .mat-mdc-icon-button.#{$name} {
     width: $size !important;
     height: $size !important;
     padding: 0px !important;
-    display: inline-flex ;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
 

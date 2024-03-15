@@ -1,23 +1,37 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TaskLabelsState } from '@workbench/interfaces';
+import { LabelContentType } from '@app/interfaces/abstract';
+import { TaskLabelsState } from '@workbench/store/task-labels';
 
 import * as selectors from './selectors';
 
-const LABEL_A = { id: 'labelA', name: 'labelA', value: 'labelA', task: 'A' };
-const LABEL_B = { id: 'labelB', name: 'labelB', value: 'labelB', task: 'B' };
+const LABEL_A = {
+  id: 1,
+  name: 'labelA',
+  value: 'labelA',
+  object_id: 1,
+  content_type: <LabelContentType>'task',
+};
+
+const LABEL_B = {
+  id: 2,
+  name: 'labelB',
+  value: 'labelB',
+  object_id: 2,
+  content_type: <LabelContentType>'task',
+};
 
 describe('LabelSelectors', () => {
   const labelA = LABEL_A;
   const labelB = LABEL_B;
   const labels = [labelA, labelB];
   const initialState: TaskLabelsState = {
-    ids: ['labelA', 'labelB'],
+    ids: [1, 2],
     entities: {
-      labelA: labelA,
-      labelB: labelB,
+      1: labelA,
+      2: labelB,
     },
-    selectedLabelId: 'labelA',
+    selectedLabelId: 1,
   };
 
   beforeEach(() => {
@@ -26,8 +40,8 @@ describe('LabelSelectors', () => {
 
   it('test selectLabelEntities', () => {
     expect(selectors.selectLabelEntities.projector(initialState)).toEqual({
-      labelA: LABEL_A,
-      labelB: LABEL_B,
+      1: LABEL_A,
+      2: LABEL_B,
     });
   });
 
@@ -53,20 +67,16 @@ describe('LabelSelectors', () => {
   });
 
   it('test selectCurrentLabelId', () => {
-    expect(selectors.selectCurrentLabelId.projector(initialState)).toEqual(
-      'labelA'
-    );
+    expect(selectors.selectCurrentLabelId.projector(initialState)).toEqual(1);
   });
 
   it('test selectCurrentLabelIndex', () => {
-    expect(
-      selectors.selectCurrentLabelIndex.projector(labels, 'labelA')
-    ).toEqual(0);
+    expect(selectors.selectCurrentLabelIndex.projector(labels, 1)).toEqual(0);
   });
 
   it('test selectCurrentLabel', () => {
     expect(
-      selectors.selectCurrentLabel.projector(initialState.entities, 'labelA')
+      selectors.selectCurrentLabel.projector(initialState.entities, 1)
     ).toEqual(LABEL_A);
   });
 
@@ -77,6 +87,6 @@ describe('LabelSelectors', () => {
   });
 
   it('test isLabelSelected', () => {
-    expect(selectors.isLabelSelected.projector('labelA')).toEqual(true);
+    expect(selectors.isLabelSelected.projector(1)).toEqual(true);
   });
 });

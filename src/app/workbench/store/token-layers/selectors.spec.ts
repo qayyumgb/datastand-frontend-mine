@@ -1,30 +1,28 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LoadStatus } from '@workbench/enums';
-import { TokenLayersState } from '@workbench/interfaces';
+import { LoadingState } from '@app/interfaces';
+import { TokenLayersState } from '@workbench/store/token-layers';
 
 import * as selectors from './selectors';
 
 const tokenLayersState: TokenLayersState = {
-  ids: ['a', 'b'],
+  ids: [1, 2],
   entities: {
-    a: {
-      text: '1',
-      id: 'a',
+    1: {
+      text: 1,
+      id: 1,
       name: 'tokens',
       boundaries: [1, 2, 3],
     },
-    b: {
-      text: '2',
-      id: 'b',
+    2: {
+      text: 2,
+      id: 2,
       name: 'bytes',
       boundaries: [],
     },
   },
-  selectedTokenLayerId: 'a',
-  error: null,
-  status: LoadStatus.Success,
-  histories: {},
+  selectedTokenLayerId: 1,
+  callState: LoadingState.LOADED,
 };
 
 describe('TokenLayersSelectors', () => {
@@ -37,7 +35,7 @@ describe('TokenLayersSelectors', () => {
   });
 
   it('test isTokenLayerSelected', () => {
-    expect(selectors.isTokenLayerSelected.projector('a')).toBe(true);
+    expect(selectors.isTokenLayerSelected.projector(1)).toBe(true);
   });
 
   it('test isTokenLayerSelected with null (expects false)', () => {
@@ -47,14 +45,14 @@ describe('TokenLayersSelectors', () => {
   it('test selectAllTokenLayers', () => {
     expect(selectors.selectAllTokenLayers.projector(tokenLayersState)).toEqual([
       {
-        text: '1',
-        id: 'a',
+        text: 1,
+        id: 1,
         name: 'tokens',
         boundaries: [1, 2, 3],
       },
       {
-        text: '2',
-        id: 'b',
+        text: 2,
+        id: 2,
         name: 'bytes',
         boundaries: [],
       },
@@ -72,8 +70,8 @@ describe('TokenLayersSelectors', () => {
   it('test selectCurrentBoundaries', () => {
     expect(
       selectors.selectCurrentBoundaries.projector({
-        text: '1',
-        id: 'a',
+        text: 1,
+        id: 1,
         name: 'tokens',
         boundaries: [1, 2, 3],
       })
@@ -82,13 +80,10 @@ describe('TokenLayersSelectors', () => {
 
   it('test selectCurrentTokenLayer', () => {
     expect(
-      selectors.selectCurrentTokenLayer.projector(
-        tokenLayersState.entities,
-        'a'
-      )
+      selectors.selectCurrentTokenLayer.projector(tokenLayersState.entities, 1)
     ).toEqual({
-      text: '1',
-      id: 'a',
+      text: 1,
+      id: 1,
       name: 'tokens',
       boundaries: [1, 2, 3],
     });
@@ -97,22 +92,22 @@ describe('TokenLayersSelectors', () => {
   it('test selectCurrentTokenLayerId', () => {
     expect(
       selectors.selectCurrentTokenLayerId.projector(tokenLayersState)
-    ).toBe('a');
+    ).toBe(1);
   });
 
   it('test selectTokenLayerEntities', () => {
     expect(
       selectors.selectTokenLayerEntities.projector(tokenLayersState)
     ).toEqual({
-      a: {
-        text: '1',
-        id: 'a',
+      1: {
+        text: 1,
+        id: 1,
         name: 'tokens',
         boundaries: [1, 2, 3],
       },
-      b: {
-        text: '2',
-        id: 'b',
+      2: {
+        text: 2,
+        id: 2,
         name: 'bytes',
         boundaries: [],
       },
@@ -121,8 +116,7 @@ describe('TokenLayersSelectors', () => {
 
   it('test selectTokenLayerIds', () => {
     expect(selectors.selectTokenLayerIds.projector(tokenLayersState)).toEqual([
-      'a',
-      'b',
+      1, 2,
     ]);
   });
 

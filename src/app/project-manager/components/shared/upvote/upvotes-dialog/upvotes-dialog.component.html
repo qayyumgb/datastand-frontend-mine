@@ -2,12 +2,12 @@
 
 <mat-dialog-content>
   <ng-container *ngIf="this.users?.length! > 0; else noUpvotes">
-    <div class="edit-modal-UI" *ngFor="let user of users">
+    <div *ngFor="let user of users">
       <pm-avatar [user]="user" size="small" class="avatar"></pm-avatar>
     </div>
   </ng-container>
   <ng-template #noUpvotes>
-    <div class="edit-modal-UI">Nobody has liked this yet 😢</div>
+    <div>Nobody has liked this yet 😢</div>
   </ng-template>
 </mat-dialog-content>
 

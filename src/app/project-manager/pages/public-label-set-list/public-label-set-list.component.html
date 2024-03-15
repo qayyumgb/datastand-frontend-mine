@@ -3,9 +3,9 @@
     <section class="data-cards-section">
       <pm-public-label-set-list-header-card></pm-public-label-set-list-header-card>
 
-      <loader-card *ngIf="isLoading()"></loader-card>
+      <loader-card *ngIf="isLoading$ | async"></loader-card>
       <pm-layout-results-with-paginator
-        *ngIf="isLoaded()"
+        *ngIf="isLoaded$ | async"
         singular="Label Set"
         plural="Label Sets"
         [totalCount]="totalCount"
@@ -15,14 +15,14 @@
       >
         <ng-container listItems>
           <pm-label-set-li-item
-            *ngFor="let labelSet of items"
+            *ngFor="let labelSet of labelSets$ | async"
             [labelSet]="labelSet!"
             (deleteLabelSetEvent)="deleteItemById($event)"
           ></pm-label-set-li-item>
         </ng-container>
         <ng-container cardItems>
           <pm-label-set-card
-            *ngFor="let labelSet of items"
+            *ngFor="let labelSet of labelSets$ | async"
             [labelSet]="labelSet"
           ></pm-label-set-card>
         </ng-container>

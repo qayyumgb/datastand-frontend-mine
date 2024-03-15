@@ -1,40 +1,18 @@
 $bg-color: #f8f9fa;
 
-@media (min-width:992px) {
-  .search-bar {
-    margin-left: calc(125px + 16px);
-    width: 450px !important;
-  }
- 
+.search-bar {
+  margin-left: calc(125px + 16px);
+  width: 450px;
 }
-@media (min-width:768px) {
-
-  .input-search-bar{
-    min-width: 350px !important;
-    margin-left: 2rem;
-  }
-}
-@media (min-width:550px) {
-  .input-search-bar{
-    min-width: 250px;
-    margin-left: 1rem;
-  }
-}
-@media (max-width:550px) {
-  .input-search-bar{
-    width: calc(100% - 30px);
-  }
-
-}
-
 
 .input-search-bar {
+  font: 400 1rem Roboto, "Helvetica Neue", sans-serif;
   padding: 10px 16px;
   border-radius: 20px;
   border: 0;
   caret-color: #9c27b0;
   background-color: $bg-color;
-
+  width: 100%;
 }
 
 .input-search-bar:focus {

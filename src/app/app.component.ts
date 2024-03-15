@@ -4,7 +4,7 @@ import { Component, HostListener } from '@angular/core';
  * @param width Width to check.
  */
 function isBigScreenFn(width: number): boolean {
-  return width >= 100;
+  return width >= 900;
 }
 
 @Component({

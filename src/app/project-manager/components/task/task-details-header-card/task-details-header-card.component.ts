@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 
 import { Task } from '@app/interfaces';
 import { AuthService, TaskService, UrlsService } from '@app/services';
-import { UpdateTaskDialogComponent } from '@pm/components';
+import {
+  TaskDownloadDialogComponent,
+  UpdateTaskDialogComponent,
+} from '@pm/components';
 
 @Component({
   selector: 'pm-task-details-header-card',
@@ -51,6 +54,12 @@ export class TaskDetailsHeaderCardComponent implements OnInit {
     //   complete: () =>
     //     this.snackBar.open('✅ Task forked succesfully', 'Dismiss'),
     // });
+  }
+
+  openTaskDownloadDialog() {
+    this.dialog.open(TaskDownloadDialogComponent, {
+      data: this.task?.id,
+    });
   }
 
   openUpdateTaskDialog() {

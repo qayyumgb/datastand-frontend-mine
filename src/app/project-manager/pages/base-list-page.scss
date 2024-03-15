@@ -7,7 +7,7 @@ mat-sidenav-container {
 mat-sidenav-content {
   position: relative;
   overflow-y: scroll;
-  height: calc(100vh - 60px); 
+  height: calc(100vh - 60px); // 60px == $topbar height.
   border-radius: 20px;
   width: auto;
 }
@@ -29,12 +29,6 @@ ul {
   border-radius: 4px;
   background-color: #fff;
   border-bottom: 0px !important;
-  @media (max-width:768px) {
-    border:0px solid white !important;
-    .li-card{
-      padding: 0 !important;
-    }
-  }
 }
 
 ul li:first-child {

@@ -1,110 +1,171 @@
-<loader-card *ngIf="isLoading()"></loader-card>
-<div *ngIf="this.task && isLoaded()" class="items-section">
-  <div class="sticky-header">
-    <div>
-      <div class="title-with-icon">
-        <mat-icon class="icon-title">text_snippet</mat-icon> Texts
-      </div>
-      <div>
-        <div class="paginator">
-          <pm-paginator
-            [page]="page!"
-            [count]="totalCount!"
-            [pageSize]="100"
-            [currentPageSize]="paginatedCount"
-          ></pm-paginator>
+<loader-card *ngIf="isLoading$ | async"></loader-card>
+<ng-container *ngIf="isLoaded$ | async">
+  <div *ngIf="this.task" class="items-section">
+    <div class="sticky-header">
+      <div class="flex-100-sb">
+        <div>
+          <div class="title-with-icon">
+            <mat-icon class="icon-title">text_snippet</mat-icon>
+            Texts
+          </div>
+          <div>
+            <div class="paginator">
+              <pm-paginator
+                [page]="page!"
+                [count]="totalCount!"
+                [currentPageSize]="paginatedCount!"
+                [pageSize]="100"
+              ></pm-paginator>
+            </div>
+          </div>
+        </div>
+
+        <div class="sticky-header-buttons">
+          <button
+            mat-flat-button
+            color="primary"
+            class="small"
+            (click)="openCreateTaskTextDialog()"
+            *ngIf="isCreator"
+          >
+            <mat-icon>add</mat-icon>Add Text
+          </button>
+          <button
+            mat-flat-button
+            color="primary"
+            class="small"
+            (click)="openTaskEditTaskTextsDialog()"
+            *ngIf="isCreator"
+          >
+            <mat-icon>recycling</mat-icon>Import Texts
+          </button>
+          <button
+            mat-flat-button
+            color="primary"
+            class="small"
+            (click)="openGenerateTaskTextsDialog()"
+            *ngIf="isCreator"
+            [disabled]="(texts$ | async)?.length! == 0"
+          >
+            <mat-icon>auto_awesome</mat-icon>AI Generate
+          </button>
+          <button
+            mat-icon-button
+            mat-small-icon-button
+            [matMenuTriggerFor]="textActionsMenu"
+            *ngIf="isCreator"
+          >
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #textActionsMenu="matMenu">
+            <button mat-menu-item (click)="acceptAllSuggestions()">
+              <mat-icon>done_all</mat-icon>
+              <span>Accept all suggestions</span>
+            </button>
+            <button mat-menu-item (click)="dedupeTaskTexts()">
+              <mat-icon>filter_1</mat-icon>
+              <span>Remove duplicates</span>
+            </button>
+            <button mat-menu-item (click)="deleteAllTaskTexts()">
+              <mat-icon>delete</mat-icon>
+              <span>Delete all texts</span>
+            </button>
+          </mat-menu>
         </div>
       </div>
+      <div
+        class="bulk-actions"
+        *ngIf="selectedItemIds$ | async as selectedItemIds"
+      >
+        <mat-checkbox
+          color="primary"
+          matTooltip="Select"
+          (click)="toggleSelectAllItems()"
+          [checked]="isAnyItemSelected()"
+        ></mat-checkbox>
+        <button
+          mat-icon-button
+          class="medium"
+          matTooltip="Refresh"
+          (click)="resetTaskTexts()"
+        >
+          <mat-icon>refresh</mat-icon>
+        </button>
+        <ng-container *ngIf="(numSelectedItems$ | async)! > 0">
+          <button
+            mat-icon-button
+            class="medium"
+            matTooltip="Mark as reviewed"
+            (click)="setTextsAsNotPending(this.task.id!, selectedItemIds)"
+          >
+            <mat-icon>check</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="medium"
+            matTooltip="Mark as pending"
+            (click)="setTextsAsPending(this.task.id!, selectedItemIds)"
+          >
+            <mat-icon>warning</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="medium"
+            matTooltip="Use as seed for AI generation"
+            (click)="setTextsAsSeeds(this.task.id!, selectedItemIds)"
+          >
+            <mat-icon>local_florist</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="medium"
+            matTooltip="Don't use as seed for AI generation"
+            (click)="setTextsAsNotSeeds(this.task.id!, selectedItemIds)"
+          >
+            <mat-icon>macro_off</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="medium"
+            matTooltip="Remove"
+            (click)="deleteTaskTexts(this.task.id!, selectedItemIds)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <mat-divider [vertical]="true" style="height: 16px"></mat-divider>
+          <div>{{ numSelectedItems$ | async }} selected</div>
+        </ng-container>
+      </div>
     </div>
-
-    <div class="sticky-header-buttons">
-      <button
-        mat-flat-button 
-        color="primary"
-        matTooltip="Refresh"
-        (click)="getTaskTexts(this.filters)"
+    <div>
+      <div
+        class="items-list"
+        *ngIf="(texts$ | async)?.length! > 0; else noItems"
       >
-        <mat-icon>refresh</mat-icon>
-      </button>
-      <button
-        mat-flat-button
-        color="primary"
-        class="small"
-        (click)="openCreateTaskTextDialog()"
-        *ngIf="isCreator"
-      >
-        <mat-icon>add</mat-icon>Add Text
-      </button>
-      <button
-        mat-flat-button
-        color="primary"
-        class="small"
-        (click)="openTaskEditTaskTextsDialog()"
-        *ngIf="isCreator"
-      >
-        <mat-icon>recycling</mat-icon>Import Texts
-      </button>
-      <button
-        mat-flat-button
-        color="primary"
-        class="small"
-        (click)="openGenerateTaskTextsDialog()"
-        *ngIf="isCreator"
-        [disabled]="items.length == 0"
-      >
-        <mat-icon>auto_awesome</mat-icon>AI Generate
-      </button>
-      <button
-        mat-icon-button
-        mat-small-icon-button
-        class="top-horizontal-dot"
-        [matMenuTriggerFor]="textActionsMenu"
-        *ngIf="isCreator"
-      >
-        <mat-icon>more_horiz</mat-icon>
-      </button>
-      <mat-menu #textActionsMenu="matMenu">
-        <button mat-menu-item (click)="openAddTokenLayersDialog()">
-          <mat-icon>space_bar</mat-icon>
-          <span>Tokenize all texts</span>
-        </button>
-        <button mat-menu-item (click)="corporaAcceptAllSuggestions()">
-          <mat-icon>done_all</mat-icon>
-          <span>Accept all suggestions</span>
-        </button>
-        <button mat-menu-item (click)="dedupeTaskTexts()">
-          <mat-icon>filter_1</mat-icon>
-          <span>Remove duplicates</span>
-        </button>
-        <button mat-menu-item (click)="deleteAllTaskTexts()">
-          <mat-icon>delete</mat-icon>
-          <span>Delete all texts</span>
-        </button>
-      </mat-menu>
+        <ul>
+          <li *ngFor="let taskText of texts$ | async">
+            <pm-task-text-li-item
+              [taskText]="taskText"
+              [taskId]="this.task.id"
+              [isSelected]="isItemIdSelected(taskText.id!)"
+              (copyTaskTextEvent)="
+                addItemAboveId($event.taskText, $event.originalTaskTextId)
+              "
+              (deleteTaskTextEvent)="deleteItemById($event)"
+              (deselectTaskTextEvent)="deselectItemById($event)"
+              (selectTaskTextEvent)="selectItemById($event)"
+            ></pm-task-text-li-item>
+          </li>
+        </ul>
+      </div>
+      <ng-template #noItems>
+        <pm-no-data-card
+          *ngIf="(texts$ | async)?.length! == 0"
+          [useCard]="true"
+          title="No results"
+          text="No texts were found"
+        ></pm-no-data-card>
+      </ng-template>
     </div>
   </div>
-  <div>
-    <div class="items-list" *ngIf="items?.length! > 0; else noItems">
-      <ul>
-        <li *ngFor="let taskText of items">
-          <pm-task-text-li-item
-            [taskText]="taskText"
-            [taskId]="this.task.id"
-            (deleteTaskTextEvent)="deleteItemById($event)"
-            (copyTaskTextEvent)="
-              addItemAboveId($event.taskText, $event.originalTaskTextId)
-            "
-          ></pm-task-text-li-item>
-        </li>
-      </ul>
-    </div>
-    <ng-template #noItems>
-      <pm-no-data-card
-        *ngIf="items?.length! == 0"
-        [useCard]="true"
-        title="No results"
-        text="No texts were found"
-      ></pm-no-data-card>
-    </ng-template>
-  </div>
-</div>
+</ng-container>

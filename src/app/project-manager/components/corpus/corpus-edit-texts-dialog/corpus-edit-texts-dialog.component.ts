@@ -21,7 +21,7 @@ export class CorpusEditTextsDialogComponent {
   });
   corpusOptions?: Corpus[];
   addedCorpora?: Corpus[] = [];
-  windowwidth: number = window.innerWidth
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Corpus,
     private dialogRef: MatDialogRef<CorpusEditTextsDialogComponent>,

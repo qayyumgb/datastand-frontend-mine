@@ -4,6 +4,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { LangTag } from '@app/interfaces';
+import { StatusEnum } from '@app/interfaces/abstract';
 import { LangTagService, TextFilters } from '@app/services';
 import { BaseListFiltersDirective } from '@pm/directives';
 
@@ -17,6 +18,8 @@ export class TextListFiltersComponent extends BaseListFiltersDirective {
   @Output() override updateFiltersEvent = new EventEmitter<TextFilters>();
   langTagOptions?: LangTag[];
   isPendingOptions?;
+  isSeedOptions?;
+  statusOptions?;
 
   constructor(
     private langTagService: LangTagService,
@@ -34,6 +37,15 @@ export class TextListFiltersComponent extends BaseListFiltersDirective {
       { text: 'Pending', value: 'true' },
       { text: 'Reviewed', value: 'false' },
     ];
+    this.isSeedOptions = [
+      { text: 'Seed texts', value: 'true' },
+      { text: 'Not seed texts', value: 'false' },
+    ];
+    this.statusOptions = [
+      { text: 'New', value: StatusEnum.NEW },
+      { text: 'Reviewed', value: StatusEnum.REVIEWED },
+      { text: 'Pending', value: StatusEnum.PENDING },
+    ];
     this.langTagService
       .getLangTags()
       .subscribe((langTags) => (this.langTagOptions = langTags));
@@ -46,9 +58,23 @@ export class TextListFiltersComponent extends BaseListFiltersDirective {
     }
   }
 
+  clearIsSeed() {
+    if (this.filters.is_seed) {
+      delete this.filters.is_seed;
+      this.emitAndNavigate();
+    }
+  }
+
   clearLangTag() {
     if (this.filters.langtag) {
       delete this.filters.langtag;
+      this.emitAndNavigate();
+    }
+  }
+
+  clearStatus() {
+    if (this.filters.status) {
+      delete this.filters.status;
       this.emitAndNavigate();
     }
   }
@@ -58,8 +84,18 @@ export class TextListFiltersComponent extends BaseListFiltersDirective {
     this.emitAndNavigate();
   }
 
+  updateIsSeed(change: MatRadioChange) {
+    this.filters.is_seed = change.value;
+    this.emitAndNavigate();
+  }
+
   updateLangTag(change: MatSelectChange) {
     this.filters.langtag = change.value;
+    this.emitAndNavigate();
+  }
+
+  updateStatus(change: MatRadioChange) {
+    this.filters.status = change.value;
     this.emitAndNavigate();
   }
 }

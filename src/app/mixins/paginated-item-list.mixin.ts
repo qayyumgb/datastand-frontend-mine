@@ -1,20 +1,21 @@
-interface Item {
-  id: number;
-}
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { Item } from './item.interface';
 
 export class PaginatedItemListMixin {
-  _items: Item[] = [];
-  _totalCount: number = 0;
-  _paginatedCount: number = 0;
+  private _items = new BehaviorSubject<Item[]>([]);
+  public readonly items$: Observable<Item[]> = this._items.asObservable();
+  private _totalCount: number = 0;
+  private _paginatedCount: number = 0;
 
   constructor() {}
 
   get items(): Item[] {
-    return this._items;
+    return this._items.getValue();
   }
 
   set items(items: Item[]) {
-    this._items = items;
+    this._items.next(items);
   }
 
   get paginatedCount() {
@@ -52,11 +53,13 @@ export class PaginatedItemListMixin {
   }
 
   addItems(items: Item[], position: number = 0) {
-    this._items = [
-      ...this._items!.slice(0, position),
+    const currentItems = this.items;
+    const updatedItems = [
+      ...currentItems.slice(0, position),
       ...items,
-      ...this._items!.slice(position),
+      ...currentItems.slice(position),
     ];
+    this.items = updatedItems;
     this._increaseCounts(items.length);
   }
 
@@ -66,7 +69,7 @@ export class PaginatedItemListMixin {
   }
 
   deleteAllItems() {
-    this._items = [];
+    this.items = [];
     this._totalCount = 0;
     this._paginatedCount = 0;
   }
@@ -76,17 +79,20 @@ export class PaginatedItemListMixin {
   }
 
   deleteItemById(id: number) {
-    this._items = [...this._items?.filter((i) => i.id != id)!];
+    const updatedItems = this.items.filter((i) => i.id !== id);
+    this.items = updatedItems;
     this._decreaseCounts();
   }
 
   overwriteItem(item: Item) {
     const index = this.items.findIndex((i) => i.id === item.id);
-    this._items![index] = item;
+    const updatedItems = [...this.items];
+    updatedItems[index] = item;
+    this.items = updatedItems;
   }
 
   setItems<T extends Item>(items: T[]) {
-    this._items = items;
+    this.items = items;
     this._paginatedCount = items.length;
   }
 

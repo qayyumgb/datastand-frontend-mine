@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -16,11 +16,10 @@ import { truncate } from '@pm/utils';
   templateUrl: './task-card.component.html',
   styleUrls: ['../../data-card.scss', '../../change-image-button.scss'],
 })
-export class TaskCardComponent implements OnInit {
+export class TaskCardComponent {
   @Input() task?: Task;
   @Output() deleteTaskEvent = new EventEmitter<number>(); // taskId
   truncate = truncate;
-  showTags:boolean | undefined = undefined
 
   constructor(
     public auth: AuthService,
@@ -29,15 +28,7 @@ export class TaskCardComponent implements OnInit {
     private snackBar: MatSnackBar,
     private taskService: TaskService,
     public urls: UrlsService
-  ) {
-   
-    
-   }
-  ngOnInit(): void {
-    if (this.task?.tags?.length) {
-      this.showTags = this.task?.tags?.length > 0
-    }
-  }
+  ) {}
 
   changeImage(event: any): void {
     if (event.target.files && event.target.files[0]) {
@@ -45,13 +36,9 @@ export class TaskCardComponent implements OnInit {
       this.taskService
         .patchImage(this.task?.id!, image)
         .subscribe((res) => (this.task = res));
-        if (this.task?.tags?.length) {
-          this.showTags = this.task?.tags?.length > 0
-        }
-      
-
     }
   }
+
   deleteTask() {
     this.taskService.delete(this.task?.id!).subscribe(() => {
       // We need to emit an event for the parent to update the count.
@@ -67,8 +54,6 @@ export class TaskCardComponent implements OnInit {
   openRenameTaskDialog() {
     this.dialog.open(RenameDialogComponent, {
       data: { element: this.task, type: 'task' },
-      maxWidth:"95vw",
-      minWidth:"300px"
     });
   }
 

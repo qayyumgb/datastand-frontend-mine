@@ -107,8 +107,10 @@ export class SpanEffects {
           vm.annotatorId &&
           vm.annotatorId !== '!off'
         ) {
+          // Note: we use optimistic updates for Span. So `action.span.id` has only
+          // a temporary id, the true id is in `action.span.changes.id`.
           return SuggestionsWindowActions.annotateSimilarSpans({
-            id: Number(action.span.id),
+            id: Number(action.span.changes.id),
           });
         } else {
           // Effects always expect an action, so we have to return a no-op action here.

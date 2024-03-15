@@ -3,6 +3,7 @@ export * from './create-task-dialog/create-task-dialog.component';
 export * from './my-task-list-header-card/my-task-list-header-card.component';
 export * from './task-card/task-card.component';
 export * from './task-details-header-card/task-details-header-card.component';
+export * from './task-download-dialog/task-download-dialog.component';
 export * from './task-edit-task-labels-dialog/task-edit-task-labels-dialog.component';
 export * from './task-edit-task-texts-dialog/task-edit-task-texts-dialog.component';
 export * from './task-form-dialog/task-form-dialog.component';

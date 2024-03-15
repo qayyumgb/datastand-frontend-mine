@@ -2,11 +2,14 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Mixin } from 'ts-mixer';
 
 import { Corpus, Text } from '@app/interfaces';
-import { LoadingStatusMixin, PaginatedItemListMixin } from '@app/mixins';
+import {
+  LoadingStatusMixin,
+  PaginatedItemListWithMultiSelectionMixin,
+} from '@app/mixins';
 import {
   AuthService,
   CorpusService,
@@ -29,7 +32,7 @@ import {
   ],
 })
 export class TextUlCardComponent
-  extends Mixin(LoadingStatusMixin, PaginatedItemListMixin)
+  extends Mixin(LoadingStatusMixin, PaginatedItemListWithMultiSelectionMixin)
   implements OnDestroy, OnInit
 {
   // Corpus is passed as input to avoid making an extra request.
@@ -59,11 +62,13 @@ export class TextUlCardComponent
           creator: params.get('creator')!,
           is_pending: params.get('is_pending')!,
           is_public: params.get('is_public')!,
+          is_seed: params.get('is_seed')!,
           langtag: params.get('langtag')!,
           page: params.get('page')! || 1,
           modifiedLast: params.get('modifiedLast')!,
           ordering: params.get('ordering')!,
           search: params.get('search')!,
+          status: params.get('status')!,
           tag: params.get('tag')!,
         };
         this.getTexts();
@@ -71,8 +76,8 @@ export class TextUlCardComponent
     });
   }
 
-  override get items(): Text[] {
-    return <Text[]>this._items;
+  get texts$(): Observable<Text[]> {
+    return <Observable<Text[]>>this.items$;
   }
 
   corporaAcceptAllSuggestions() {
@@ -88,23 +93,24 @@ export class TextUlCardComponent
   }
 
   corporaGenerateTexts(numTexts: number) {
-    var isSnackBarOpen = false;
+    let numGeneratedTexts = 0; // Counter for generated texts
+
     this.corpusService.generateTexts(this.corpus?.id!, numTexts).subscribe({
       next: (res: Text) => {
-        if (!isSnackBarOpen) {
-          this.snackBar.open(
-            `🤖 Generating texts in the background...`,
-            'Dismiss',
-            { duration: 60_000 }
-          );
-          isSnackBarOpen = true;
-        }
+        numGeneratedTexts++;
+        this.snackBar.open(
+          `🤖 Generating texts... (${numGeneratedTexts}/${numTexts})`,
+          'Dismiss',
+          { duration: 600_000 }
+        );
         this.setItems([res, ...this.items!]);
         this._increaseCounts();
       },
-      error: (err: Error) => console.error('Observer got an error: ' + err),
       complete: () =>
-        this.snackBar.open('✅ Texts generated successfully', 'Dismiss'),
+        this.snackBar.open(
+          `✅ ${numGeneratedTexts} Text(s) generated successfully`,
+          'Dismiss'
+        ),
     });
   }
 
@@ -119,6 +125,13 @@ export class TextUlCardComponent
         );
       }
       this.resetTexts();
+    });
+  }
+
+  deleteTexts(corpusId: number, textIds: number[]) {
+    this.corpusService.deleteTexts(corpusId, textIds).subscribe(() => {
+      this.resetTexts();
+      this.clearSelection();
     });
   }
 
@@ -171,17 +184,43 @@ export class TextUlCardComponent
   }
 
   openGenerateTextsDialog(): void {
-    let dialogRef = this.dialog.open(GenerateTextsDialogComponent, {});
-    // dialogRef returns the number of texts to be generated.
-    dialogRef
-      .afterClosed()
-      .subscribe(
-        (numTexts: number) => numTexts && this.corporaGenerateTexts(numTexts)
-      );
+    let dialogRef = this.dialog.open(GenerateTextsDialogComponent, {
+      data: { entityId: this.corpus?.id!, entityType: 'corpus' },
+    });
+    // Texts are generated in the dialog, so we just need to reset the texts.
+    dialogRef.afterClosed().subscribe(() => this.resetTexts());
   }
 
   resetTexts(): void {
     this.filters = { page: 1 };
     this.getTexts();
+  }
+
+  setTextsAsSeeds(corpusId: number, textIds: number[]) {
+    this.corpusService.setTextsAsSeeds(corpusId, textIds).subscribe(() => {
+      this.resetTexts();
+      this.clearSelection();
+    });
+  }
+
+  setTextsAsNotSeeds(corpusId: number, textIds: number[]) {
+    this.corpusService.setTextsAsNotSeeds(corpusId, textIds).subscribe(() => {
+      this.resetTexts();
+      this.clearSelection();
+    });
+  }
+
+  setTextsAsPending(corpusId: number, textIds: number[]) {
+    this.corpusService.setTextsAsPending(corpusId, textIds).subscribe(() => {
+      this.resetTexts();
+      this.clearSelection();
+    });
+  }
+
+  setTextsAsNotPending(corpusId: number, textIds: number[]) {
+    this.corpusService.setTextsAsReviewed(corpusId, textIds).subscribe(() => {
+      this.resetTexts();
+      this.clearSelection();
+    });
   }
 }

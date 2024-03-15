@@ -23,9 +23,12 @@ export interface IcopyTextEvent {
 export class TextLiItemComponent {
   @Input() text?: Text;
   @Input() corpusId?: number;
+  @Input() isSelected?: boolean = false;
   @Output() acceptSuggestionEvent = new EventEmitter<Text>();
   @Output() copyTextEvent = new EventEmitter<IcopyTextEvent>(); // copied Text
   @Output() deleteTextEvent = new EventEmitter<number>(); // textId
+  @Output() selectTextEvent = new EventEmitter<number>(); // textId
+  @Output() deselectTextEvent = new EventEmitter<number>(); // textId
 
   constructor(
     private auth: AuthService,
@@ -63,15 +66,33 @@ export class TextLiItemComponent {
     return this.auth.username === this.text?.creator?.username;
   }
 
+  markTextAsNew(text: Text) {
+    this.textService
+      .setStatusToNew(text.id!)
+      .subscribe((res: Text) => (this.text = res));
+  }
+
   markTextAsPending(text: Text) {
     this.textService
       .setAsPending(text.id!)
       .subscribe((res: Text) => (this.text = res));
   }
 
+  markTextAsNotSeed(text: Text) {
+    this.textService
+      .setAsNotSeed(text.id!)
+      .subscribe((res: Text) => (this.text = res));
+  }
+
   markTextAsReviewed(text: Text) {
     this.textService
       .setAsReviewed(text.id!)
+      .subscribe((res: Text) => (this.text = res));
+  }
+
+  markTextAsSeed(text: Text) {
+    this.textService
+      .setAsSeed(text.id!)
       .subscribe((res: Text) => (this.text = res));
   }
 
@@ -97,5 +118,14 @@ export class TextLiItemComponent {
     this.dialog.open(ViewTextDialogComponent, {
       data: text,
     });
+  }
+
+  toggleSelection() {
+    this.isSelected = !this.isSelected;
+    if (this.isSelected) {
+      this.selectTextEvent.emit(this.text?.id!);
+    } else {
+      this.deselectTextEvent.emit(this.text?.id!);
+    }
   }
 }

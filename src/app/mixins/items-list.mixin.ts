@@ -1,8 +1,6 @@
 import { CountMixin } from './count.mixin';
 
-interface Item {
-  id: number;
-}
+import { Item } from './item.interface';
 
 export class ItemsListMixin extends CountMixin {
   _items: Item[] = [];

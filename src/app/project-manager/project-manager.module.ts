@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -68,7 +69,9 @@ import { ColorSquareComponent } from './components/shared/color-square/color-squ
     fromComponents.HomeHeaderCardComponent,
     fromComponents.HomeIntroCardComponent,
     fromComponents.HomeWelcomeCardComponent,
+    fromComponents.IsPendingChipComponent,
     fromComponents.IsPublicChipComponent,
+    fromComponents.IsSeedChipComponent,
     fromComponents.LabelFormDialogComponent,
     fromComponents.LabelLiItemComponent,
     fromComponents.LabelListFiltersComponent,
@@ -103,6 +106,7 @@ import { ColorSquareComponent } from './components/shared/color-square/color-squ
     fromComponents.TagsFormFieldComponent,
     fromComponents.TaskCardComponent,
     fromComponents.TaskDetailsHeaderCardComponent,
+    fromComponents.TaskDownloadDialogComponent,
     fromComponents.TaskEditTaskLabelsDialogComponent,
     fromComponents.TaskEditTaskTextsDialogComponent,
     fromComponents.TaskFormDialogComponent,
@@ -173,6 +177,7 @@ import { ColorSquareComponent } from './components/shared/color-square/color-squ
     MatCheckboxModule,
     MatChipsModule,
     MatDialogModule,
+    MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,

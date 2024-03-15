@@ -15,14 +15,3 @@ mat-sidenav {
   width: 250px;
   padding: 16px;
 }
-@media (min-width:1200px) {
-  .filter-btn-wrapper{
-    display: none !important;
-  }
-}
-.filter-btn-wrapper button{
-  position: fixed;
-  bottom: 25px;
-  right: 20px;
-  z-index: 99;
-}

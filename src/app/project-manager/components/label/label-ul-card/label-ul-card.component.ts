@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Mixin } from 'ts-mixer';
 
 import { Label, LabelSet } from '@app/interfaces';
@@ -68,8 +68,8 @@ export class LabelUlCardComponent
     });
   }
 
-  override get items(): Label[] {
-    return <Label[]>this._items;
+  get labels$(): Observable<Label[]> {
+    return <Observable<Label[]>>this.items$;
   }
 
   acceptAllLabels() {

@@ -1,28 +1,69 @@
 <h1 mat-dialog-title>AI Text Generate</h1>
 <form [formGroup]="form">
-  <mat-dialog-content>
+  <mat-dialog-content class="flex-column gap-16">
     <mat-form-field>
       <mat-label>Number of texts</mat-label>
-      <mat-select formControlName="numTexts">
+      <mat-select
+        formControlName="numTexts"
+        [disabled]="generationLoadStatus != loadStatus.Pending"
+      >
         <mat-option [value]="1"> 1 </mat-option>
         <mat-option [value]="5"> 5 </mat-option>
         <mat-option [value]="10"> 10 </mat-option>
         <mat-option [value]="25"> 25 </mat-option>
         <mat-option [value]="50"> 50 </mat-option>
         <mat-option [value]="100"> 100 </mat-option>
+        <mat-option [value]="1000"> 1,000 </mat-option>
       </mat-select>
     </mat-form-field>
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        style="width: 100%"
+        (click)="generateTexts(this.form.value.numTexts!)"
+        [disabled]="generationLoadStatus != loadStatus.Pending"
+      >
+        {{
+          generationLoadStatus == loadStatus.Loading
+            ? "Generating..."
+            : "Generate"
+        }}
+      </button>
+    </div>
+    <progress-bar
+      [value]="count! / this.form.value.numTexts!"
+      [class.hidden]="generationLoadStatus == loadStatus.Pending"
+    ></progress-bar>
+    <div class="generated-texts mt-16">
+      <div *ngFor="let text of items; index as idx" class="text">
+        <div class="title-2 clamp-3" [title]="text.raw_string">
+          {{ idx + 1 }}. {{ text.raw_string }}
+        </div>
+        <div class="caption-1 ellipsis">
+          ID #{{ text.id }} · {{ text.langtag }} ·
+          {{ text.raw_string.length! | number }} chars
+        </div>
+      </div>
+    </div>
   </mat-dialog-content>
   <mat-dialog-actions [align]="'end'">
-    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-button
+      mat-dialog-close
+      [disabled]="generationLoadStatus == loadStatus.Success"
+    >
+      Cancel
+    </button>
     <button
       mat-raised-button
       color="primary"
       type="submit"
-      [mat-dialog-close]="this.form.value.numTexts"
-      [disabled]="!form.valid"
+      mat-dialog-close
+      [disabled]="generationLoadStatus != loadStatus.Success"
     >
-      Save
+      Done
     </button>
   </mat-dialog-actions>
 </form>

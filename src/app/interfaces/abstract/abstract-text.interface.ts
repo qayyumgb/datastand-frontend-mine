@@ -15,4 +15,5 @@ export interface AbstractText
   image?: string;
   is_generated?: boolean;
   is_pending?: boolean;
+  is_seed?: boolean;
 }

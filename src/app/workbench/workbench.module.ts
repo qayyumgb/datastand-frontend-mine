@@ -79,7 +79,6 @@ import {
     fromComponents.MouseLabelComponent,
     fromComponents.PrivacyPolicyDialogComponent,
     fromComponents.ProfileDialogComponent,
-    fromComponents.ProgressBarComponent,
     fromComponents.ResetTextDialogComponent,
     fromComponents.SendFeedbackDialogComponent,
     fromComponents.SpanComponent,

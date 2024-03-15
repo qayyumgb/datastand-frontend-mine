@@ -13,38 +13,42 @@
       [hasUpvoted]="corpus.has_upvoted!"
       [numUpvotes]="corpus.num_upvotes!"
       [element]="'corpus'"
-      [elementId]="corpus.id" >
+      [elementId]="corpus.id"
+    >
     </pm-upvote-button>
     <!-- Creator action buttons -->
     <ng-container *ngIf="isCreator">
       <button
         mat-stroked-button
         class="small"
-        (click)="openUpdateCorpusDialog()" >
+        (click)="openUpdateCorpusDialog()"
+      >
         <mat-icon>edit</mat-icon>Edit
       </button>
-   
-      <button 
-          mat-flat-button 
-          color="primary" 
-          class="small" 
-          (click)="openCorpusDownloadDialog()">
-            <mat-icon>download</mat-icon> Download
+      <button
+        mat-flat-button
+        color="primary"
+        class="small"
+        (click)="openCorpusDownloadDialog()"
+      >
+        <mat-icon>download</mat-icon> Download
       </button>
-
       <button
         mat-icon-button
+        mat-small-icon-button
         [matMenuTriggerFor]="actionsMenu"
-        class="horizon-dot top-horizontal-dot"
         *ngIf="isCreator"
       >
         <mat-icon>more_horiz</mat-icon>
       </button>
       <mat-menu #actionsMenu="matMenu">
         <button *ngIf="isCreator" mat-menu-item>
-          <label [for]="'img-upload'" class="change-image-button">
-            <mat-icon class="change-image-icon">image</mat-icon> Change image
-            </label>
+          <label [for]="'img-upload'" class="change-image-button"
+            ><mat-icon class="change-image-icon">image</mat-icon></label
+          >
+          <label [for]="'img-upload'" class="change-image-button"
+            >Change image</label
+          >
         </button>
         <input [id]="'img-upload'" type="file" (change)="changeImage($event)" />
         <button mat-menu-item (click)="deleteCorpus()">

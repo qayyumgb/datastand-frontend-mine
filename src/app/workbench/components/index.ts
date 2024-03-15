@@ -17,7 +17,6 @@ export * from './label-set-window/label-set-window.component';
 export * from './mouse-label/mouse-label.component';
 export * from './privacy-policy-dialog/privacy-policy-dialog.component';
 export * from './profile-dialog/profile-dialog.component';
-export * from './progress-bar/progress-bar.component';
 export * from './reset-text-dialog/reset-text-dialog.component';
 export * from './send-feedback-dialog/send-feedback-dialog.component';
 export * from './span/span.component';
