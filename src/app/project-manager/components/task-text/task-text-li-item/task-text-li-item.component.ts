@@ -1,21 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Text } from '@app/interfaces';
 import { StatusEnum } from '@app/interfaces/abstract';
-import { AuthService, TextService, UrlsService } from '@app/services';
+import { UrlsService } from '@app/services';
 import {
   RenameDialogComponent,
   UpdateTagsDialogComponent,
   UpdateTaskTextDialogComponent,
   ViewTaskTextDialogComponent,
 } from '@pm/components';
-
-export interface IcopyTaskTextEvent {
-  taskText: Text;
-  originalTaskTextId: number;
-}
 
 @Component({
   selector: 'pm-task-text-li-item',
@@ -26,74 +20,20 @@ export class TaskTextLiItemComponent {
   @Input() taskText?: Text;
   @Input() taskId?: number;
   @Input() isSelected?: boolean = false;
-  @Output() acceptSuggestionEvent = new EventEmitter<Text>();
-  @Output() copyTaskTextEvent = new EventEmitter<IcopyTaskTextEvent>(); // copied TaskText
-  @Output() deleteTaskTextEvent = new EventEmitter<number>(); // taskTextId
-  @Output() selectTaskTextEvent = new EventEmitter<number>(); // textId
-  @Output() deselectTaskTextEvent = new EventEmitter<number>(); // textId
+  @Input() isCreator?: boolean;
+  // All these events emit the textId.
+  @Output() copyTextEvent = new EventEmitter<number>();
+  @Output() deleteTextEvent = new EventEmitter<number>();
+  @Output() deselectTextEvent = new EventEmitter<number>();
+  @Output() selectTextEvent = new EventEmitter<number>();
+  @Output() setTextAsNotSeedEvent = new EventEmitter<number>();
+  @Output() setTextAsSeedEvent = new EventEmitter<number>();
+  @Output() setTextStatusToPendingEvent = new EventEmitter<number>();
+  @Output() setTextStatusToCompletedEvent = new EventEmitter<number>();
 
   statusEnum = StatusEnum;
 
-  constructor(
-    private auth: AuthService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private textService: TextService,
-    public urls: UrlsService
-  ) {}
-
-  copyTaskText(taskText: Text) {
-    this.textService.copy(taskText.id!).subscribe((res) =>
-      this.copyTaskTextEvent.emit({
-        originalTaskTextId: taskText.id!,
-        taskText: res,
-      })
-    );
-  }
-
-  acceptSuggestion(taskText: Text) {
-    this.textService.setStatusToCompleted(taskText.id!).subscribe((res) => {
-      this.acceptSuggestionEvent.emit(res);
-      this.taskText = res;
-      this.snackBar.open(`✅ Suggestion accepted`, 'Dismiss');
-    });
-  }
-
-  deleteTaskText(taskText: Text) {
-    this.textService.delete(taskText.id!).subscribe(() => {
-      // We need to emit an event for the parent to update the count.
-      this.deleteTaskTextEvent.emit(taskText?.id);
-      this.taskText = undefined;
-    });
-  }
-
-  isCreator(): boolean {
-    return this.auth.username === this.taskText?.creator?.username;
-  }
-
-  setAsNotSeed(taskText: Text) {
-    this.textService
-      .setAsNotSeed(taskText.id!)
-      .subscribe((res: Text) => (this.taskText = res));
-  }
-
-  setAsSeed(taskText: Text) {
-    this.textService
-      .setAsSeed(taskText.id!)
-      .subscribe((res: Text) => (this.taskText = res));
-  }
-
-  setStatusToPending(taskText: Text) {
-    this.textService
-      .setStatusToPending(taskText.id!)
-      .subscribe((res: Text) => (this.taskText = res));
-  }
-
-  setStatusToCompleted(taskText: Text) {
-    this.textService
-      .setStatusToCompleted(taskText.id!)
-      .subscribe((res: Text) => (this.taskText = res));
-  }
+  constructor(private dialog: MatDialog, public urls: UrlsService) {}
 
   openUpdateTaskTextDialog(taskText: Text) {
     this.dialog.open(UpdateTaskTextDialogComponent, {
@@ -122,9 +62,9 @@ export class TaskTextLiItemComponent {
   toggleSelection() {
     this.isSelected = !this.isSelected;
     if (this.isSelected) {
-      this.selectTaskTextEvent.emit(this.taskText?.id!);
+      this.selectTextEvent.emit(this.taskText?.id!);
     } else {
-      this.deselectTaskTextEvent.emit(this.taskText?.id!);
+      this.deselectTextEvent.emit(this.taskText?.id!);
     }
   }
 }

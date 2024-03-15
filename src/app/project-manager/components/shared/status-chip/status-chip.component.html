@@ -1,0 +1,16 @@
+<ng-container [ngSwitch]="status">
+  <chip
+    *ngSwitchCase="statusEnum.PENDING"
+    matIcon="warning"
+    matTooltip="This item is pending"
+    color="orange"
+    >PENDING</chip
+  >
+  <chip
+    *ngSwitchCase="statusEnum.NEW"
+    matIcon="auto_awesome"
+    matTooltip="This item is new"
+    color="grey"
+    >NEW</chip
+  >
+</ng-container>

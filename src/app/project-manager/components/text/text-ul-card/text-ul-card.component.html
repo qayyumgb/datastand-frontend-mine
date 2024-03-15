@@ -28,7 +28,7 @@
             (click)="openCreateTextDialog()"
             *ngIf="isCreator"
           >
-            <mat-icon>add</mat-icon>Add Text
+            <mat-icon>add</mat-icon>Add
           </button>
           <button
             mat-flat-button
@@ -37,7 +37,7 @@
             (click)="openCorpusEditTextsDialog()"
             *ngIf="isCreator"
           >
-            <mat-icon>recycling</mat-icon>Import Texts
+            <mat-icon>recycling</mat-icon>Import
           </button>
           <button
             mat-flat-button
@@ -73,67 +73,70 @@
           </mat-menu>
         </div>
       </div>
-      <div
-        class="bulk-actions"
-        *ngIf="selectedItemIds$ | async as selectedItemIds"
-      >
-        <mat-checkbox
-          color="primary"
-          matTooltip="Select"
-          (click)="toggleSelectAllItems()"
-          [checked]="isAnyItemSelected()"
-        ></mat-checkbox>
-        <button
-          mat-icon-button
-          class="medium"
-          matTooltip="Refresh"
-          (click)="getTexts()"
-        >
-          <mat-icon>refresh</mat-icon>
-        </button>
-        <ng-container *ngIf="(numSelectedItems$ | async)! > 0">
+      <div class="bulk-actions" *ngIf="isCreator">
+        <ng-container *ngIf="selectedItemIds$ | async as selectedItemIds">
+          <mat-checkbox
+            color="primary"
+            matTooltip="Select"
+            (click)="toggleSelectAllItems()"
+            [checked]="isAnyItemSelected()"
+          ></mat-checkbox>
           <button
             mat-icon-button
             class="medium"
-            matTooltip="Mark as reviewed"
-            (click)="setTextsAsNotPending(this.corpus.id!, selectedItemIds)"
+            matTooltip="Refresh"
+            (click)="getTexts()"
           >
-            <mat-icon>check</mat-icon>
+            <mat-icon>refresh</mat-icon>
           </button>
-          <button
-            mat-icon-button
-            class="medium"
-            matTooltip="Mark as pending"
-            (click)="setTextsAsPending(this.corpus.id!, selectedItemIds)"
-          >
-            <mat-icon>warning</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            class="medium"
-            matTooltip="Use as seed for AI generation"
-            (click)="setTextsAsSeeds(this.corpus.id!, selectedItemIds)"
-          >
-            <mat-icon>local_florist</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            class="medium"
-            matTooltip="Don't use as seed for AI generation"
-            (click)="setTextsAsNotSeeds(this.corpus.id!, selectedItemIds)"
-          >
-            <mat-icon>macro_off</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            class="medium"
-            matTooltip="Remove"
-            (click)="deleteTexts(this.corpus.id!, selectedItemIds)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-          <mat-divider [vertical]="true" style="height: 16px"></mat-divider>
-          <div>{{ numSelectedItems$ | async }} selected</div>
+          <ng-container *ngIf="(numSelectedItems$ | async)! > 0">
+            <button
+              mat-icon-button
+              class="medium"
+              matTooltip="Mark as reviewed"
+              (click)="
+                setTextsStatusToReviewed(this.corpus.id!, selectedItemIds)
+              "
+            >
+              <mat-icon>check</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              class="medium"
+              matTooltip="Mark as pending"
+              (click)="
+                setTextsStatusToPending(this.corpus.id!, selectedItemIds)
+              "
+            >
+              <mat-icon>warning</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              class="medium"
+              matTooltip="Use as seed for AI generation"
+              (click)="setTextsAsSeeds(this.corpus.id!, selectedItemIds)"
+            >
+              <mat-icon>local_florist</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              class="medium"
+              matTooltip="Don't use as seed for AI generation"
+              (click)="setTextsAsNotSeeds(this.corpus.id!, selectedItemIds)"
+            >
+              <mat-icon>macro_off</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              class="medium"
+              matTooltip="Remove"
+              (click)="deleteTexts(this.corpus.id!, selectedItemIds)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <mat-divider [vertical]="true" style="height: 16px"></mat-divider>
+            <div>{{ numSelectedItems$ | async }} selected</div>
+          </ng-container>
         </ng-container>
       </div>
     </div>
@@ -146,14 +149,16 @@
           <li *ngFor="let text of texts$ | async">
             <pm-text-li-item
               [text]="text"
-              [corpusId]="this.corpus.id!"
+              [isCreator]="isCreator"
               [isSelected]="isItemIdSelected(text.id!)"
-              (copyTextEvent)="
-                addItemAboveId($event.text, $event.originalTextId)
-              "
-              (deleteTextEvent)="deleteItemById($event)"
+              (copyTextEvent)="copyText($event)"
+              (deleteTextEvent)="deleteText($event)"
               (deselectTextEvent)="deselectItemById($event)"
               (selectTextEvent)="selectItemById($event)"
+              (setTextAsNotSeedEvent)="setTextAsNotSeed($event)"
+              (setTextAsSeedEvent)="setTextAsSeed($event)"
+              (setTextStatusToPendingEvent)="setTextStatusToPending($event)"
+              (setTextStatusToReviewedEvent)="setTextStatusToReviewed($event)"
             ></pm-text-li-item>
           </li>
         </ul>

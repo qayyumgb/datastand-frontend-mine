@@ -20,4 +20,5 @@ export * from './no-data-card/no-data-card.component';
 export * from './paginator/paginator.component';
 export * from './rename-dialog/rename-dialog.component';
 export * from './search-bar/search-bar.component';
+export * from './status-chip/status-chip.component';
 export * from './usage-dialog/usage-dialog.component';

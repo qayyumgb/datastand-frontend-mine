@@ -84,13 +84,13 @@ export class LabelService {
     return this.http.patch<Label>(`${this.url}/${labelId}/`, { name });
   }
 
-  setAsPending(labelId: number): Observable<Label> {
+  setStatusToPending(labelId: number): Observable<Label> {
     return this.http.patch<Label>(`${this.url}/${labelId}/`, {
       is_pending: true,
     });
   }
 
-  setAsReviewed(labelId: number): Observable<Label> {
+  setStatusToReviewed(labelId: number): Observable<Label> {
     return this.http.patch<Label>(`${this.url}/${labelId}/`, {
       is_pending: false,
     });

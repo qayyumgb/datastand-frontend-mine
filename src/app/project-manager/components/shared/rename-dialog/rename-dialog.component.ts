@@ -26,7 +26,7 @@ interface InputData {
 @Component({
   selector: 'pm-rename-dialog',
   templateUrl: './rename-dialog.component.html',
-  styleUrls: ['./rename-dialog.component.scss'],
+  styleUrls: ['../../base-crud-dialog.scss'],
 })
 export class RenameDialogComponent {
   form = this.fb.group({

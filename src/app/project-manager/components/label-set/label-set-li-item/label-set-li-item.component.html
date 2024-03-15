@@ -20,7 +20,7 @@
 
   <ng-container hoverButtons>
     <!-- Creator actions -->
-    <ng-container *ngIf="isCreator()">
+    <ng-container *ngIf="isCreator">
       <button
         mat-icon-button
         class="medium"
@@ -65,7 +65,7 @@
     </ng-container>
     <!-- Non-creator actions -->
     <button
-      *ngIf="!isCreator()"
+      *ngIf="!isCreator"
       mat-icon-button
       class="medium"
       matTooltip="Fork labelSet"

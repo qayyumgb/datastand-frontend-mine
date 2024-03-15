@@ -35,7 +35,6 @@
       </button>
       <button
         mat-icon-button
-        mat-small-icon-button
         [matMenuTriggerFor]="actionsMenu"
         *ngIf="isCreator"
       >
@@ -43,12 +42,9 @@
       </button>
       <mat-menu #actionsMenu="matMenu">
         <button *ngIf="isCreator" mat-menu-item>
-          <label [for]="'img-upload'" class="change-image-button"
-            ><mat-icon class="change-image-icon">image</mat-icon></label
-          >
-          <label [for]="'img-upload'" class="change-image-button"
-            >Change image</label
-          >
+          <label [for]="'img-upload'" class="change-image-button">
+            <mat-icon class="change-image-icon">image</mat-icon> Change image
+          </label>
         </button>
         <input [id]="'img-upload'" type="file" (change)="changeImage($event)" />
         <button mat-menu-item (click)="deleteCorpus()">

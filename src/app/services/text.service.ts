@@ -143,21 +143,14 @@ export class TextService {
     return this.http.patch<Text>(`${this.url}/${textId}/`, { is_seed: false });
   }
 
-  setAsPending(textId: number): Observable<Text> {
-    return this.http.patch<Text>(`${this.url}/${textId}/`, {
-      is_pending: true,
-      status: StatusEnum.PENDING,
-    });
+  setAsSeed(textId: number): Observable<Text> {
+    return this.http.patch<Text>(`${this.url}/${textId}/`, { is_seed: true });
   }
 
-  setAsReviewed(textId: number): Observable<Text> {
+  setStatusToReviewed(textId: number): Observable<Text> {
     return this.http.patch<Text>(`${this.url}/${textId}/`, {
       is_pending: false,
       status: StatusEnum.REVIEWED,
     });
-  }
-
-  setAsSeed(textId: number): Observable<Text> {
-    return this.http.patch<Text>(`${this.url}/${textId}/`, { is_seed: true });
   }
 }

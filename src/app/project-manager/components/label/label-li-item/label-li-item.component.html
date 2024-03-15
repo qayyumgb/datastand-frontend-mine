@@ -21,13 +21,13 @@
   </ng-container>
 
   <ng-container actions>
-    <ng-container *ngIf="isCreator()">
+    <ng-container *ngIf="isCreator">
       <button
         *ngIf="label.is_pending"
         mat-icon-button
         class="medium"
         matTooltip="Mark as reviewed"
-        (click)="markLabelAsReviewed(label)"
+        (click)="setLabelStatusToReviewedEvent.emit(label.id)"
       >
         <mat-icon>check</mat-icon>
       </button>
@@ -36,7 +36,7 @@
         mat-icon-button
         class="medium"
         matTooltip="Mark as pending"
-        (click)="markLabelAsPending(label)"
+        (click)="setLabelStatusToPendingEvent.emit(label.id)"
       >
         <mat-icon>warning</mat-icon>
       </button>
@@ -68,7 +68,7 @@
         mat-icon-button
         class="medium"
         matTooltip="Make a copy"
-        (click)="copyLabel(label)"
+        (click)="copyLabelEvent.emit(label.id)"
       >
         <mat-icon>file_copy</mat-icon>
       </button>
@@ -76,7 +76,7 @@
         mat-icon-button
         class="medium"
         matTooltip="Remove"
-        (click)="deleteLabel(label)"
+        (click)="deleteLabelEvent.emit(label.id)"
       >
         <mat-icon>delete</mat-icon>
       </button>

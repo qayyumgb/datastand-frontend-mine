@@ -26,7 +26,7 @@ interface InputData {
 @Component({
   selector: 'pm-update-tags-dialog',
   templateUrl: './update-tags-dialog.component.html',
-  styleUrls: ['./update-tags-dialog.component.scss'],
+  styleUrls: ['../../../base-crud-dialog.scss'],
 })
 export class UpdateTagsDialogComponent {
   form = this.fb.group({

@@ -25,6 +25,7 @@ import {
 export class ProjectManagementPage implements OnInit {
   user?: UserProfile;
   usage?: Usage;
+  showSearchBar: boolean = false;
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   constructor(
@@ -79,5 +80,9 @@ export class ProjectManagementPage implements OnInit {
 
   toggleMenu() {
     this.sidenav.toggle();
+  }
+
+  toggleSearchbar() {
+    this.showSearchBar = !this.showSearchBar;
   }
 }

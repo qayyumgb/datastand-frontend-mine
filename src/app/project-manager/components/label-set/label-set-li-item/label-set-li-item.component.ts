@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -9,15 +9,16 @@ import {
   RenameDialogComponent,
   UpdateTagsDialogComponent,
 } from '@pm/components';
-import { truncate } from '@pm/utils';
+import { isCreator, truncate } from '@pm/utils';
 
 @Component({
   selector: 'pm-label-set-li-item',
   templateUrl: './label-set-li-item.component.html',
 })
-export class LabelSetLiItemComponent {
+export class LabelSetLiItemComponent implements OnInit {
   @Input() labelSet?: LabelSet;
   @Output() deleteLabelSetEvent = new EventEmitter<number>(); // labelSetId
+  isCreator?: boolean;
   truncate = truncate;
 
   constructor(
@@ -28,6 +29,10 @@ export class LabelSetLiItemComponent {
     private snackBar: MatSnackBar,
     public urls: UrlsService
   ) {}
+
+  ngOnInit(): void {
+    this.isCreator = isCreator(this.labelSet!, this.auth.user?.username);
+  }
 
   changeImage(event: any): void {
     if (event.target.files && event.target.files[0]) {
@@ -58,10 +63,6 @@ export class LabelSetLiItemComponent {
       this.router.navigateByUrl(this.urls.getLabelSetUrl(res.id));
       this.snackBar.open('✅ Label set forked succesfully', 'Dismiss');
     });
-  }
-
-  isCreator(): boolean {
-    return this.auth.username === this.labelSet?.creator?.username;
   }
 
   openRenameLabelSetDialog() {

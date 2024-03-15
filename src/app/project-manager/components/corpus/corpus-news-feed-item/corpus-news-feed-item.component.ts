@@ -1,19 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { Corpus, User } from '@app/interfaces';
 import { AuthService, CorpusService, UrlsService } from '@app/services';
+import { isCreator } from '@pm/utils';
 
 @Component({
   selector: 'pm-corpus-news-feed-item',
   templateUrl: './corpus-news-feed-item.component.html',
   styleUrls: ['./corpus-news-feed-item.component.scss'],
 })
-export class CorpusNewsFeedItemComponent {
+export class CorpusNewsFeedItemComponent implements OnInit {
   @Input() corpus?: Corpus;
   @Input() user?: User;
-  actions: boolean = false;
+  isCreator?: boolean;
 
   constructor(
     public auth: AuthService,
@@ -23,8 +24,8 @@ export class CorpusNewsFeedItemComponent {
     public urls: UrlsService
   ) {}
 
-  displayActions() {
-    this.actions = true;
+  ngOnInit(): void {
+    this.isCreator = isCreator(this.corpus!, this.auth.username);
   }
 
   forkCorpus() {
@@ -32,13 +33,5 @@ export class CorpusNewsFeedItemComponent {
       this.router.navigateByUrl(this.urls.getCorpusUrl(res.id));
       this.snackBar.open('✅ Corpus forked succesfully', 'Dismiss');
     });
-  }
-
-  hideActions() {
-    this.actions = false;
-  }
-
-  isCreator(): boolean {
-    return this.auth.username === this.corpus?.creator?.username;
   }
 }

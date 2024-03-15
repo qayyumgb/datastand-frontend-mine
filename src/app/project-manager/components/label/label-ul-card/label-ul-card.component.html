@@ -34,7 +34,7 @@
           (click)="openCreateLabelDialog()"
           *ngIf="isCreator"
         >
-          <mat-icon>add</mat-icon>Add Label
+          <mat-icon>add</mat-icon>Add
         </button>
         <button
           mat-flat-button
@@ -43,12 +43,12 @@
           (click)="openLabelSetEditLabelsDialog()"
           *ngIf="isCreator"
         >
-          <mat-icon>recycling</mat-icon>Import Labels
+          <mat-icon>recycling</mat-icon>Import
         </button>
         <label *ngIf="isCreator" for="csv-upload" title="Upload thumbnail">
           <a mat-flat-button class="small" color="primary">
             <mat-icon>file_upload</mat-icon>
-            <span>Import from CSV</span>
+            <span>Upload CSV</span>
           </a>
         </label>
         <input
@@ -89,11 +89,12 @@
           <li *ngFor="let label of labels$ | async">
             <pm-label-li-item
               [label]="label"
+              [isCreator]="isCreator"
               [labelSetId]="this.labelSet.id!"
-              (deleteLabelEvent)="deleteItemById($event)"
-              (copyLabelEvent)="
-                addItemAboveId($event.label, $event.originalLabelId)
-              "
+              (copyLabelEvent)="copyLabel($event)"
+              (deleteLabelEvent)="deleteLabel($event)"
+              (setLabelStatusToPendingEvent)="setLabelStatusToPending($event)"
+              (setLabelStatusToReviewedEvent)="setLabelStatusToReviewed($event)"
             ></pm-label-li-item>
           </li>
         </ul>

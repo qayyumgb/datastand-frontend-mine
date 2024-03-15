@@ -1,6 +1,8 @@
 <section class="app">
   <ng-container *ngIf="isBigScreen; else notBigScreen">
     <router-outlet></router-outlet>
+    <!-- TODO(gustavoauma): Reenable this -->
+    <!-- <app-loader></app-loader> -->
   </ng-container>
   <!-- Block usage of the app in small screens -->
   <ng-template #notBigScreen>

@@ -12,24 +12,26 @@
     >
 
     <div class="layout-buttons">
-      <button
-        *ngIf="!userSettings.isCardLayout()"
-        mat-icon-button
-        matTooltip="Grid layout"
-        class="normal"
-        (click)="userSettings.toggleLayout()"
-      >
-        <mat-icon>grid_on</mat-icon>
-      </button>
-      <button
-        *ngIf="!userSettings.isListLayout()"
-        mat-icon-button
-        matTooltip="List layout"
-        class="normal"
-        (click)="userSettings.toggleLayout()"
-      >
-        <mat-icon>view_list</mat-icon>
-      </button>
+      <ng-container *ngIf="!isMobile">
+        <button
+          *ngIf="!userSettings.isCardLayout()"
+          mat-icon-button
+          matTooltip="Grid layout"
+          class="normal"
+          (click)="userSettings.toggleLayout()"
+        >
+          <mat-icon>grid_on</mat-icon>
+        </button>
+        <button
+          *ngIf="!userSettings.isListLayout()"
+          mat-icon-button
+          matTooltip="List layout"
+          class="normal"
+          (click)="userSettings.toggleLayout()"
+        >
+          <mat-icon>view_list</mat-icon>
+        </button>
+      </ng-container>
       <button
         mat-icon-button
         matTooltip="Refresh"
@@ -41,13 +43,16 @@
     </div>
   </div>
   <!-- List layout -->
-  <div *ngIf="userSettings.isListLayout()">
+  <div *ngIf="userSettings.isListLayout() && !isMobile">
     <ul class="data-table">
       <ng-content select="[listItems]"></ng-content>
     </ul>
   </div>
   <!-- Grid layout -->
-  <div class="data-card-container" *ngIf="userSettings.isCardLayout()">
+  <div
+    class="data-card-container"
+    *ngIf="userSettings.isCardLayout() || isMobile"
+  >
     <ng-content select="[cardItems]"></ng-content>
   </div>
   <!-- Paginator -->

@@ -35,7 +35,7 @@
           (click)="openCreateTaskLabelDialog()"
           *ngIf="isCreator"
         >
-          <mat-icon>add</mat-icon>Add Label
+          <mat-icon>add</mat-icon>Add
         </button>
         <button
           mat-flat-button
@@ -44,12 +44,12 @@
           (click)="openTaskEditTaskLabelsDialog()"
           *ngIf="isCreator"
         >
-          <mat-icon>recycling</mat-icon>Import Labels
+          <mat-icon>recycling</mat-icon>Import
         </button>
         <label for="csv-upload" title="Upload thumbnail">
           <a mat-flat-button class="small" color="primary">
             <mat-icon>file_upload</mat-icon>
-            <span>Import from CSV</span>
+            <span>Upload CSV</span>
           </a>
         </label>
         <input id="csv-upload" type="file" />
@@ -87,10 +87,11 @@
             <pm-task-label-li-item
               [taskLabel]="taskLabel"
               [taskId]="this.task.id!"
-              (deleteLabelEvent)="deleteItemById($event)"
-              (copyLabelEvent)="
-                addItemAboveId($event.taskLabel, $event.originalTaskLabelId)
-              "
+              [isCreator]="isCreator"
+              (copyLabelEvent)="copyLabel($event)"
+              (deleteLabelEvent)="deleteLabel($event)"
+              (setLabelStatusToPendingEvent)="setLabelStatusToPending($event)"
+              (setLabelStatusToReviewedEvent)="setLabelStatusToReviewed($event)"
             ></pm-task-label-li-item>
           </li>
         </ul>

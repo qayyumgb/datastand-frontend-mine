@@ -187,7 +187,17 @@ export class CorpusService {
     );
   }
 
-  setTextsAsPending(
+  setTextsAsSeeds(
+    corpusId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${corpusId}/set-texts-as-seeds/`,
+      { ids: textIds }
+    );
+  }
+
+  setTextsStatusToPending(
     corpusId: number,
     textIds: number[]
   ): Observable<NumChangedResponse> {
@@ -197,22 +207,12 @@ export class CorpusService {
     );
   }
 
-  setTextsAsReviewed(
+  setTextsStatusToReviewed(
     corpusId: number,
     textIds: number[]
   ): Observable<NumChangedResponse> {
     return this.http.post<NumChangedResponse>(
       `${this.url}/${corpusId}/set-texts-as-reviewed/`,
-      { ids: textIds }
-    );
-  }
-
-  setTextsAsSeeds(
-    corpusId: number,
-    textIds: number[]
-  ): Observable<NumChangedResponse> {
-    return this.http.post<NumChangedResponse>(
-      `${this.url}/${corpusId}/set-texts-as-seeds/`,
       { ids: textIds }
     );
   }

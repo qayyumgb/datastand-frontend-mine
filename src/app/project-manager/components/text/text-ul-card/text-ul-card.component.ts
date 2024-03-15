@@ -80,6 +80,12 @@ export class TextUlCardComponent
     return <Observable<Text[]>>this.items$;
   }
 
+  copyText(textId: number) {
+    this.textService
+      .copy(textId)
+      .subscribe((res: Text) => this.addItemAboveId(res, textId));
+  }
+
   corporaAcceptAllSuggestions() {
     this.corpusService
       .acceptAllSuggestions(this.corpus?.id!)
@@ -90,28 +96,6 @@ export class TextUlCardComponent
         );
         this.getTexts();
       });
-  }
-
-  corporaGenerateTexts(numTexts: number) {
-    let numGeneratedTexts = 0; // Counter for generated texts
-
-    this.corpusService.generateTexts(this.corpus?.id!, numTexts).subscribe({
-      next: (res: Text) => {
-        numGeneratedTexts++;
-        this.snackBar.open(
-          `🤖 Generating texts... (${numGeneratedTexts}/${numTexts})`,
-          'Dismiss',
-          { duration: 600_000 }
-        );
-        this.setItems([res, ...this.items!]);
-        this._increaseCounts();
-      },
-      complete: () =>
-        this.snackBar.open(
-          `✅ ${numGeneratedTexts} Text(s) generated successfully`,
-          'Dismiss'
-        ),
-    });
   }
 
   dedupeTexts() {
@@ -126,6 +110,12 @@ export class TextUlCardComponent
       }
       this.resetTexts();
     });
+  }
+
+  deleteText(textId: number) {
+    this.textService
+      .delete(textId)
+      .subscribe(() => this.deleteItemById(textId));
   }
 
   deleteTexts(corpusId: number, textIds: number[]) {
@@ -196,6 +186,30 @@ export class TextUlCardComponent
     this.getTexts();
   }
 
+  setTextAsNotSeed(textId: number) {
+    this.textService
+      .setAsNotSeed(textId)
+      .subscribe((res: Text) => this.overwriteItem(res));
+  }
+
+  setTextAsSeed(textId: number) {
+    this.textService
+      .setAsSeed(textId)
+      .subscribe((res: Text) => this.overwriteItem(res));
+  }
+
+  setTextStatusToPending(textId: number) {
+    this.textService
+      .setStatusToPending(textId)
+      .subscribe((res: Text) => this.overwriteItem(res));
+  }
+
+  setTextStatusToReviewed(textId: number) {
+    this.textService
+      .setStatusToReviewed(textId)
+      .subscribe((res: Text) => this.overwriteItem(res));
+  }
+
   setTextsAsSeeds(corpusId: number, textIds: number[]) {
     this.corpusService.setTextsAsSeeds(corpusId, textIds).subscribe(() => {
       this.resetTexts();
@@ -210,17 +224,21 @@ export class TextUlCardComponent
     });
   }
 
-  setTextsAsPending(corpusId: number, textIds: number[]) {
-    this.corpusService.setTextsAsPending(corpusId, textIds).subscribe(() => {
-      this.resetTexts();
-      this.clearSelection();
-    });
+  setTextsStatusToPending(corpusId: number, textIds: number[]) {
+    this.corpusService
+      .setTextsStatusToPending(corpusId, textIds)
+      .subscribe(() => {
+        this.resetTexts();
+        this.clearSelection();
+      });
   }
 
-  setTextsAsNotPending(corpusId: number, textIds: number[]) {
-    this.corpusService.setTextsAsReviewed(corpusId, textIds).subscribe(() => {
-      this.resetTexts();
-      this.clearSelection();
-    });
+  setTextsStatusToReviewed(corpusId: number, textIds: number[]) {
+    this.corpusService
+      .setTextsStatusToReviewed(corpusId, textIds)
+      .subscribe(() => {
+        this.resetTexts();
+        this.clearSelection();
+      });
   }
 }

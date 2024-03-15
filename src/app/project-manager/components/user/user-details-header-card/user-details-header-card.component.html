@@ -1,10 +1,12 @@
 <section *ngIf="userProfile" class="card">
-  <div class="flex">
-    <div class="flex-100">
+  <div class="card-inner">
+    <div>
       <img
         [src]="userProfile.image || urls.DEFAULT_IMG_URL"
         class="user-image"
       />
+    </div>
+    <div class="flex-column">
       <div class="user-info">
         <h1 class="mb-16">{{ userProfile.username }}@</h1>
         <div *ngIf="userProfile.first_name || userProfile.last_name">
@@ -38,46 +40,45 @@
           >
         </div>
       </div>
-    </div>
-    <div class="top-buttons">
-      <!-- Same user buttons -->
-      <ng-container *ngIf="userProfile.username != this.auth.username">
-        <button
-          *ngIf="!userProfile.am_i_following"
-          mat-flat-button
-          color="primary"
-          class="follow-button"
-          (click)="followUser()"
-        >
-          <mat-icon>person_add</mat-icon> Follow
-        </button>
-        <button
-          *ngIf="userProfile.am_i_following"
-          mat-stroked-button
-          class="follow-button"
-          (click)="unfollowUser()"
-        >
-          <mat-icon>person_remove</mat-icon> Unfollow
-        </button>
-      </ng-container>
-      <!-- Other user buttons -->
-      <ng-container *ngIf="userProfile.username! == this.auth.username!">
-        <label for="file-upload" title="Upload thumbnail">
-          <a mat-stroked-button class="small">
-            <mat-icon>image</mat-icon>
-            <span>Change Image</span>
-          </a>
-        </label>
-        <input id="file-upload" type="file" (change)="changeImage($event)" />
-        <button
-          mat-flat-button
-          color="primary"
-          class="follow-button"
-          (click)="openUpdateUserProfileDialog()"
-        >
-          <mat-icon>edit</mat-icon> Edit
-        </button>
-      </ng-container>
+      <div class="top-buttons">
+        <!-- Same user buttons -->
+        <ng-container *ngIf="userProfile.username != this.auth.username">
+          <button
+            *ngIf="!userProfile.am_i_following"
+            mat-flat-button
+            color="primary"
+            class="follow-button"
+            (click)="followUser()"
+          >
+            <mat-icon>person_add</mat-icon> Follow
+          </button>
+          <button
+            *ngIf="userProfile.am_i_following"
+            mat-stroked-button
+            class="follow-button"
+            (click)="unfollowUser()"
+          >
+            <mat-icon>person_remove</mat-icon> Unfollow
+          </button>
+        </ng-container>
+        <!-- Other user buttons -->
+        <ng-container *ngIf="userProfile.username! == this.auth.username!">
+          <label for="file-upload" title="Upload thumbnail">
+            <a mat-stroked-button class="small">
+              <mat-icon>image</mat-icon>
+              <span>Change Image</span>
+            </a>
+          </label>
+          <input id="file-upload" type="file" (change)="changeImage($event)" />
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="openUpdateUserProfileDialog()"
+          >
+            <mat-icon>edit</mat-icon> Edit
+          </button>
+        </ng-container>
+      </div>
     </div>
   </div>
 </section>

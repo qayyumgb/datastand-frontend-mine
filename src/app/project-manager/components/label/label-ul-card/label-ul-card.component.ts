@@ -17,6 +17,7 @@ import {
   CreateLabelDialogComponent,
   LabelSetEditLabelsDialogComponent,
 } from '@pm/components';
+import { isCreator } from '@pm/utils';
 
 @Component({
   selector: 'pm-label-ul-card',
@@ -84,6 +85,18 @@ export class LabelUlCardComponent
       });
   }
 
+  copyLabel(labelId: number) {
+    this.labelService
+      .copy(labelId)
+      .subscribe((res: Label) => this.addItemAboveId(res, labelId));
+  }
+
+  deleteLabel(labelId: number) {
+    this.labelService
+      .delete(labelId)
+      .subscribe(() => this.deleteItemById(labelId));
+  }
+
   importLabelsFromCsv(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file: File = event.target.files[0];
@@ -136,8 +149,7 @@ export class LabelUlCardComponent
   }
 
   ngOnInit(): void {
-    this.isCreator =
-      this.labelSet?.creator?.username === this.auth.user?.username;
+    this.isCreator = isCreator(this.labelSet!, this.auth.user?.username);
   }
 
   openLabelSetEditLabelsDialog() {
@@ -163,5 +175,17 @@ export class LabelUlCardComponent
   resetLabels(): void {
     this.filters = { page: 1 };
     this.getLabels(this.filters);
+  }
+
+  setLabelStatusToPending(labelId: number) {
+    this.labelService
+      .setStatusToPending(labelId)
+      .subscribe((res: Label) => this.overwriteItem(res));
+  }
+
+  setLabelStatusToReviewed(labelId: number) {
+    this.labelService
+      .setStatusToReviewed(labelId)
+      .subscribe((res: Label) => this.overwriteItem(res));
   }
 }

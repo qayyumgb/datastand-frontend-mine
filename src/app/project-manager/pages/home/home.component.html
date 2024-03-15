@@ -1,4 +1,4 @@
-<section class="container">
+<section class="home-section">
   <h1>Home</h1>
   <pm-home-welcome-card
     *ngIf="userSettingsService.show_home_welcome_message"
@@ -20,16 +20,16 @@
         [labelSet]="$any(action.target)"
         [user]="action.actor"
       ></pm-label-set-news-feed-item>
-
-      <!-- TODO(gustavoauma): Implement "show more" -->
-      <button
-        mat-stroked-button
-        color="primary"
-        class="show-more-button"
-        disabled
-      >
-        No more updates
-      </button>
     </ng-container>
+
+    <!-- TODO(gustavoauma): Implement "show more" -->
+    <button
+      mat-stroked-button
+      color="primary"
+      class="show-more-button"
+      disabled
+    >
+      No more updates
+    </button>
   </ng-container>
 </section>

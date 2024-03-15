@@ -1,5 +1,17 @@
 import { Observable, concat, merge, retry } from 'rxjs';
 
+import { Entity } from '@app/interfaces';
+
+/**
+ * Checks if the given username matches the creator's username of the entity.
+ * @param entity - The entity to check.
+ * @param username - The username to compare with the creator's username.
+ * @returns Returns true if the username matches the creator's username, otherwise false.
+ */
+export function isCreator(entity: Entity, username: string) {
+  return entity.creator?.username === username;
+}
+
 /**
  * Runs multiple HTTP calls in parallel and returns an Observable that emits the results.
  *

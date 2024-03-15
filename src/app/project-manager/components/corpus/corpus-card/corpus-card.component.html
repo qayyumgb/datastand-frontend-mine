@@ -63,38 +63,40 @@
   <!-- Context menu -->
   <mat-menu #moreActionsMenu="matMenu">
     <!-- Corpus creator actions -->
-    <button
-      *ngIf="isCreator()"
-      mat-menu-item
-      (click)="openRenameCorpusDialog()"
-    >
-      <mat-icon>edit</mat-icon>
-      <span>Rename</span>
-    </button>
-    <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
-    <button *ngIf="isCreator()" mat-menu-item>
-      <label [for]="'file-upload-card-' + corpus.id" class="change-image-button"
-        ><mat-icon class="change-image-icon">image</mat-icon></label
-      >
-      <label [for]="'file-upload-card-' + corpus.id" class="change-image-button"
-        >Change image</label
-      >
-    </button>
-    <input
-      [id]="'file-upload-card-' + corpus.id"
-      type="file"
-      (change)="changeImage($event)"
-    />
-    <button *ngIf="isCreator()" mat-menu-item (click)="openUpdateTagsDialog()">
-      <mat-icon>label</mat-icon>
-      <span>Change tags</span>
-    </button>
-    <button *ngIf="isCreator()" mat-menu-item (click)="deleteCorpus()">
-      <mat-icon>delete</mat-icon>
-      <span>Remove</span>
-    </button>
+    <ng-container *ngIf="isCreator">
+      <button mat-menu-item (click)="openRenameCorpusDialog()">
+        <mat-icon>edit</mat-icon>
+        <span>Rename</span>
+      </button>
+      <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
+      <button mat-menu-item>
+        <label
+          [for]="'file-upload-card-' + corpus.id"
+          class="change-image-button"
+          ><mat-icon class="change-image-icon">image</mat-icon></label
+        >
+        <label
+          [for]="'file-upload-card-' + corpus.id"
+          class="change-image-button"
+          >Change image</label
+        >
+      </button>
+      <input
+        [id]="'file-upload-card-' + corpus.id"
+        type="file"
+        (change)="changeImage($event)"
+      />
+      <button mat-menu-item (click)="openUpdateTagsDialog()">
+        <mat-icon>label</mat-icon>
+        <span>Change tags</span>
+      </button>
+      <button mat-menu-item (click)="deleteCorpus()">
+        <mat-icon>delete</mat-icon>
+        <span>Remove</span>
+      </button>
+    </ng-container>
     <!-- Corpus non-creator actions -->
-    <button *ngIf="!isCreator()" mat-menu-item (click)="forkCorpus()">
+    <button *ngIf="!isCreator" mat-menu-item (click)="forkCorpus()">
       <mat-icon>fork_right</mat-icon>
       <span>Fork</span>
     </button>

@@ -101,6 +101,7 @@ import { ColorSquareComponent } from './components/shared/color-square/color-squ
     fromComponents.SearchFiltersComponent,
     fromComponents.SearchHeaderCardComponent,
     fromComponents.RenameDialogComponent,
+    fromComponents.StatusChipComponent,
     fromComponents.TagComponent,
     fromComponents.TagListTruncatedComponent,
     fromComponents.TagsFormFieldComponent,

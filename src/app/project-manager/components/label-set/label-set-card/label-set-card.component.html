@@ -65,7 +65,7 @@
   <mat-menu #moreActionsMenu="matMenu">
     <!-- Corpus creator actions -->
     <button
-      *ngIf="isCreator()"
+      *ngIf="isCreator"
       mat-menu-item
       (click)="openRenameLabelSetDialog()"
     >
@@ -73,7 +73,7 @@
       <span>Rename</span>
     </button>
     <!-- TODO(gustavoauma): Refactor this, this is too ugly -->
-    <button *ngIf="isCreator()" mat-menu-item>
+    <button *ngIf="isCreator" mat-menu-item>
       <label
         [for]="'file-upload-card-' + labelSet.id"
         class="change-image-button"
@@ -90,16 +90,16 @@
       type="file"
       (change)="changeImage($event)"
     />
-    <button *ngIf="isCreator()" mat-menu-item (click)="openUpdateTagsDialog()">
+    <button *ngIf="isCreator" mat-menu-item (click)="openUpdateTagsDialog()">
       <mat-icon>label</mat-icon>
       <span>Change tags</span>
     </button>
-    <button *ngIf="isCreator()" mat-menu-item (click)="deleteLabelSet()">
+    <button *ngIf="isCreator" mat-menu-item (click)="deleteLabelSet()">
       <mat-icon>delete</mat-icon>
       <span>Remove</span>
     </button>
     <!-- Corpus non-creator actions -->
-    <button *ngIf="!isCreator()" mat-menu-item (click)="forkLabelSet()">
+    <button *ngIf="!isCreator" mat-menu-item (click)="forkLabelSet()">
       <mat-icon>fork_right</mat-icon>
       <span>Fork</span>
     </button>

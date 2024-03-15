@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Text } from '@app/interfaces';
-import { AuthService, TextService, UrlsService } from '@app/services';
+import { UrlsService } from '@app/services';
 import {
   RenameDialogComponent,
   UpdateTagsDialogComponent,
@@ -11,95 +10,28 @@ import {
   ViewTextDialogComponent,
 } from '@pm/components';
 
-export interface IcopyTextEvent {
-  text: Text;
-  originalTextId: number;
-}
-
 @Component({
   selector: 'pm-text-li-item',
   templateUrl: './text-li-item.component.html',
 })
 export class TextLiItemComponent {
   @Input() text?: Text;
-  @Input() corpusId?: number;
   @Input() isSelected?: boolean = false;
-  @Output() acceptSuggestionEvent = new EventEmitter<Text>();
-  @Output() copyTextEvent = new EventEmitter<IcopyTextEvent>(); // copied Text
-  @Output() deleteTextEvent = new EventEmitter<number>(); // textId
-  @Output() selectTextEvent = new EventEmitter<number>(); // textId
-  @Output() deselectTextEvent = new EventEmitter<number>(); // textId
+  @Input() isCreator?: boolean;
+  // All these events emit the textId.
+  @Output() copyTextEvent = new EventEmitter<number>();
+  @Output() deleteTextEvent = new EventEmitter<number>();
+  @Output() deselectTextEvent = new EventEmitter<number>();
+  @Output() selectTextEvent = new EventEmitter<number>();
+  @Output() setTextAsNotSeedEvent = new EventEmitter<number>();
+  @Output() setTextAsSeedEvent = new EventEmitter<number>();
+  @Output() setTextStatusToPendingEvent = new EventEmitter<number>();
+  @Output() setTextStatusToReviewedEvent = new EventEmitter<number>();
 
-  constructor(
-    private auth: AuthService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private textService: TextService,
-    public urls: UrlsService
-  ) {}
-
-  copyText(text: Text) {
-    this.textService
-      .copy(text.id!)
-      .subscribe((res: Text) =>
-        this.copyTextEvent.emit({ originalTextId: text.id!, text: res })
-      );
-  }
-
-  acceptSuggestion(text: Text) {
-    this.textService.setAsReviewed(text.id!).subscribe((res: Text) => {
-      this.acceptSuggestionEvent.emit(res);
-      this.text = res;
-      this.snackBar.open(`✅ Suggestion accepted`, 'Dismiss');
-    });
-  }
-
-  deleteText(text: Text) {
-    this.textService.delete(text.id!).subscribe(() => {
-      // We need to emit an event for the parent to update the count.
-      this.deleteTextEvent.emit(text?.id);
-      this.text = undefined;
-    });
-  }
-
-  isCreator(): boolean {
-    return this.auth.username === this.text?.creator?.username;
-  }
-
-  markTextAsNew(text: Text) {
-    this.textService
-      .setStatusToNew(text.id!)
-      .subscribe((res: Text) => (this.text = res));
-  }
-
-  markTextAsPending(text: Text) {
-    this.textService
-      .setAsPending(text.id!)
-      .subscribe((res: Text) => (this.text = res));
-  }
-
-  markTextAsNotSeed(text: Text) {
-    this.textService
-      .setAsNotSeed(text.id!)
-      .subscribe((res: Text) => (this.text = res));
-  }
-
-  markTextAsReviewed(text: Text) {
-    this.textService
-      .setAsReviewed(text.id!)
-      .subscribe((res: Text) => (this.text = res));
-  }
-
-  markTextAsSeed(text: Text) {
-    this.textService
-      .setAsSeed(text.id!)
-      .subscribe((res: Text) => (this.text = res));
-  }
+  constructor(private dialog: MatDialog, public urls: UrlsService) {}
 
   openUpdateTextDialog(text: Text) {
-    this.dialog.open(UpdateTextDialogComponent, {
-      data: text,
-    });
+    this.dialog.open(UpdateTextDialogComponent, { data: text });
   }
 
   openRenameTextDialog(text: Text) {
@@ -115,9 +47,7 @@ export class TextLiItemComponent {
   }
 
   openViewTextDialog(text: Text) {
-    this.dialog.open(ViewTextDialogComponent, {
-      data: text,
-    });
+    this.dialog.open(ViewTextDialogComponent, { data: text });
   }
 
   toggleSelection() {

@@ -7,10 +7,7 @@ import { CorpusService } from '@app/services';
 @Component({
   selector: 'pm-label-set-form-dialog',
   templateUrl: './label-set-form-dialog.component.html',
-  styleUrls: [
-    './label-set-form-dialog.component.scss',
-    '../../base-crud-dialog.scss',
-  ],
+  styleUrls: ['../../base-crud-dialog.scss'],
 })
 export class LabelSetFormDialogComponent {
   @Input() title?: string;

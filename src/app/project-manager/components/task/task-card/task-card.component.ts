@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -9,16 +9,17 @@ import {
   RenameDialogComponent,
   UpdateTagsDialogComponent,
 } from '@pm/components';
-import { truncate } from '@pm/utils';
+import { isCreator, truncate } from '@pm/utils';
 
 @Component({
   selector: 'pm-task-card',
   templateUrl: './task-card.component.html',
   styleUrls: ['../../data-card.scss', '../../change-image-button.scss'],
 })
-export class TaskCardComponent {
+export class TaskCardComponent implements OnInit {
   @Input() task?: Task;
   @Output() deleteTaskEvent = new EventEmitter<number>(); // taskId
+  isCreator?: boolean;
   truncate = truncate;
 
   constructor(
@@ -29,6 +30,10 @@ export class TaskCardComponent {
     private taskService: TaskService,
     public urls: UrlsService
   ) {}
+
+  ngOnInit(): void {
+    this.isCreator = isCreator(this.task!, this.auth.user?.username);
+  }
 
   changeImage(event: any): void {
     if (event.target.files && event.target.files[0]) {
@@ -45,10 +50,6 @@ export class TaskCardComponent {
       this.deleteTaskEvent.emit(this.task?.id);
       delete this.task;
     });
-  }
-
-  isCreator(): boolean {
-    return this.auth.username === this.task?.creator?.username;
   }
 
   openRenameTaskDialog() {

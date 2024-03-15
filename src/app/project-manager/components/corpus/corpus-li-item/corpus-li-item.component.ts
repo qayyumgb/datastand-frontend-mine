@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -9,14 +9,16 @@ import {
   RenameDialogComponent,
   UpdateTagsDialogComponent,
 } from '@pm/components';
+import { isCreator } from '@pm/utils';
 
 @Component({
   selector: 'pm-corpus-li-item',
   templateUrl: './corpus-li-item.component.html',
 })
-export class CorpusLiItemComponent {
+export class CorpusLiItemComponent implements OnInit {
   @Input() corpus?: Corpus;
   @Output() deleteCorpusEvent = new EventEmitter<number>(); // corpusId
+  isCreator?: boolean;
 
   constructor(
     public auth: AuthService,
@@ -26,6 +28,10 @@ export class CorpusLiItemComponent {
     private snackBar: MatSnackBar,
     public urls: UrlsService
   ) {}
+
+  ngOnInit(): void {
+    this.isCreator = isCreator(this.corpus!, this.auth.username);
+  }
 
   changeImage(event: any): void {
     if (event.target.files && event.target.files[0]) {
@@ -56,10 +62,6 @@ export class CorpusLiItemComponent {
       this.router.navigateByUrl(this.urls.getCorpusUrl(res.id));
       this.snackBar.open('✅ Corpus forked succesfully', 'Dismiss');
     });
-  }
-
-  isCreator(): boolean {
-    return this.auth.username === this.corpus?.creator?.username;
   }
 
   openRenameCorpusDialog() {

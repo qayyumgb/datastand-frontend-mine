@@ -9,19 +9,10 @@ import { UrlsService } from '@app/services';
   styleUrls: ['./entity-li-item.component.scss'],
 })
 export class EntityLiItemComponent {
-  actions: boolean = false;
   @Input() entityUrl?: string;
   @Input() imgUrl?: string;
   @Input() entity?: Entity;
   @Input() entityType?: string;
 
   constructor(public urls: UrlsService) {}
-
-  hideActions() {
-    this.actions = false;
-  }
-
-  displayActions() {
-    this.actions = true;
-  }
 }

@@ -5,14 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './layout-li-with-actions.component.html',
   styleUrls: ['./layout-li-with-actions.component.scss'],
 })
-export class LayoutLiWithActionsComponent {
-  actions: boolean = false;
-
-  hideActions() {
-    this.actions = false;
-  }
-
-  displayActions() {
-    this.actions = true;
-  }
-}
+export class LayoutLiWithActionsComponent {}

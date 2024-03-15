@@ -99,6 +99,18 @@ export class TaskLabelUlCardComponent
     });
   }
 
+  copyLabel(labelId: number) {
+    this.labelService
+      .copy(labelId)
+      .subscribe((res: Label) => this.addItemAboveId(res, labelId));
+  }
+
+  deleteLabel(labelId: number) {
+    this.labelService
+      .delete(labelId)
+      .subscribe(() => this.deleteItemById(labelId));
+  }
+
   dedupeTaskLabels() {
     this.taskService.dedupeLabels(this.task?.id!).subscribe((res) => {
       if (res.num_deleted == 0) {
@@ -182,16 +194,6 @@ export class TaskLabelUlCardComponent
       .subscribe((isSaved: boolean) => isSaved && this.resetTaskLabels());
   }
 
-  openGenerateTaskLabelsDialog(): void {
-    // let dialogRef = this.dialog.open(GenerateTaskLabelsDialogComponent, {});
-    // // dialogRef returns the number of taskLabels to be generated.
-    // dialogRef.afterClosed().subscribe((numTaskLabels: number) => {
-    //   if (numTaskLabels) {
-    //     this.corporaGenerateTaskLabels(numTaskLabels);
-    //   }
-    // });
-  }
-
   resetTaskLabels(): void {
     this.updateFilters({});
     this.getTaskLabels(this.filters);
@@ -201,6 +203,18 @@ export class TaskLabelUlCardComponent
     this.searchForm.reset();
     this.filters = { ...this.filters, search: '' };
     this.resetTaskLabels();
+  }
+
+  setLabelStatusToPending(labelId: number) {
+    this.labelService
+      .setStatusToPending(labelId)
+      .subscribe((res: Label) => this.overwriteItem(res));
+  }
+
+  setLabelStatusToReviewed(labelId: number) {
+    this.labelService
+      .setStatusToReviewed(labelId)
+      .subscribe((res: Label) => this.overwriteItem(res));
   }
 
   updateFilters(filters: LabelFilters) {

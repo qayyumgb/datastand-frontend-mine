@@ -1,5 +1,14 @@
 // Layout
-
+.card-inner {
+  display: flex;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
 .user-image {
   width: 150px;
   height: 150px;
@@ -12,9 +21,14 @@
 
 .top-buttons {
   display: flex;
-  justify-content: flex-end;
   gap: 10px;
-  width: 400px;
+}
+@media (min-width: 768px) {
+  .top-buttons {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
 }
 
 .user-info {

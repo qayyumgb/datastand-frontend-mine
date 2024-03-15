@@ -38,7 +38,7 @@
     ></progress-bar>
     <div class="generated-texts mt-16">
       <div *ngFor="let text of items; index as idx" class="text">
-        <div class="title-2 clamp-3" [title]="text.raw_string">
+        <div class="title-2 clamp-10" [title]="text.raw_string">
           {{ idx + 1 }}. {{ text.raw_string }}
         </div>
         <div class="caption-1 ellipsis">

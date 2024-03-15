@@ -12,3 +12,11 @@
   justify-content: flex-end;
   gap: 8px;
 }
+
+.hover-buttons {
+  display: none;
+}
+
+.li-card:hover .hover-buttons {
+  display: block;
+}

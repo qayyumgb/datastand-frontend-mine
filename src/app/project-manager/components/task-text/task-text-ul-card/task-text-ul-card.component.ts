@@ -104,6 +104,18 @@ export class TaskTextUlCardComponent
     });
   }
 
+  copyText(textId: number) {
+    this.textService
+      .copy(textId)
+      .subscribe((res: Text) => this.addItemAboveId(res, textId));
+  }
+
+  deleteText(textId: number) {
+    this.textService
+      .delete(textId)
+      .subscribe(() => this.deleteItemById(textId));
+  }
+
   generateTexts(numTexts: number) {
     let numGeneratedTexts = 0; // Counter for generated texts
 
@@ -232,6 +244,30 @@ export class TaskTextUlCardComponent
     this.getTaskTexts(this.filters);
   }
 
+  setTextAsNotSeed(textId: number) {
+    this.textService
+      .setAsNotSeed(textId)
+      .subscribe((res: Text) => this.overwriteItem(res));
+  }
+
+  setTextAsSeed(textId: number) {
+    this.textService
+      .setAsSeed(textId)
+      .subscribe((res: Text) => this.overwriteItem(res));
+  }
+
+  setTextStatusToCompleted(textId: number) {
+    this.textService
+      .setStatusToCompleted(textId)
+      .subscribe((res: Text) => this.overwriteItem(res));
+  }
+
+  setTextStatusToPending(textId: number) {
+    this.textService
+      .setStatusToPending(textId)
+      .subscribe((res: Text) => this.overwriteItem(res));
+  }
+
   setTextsAsSeeds(taskId: number, textIds: number[]) {
     this.taskService.setTextsAsSeeds(taskId, textIds).subscribe(() => {
       this.resetTaskTexts();
@@ -246,15 +282,15 @@ export class TaskTextUlCardComponent
     });
   }
 
-  setTextsAsPending(taskId: number, textIds: number[]) {
-    this.taskService.setTextsAsPending(taskId, textIds).subscribe(() => {
+  setTextsStatusToPending(taskId: number, textIds: number[]) {
+    this.taskService.setTextsStatusToPending(taskId, textIds).subscribe(() => {
       this.resetTaskTexts();
       this.clearSelection();
     });
   }
 
-  setTextsAsNotPending(taskId: number, textIds: number[]) {
-    this.taskService.setTextsAsReviewed(taskId, textIds).subscribe(() => {
+  setTextsStatusToReviewed(taskId: number, textIds: number[]) {
+    this.taskService.setTextsStatusToReviewed(taskId, textIds).subscribe(() => {
       this.resetTaskTexts();
       this.clearSelection();
     });

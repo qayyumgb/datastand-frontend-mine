@@ -281,7 +281,17 @@ export class TaskService {
     );
   }
 
-  setTextsAsPending(
+  setTextsAsSeeds(
+    taskId: number,
+    textIds: number[]
+  ): Observable<NumChangedResponse> {
+    return this.http.post<NumChangedResponse>(
+      `${this.url}/${taskId}/set-texts-as-seeds/`,
+      { ids: textIds }
+    );
+  }
+
+  setTextsStatusToPending(
     taskId: number,
     textIds: number[]
   ): Observable<NumChangedResponse> {
@@ -291,22 +301,12 @@ export class TaskService {
     );
   }
 
-  setTextsAsReviewed(
+  setTextsStatusToReviewed(
     taskId: number,
     textIds: number[]
   ): Observable<NumChangedResponse> {
     return this.http.post<NumChangedResponse>(
       `${this.url}/${taskId}/set-texts-as-reviewed/`,
-      { ids: textIds }
-    );
-  }
-
-  setTextsAsSeeds(
-    taskId: number,
-    textIds: number[]
-  ): Observable<NumChangedResponse> {
-    return this.http.post<NumChangedResponse>(
-      `${this.url}/${taskId}/set-texts-as-seeds/`,
       { ids: textIds }
     );
   }

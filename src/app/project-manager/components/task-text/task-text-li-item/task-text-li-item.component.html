@@ -14,8 +14,7 @@
         <div class="mw-700px">
           <div
             (click)="openViewTaskTextDialog(taskText)"
-            class="title-2 a-like clamp-3"
-            [title]="taskText.raw_string"
+            class="title-2 a-like clamp-10"
             [innerText]="taskText.raw_string"
           ></div>
         </div>
@@ -33,10 +32,7 @@
             *ngIf="taskText.is_seed"
             [isSeed]="taskText.is_seed"
           ></is-seed-chip>
-          <is-pending-chip
-            *ngIf="taskText.status == 'pending'"
-            [isPending]="taskText.status == 'pending'"
-          ></is-pending-chip>
+          <status-chip [status]="taskText.status"></status-chip>
         </div>
         <pm-tag-list-truncated
           *ngIf="taskText.tags?.length! > 0"
@@ -46,13 +42,13 @@
     </div>
   </ng-container>
   <ng-container actions>
-    <ng-container *ngIf="isCreator()">
+    <ng-container *ngIf="isCreator">
       <button
         *ngIf="taskText.status == statusEnum.PENDING"
         mat-icon-button
         class="medium"
         matTooltip="Mark as completed"
-        (click)="setStatusToCompleted(taskText)"
+        (click)="setTextStatusToCompletedEvent.emit(taskText.id)"
       >
         <mat-icon>check</mat-icon>
       </button>
@@ -61,7 +57,7 @@
         mat-icon-button
         class="medium"
         matTooltip="Mark as pending"
-        (click)="setStatusToPending(taskText)"
+        (click)="setTextStatusToPendingEvent.emit(taskText.id)"
       >
         <mat-icon>warning</mat-icon>
       </button>
@@ -70,7 +66,7 @@
         mat-icon-button
         class="medium"
         matTooltip="Use as seed for AI generation"
-        (click)="setAsSeed(taskText)"
+        (click)="setTextAsSeedEvent.emit(taskText.id)"
       >
         <mat-icon>local_florist</mat-icon>
       </button>
@@ -79,7 +75,7 @@
         mat-icon-button
         class="medium"
         matTooltip="Don't use as seed for AI generation"
-        (click)="setAsNotSeed(taskText)"
+        (click)="setTextAsNotSeedEvent.emit(taskText.id)"
       >
         <mat-icon>macro_off</mat-icon>
       </button>
@@ -111,7 +107,7 @@
         mat-icon-button
         class="medium"
         matTooltip="Make a copy"
-        (click)="copyTaskText(taskText)"
+        (click)="copyTextEvent.emit(taskText.id)"
       >
         <mat-icon>file_copy</mat-icon>
       </button>
@@ -119,7 +115,7 @@
         mat-icon-button
         class="medium"
         matTooltip="Remove"
-        (click)="deleteTaskText(taskText)"
+        (click)="deleteTextEvent.emit(taskText.id)"
       >
         <mat-icon>delete</mat-icon>
       </button>

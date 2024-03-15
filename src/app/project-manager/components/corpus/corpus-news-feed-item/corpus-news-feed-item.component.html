@@ -3,12 +3,7 @@
   [element]="corpus"
   [user]="user"
 >
-  <div
-    *ngIf="corpus"
-    class="entry-container"
-    (mouseenter)="displayActions()"
-    (mouseleave)="hideActions()"
-  >
+  <div *ngIf="corpus" class="entry-container">
     <div class="entry-main-content">
       <img
         [src]="corpus.image || urls.DEFAULT_IMG_URL"
@@ -38,13 +33,13 @@
       </div>
     </div>
     <div class="entry-actions-container">
-      <div class="easy-actions" [class.hidden]="!actions">
+      <div class="easy-actions">
         <!-- Corpus non-creator actions -->
         <button
-          *ngIf="!isCreator()"
+          *ngIf="!isCreator"
           mat-icon-button
           class="medium"
-          matTooltip="Fork corpus"
+          matTooltip="Fork Corpus"
           (click)="forkCorpus()"
         >
           <mat-icon>fork_right</mat-icon>

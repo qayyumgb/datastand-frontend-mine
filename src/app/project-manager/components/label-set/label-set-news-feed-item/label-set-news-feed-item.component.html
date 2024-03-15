@@ -3,12 +3,7 @@
   [element]="labelSet"
   [user]="user"
 >
-  <div
-    *ngIf="labelSet"
-    class="entry-container"
-    (mouseenter)="displayActions()"
-    (mouseleave)="hideActions()"
-  >
+  <div *ngIf="labelSet" class="entry-container">
     <div class="entry-main-content">
       <img
         [src]="labelSet.image || urls.DEFAULT_IMG_URL"
@@ -40,13 +35,13 @@
       </div>
     </div>
     <div class="entry-actions-container">
-      <div class="easy-actions" [class.hidden]="!actions">
+      <div class="easy-actions">
         <!-- LabelSet non-creator actions -->
         <button
-          *ngIf="!isCreator()"
+          *ngIf="!isCreator"
           mat-icon-button
           class="medium"
-          matTooltip="Fork labelSet"
+          matTooltip="Fork Label Set"
           (click)="forkLabelSet()"
         >
           <mat-icon>fork_right</mat-icon>

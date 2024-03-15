@@ -44,14 +44,14 @@ export class SpanService {
     return this.http.patch<Span>(`${this.url}/${spanId}/`, span);
   }
 
-  setAsPending(spanId: number): Observable<Span> {
+  setStatusToPending(spanId: number): Observable<Span> {
     return this.http.patch<Span>(`${this.url}/${spanId}/`, {
       is_pending: true,
       status: 'pending',
     });
   }
 
-  setAsReviewed(spanId: number): Observable<Span> {
+  setStatusToReviewed(spanId: number): Observable<Span> {
     return this.http.patch<Span>(`${this.url}/${spanId}/`, {
       is_pending: false,
       status: 'accepted',

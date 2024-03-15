@@ -1,9 +1,4 @@
-<div
-  *ngIf="entity"
-  class="li-card"
-  (mouseenter)="displayActions()"
-  (mouseleave)="hideActions()"
->
+<div *ngIf="entity" class="li-card">
   <pm-base-li-with-img [imgUrl]="entity.image">
     <ng-container content>
       <div class="entity-info">
@@ -31,7 +26,7 @@
         <div class="actions mb-16">
           <ng-content select="[buttons]"></ng-content>
         </div>
-        <div [class.hidden]="!actions">
+        <div class="hover-buttons">
           <ng-content select="[hoverButtons]"></ng-content>
           <br />
         </div>

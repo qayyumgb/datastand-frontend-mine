@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -14,13 +14,16 @@ import {
   RenameDialogComponent,
   UpdateTagsDialogComponent,
 } from '@pm/components';
+import { isCreator } from '@pm/utils';
+
 @Component({
   selector: 'pm-task-li-item',
   templateUrl: './task-li-item.component.html',
 })
-export class TaskLiItemComponent {
+export class TaskLiItemComponent implements OnInit {
   @Input() task?: Task;
   @Output() deleteTaskEvent = new EventEmitter<number>(); // taskId
+  isCreator?: boolean;
 
   constructor(
     public auth: AuthService,
@@ -31,6 +34,10 @@ export class TaskLiItemComponent {
     private taskService: TaskService,
     public urls: UrlsService
   ) {}
+
+  ngOnInit(): void {
+    this.isCreator = isCreator(this.task!, this.auth.user?.username);
+  }
 
   copyTask() {
     this.taskService.copy(this.task?.id!).subscribe((res: Task) => {
@@ -54,10 +61,6 @@ export class TaskLiItemComponent {
       this.deleteTaskEvent.emit(this.task?.id);
       delete this.task;
     });
-  }
-
-  isCreator(): boolean {
-    return this.auth.username === this.task?.creator?.username;
   }
 
   openRenameTaskDialog() {

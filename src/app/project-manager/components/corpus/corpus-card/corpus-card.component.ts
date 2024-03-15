@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { Corpus } from '@app/interfaces';
@@ -9,16 +8,17 @@ import {
   RenameDialogComponent,
   UpdateTagsDialogComponent,
 } from '@pm/components';
-import { truncate } from '@pm/utils';
+import { isCreator, truncate } from '@pm/utils';
 
 @Component({
   selector: 'pm-corpus-card',
   templateUrl: './corpus-card.component.html',
   styleUrls: ['../../data-card.scss', '../../change-image-button.scss'],
 })
-export class CorpusCardComponent {
+export class CorpusCardComponent implements OnInit {
   @Input() corpus?: Corpus;
   @Output() deleteCorpusEvent = new EventEmitter<number>(); // corpusId
+  isCreator?: boolean;
   truncate = truncate;
 
   constructor(
@@ -26,9 +26,12 @@ export class CorpusCardComponent {
     private corpusService: CorpusService,
     private dialog: MatDialog,
     private router: Router,
-    private snackBar: MatSnackBar,
     public urls: UrlsService
   ) {}
+
+  ngOnInit(): void {
+    this.isCreator = isCreator(this.corpus!, this.auth.username);
+  }
 
   changeImage(event: any): void {
     if (event.target.files && event.target.files[0]) {
@@ -53,10 +56,6 @@ export class CorpusCardComponent {
       .subscribe((res: Corpus) =>
         this.router.navigateByUrl(this.urls.getCorpusUrl(res.id))
       );
-  }
-
-  isCreator(): boolean {
-    return this.auth.username === this.corpus?.creator?.username;
   }
 
   openRenameCorpusDialog() {

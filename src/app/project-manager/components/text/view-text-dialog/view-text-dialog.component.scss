@@ -1,7 +1,6 @@
 mat-dialog-content {
   padding: 16px;
-  width: 700px !important;
-  height: 500px;
+  max-width: 700px;
   overflow-y: scroll;
   margin: 16px;
 }
@@ -12,19 +11,11 @@ mat-dialog-content {
 }
 
 .td-line-idx {
-  font-family: "Roboto Mono", monospace;
-  font-size: 10px;
-  text-align: left;
+  font-size: 12px;
+  text-align: right;
   vertical-align: top;
   color: rgb(0, 0, 0, 0.3);
   padding: 0;
   padding-right: 10px;
   user-select: none;
-}
-
-.td-line-content {
-  font-size: 13px;
-  line-height: 13px;
-  white-space: pre-wrap;
-  font-family: "Roboto Mono", monospace;
 }

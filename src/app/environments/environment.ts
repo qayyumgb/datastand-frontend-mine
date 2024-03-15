@@ -11,6 +11,9 @@ export const environment = {
   appUrl: 'http://localhost:4200',
 
   // datastand-backend config
+  //
+  // For local backend uncomment the following line.
+  // backendApiUrl: 'http://localhost:7001/api',
   backendApiUrl: '/api',
 
   imports: [StoreDevtoolsModule.instrument({ maxAge: 25 })],

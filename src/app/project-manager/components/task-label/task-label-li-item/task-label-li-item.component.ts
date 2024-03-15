@@ -2,17 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Label } from '@app/interfaces';
-import { AuthService, LabelService, UrlsService } from '@app/services';
+import { AuthService, UrlsService } from '@app/services';
 import {
   RenameDialogComponent,
   UpdateTagsDialogComponent,
   UpdateTaskLabelDialogComponent,
 } from '@pm/components';
-
-export interface IcopyTaskLabelEvent {
-  taskLabel: Label;
-  originalTaskLabelId: number;
-}
 
 @Component({
   selector: 'pm-task-label-li-item',
@@ -21,48 +16,18 @@ export interface IcopyTaskLabelEvent {
 export class TaskLabelLiItemComponent {
   @Input() taskLabel?: Label;
   @Input() taskId?: number;
-  @Output() copyLabelEvent = new EventEmitter<IcopyTaskLabelEvent>(); // copied TaskLabel
-  @Output() deleteLabelEvent = new EventEmitter<number>(); // labelId
+  @Input() isCreator?: boolean;
+  // All these events emit the labelId.
+  @Output() copyLabelEvent = new EventEmitter<number>();
+  @Output() deleteLabelEvent = new EventEmitter<number>();
+  @Output() setLabelStatusToPendingEvent = new EventEmitter<number>();
+  @Output() setLabelStatusToReviewedEvent = new EventEmitter<number>();
 
   constructor(
     private auth: AuthService,
-    private labelService: LabelService,
     private dialog: MatDialog,
     public urls: UrlsService
   ) {}
-
-  copyLabel(taskLabel: Label) {
-    this.labelService.copy(taskLabel.id!).subscribe((res: Label) =>
-      this.copyLabelEvent.emit({
-        originalTaskLabelId: taskLabel.id!,
-        taskLabel: res,
-      })
-    );
-  }
-
-  deleteLabel(taskLabel: Label) {
-    this.labelService.delete(taskLabel.id!).subscribe(() => {
-      // We need to emit an event for the parent to update the count.
-      this.deleteLabelEvent.emit(taskLabel?.id);
-      this.taskLabel = undefined;
-    });
-  }
-
-  isCreator(): boolean {
-    return this.auth.username === this.taskLabel?.creator?.username;
-  }
-
-  markLabelAsPending(taskLabel: Label) {
-    this.labelService
-      .setAsPending(taskLabel.id!)
-      .subscribe((res: Label) => (this.taskLabel = res));
-  }
-
-  markLabelAsReviewed(taskLabel: Label) {
-    this.labelService
-      .setAsReviewed(taskLabel.id!)
-      .subscribe((res: Label) => (this.taskLabel = res));
-  }
 
   openRenameLabelDialog(taskLabel: Label) {
     this.dialog.open(RenameDialogComponent, {
